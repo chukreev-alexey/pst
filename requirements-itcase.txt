@@ -1,0 +1,11 @@
+# Put here list of ITCase Dev packages
+git+ssh://git@bitbucket.org/itcase-dev/itcase-cart@develop
+git+ssh://git@bitbucket.org/itcase-dev/itcase-catalog@develop
+git+ssh://git@bitbucket.org/itcase-dev/itcase-common@feature/django2.0
+git+ssh://git@bitbucket.org/itcase-dev/itcase-entry@develop
+git+ssh://git@bitbucket.org/itcase-dev/itcase-feed@feature/django2
+git+ssh://git@bitbucket.org/itcase-dev/itcase-gallery@feature/django2.0
+git+ssh://git@bitbucket.org/itcase-dev/itcase-pages@develop
+git+ssh://git@bitbucket.org/itcase-dev/itcase-paginator@develop
+git+ssh://git@bitbucket.org/itcase-dev/itcase-rotator@develop
+git+ssh://git@bitbucket.org/itcase-dev/itcase-search@develop
