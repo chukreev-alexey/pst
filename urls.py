@@ -37,6 +37,7 @@ urlpatterns = [
     ])),
 
     path(r'', include('website.urls')),
+    path(r'', include('modules.catalog.urls')),
 
     path(r'cart/', include('itcase_cart.urls')),
     path(r'', include('itcase_catalog.urls')),

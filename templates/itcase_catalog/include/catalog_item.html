@@ -1,0 +1,66 @@
+{% load fb_versions l10n %}
+
+<div class="catalog-item {{ item_class }}
+    {% if product.border %}
+        catalog-item_type_big
+    {% endif %}">
+    <div class="catalog-item__inner">
+        <div class="catalog-item__inner-left">
+            {% if product.get_first_image %}
+                <div class="catalog-item__image">
+                    <a href="{{ product.get_absolute_url }}" class="catalog-item__image-link">
+                        <img src="{% version product.image 'catalog_list_thumb' %}"
+                            class="catalog-item__image-image" alt="" title="" />
+                    </a>
+                </div>
+            {% else %}
+                <div class="catalog-item__image catalog-item__image_type_placholder">&nbsp;</div>
+            {% endif %}
+        </div>
+        <div class="catalog-item__inner-right">
+            <div class="catalog-item__category">
+                <a href="{{ product.category.get_absolute_url }}" class="catalog-item__category-link">{{ product.category.name }}</a>
+            </div>
+            <div class="catalog-item__title">
+                <a href="{{ product.get_absolute_url }}" class="catalog-item__title-link">{{ product.name }}</a>
+            </div>
+            <div class="catalog-item__price">
+                <div class="catalog-item__price-text">
+                    {{ product.price|floatformat:'-2' }} Р
+                </div>
+                {% if product.old_price %}
+                    <div class="catalog-item__price-old">
+                        {{ product.old_price|floatformat:'-2' }} Р
+                    </div>
+                {% endif %}
+            </div>
+            {% with id=product.pk|unlocalize %}
+                <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                   class="catalog-item__button button
+                          {% if product in cart %}
+                            button_border_orange
+                          {% else %}
+                            button_color_blue
+                          {% endif %}"
+                    data-add-url="{% url 'itcase_cart:cart_add' %}"
+                    data-product="{{ id }}"
+                    data-amount-{{ id }}="1">
+                    <div class="catalog-item__button-loader">
+                        <div class="sk-three-bounce">
+                            <div class="sk-child sk-bounce1"></div>
+                            <div class="sk-child sk-bounce2"></div>
+                            <div class="sk-child sk-bounce3"></div>
+                        </div>
+                    </div>
+                    <div class="catalog-item__button-text">
+                        {% if product in cart %}
+                            В заказе
+                        {% else %}
+                            Заказать
+                        {% endif %}
+                    </div>
+                </a>
+            {% endwith %}
+        </div>
+    </div>
+</div>

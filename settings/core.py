@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'captcha',
+    'compressor',
     'django_mptt_admin',
     'django_rq',
     'filebrowser',
@@ -58,6 +59,8 @@ INSTALLED_APPS = [
     'itcase_paginator',
     'itcase_rotator',
     'itcase_search',
+
+    'modules.catalog',
 
     'website',
 

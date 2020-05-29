@@ -78,6 +78,27 @@ FILEBROWSER_VERSIONS = {
         'height': 60,
         'opts': 'crop'
     },
+    # Catalog
+    'catalog_category_thumb': {
+        'verbose_name': 'Catalog Category Thumb',
+        'width': 270, 'height': 210,
+        'opts': 'upscale crop'},
+    'catalog_list_thumb': {
+        'verbose_name': 'Catalog List Thumb',
+        'width': '', 'height': 240,
+        'opts': 'upscale'},
+    'catalog_list_thumb_big': {
+        'verbose_name': 'Catalog List Thumb Big',
+        'width': 440, 'height': 400,
+        'opts': 'upscale'},
+    'catalog_detail': {
+        'verbose_name': 'Catalog Detail',
+        'width': 440, 'height': 400,
+        'opts': 'upscale'},
+    'catalog_detail_thumb': {
+        'verbose_name': 'Catalog Detail Thumb',
+        'width': 60, 'height': 60,
+        'opts': 'upscale'},
 }
 
 # Directory to save image versions (and thumbnails)

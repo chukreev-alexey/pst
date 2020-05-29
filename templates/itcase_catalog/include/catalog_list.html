@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="catalog-list">
+    {{ category }}
+    {% for product in products %}
+        {% include './catalog_item.html' %}
+    {% empty %}
+       <div class="catalog-icon">
+            <div class="catalog-icon__image">
+                <img src="{% static 'itcase_catalog/img/not_fround.png' %}" class="catalog-icon__image-image" alt="" title="" />
+            </div>
+            <div class="catalog-icon__text">
+                <div class="catalog-icon__text-title">В категории нет товаров</div>
+                <div class="catalog-icon__text-desc">
+                    Если вы не нашли того что искали,<br/>
+                    <a href="{% url 'form_detail' slug='feedback' %}" class="{% if site_version == 'desktop' %} forms_ajax {% endif %}">напишите нам</a> и мы поможем с покупкой
+                </div>
+            </div>
+       </div>
+    {% endfor %}
+</div>

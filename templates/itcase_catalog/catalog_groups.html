@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load itcase_common l10n %}
+
+{% block title %}
+    {% for crumb in catalog_breadcrumbs %}
+        {{ crumb.name }} {% if not forloop.last %} | {% endif %}
+    {% endfor %}
+{% endblock title %}
+
+{% block content %}
+    {% if not view.hide_products %}
+        <div class="nav">
+            {% for crumb in catalog_breadcrumbs %}
+                <div class="nav__item">
+                    <a href="{{ crumb.get_absolute_url }}"
+                       class="nav__item-link">{{ crumb.name }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if view.hide_products %}
+        {% include './include/categories_list.html' %}
+    {% else %}
+        {% include './include/catalog_group.html' %}
+    {% endif %}
+    {% if category.content %}
+        {% render_content category.content %}
+    {% endif %}
+
+{% endblock content %}

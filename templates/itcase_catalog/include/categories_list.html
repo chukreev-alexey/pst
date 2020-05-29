@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="catalog-group">
+    <div class="catalog-group__title">{{ category.name }}</div>
+    <div class="catalog-group__sort">
+        {% include './catalog_sort.html' %}
+    </div>
+
+    <div class="catalog-group__inner clearfix">
+        {% include './catalog_loading.html' %}
+        <ul class="catalog-group__inner-list">
+            {% for category in categories %}
+                <li class="catalog-group__inner-list-item">
+                    <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
+                        <img src="{% static 'img/__temp/unitaz-s-instalyaciey_1.jpg' %}" class="catalog-group__inner-list-link-image" />
+                        <span class="catalog-group__inner-list-link-text">{{ category }}</span>
+                    </a>
+                    {% with subcategories=category.children.all %}
+                        {% if subcategories.exists %}
+                            <ul class="catalog-group__inner-nested-list">
+                                {% for subcategory in subcategories %}
+                                    <li class="catalog-group__inner-nested-list-item"><a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">{{ subcategory }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                </li>
+            {% endfor %}
+            <li class="catalog-group__inner-list-item catalog-group__inner-list-item_type_placeholder">&nbsp;</li>
+            <li class="catalog-group__inner-list-item catalog-group__inner-list-item_type_placeholder">&nbsp;</li>
+        </ul>
+    </div>
+
+    {% include 'itcase_paginator/include/paginator.html' %}
+</div>

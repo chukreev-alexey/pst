@@ -20,8 +20,8 @@ PROJECT_NAME = 'pst'
 # ****************************************************************
 # ITCASE
 # Put bellow options for ITCase Dev packages
-ITCASE_CATALOG_CATEGORY_MODEL = 'itcase_catalog.Category'
-ITCASE_CATALOG_PRODUCT_MODEL = 'itcase_catalog.Product'
+ITCASE_CATALOG_CATEGORY_MODEL = 'catalog.Category'
+ITCASE_CATALOG_PRODUCT_MODEL = 'catalog.Product'
 
 ITCASE_CART_PRODUCT_MODEL = ITCASE_CATALOG_PRODUCT_MODEL
 ITCASE_CART_ORDER_MODEL = 'itcase_cart.Order'

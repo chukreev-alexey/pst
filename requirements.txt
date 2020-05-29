@@ -1,5 +1,6 @@
 django-appconf
 django-braces
+django-compressor
 django-extensions
 django-filebrowser<3.13
 django-grappelli<2.14

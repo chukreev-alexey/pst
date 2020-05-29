@@ -1,9 +1,221 @@
+{% load catalog_tags itcase_common compress fb_versions itcase_cart_tags static %}
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>{% block title %}{% endblock title %}</title>
-    </head>
-    <body>
-        {% block content %}{% endblock content %}
-    </body>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>
+        {% block title %}
+            {% if request.page.seo_title %}
+                {{ request.page.seo_title }}
+            {% else %}
+                {{ request.page.title }}
+            {% endif %}
+        {% endblock title %}
+        {% if request.site.name and not request.page.path == '/' %}
+            | {{ request.site.name }}
+        {% endif %}
+    </title>
+
+    {% block meta %}
+        <meta name="description" content="{{ cur_page.seo_description|default:""|safe }}" />
+        <meta name="keywords" content="{{ cur_page.seo_keywords|default:""|safe }}" />
+        {% if request.page.seo_other %}
+            {{ request.page.seo_other|safe }}
+        {% endif %}
+    {% endblock %}
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/favicon-16x16.png" sizes="16x16" rel="icon" type="image/png" />
+    <link href="/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png" />
+    <link href="/apple-touch-icon.png" sizes="180x180" rel="apple-touch-icon" />
+    <link href="/site.webmanifest" rel="manifest" />
+    <link href="/safari-pinned-tab.svg" color="#5bbad5" rel="mask-icon" />
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {% if site_version == 'mobile' or site_version == 'tablet' %}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% endif %}
+
+    {% if site_domain in request.get_host %}
+        <meta name="robots" content="index,follow" />
+        <meta name="yandex-verification" content="5de2550ce59811d4" />
+        {{ request.infoblock.additional_meta|default:""|safe }}
+    {% else %}
+        <meta name="robots" content="none" />
+    {% endif %}
+
+    {% compress css %}
+        <link href="{% static 'itcase_common/css/__common.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'itcase_cart/css/__cart.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'itcase_catalog/css/__catalog.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'itcase_entry/css/__entry.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'itcase_feed/css/__feed.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'itcase_pages/css/__pages.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'itcase_paginator/css/__paginator.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'itcase_rotator/css/__rotator.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'itcase_search/css/__search.css' %}" rel="stylesheet" type="text/css" />
+
+        <link href="{% static 'css/__main.css' %}" rel="stylesheet" type="text/css" />
+    {% endcompress %}
+
+    <noscript>
+        <link href="{% static 'css/no-js.css' %}" rel="stylesheet" type="text/css" />
+    </noscript>
+
+    {% compress js %}
+        <script src="{% static 'js/__build/__libs.js' %}"></script>
+    {% endcompress %}
+
+    {% compress css %}
+        {% block extra_css %}
+        {% endblock extra_css %}
+    {% endcompress %}
+
+    {% compress js %}
+        {% block extra_js_head %}
+        {% endblock extra_js_head %}
+    {% endcompress %}
+</head>
+
+<body>
+    {% csrf_token %}
+
+    {% block popup %}
+        <div class="popup">
+            <div class="popup-content animated">
+                <a href="#" class="popup-content__link">
+                    <span class="popup-content__link-text">закрыть</span>
+                </a>
+                <div class="popup-loading">
+                    <div class="popup-loading__inner">
+                        <div class="sk-three-bounce">
+                            <div class="sk-child sk-bounce1"></div>
+                            <div class="sk-child sk-bounce2"></div>
+                            <div class="sk-child sk-bounce3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popup-content__inner">&nbsp;</div>
+            </div>
+        </div>
+    {% endblock popup %}
+
+    <div class="fader">&nbsp;</div>
+
+    {% with show_close=True %}
+        {% include 'itcase_pages/include/site_menu_popup.html' %}
+    {% endwith %}
+
+    <div class="body-wrapper">
+
+        <div class="header" {% if site_version == 'mobile' %}data-sticky="True"{% endif %}>
+            <div class="header__wrapper">
+                <div class="header__menu menu">
+                    <div class="menu__wrapper">
+                        {% for item in header_menu %}
+                            <li class="menu__item {% if request.path|startswith:item.get_absolute_url %} main-menu-list__item_state_current {% endif %}">
+                                <a href="{{ item.get_absolute_url }}" class="menu__item-link" {{ item.in_new_tab|yesno:"target=_blank," }}>
+                                    {{ item.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="header__inner clearfix">
+                    <div class="header__logo">
+                        <div class="logo">
+                            <a href="/" class="logo__link">
+                                <img src="{% static 'img/logo.png' %}" class="logo__link-image" alt="{{ request.site.name }}" title="{{ request.site.name }}" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header__store">
+                        {% with additional_class='point-list_type_selector' selector=True %}
+                            {# {% points %} #}
+                        {% endwith %}
+                    </div>
+                    <div class="header__cart">{% cart_state %}</div>
+                </div>
+                <div class="header__nav">
+                    {% include 'itcase_search/include/quick/quick_search_button.html' %}
+                    {% include 'itcase_pages/include/menu.html' %}
+                </div>
+            </div>
+        </div>
+
+        {% block catalog_category %}
+            {% with title_additional_class='catalog-nav__title_state_collapse catalog-nav__title_type_popup' %}
+                {% catalog_menu %}
+            {% endwith %}
+        {% endblock catalog_category %}
+
+        <div class="wrapper">
+            <div class="wrapper__inner">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer__wrapper clearfix">
+            <div class="footer-menu">
+                {% for item in footer_menu %}
+                    <div class="footer-menu__item">
+                        <a href="{{ item.get_absolute_url }}" class="footer-menu__item-link" {{ item.in_new_tab|yesno:"target=_blank," }}>{{ item.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="footer-info">
+                <div class="footer-info__text">
+                    {{ request.infoblock.footer_text|default:""|safe }}
+                </div>
+                <div class="footer__links">
+                    <a href="/agreement">Соглашение на обработку персональных данных данных</a>
+                    <br/>
+                    <a href="/politics">Политика обработки персональных данных</a>
+                </div>
+                <div class="footer-info__copyright">
+                    {{ request.infoblock.footer_copyright|default:""|safe }}
+                </div>
+                <div class="footer__author">
+                    Сделано в <a href="https://www.itcase.pro/">ITCase</a>
+                    <br/>
+                    <a href="#">Информация о сайте</a>
+                </div>
+            </div>
+            <div class="footer-store">
+                {% with additional_class='point-list_type_footer' %}
+                    {# {% points %} #}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'itcase_common/include/cookies.html' %}
+
+    {% compress js %}
+        <script src="{% static 'itcase_common/js/__build/__common-main.js' %}" type="text/javascript"></script>
+        <script src="{% static 'itcase_gallery/js/__build/__gallery-main.js' %}" type="text/javascript"></script>
+        <script src="{% static 'itcase_entry/js/__build/__entry-main.js' %}" type="text/javascript"></script>
+        <script src="{% static 'itcase_cart/js/__build/__cart-main.js' %}" type="text/javascript"></script>
+        <script src="{% static 'itcase_pages/js/__build/__pages-main.js' %}" type="text/javascript"></script>
+        <script src="{% static 'itcase_rotator/js/__build/__rotator-main.js' %}" type="text/javascript"></script>
+        <script src="{% static 'itcase_search/js/__build/__search-main.js' %}" type="text/javascript"></script>
+
+        <script src="{% static 'js/__build/__main.js' %}" type="text/javascript"></script>
+
+        {% block extra_js %}
+        {% endblock extra_js %}
+    {% endcompress %}
+
+    {% if site_domain in request.get_host %}
+        {{ request.infoblock.google_analytics|default:""|safe }}
+        {{ request.infoblock.yandex_metrika|default:""|safe }}
+        {{ request.infoblock.additional_scripts|default:""|safe }}
+    {% endif %}
+</body>
 </html>

@@ -1,0 +1,14 @@
+{% load fb_versions static %}
+
+{% if product.related_products.all %}
+    <div class="catalog-related clearfix">
+        <div class="catalog-related__title">{{ title|default:"Рекомендуем" }}</div>
+        <div class="catalog-related__wrapper">
+            {% for related_product in product.related_products.all %}
+                {% with item_class='catalog-related__item' product=related_product %}
+                    {% include './catalog_item.html' %}
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

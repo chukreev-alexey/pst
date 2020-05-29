@@ -1,0 +1,30 @@
+<div class="catalog-group">
+    <div class="catalog-group__sort">
+        {% include './catalog_sort.html' %}
+    </div>
+
+    <div class="catalog-group__inner clearfix">
+        {% if filter_enable %}
+            <div class="catalog-filter-popup">
+                <span class="catalog-filter-popup__button button button_color_blue">Фильтр</span>
+            </div>
+        {% endif %}
+
+        <div class="catalog-group__inner-left">
+            <div class="catalog-group__inner-left-inner clearfix">
+                {% include './catalog_loading.html' %}
+                {% include './catalog_list.html' %}
+            </div>
+        </div>
+
+        {% if filter_enable %}
+            <div class="catalog-group__inner-right">
+                <div class="catalog-group__inner-right-inner">
+                    {% include './catalog_filter.html' %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    {% include 'itcase_paginator/include/paginator.html' %}
+</div>

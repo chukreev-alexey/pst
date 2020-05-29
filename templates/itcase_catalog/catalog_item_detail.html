@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% load fb_versions l10n static %}
+
+{% block title %}
+    {{ product.name }}
+    {% for crumb in catalog_breadcrumbs %} | {{ crumb.name }} {% endfor %}
+{% endblock title %}
+
+{% block content %}
+    <div class="nav">
+        {% for crumb in catalog_breadcrumbs %}
+            <div class="nav__item">
+                <a href="{{ crumb.get_absolute_url }}"
+                   class="nav__item-link">{{ crumb.name }}</a>
+            </div>
+        {% endfor %}
+        <div class="nav__item nav__item_state_current">
+            <div class="nav__item-text">{{ product.name }}</div>
+        </div>
+    </div>
+    <div class="catalog-item-detail clearfix">
+        <div class="catalog-item-detail__left">
+            <div class="catalog-item-detail__gallery">
+                {% with images=product.get_images %}
+                    {% if images %}
+                        <div class="catalog-item-gallery">
+                            <div class="catalog-item-gallery__image">
+                                <img src="{% version product.image 'catalog_detail' %}"
+                                     class="catalog-item-gallery__image-image" alt="" title="" />
+                            </div>
+                            <div class="catalog-item-gallery-nav">
+                                {% for image in images %}
+                                        <div class="catalog-item-gallery-nav__item{% if forloop.first %} catalog-item-gallery-nav__item_state_current{% endif %}">
+                                            <img src="{% version image.image 'catalog_detail_thumb' %}" alt="" title="" />
+                                        </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            {% if product.content %}
+                <div class="catalog-item-detail__desc content">
+                    {{ product.content|safe }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="catalog-item-detail__right">
+            <div class="catalog-item-detail__info">
+                <div class="catalog-item-detail__info-title">
+                    {{ product.name }}
+                    {{ product.article }}
+                </div>
+                {% if product.is_exist %}
+                    <div class="catalog-item-detail__info-state catalog-item-detail__info-state_exist">
+                        <div class="catalog-item-detail__info-state-text">В наличии</div>
+                    </div>
+                {% else %}
+                    <div class="catalog-item-detail__info-state">
+                        <div class="catalog-item-detail__info-state-text">Под заказ</div>
+                    </div>
+                {% endif %}
+                <div class="catalog-item-detail__info-price">
+                    {{ product.price|floatformat:'-2' }} Р
+                </div>
+
+                {% with id=product.pk|unlocalize %}
+                    <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                       class="catalog-item__button button
+                              {% if product in cart %}
+                                button_border_orange
+                              {% else %}
+                                button_color_blue
+                              {% endif %}"
+                        data-add-url="{% url 'itcase_cart:cart_add' %}"
+                        data-product="{{ id }}"
+                        data-amount-{{ id }}="1">
+                        {% if product in cart %}
+                            В заказе
+                        {% else %}
+                            Заказать
+                        {% endif %}
+                    </a>
+                {% endwith %}
+
+                {% if product.options %}
+                    <div class="catalog-item-detail__info-param">
+                        <div class="catalog-item-detail__info-param-title">Характеристики</div>
+                        {% for name, value in product.options.items %}
+                            <div class="catalog-item-detail__info-param-item">
+                                <div class="catalog-item-detail__info-param-item-name">{{ name }}</div>
+                                <div class="catalog-item-detail__info-param-item-value">{{ value }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                Цены за цвет:
+                {% for name, value in product.get_price_color_dict.items %}
+                    <p>{{ name }}: {{ value }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% include './include/catalog_related.html' %}
+{% endblock %}

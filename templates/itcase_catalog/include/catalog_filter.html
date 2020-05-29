@@ -1,0 +1,105 @@
+{% load l10n %}
+
+{% localize off %}
+    <form method="post" accept-charset="utf-8" class="catalog-filter"
+        {% if site_version == 'mobile' %} id="catalogFilter" {% endif %}>
+
+        {% csrf_token %}
+
+        {% if filter_category %}
+            <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open" data-group-key="category">
+                <div class="catalog-filter-group__list">
+                    {% for category in filter_category %}
+                        <div class="catalog-filter-group__list-item
+                                    {% if category.checked %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if category.disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                            <label class="catalog-filter-group__list-item-label">
+                                <input class="catalog-filter-group__list-item-checkbox"
+                                       type="checkbox"
+                                       name="filter-category"
+                                       value="{{ category.pk }}"
+                                       {% if category.disabled %}disabled="disabled"{% endif %}
+                                       {% if category.checked %}checked="checked"{% endif %} />
+                                <span class="catalog-filter-group__list-item-text">
+                                    {{ category.name }} ({{ category.items_count }})
+                                </span>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if filter_special %}
+            <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open" data-group-key="category">
+                <div class="catalog-filter-group__list">
+                    {% for category in filter_special %}
+                        <div class="catalog-filter-group__list-item
+                                    {% if category.checked %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if category.disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                            <label class="catalog-filter-group__list-item-label">
+                                <input class="catalog-filter-group__list-item-checkbox"
+                                       type="checkbox"
+                                       name="filter-special"
+                                       value="{{ category.pk }}"
+                                       {% if category.disabled %}disabled="disabled"{% endif %}
+                                       {% if category.checked %}checked="checked"{% endif %} />
+                                <span class="catalog-filter-group__list-item-text">
+                                    {{ category.name }} ({{ category.items_count }})
+                                </span>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if 'search' in request.get_full_path %}
+            <input type="hidden" name="search" value="{{ search }}">
+        {% endif %}
+
+        {% if filter_brand %}
+            <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="brand">
+                <div class="catalog-filter-group__title">Бренды</div>
+                <div class="catalog-filter-group__list">
+                    {% for brand in filter_brand %}
+                        <div class="catalog-filter-group__list-item
+                                    {% if brand.checked %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if brand.disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                            <label class="catalog-filter-group__list-item-label">
+                                <input class="catalog-filter-group__list-item-checkbox"
+                                       type="checkbox"
+                                       name="filter-brand"
+                                       value="{{ brand.pk }}"
+                                       {% if brand.disabled %}disabled="disabled"{% endif %}
+                                       {% if brand.checked %}checked="checked"{% endif %} />
+                                <span class="catalog-filter-group__list-item-text">
+                                    {{ brand.name }} ({{ brand.items_count }})
+                                </span>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if filter_price_max and filter_price_min %}
+            <div class="catalog-filter-group catalog-filter-group_state_close">
+                <div class="catalog-filter-group__title">Стоимость</div>
+                <div class="catalog-filter-group__range clearfix">
+                    <input class="catalog-filter-group__range-item" type="text" name="filter-price_min" value="{{ filter_price_min }}" data-price-min="true" />
+                    <div class="catalog-filter-group__range-separator">&nbsp;</div>
+                    <input class="catalog-filter-group__range-item" type="text" name="filter-price_max" value="{{ filter_price_max }}" data-price-max="true" />
+                    <div data-range-slider="true"></div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="catalog-filter__clear button button_border_blue">Очистить фильтры</div>
+
+        <noscript>
+            <div class="catalog-filter__button">
+                <input class="button button_border_blue" type="submit" name="" value="Показать" />
+            </div>
+        </noscript>
+    </form>
+{% endlocalize %}
