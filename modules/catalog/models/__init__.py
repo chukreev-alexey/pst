@@ -1,12 +1,27 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright 2020 ItCase (info@itcase.pro)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from django.db import models
 from django.urls import reverse_lazy
+from mptt.models import MPTTModel
 
 from tinymce_4.fields import TinyMCEModelField
 from filebrowser.fields import FileBrowseField
-from mptt.models import MPTTModel
 
 from itcase_catalog.models import ProductBase, CategoryBase
-from itcase_catalog.models import OptionFieldBase
 from itcase_common.models import SEOModel
 
 
@@ -86,63 +101,16 @@ class Product(ProductBase):
                 continue
             yield image
 
-    def get_price_by_color(self, color_id):
-        if self.color_prices.filter(id=color_id).exists():
-            return self.color_prices.get(id=color_id).price
-        else:
-            return self.price
+    # def get_price_by_color(self, color_id):
+
+    #     if self.color_prices.filter(id=color_id).exists():
+    #         return self.color_prices.get(id=color_id).price
+    #     else:
+    #         return self.price
 
     def get_price_color_dict(self):
-        if self.color_prices:
-            return {cp.color.name: cp.price for cp in self.color_prices.all()}
-        return None
-
-
-class ProductColors(models.Model):
-    name = models.CharField(verbose_name='Название', max_length=255)
-    sort = models.PositiveSmallIntegerField('Порядок', default=0)
-
-    class Meta(object):
-        ordering = ['sort']
-        verbose_name = 'Цвет'
-        verbose_name_plural = 'Цвета товаров'
-
-    def __str__(self):
-        return self.name
-
-
-class ProductImage(models.Model):
-    image = FileBrowseField('Изображение', format='image', max_length=255,
-                            blank=True)
-    sort = models.PositiveSmallIntegerField('Позиция', default=0)
-    color = models.ForeignKey(ProductColors, related_name='color_images',
-                              verbose_name='Цвет',
-                              on_delete=models.DO_NOTHING)
-    product = models.ForeignKey(Product, related_name='images',
-                                verbose_name=Product._meta.verbose_name,
-                                on_delete=models.CASCADE)
-
-    class Meta(object):
-        ordering = ['sort']
-        verbose_name = 'Изображение'
-        verbose_name_plural = 'Изображения'
-
-    def __str__(self):
-        return self.image.original_filename
-
-
-class PickingPrice(models.Model):
-    price = models.DecimalField('Цена', max_digits=10, decimal_places=2)
-    color = models.ForeignKey(ProductColors, related_name='product_prices',
-                              verbose_name='Цвет',
-                              on_delete=models.DO_NOTHING)
-    product = models.ForeignKey(Product, related_name='color_prices',
-                                verbose_name=Product._meta.verbose_name,
-                                on_delete=models.CASCADE)
-
-    class Meta(object):
-        verbose_name = 'Цена комплектации'
-        verbose_name_plural = 'Цены Комплектаций'
-
-    def __str__(self):
-        return f'{self.color.name}: {self.price}'
+        color_prices = {}
+        if self.prices.all():
+            for price in self.prices.all():
+                color_prices[price.parametr.first().value] = price.price
+        return color_prices
