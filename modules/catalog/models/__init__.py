@@ -101,13 +101,6 @@ class Product(ProductBase):
                 continue
             yield image
 
-    # def get_price_by_color(self, color_id):
-
-    #     if self.color_prices.filter(id=color_id).exists():
-    #         return self.color_prices.get(id=color_id).price
-    #     else:
-    #         return self.price
-
     def get_price_color_dict(self):
         color_prices = {}
         if self.prices.all():

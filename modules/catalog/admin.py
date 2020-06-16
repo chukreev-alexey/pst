@@ -17,8 +17,14 @@ Category = get_category_model()
 admin.site.unregister(Category)
 admin.site.unregister(Product)
 
-admin.site.register(Parametr)
 admin.site.register(Brand)
+
+
+@admin.register(Parametr)
+class ParametrAdmin(admin.ModelAdmin):
+
+    list_display = ('name', 'is_affects_price')
+    list_editable = ['is_affects_price']
 
 
 @admin.register(Category)
@@ -74,12 +80,16 @@ class PickingPriceInline(admin.TabularInline):
     model = Price
     extra = 0
 
+    filter_horizontal = ['parametr']
+
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         field = super().formfield_for_manytomany(db_field, request, **kwargs)
         print(db_field.name)
         if db_field.name == 'parametr':
 
             if request._obj_ is not None:
+                field.queryset = field.queryset.filter(
+                    parametr__is_affects_price=True)
                 field.queryset = field.queryset.filter(
                     product__exact=request._obj_)
             else:

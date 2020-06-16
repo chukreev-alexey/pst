@@ -7,6 +7,8 @@ from . import Product
 
 class Parametr(models.Model):
     name = models.CharField('Название', max_length=255)
+    is_affects_price = models.BooleanField('Влияет на цену?',
+                                           default=False)
 
     class Meta(object):
         # ordering = ['sort']
