@@ -27,7 +27,7 @@ from itcase_common.mixins import FilterMixin, SortMixin
 from itcase_common.views.mixins import RequestDataMixin
 from itcase_paginator.pagination import SlicePaginatorMixin
 
-from .models import Category, Product
+from .models import Category, Product, Parametr
 
 __all__ = ('CatalogIndexView', 'CategoryDetail', 'ProductDetail')
 
@@ -48,6 +48,8 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
     paginate_by = 12
 
     _checked = set()
+
+    filter_fields = [p for p in Parametr.objects.filter(filter_by=True)]
 
     def _get_context_data(self, object_list=None):
         context = {'products': object_list}
@@ -235,6 +237,7 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
             initial['filter_special'] = special
 
         initial.update(self.get_filter_price())
+        initial['other_fields'] = self.filter_fields
 
         if initial:
             initial['filter_enable'] = True

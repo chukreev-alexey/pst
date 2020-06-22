@@ -7,8 +7,8 @@ from itcase_catalog.shortcuts import get_product_model, get_category_model
 from itcase_catalog.admin import ProductAdmin as ProductAdminBase
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 
-from .models import Brand
-from .models.parametres import Parametr, ProductParametr, ProductImage, Price
+from .models.catalog import Brand, Parametr, ProductParametr
+from .models.parametres import ProductImage, Price
 
 
 Product = get_product_model()
@@ -20,11 +20,26 @@ admin.site.unregister(Product)
 admin.site.register(Brand)
 
 
+class ProductParametrAdminInline(admin.TabularInline):
+
+    model = ProductParametr
+    extra = 0
+
+
 @admin.register(Parametr)
 class ParametrAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'is_affects_price')
-    list_editable = ['is_affects_price']
+    fieldsets = (
+        (None, {'fields': ('name', 'query_name', 'is_affects_price',
+                           'filter_by')}),
+    )
+
+    prepopulated_fields = {'query_name': ('name',)}
+
+    list_display = ('name', 'query_name', 'filter_by', 'is_affects_price')
+    list_editable = ['is_affects_price', 'filter_by']
+
+    inlines = [ProductParametrAdminInline]
 
 
 @admin.register(Category)
@@ -62,16 +77,12 @@ class ProductImageInline(admin.TabularInline):
 
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super().formfield_for_foreignkey(db_field, request, **kwargs)
-        print(db_field.name)
         if db_field.name == 'color':
-
             if request._obj_ is not None:
-                field.queryset = field.queryset.filter(
-                    product__exact=request._obj_,
+                field.queryset = request._obj_.parametres.filter(
                     parametr__name__exact='Цвет')
             else:
                 field.queryset = field.queryset.none()
-
         return field
 
 
@@ -84,24 +95,14 @@ class PickingPriceInline(admin.TabularInline):
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         field = super().formfield_for_manytomany(db_field, request, **kwargs)
-        print(db_field.name)
         if db_field.name == 'parametr':
-
             if request._obj_ is not None:
-                field.queryset = field.queryset.filter(
-                    parametr__is_affects_price=True)
-                field.queryset = field.queryset.filter(
-                    product__exact=request._obj_)
+                field.queryset = request._obj_.parametres.filter(
+                    parametr__is_affects_price=True,
+                )
             else:
                 field.queryset = field.queryset.none()
-
         return field
-
-
-class ProductParametrInline(admin.TabularInline):
-
-    model = ProductParametr
-    extra = 0
 
 
 class ProductAdminForm(forms.ModelForm):
@@ -121,7 +122,7 @@ class ProductAdmin(ProductAdminBase):
     fieldsets = (
         (None, {
             'fields': ('name', 'price', 'article', ('category', 'brand'),
-                       'related_products', 'description',
+                       'related_products', 'description', 'parametres',
                        'pdf_instructtion', 'pdf_components', 'scheme',
                        'product_actions')
         }),
@@ -130,11 +131,11 @@ class ProductAdmin(ProductAdminBase):
             'classes': ('grp-collapse', 'grp-closed'),
         }),
     )
-    filter_horizontal = ['related_products']
+    filter_horizontal = ['related_products', 'parametres']
 
     form = ProductAdminForm
 
-    inlines = [ProductParametrInline, ProductImageInline, PickingPriceInline]
+    inlines = [ProductImageInline, PickingPriceInline]
 
     readonly_fields = ('product_actions',)
 
