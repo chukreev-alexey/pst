@@ -107,7 +107,7 @@
                                     <input class="catalog-filter-group__list-item-checkbox"
                                            type="checkbox"
                                            name="filter-{{ field.query_name }}"
-                                           value="{{ value.value }}"
+                                           value="{{ value.pk }}"
                                            {% if value.disabled %}disabled="disabled"{% endif %}
                                            {% if value.checked %}checked="checked"{% endif %} />
                                     <span class="catalog-filter-group__list-item-text">

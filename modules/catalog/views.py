@@ -94,6 +94,12 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
         return super().render_to_response(context, **response_kwargs)
 
+    def get_filtered_queryset(self, queryset, request):
+
+        queryset = super().get_filtered_queryset(queryset, request).distinct()
+
+        return queryset
+
     def filter_handle_field(self, model, field, value, _and=True):
         """Extend method FilterMixin.filter_handle_field."""
 
@@ -118,6 +124,11 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
         if field == 'special':
             return Q(**{'category': value}), _and
+
+        if field in [f.query_name for f in self.filter_fields]:
+            if type(value) is list:
+                return Q(**{'parametres__pk__in': value}), _and
+            return Q(**{'parametres__pk': value}), _and
 
         return super().filter_handle_field(model, field, value, _and=_and)
 
