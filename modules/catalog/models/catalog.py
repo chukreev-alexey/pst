@@ -138,9 +138,6 @@ class Product(ProductBase):
                 continue
             yield image
 
-    def get_price_color_dict(self):
-        color_prices = {}
-        if self.prices.all():
-            for price in self.prices.all():
-                color_prices[price.parametr.first().value] = price.price
-        return color_prices
+    def get_parametres_dict(self):
+        parametres = set(p.parametr for p in self.parametres.all())
+        return {p: self.parametres.filter(parametr=p) for p in parametres}

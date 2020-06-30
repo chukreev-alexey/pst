@@ -233,6 +233,32 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
         return initial
 
+    def get_filter_other_fields(self):
+        _filter = self._filter.get('filter') or {}
+        data = {}
+        queryset = self.get_queryset()
+
+        for field in self.get_filter_fields():
+            picked_parametres = _filter.get(field.query_name, False)
+
+            if type(picked_parametres) is not list:
+                picked_parametres = [picked_parametres, ]
+
+            product_parametres = {}
+            for parametr in field.product_parametres.all():
+                checked = False
+                items_count = 0
+                items_count = len(
+                    parametr.products.intersection(queryset))
+                if str(parametr.pk) in picked_parametres:
+                    checked = True
+                p_data = {'items_count': items_count, 'checked': checked}
+                product_parametres[parametr] = p_data
+
+            data[field] = product_parametres
+
+        return data
+
     def get_filter_data(self):
         initial = {}
 
@@ -249,7 +275,8 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
             initial['filter_special'] = special
 
         initial.update(self.get_filter_price())
-        initial['other_fields'] = self.get_filter_fields()
+
+        initial['other_fields'] = self.get_filter_other_fields()
 
         if initial:
             initial['filter_enable'] = True

@@ -95,23 +95,23 @@
         {% endif %}
 
         {% if other_fields %}
-            {% for field in other_fields %}
+            {% for field, parametres in other_fields.items %}
                 <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="{{ field.query_name }}">
                     <div class="catalog-filter-group__title">{{ field.name }}</div>
                     <div class="catalog-filter-group__list">
-                        {% for value in field.product_parametres.all %}
+                        {% for parametr, parametr_data in parametres.items %}
                             <div class="catalog-filter-group__list-item
-                                        {% if value.checked %} catalog-filter-group__list-item_state_checked{% endif %}
-                                        {% if value.disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                                        {% if parametr_data.checked %} catalog-filter-group__list-item_state_checked{% endif %}
+                                        {% if parametr_data.items_count %} catalog-filter-group__list-item_state_disabled{% endif %}">
                                 <label class="catalog-filter-group__list-item-label">
                                     <input class="catalog-filter-group__list-item-checkbox"
                                            type="checkbox"
                                            name="filter-{{ field.query_name }}"
-                                           value="{{ value.pk }}"
-                                           {% if value.disabled %}disabled="disabled"{% endif %}
-                                           {% if value.checked %}checked="checked"{% endif %} />
+                                           value="{{ parametr.pk }}"
+                                           {% if not parametr_data.items_count %}disabled="disabled"{% endif %}
+                                           {% if parametr_data.checked %}checked="checked"{% endif %} />
                                     <span class="catalog-filter-group__list-item-text">
-                                        {{ value.value }}
+                                        {{ parametr.value }}({{ parametr_data.items_count }})
                                     </span>
                                 </label>
                             </div>

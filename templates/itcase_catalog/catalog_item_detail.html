@@ -83,21 +83,44 @@
                         {% endif %}
                     </a>
                 {% endwith %}
-
-                {% if product.options %}
-                    <div class="catalog-item-detail__info-param">
-                        <div class="catalog-item-detail__info-param-title">Характеристики</div>
-                        {% for name, value in product.options.items %}
-                            <div class="catalog-item-detail__info-param-item">
-                                <div class="catalog-item-detail__info-param-item-name">{{ name }}</div>
-                                <div class="catalog-item-detail__info-param-item-value">{{ value }}</div>
-                            </div>
+                <div class="catalog-item-detail__info-param">
+                <div class="catalog-item-detail__info-param-title">Характеристики</div>
+                {% for parametr, items in product.get_parametres_dict.items %}
+                     <div class="catalog-item-detail__info-param-item">
+                        <div class="catalog-item-detail__info-param-item-name">{{ parametr.name }}</div>
+                        {% for item in items %}
+                            <div class="catalog-item-detail__info-param-item-value">{{ item.value }}</div>                            
                         {% endfor %}
                     </div>
-                {% endif %}
-                Цены за цвет:
-                {% for name, value in product.get_price_color_dict.items %}
-                    <p>{{ name }}: {{ value }}</p>
+                {% endfor %} 
+                </div>
+
+                Цены:
+                {% for price in product.prices.all %}
+                    <div>
+                        <p>{{ price.product_article }}(Кол-во на складе: {{ price.amount }}): {{ price.price }}</p>
+                        {% for parametr in price.parametr.all %}
+                            <p>{{ parametr }}</p>
+                        {% endfor %}
+                        {% with id=price.pk|unlocalize %}
+                            <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                               class="catalog-item__button button
+                                      {% if price in cart %}
+                                        button_border_orange
+                                      {% else %}
+                                        button_color_blue
+                                      {% endif %}"
+                                data-add-url="{% url 'itcase_cart:cart_add' %}"
+                                data-product="{{ id }}"
+                                data-amount-{{ id }}="1">
+                                {% if price in cart %}
+                                    В заказе
+                                {% else %}
+                                    Заказать
+                                {% endif %}
+                            </a>
+                        {% endwith %}
+                    </div>
                 {% endfor %}
             </div>
         </div>
