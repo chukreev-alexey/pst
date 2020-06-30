@@ -49,8 +49,6 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
     _checked = set()
 
-    filter_fields = [p for p in Parametr.objects.filter(filter_by=True)]
-
     def _get_context_data(self, object_list=None):
         context = {'products': object_list}
 
@@ -94,6 +92,9 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
         return super().render_to_response(context, **response_kwargs)
 
+    def get_filter_fields(self):
+        return [param for param in Parametr.objects.filter(filter_by=True)]
+
     def get_filtered_queryset(self, queryset, request):
 
         queryset = super().get_filtered_queryset(queryset, request).distinct()
@@ -125,7 +126,7 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         if field == 'special':
             return Q(**{'category': value}), _and
 
-        if field in [f.query_name for f in self.filter_fields]:
+        if field in [f.query_name for f in self.get_filter_fields()]:
             if type(value) is list:
                 return Q(**{'parametres__pk__in': value}), _and
             return Q(**{'parametres__pk': value}), _and
@@ -248,7 +249,7 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
             initial['filter_special'] = special
 
         initial.update(self.get_filter_price())
-        initial['other_fields'] = self.filter_fields
+        initial['other_fields'] = self.get_filter_fields()
 
         if initial:
             initial['filter_enable'] = True
