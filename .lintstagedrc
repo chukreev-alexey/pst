@@ -1,0 +1,14 @@
+{
+  "*.css": [
+    "./node_modules/stylelint/bin/stylelint.js --fix"
+  ],
+  "*.{js,jsx}": [
+    "./node_modules/eslint/bin/eslint.js --fix"
+  ],
+  "*.{htm,html}": [
+    "./node_modules/htmlhint/bin/htmlhint --config ./.htmlhintrc"
+  ],
+  ".*{rc,json}": [
+    "./node_modules/jsonlint/lib/cli.js --compact"
+  ]
+}
