@@ -105,6 +105,10 @@ class Product(ProductBase):
                               related_name='products', verbose_name='Бренд',
                               on_delete=models.SET_NULL, blank=True, null=True)
     description = TinyMCEModelField('Подробное описание', blank=True)
+    recommend_categories = models.ManyToManyField(
+        Category, blank=True, verbose_name='Рекомендуем категории')
+    recommend_products = models.ManyToManyField(
+        'self', blank=True, verbose_name='Рекомендуем товары')
     related_products = models.ManyToManyField(
         'self', blank=True, verbose_name='Комплектующие')
     pdf_instructtion = FileBrowseField('Инструкция', format='file',

@@ -120,6 +120,7 @@ class ProductAdmin(ProductAdminBase):
     fieldsets = (
         (None, {
             'fields': ('name', 'price', 'article', ('category', 'brand'),
+                       'recommend_categories', 'recommend_products',
                        'related_products', 'description', 'parametres',
                        'pdf_instructtion', 'pdf_components', 'scheme',
                        'product_actions')
@@ -129,7 +130,10 @@ class ProductAdmin(ProductAdminBase):
             'classes': ('grp-collapse', 'grp-closed'),
         }),
     )
-    filter_horizontal = ['related_products', 'parametres']
+    filter_horizontal = ['related_products',
+                         'recommend_categories',
+                         'recommend_products',
+                         'parametres']
 
     form = ProductAdminForm
 
