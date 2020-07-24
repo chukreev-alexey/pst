@@ -25,6 +25,22 @@ class ProductImage(models.Model):
         return self.image.original_filename
 
 
+class PriceCombinations(models.Model):
+    data = models.ManyToManyField(
+        ProductParametr,
+        related_name='combination_parametres',
+        blank=True,
+        verbose_name='Параметры')
+
+    class Meta(object):
+        verbose_name = 'Параметры комплектации'
+        verbose_name_plural = 'Варианты комплектаций'
+
+    def __str__(self):
+        data = [f'{i.parametr.name}: {i.value}' for i in self.data.all()]
+        return '; '.join(data)
+
+
 class Price(models.Model):
     product = models.ForeignKey(Product, related_name='prices',
                                 verbose_name=Product._meta.verbose_name,
@@ -33,15 +49,18 @@ class Price(models.Model):
     price = models.DecimalField('Цена', max_digits=10, decimal_places=2)
     amount = models.PositiveIntegerField('Количество в наличии')
 
-    parametr = models.ManyToManyField(
-        ProductParametr,
+    price_combination = models.ForeignKey(
+        PriceCombinations,
         related_name='price_by_parametres',
-        blank=True,
-        verbose_name='Параметры')
+        blank=True, null=True,
+        verbose_name='Параметры', on_delete=models.CASCADE)
 
     class Meta(object):
         verbose_name = 'Цена комплектации'
-        verbose_name_plural = 'Цены Комплектаций'
+        verbose_name_plural = 'Цены комплектаций'
 
     def __str__(self):
-        return f'{self.parametr.first()}: {self.price}'
+        if self.price_combination:
+            return f'{self.price_combination.data.first()}: {self.price}'
+        else:
+            return 'None'
