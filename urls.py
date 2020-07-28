@@ -43,6 +43,7 @@ urlpatterns = [
     path(r'', include('itcase_catalog.urls')),
     path(r'', include('itcase_feed.urls')),
     path(r'', include('itcase_gallery.urls')),
+    path(r'', include('itcase_logos.urls')),
     path(r'search/', include('itcase_search.urls')),
     path(r'forms/', include('itcase_entry.urls')),
 
