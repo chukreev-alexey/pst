@@ -1,5 +1,13 @@
 {% extends "base.html" %}
+{% load catalog_tags static fb_versions itcase_common itcase_feed %}
 
 {% block content %}
-    Website index template
+
+    {% with feed_title='Скидки и акции' %}
+        {% feed_list_main_page limit=3 %}
+    {% endwith %}
+
+    {% comment %}
+        {% logos_list_main_page %}
+    {% endcomment %}
 {% endblock content %}

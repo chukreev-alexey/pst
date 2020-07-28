@@ -153,6 +153,33 @@
     {% block content %}
     {% endblock content %}
 
+    <footer class="footer">
+        <div class="footer__wrapper">
+            <div class="footer__left">
+                <div class="footer__form"></div>
+                <div class="footer__contact">
+                    +7 922-127-77-25
+                    +7 908-630-79-47
+                    +7 (343) 380-08-42
+                    +7 (343) 319-05-30
+                </div>
+                <div class="footer__copyright">© 2010-2020 ПрофСтройТорг</div>
+            </div>
+            <div class="footer__right">
+                <div class="footer__menu">
+                    {% catalog_menu %}
+                </div>
+                <div class="footer__menu">
+                    {% for item in footer_menu %}
+                        <div class="footer-menu__item">
+                            <a href="{{ item.get_absolute_url }}" class="footer-menu__item-link" {{ item.in_new_tab|yesno:"target=_blank," }}>{{ item.name }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </footer>
+
 
     {% include 'itcase_common/include/cookies.html' %}
 
