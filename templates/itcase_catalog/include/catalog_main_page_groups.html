@@ -2,4 +2,33 @@
     {% for category in categories %}
         {% include 'itcase_catalog/include/catalog_item.html' %}
     {% endfor %}
+
+    {% for group, products in products_groups.items %}
+    {% if forloop.first %}
+        <div class="catalog-category-menu">
+            <div class="catalog-category-menu__item catalog-category-menu__item_state_current" data-category="recommended">рекомендуем</div>
+            <div class="catalog-category-menu__item" data-category="hit">хиты продаж</div>
+            <div class="catalog-category-menu__item" data-category="action">акции и распродажи</div>
+        </div>
+    {% endif %}
+    <div class="catalog-group" data-category="{{ group }}">
+        {% if show_title %}
+            <div class="catalog-group__title">
+                {% if group == 'recommended' %}Рекомендуем{% endif %}
+                {% if group == 'hit' %}Хиты продаж{% endif %}
+                {% if group == 'action' %}Акции и распродажи{% endif %}
+            </div>
+        {% endif %}
+        <div class="catalog-group__inner">
+            <div class="catalog-list catalog-list_type_scroll">
+                {% for row in products %}
+                    {% for product in row %}
+                        {% include 'itcase_catalog/include/catalog_item.html' %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
 </div>

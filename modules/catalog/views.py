@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from itertools import permutations
+
 from django.db.models import Max, Min, Q
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -28,6 +30,8 @@ from itcase_common.views.mixins import RequestDataMixin
 from itcase_paginator.pagination import SlicePaginatorMixin
 
 from .models import Category, Product, Parametr, Price
+from .conf import get_settings
+
 
 __all__ = ('CatalogIndexView', 'CategoryDetail', 'ProductDetail')
 
@@ -37,9 +41,114 @@ class CatalogIndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context['categories'] = Category.objects.all()
 
+        groups = {
+            'recommended': Product.objects.filter(in_recommended=True),
+            'hit': Product.objects.filter(in_hit=True),
+            'action': Product.objects.filter(in_action=True),
+        }
+
+        for name, queryset in groups.items():
+            if not queryset.exists():
+                continue
+            groups[name] = self.get_pretty_object_list(queryset)
+
+        context['products_groups'] = groups
+
         return context
+
+    @staticmethod
+    def get_pretty_object_list(queryset, b_size=2, box_size=4):
+
+        class Box(object):
+
+            def __init__(self, index):
+                super().__init__()
+
+                self._items = []
+                self._size = box_size
+
+            @property
+            def size(self):
+                if not self._items:
+                    return 0
+                return sum(self.item_size(item) for item in self._items)
+
+            @staticmethod
+            def item_size(item):
+                return b_size if item.border else 1
+
+            def add(self, item):
+                if self.size + self.item_size(item) <= self._size:
+                    self._items.append(item)
+                    return
+
+                items = self._items.copy()
+                items.append(item)
+                for comb in permutations(items, len(self._items)):
+
+                    _sum = sum(self.item_size(item) for item in comb)
+                    if not _sum == self._size:
+                        continue
+
+                    diff = set(self._items).difference(set(comb))
+
+                    self._items = list(comb)
+
+                    try:
+                        return diff.pop()
+                    except KeyError:
+                        return
+
+                return item
+
+            def complete(self):
+                return self.size == self._size
+
+        box = None
+        count = get_settings('SPECIAL_PRODUCTS_COUNT')
+        iteration = 0
+        objs = list(queryset.order_by('?')[:count])
+        result = []
+        while iteration < (count * b_size / box_size):
+
+            if box is None:
+                box = Box(iteration)
+                box.add(objs.pop(0))
+
+            empty = set()
+            for index, item in enumerate(objs):
+
+                obj = box.add(item)
+                objs[index] = obj
+
+                if obj is None:
+                    empty.add(index)
+
+                if box.complete():
+                    break
+
+            for index, pos in enumerate(empty):
+                del objs[pos - index]
+
+            if box.complete() or not objs:
+                result.append(box._items)
+                box = None
+
+            if not objs:
+                break
+
+            iteration += 1
+
+        if objs:
+            box = box or Box(len(result))
+            for orphan in objs:
+                box._items.append(orphan)
+            result.append(box._items)
+
+        return result
 
 
 class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):

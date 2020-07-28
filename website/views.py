@@ -15,6 +15,7 @@
 # limitations under the License.
 
 from django.views.generic.base import TemplateView
+from modules.catalog.views import CatalogIndexView
 from itcase_catalog.shortcuts import get_category_model
 
 
@@ -24,7 +25,7 @@ Category = get_category_model()
 __all__ = ['IndexView']
 
 
-class IndexView(TemplateView):
+class IndexView(CatalogIndexView):
     template_name = 'website/index.html'
 
     def get_context_data(self, **kwargs):
