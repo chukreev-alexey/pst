@@ -40,6 +40,7 @@ class Category(MPTTModel, CategoryBase, SEOModel):
 
     on_main_page = models.BooleanField('Отображать на главной странице?',
                                        default=False)
+    in_menu = models.BooleanField('Отображать в меню?', default=False)
 
     class Meta(CategoryBase.Meta):
         pass
