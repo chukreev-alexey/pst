@@ -27,7 +27,7 @@ from itcase_common.mixins import FilterMixin, SortMixin
 from itcase_common.views.mixins import RequestDataMixin
 from itcase_paginator.pagination import SlicePaginatorMixin
 
-from .models import Category, Product, Parametr
+from .models import Category, Product, Parametr, Price
 
 __all__ = ('CatalogIndexView', 'CategoryDetail', 'ProductDetail')
 
@@ -93,7 +93,8 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         return super().render_to_response(context, **response_kwargs)
 
     def get_filter_fields(self):
-        return [param for param in Parametr.objects.filter(filter_by=True)]
+        return Parametr.objects.filter(filter_by=True).values_list(
+            'query_name', flat=True)
 
     def get_filtered_queryset(self, queryset, request):
 
@@ -105,10 +106,10 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         """Extend method FilterMixin.filter_handle_field."""
 
         if field == 'price_max':
-            return Q(**{'price__lte': value}), _and
+            return Q(**{'prices__price__lte': value}), _and
 
         if field == 'price_min':
-            return Q(**{'price__gte': value}), _and
+            return Q(**{'prices__price__gte': value}), _and
 
         if field == 'category':
             if not isinstance(value, list):
@@ -126,7 +127,7 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         if field == 'special':
             return Q(**{'category': value}), _and
 
-        if field in [f.query_name for f in self.get_filter_fields()]:
+        if field in self.get_filter_fields():
             if type(value) is list:
                 return Q(**{'parametres__pk__in': value}), _and
             return Q(**{'parametres__pk': value}), _and
@@ -219,8 +220,8 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
     def get_filter_price(self):
         filtered = self._filter.get('filter') or {}
-        data = self.queryset.aggregate(Max('price'), Min('price'))
-
+        # data = self.queryset.aggregate(Max('price'), Min('price'))
+        data = Price.objects.filter(product__in=self.queryset).aggregate(Max('price'), Min('price'))
         initial = {}
 
         _max = filtered.get('price_max', data.get('price__max'))
@@ -238,7 +239,9 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         data = {}
         queryset = self.get_queryset()
 
-        for field in self.get_filter_fields():
+        for field_query_name in self.get_filter_fields():
+
+            field = Parametr.objects.get(query_name=field_query_name)
             picked_parametres = _filter.get(field.query_name, False)
 
             if type(picked_parametres) is not list:

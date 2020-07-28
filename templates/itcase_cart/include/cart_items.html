@@ -1,0 +1,53 @@
+{% load itcase_common l10n %}
+
+<div class="cart-list">
+    {% for item in cart_items %}
+        {% with product=item.product.product price=item.price|floatformat:'-2' %}
+            <div class="cart-list__item">
+                <div class="cart-list__item-image">
+                    {% if product.image.exists %}
+                        <img src="{{ product.image.url }}" class="catalog-item__image-image" />
+                    {% endif %}
+                </div>
+                <div class="cart-list__item-info">
+                    <a href="{{ product.get_absolute_url }}" class="cart-list__item-info-title">{{ product.name }}</a>
+                    <div class="cart-list__item-info-state">
+                        <div class="cart-list__item-info-state-text">Под заказ</div>
+                    </div>
+                </div>
+                <div class="cart-list__item-count">
+                    <input class="cart-list__item-count-input"
+                           name="amount-{{ product.pk|unlocalize }}"
+                           value="{{ item.amount|unlocalize }}"
+                           data-product="{{ product.pk|unlocalize }}"
+                           data-step="{{ product.get_allowed_size }}"
+                           data-price="{{ price|unlocalize }}"
+                           data-item-amount="{{ product.remains }}"
+                           data-action="{{ view.ACTION_PRODUCT_AMOUNT }}"
+                           maxlength="3"
+                           type="text" />
+                </div>
+                <div class="cart-list__item-cost">
+                    {{ price }} рубл{{ price|pytils_choose_plural:'ь,я,ей' }}
+                    {% with subtotal=item.total|floatformat:'-2' %}
+                        {{ subtotal }} рубл{{ subtotal|pytils_choose_plural:'ь,я,ей' }}
+                    {% endwith %}
+                </div>
+                <div class="cart-list__item-action">
+                    <a href="{% url 'itcase_cart:cart_remove' %}?product={{ product.pk }}"
+                       class="cart-list__item-action-link"
+                       data-product="{{ product.pk }}"
+                       data-amount-{{ product.pk }}="{{ product.get_allowed_size|unlocalize }}">убрать</a>
+                </div>
+            </div>
+        {% endwith %}
+    {% endfor %}
+    <div class="cart-list-sum">
+        <div class="cart-list-sum__title">Итого</div>
+        <div class="cart-list-sum__amount">
+            {% with total=cart.total|floatformat:'-2' %}
+                {{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}
+            {% endwith %}
+        </div>
+    </div>
+</div>

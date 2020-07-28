@@ -89,10 +89,10 @@
                      <div class="catalog-item-detail__info-param-item">
                         <div class="catalog-item-detail__info-param-item-name">{{ parametr.name }}</div>
                         {% for item in items %}
-                            <div class="catalog-item-detail__info-param-item-value">{{ item.value }}</div>                            
+                            <div class="catalog-item-detail__info-param-item-value">{{ item.value }}</div>
                         {% endfor %}
                     </div>
-                {% endfor %} 
+                {% endfor %}
                 </div>
 
                 Цены:
@@ -122,6 +122,28 @@
                         {% endwith %}
                     </div>
                 {% endfor %}
+
+                {% if product.recommend_categories %}
+                    <h2>Рекомендуем категории<h2>
+                    {% for category in product.recommend_categories.all %}
+                        <h3>{{ category }}</h3>
+                        <ul>
+                            {% for product in category.products.all %}
+                                <li>{{ product }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                {% endif %}
+
+                {% if product.recommend_products %}
+                    <h2>Рекомендуем товары<h2>
+                    <ul>
+                        {% for product in product.recommend_products.all %}
+                            <li>{{ product }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
             </div>
         </div>
     </div>

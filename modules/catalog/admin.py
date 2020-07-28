@@ -8,7 +8,7 @@ from itcase_catalog.admin import ProductAdmin as ProductAdminBase
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 
 from .models.catalog import Brand, Parametr, ProductParametr
-from .models.parametres import ProductImage, Price
+from .models.parametres import ProductImage, Price, PriceCombinations
 
 
 Product = get_product_model()
@@ -18,6 +18,20 @@ admin.site.unregister(Category)
 admin.site.unregister(Product)
 
 admin.site.register(Brand)
+
+
+@admin.register(PriceCombinations)
+class PriceCombinationsAdmin(admin.ModelAdmin):
+
+    filter_horizontal = ['data', ]
+
+    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
+        field = super().formfield_for_manytomany(db_field, request, **kwargs)
+        if db_field.name == 'data':
+            field.queryset = ProductParametr.objects.filter(
+                parametr__in=Parametr.objects.filter(
+                    is_affects_price=True))
+        return field
 
 
 class ProductParametrAdminInline(admin.TabularInline):
@@ -78,11 +92,8 @@ class ProductImageInline(admin.TabularInline):
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super().formfield_for_foreignkey(db_field, request, **kwargs)
         if db_field.name == 'color':
-            if request._obj_ is not None:
-                field.queryset = request._obj_.parametres.filter(
-                    parametr__name__exact='Цвет')
-            else:
-                field.queryset = field.queryset.none()
+            field.queryset = Parametr.objects.get(
+                name__iexact='цвет').product_parametres.all()
         return field
 
 
@@ -90,19 +101,6 @@ class PickingPriceInline(admin.TabularInline):
 
     model = Price
     extra = 0
-
-    filter_horizontal = ['parametr']
-
-    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
-        field = super().formfield_for_manytomany(db_field, request, **kwargs)
-        if db_field.name == 'parametr':
-            if request._obj_ is not None:
-                field.queryset = request._obj_.parametres.filter(
-                    parametr__is_affects_price=True,
-                )
-            else:
-                field.queryset = field.queryset.none()
-        return field
 
 
 class ProductAdminForm(forms.ModelForm):
@@ -122,6 +120,7 @@ class ProductAdmin(ProductAdminBase):
     fieldsets = (
         (None, {
             'fields': ('name', 'price', 'article', ('category', 'brand'),
+                       'recommend_categories', 'recommend_products',
                        'related_products', 'description', 'parametres',
                        'pdf_instructtion', 'pdf_components', 'scheme',
                        'product_actions')
@@ -131,7 +130,10 @@ class ProductAdmin(ProductAdminBase):
             'classes': ('grp-collapse', 'grp-closed'),
         }),
     )
-    filter_horizontal = ['related_products', 'parametres']
+    filter_horizontal = ['related_products',
+                         'recommend_categories',
+                         'recommend_products',
+                         'parametres']
 
     form = ProductAdminForm
 
