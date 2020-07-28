@@ -1,32 +1,45 @@
 .footer {
   width: 100%;
   position: relative;
-  @media (--warning) {
-    display: none;
-  }
-  &-wrapper {
+  background: var(--color-neutral);
+  &__wrapper {
+    padding: 32px 0 48px 0;
+    max-width: var(--max);
+    margin: 0 auto;
     position: relative;
-    &_type_menu {
-      background: var(--color-fourthly);
-      & .footer-wrapper__inner {
-        padding: 32px 72px 40px 72px;
-        @media (--mobile) {
-          padding: 48px 20px;
+    display: flex;
+    ^&__left {
+      ^^&__contact {
+        display: flex;
+        &-phone {
+          & p {
+            color: var(--color-neutral-text);
+            @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
+            margin: 0;
+            padding: 0;
+            & a {
+              color: var(--color-neutral-text);
+              text-decoration: none;
+            }
+          }
         }
-        @media (--tablet) {
-          padding: 48px 24px;
+        &-address {
+          margin: 0 0 0 32px;
+          & p {
+            color: var(--color-neutral-text);
+            @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
+            margin: 0;
+            padding: 0;
+            & a {
+              color: var(--color-neutral-text);
+              text-decoration: none;
+            }
+          }
         }
       }
     }
-    &__inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      display: flex;
-      flex-flow: row wrap;
-      box-sizing: border-box;
-      @media (--tablet) {
-        display: block;
-      }
+    ^&__right {
+      margin: 0 0 0 56px;
     }
   }
 }
