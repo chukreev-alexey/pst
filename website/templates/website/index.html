@@ -2,35 +2,27 @@
 {% load catalog_tags static fb_versions itcase_common itcase_logos itcase_feed %}
 
 {% block content %}
-    {{ categories }}
-
     <div class="catalog-group">
         <div class="catalog-group__title">Системы отопления</div>
-        <ul class="catalog-group__inner-list">
-            <li class="catalog-group__inner-list-item">
-                <a href="#" class="catalog-group__inner-list-link">
-                    <img src="#" class="catalog-group__inner-list-link-image" alt="Металлочерепица" title="Металлочерепица">
-                    <span class="catalog-group__inner-list-link-text">Металлочерепица</span>
-                </a>
-                <ul class="catalog-group__inner-nested-list">
-                    <li class="catalog-group__inner-nested-list-item">
-                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3484" class="catalog-group__inner-nested-list-link">Монтерроса</a>
+            <ul class="catalog-group__inner-list">
+                {% for category in categories %}
+                    <li class="catalog-group__inner-list-item">
+                        <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
+                            <img src="{{ category.image.path }}" class="catalog-group__inner-list-link-image" alt="{{ category.name }}" title="{{ category.name }}">
+                            <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
+                        </a>
+                        <ul class="catalog-group__inner-nested-list">
+                            {% for subcategory in category.children.all %}
+                                <li class="catalog-group__inner-nested-list-item">
+                                    <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">{{ subcategory.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </li>
-                    <li class="catalog-group__inner-nested-list-item">
-                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3485" class="catalog-group__inner-nested-list-link">Трамонтана</a>
-                    </li>
-                    <li class="catalog-group__inner-nested-list-item">
-                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3486" class="catalog-group__inner-nested-list-link">Монтекристо</a>
-                    </li>
-                    <li class="catalog-group__inner-nested-list-item">
-                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3487" class="catalog-group__inner-nested-list-link">Монтеррей</a>
-                    </li>
-                    <li class="catalog-group__inner-nested-list-item">
-                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3488" class="catalog-group__inner-nested-list-link">Супермонтеррей</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
     {% with feed_title='Скидки и акции' %}
         {% feed_list_main_page limit=3 %}
