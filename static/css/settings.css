@@ -1,17 +1,14 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 :root {
-  --font: 'dinpro', sans-serif;
-  --font-secondary: 'Arial', helvetica, sans-serif;
-  --font-title: 'dinpro', sans-serif;
-  --font-title-secondary: 'dincondensedc', sans-serif;
-  --font-email: 'arial', sans-serif;
+  --font: 'Fact', sans-serif;
+  --font-secondary: 'Fact', helvetica, sans-serif;
+  --font-title: 'Fact', sans-serif;
+  --font-title-secondary: 'Fact', sans-serif;
+  --font-email: 'Arial', sans-serif;
 
-  --font-pdf: 'times new roman', serif;
-  --font-pdf-desc: 'verdana', geneva, sans-serif;
-
-  --color-primary: #16a9f4;
-  --color-primary-hover: color(rgba(#16a9f4, 1) l(30%));
+  --color-primary: #D82318;
+  --color-primary-hover: color(rgba(#D82318, 1) l(30%));
   --color-primary-text: #fff;
   --color-primary-text-hover: #fff;
   --color-primary-item: #000;

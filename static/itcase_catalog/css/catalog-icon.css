@@ -1,0 +1,50 @@
+@import './import.css';
+
+.catalog-icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  @media (--mobile) {
+    margin: 10px 0 40px 0;
+    display: block;
+  }
+  &__image {
+    @media (--mobile) {
+      text-align: center;
+    }
+    &-image {
+      vertical-align: bottom;
+      @media (--mobile) {
+        width: 200px;
+      }
+    }
+  }
+  &__text {
+    padding: 0 0 0 35px;
+    @media (--mobile) {
+      padding: 30px 0 0 15px;
+    }
+    &-title {
+      font: 500 24px/24px var(--font);
+      color: var(--color-blue);
+      margin: 0 0 10px 0;
+      @media (--mobile) {
+        font: 500 18px/18px var(--font);
+        margin: 0 0 5px 0;
+      }
+    }
+    &-desc {
+      font: 18px/26px var(--font);
+      color: #000;
+      @media (--mobile) {
+        font: 14px/20px var(--font);
+      }
+      & a {
+        color: var(--color-orange);
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+  }
+}

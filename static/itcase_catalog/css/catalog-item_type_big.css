@@ -1,0 +1,96 @@
+@import './import.css';
+
+div.catalog-item_type_big {
+  width: calc(50% - 20px);
+  @media (--mobile) {
+    width: 100%;
+  }
+  & .catalog-item {
+    &__inner {
+      flex-flow: nowrap row;
+      @media (--mobile) {
+        padding: 10px 10px 20px 10px;
+        flex-flow: nowrap column;
+      }
+      &-left {
+        width: 50%;
+        align-self: center;
+        @media (--mobile) {
+          width: 100%;
+        }
+      }
+      &-right {
+        width: 50%;
+        align-self: center;
+        @media (--mobile) {
+          width: 100%;
+        }
+      }
+    }
+    &__icon {
+      left: 2px;
+      top: 2px;
+      @media (--mobile) {
+        left: 0;
+        top: 0;
+      }
+    }
+    &__image {
+      &-link {
+        height: auto;
+      }
+      &-image {
+        width: 100%;
+        left: 0;
+        top: 0;
+        transform: none;
+        @media (--mobile), (--tablet) {
+          width: auto;
+        }
+      }
+    }
+    &__category {
+      padding: 0 0 0 20px;
+      @media (--mobile), (--tablet) {
+        padding: 0;
+      }
+    }
+    &__title {
+      padding: 0 0 0 20px;
+      @media (--mobile), (--tablet) {
+        padding: 0;
+      }
+      &-link {
+        font: 18px/20px var(--font);
+      }
+    }
+    &__price {
+      padding: 0 0 0 20px;
+      @media (--mobile), (--tablet) {
+        padding: 0;
+      }
+      &-text {
+        font: 500 24px/22px var(--font);
+        color: #000;
+        @media (--mobile), (--tablet) {
+          font: 500 20px/18px var(--font);
+        }
+      }
+      &-old {
+        font: 500 16px/18px var(--font);
+        @media (--mobile), (--tablet) {
+          font: 500 14px/12px var(--font);
+        }
+        &::after {
+          margin: 1px 0 0 0;
+        }
+      }
+    }
+    &__button {
+      margin: 15px 0 0 20px;
+      @media (--mobile), (--tablet) {
+        margin: 15px 0 0 0;
+      }
+    }
+  }
+}

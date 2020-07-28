@@ -1,0 +1,17 @@
+@import './import.css';
+
+.catalog-filter-popup {
+  width: 100%;
+  text-align: center;
+  margin: 25px 0 20px 0;
+  position: relative;
+  display: none;
+  z-index: 10;
+  @media (--mobile), (--tablet) {
+    margin: 0 0 20px 0;
+    position: fixed;
+    display: block;
+    left: 0;
+    bottom: 15px;
+  }
+}

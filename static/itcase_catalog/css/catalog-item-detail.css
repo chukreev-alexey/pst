@@ -1,0 +1,196 @@
+@import './import.css';
+
+.catalog-item-detail {
+  margin: 0 30px 70px 0;
+  display: flex;
+  box-sizing: border-box;
+  @media (--mobile), (--tablet) {
+    padding: 0 15px;
+    margin: 0 0 20px 0;
+  }
+  @media (--mobile-small) {
+    padding: 0 15px;
+    margin: 0 0 15px 0;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  &__left {
+    width: 50%;
+    @media (--mobile-small), (--mobile-medium), (--mobile-standart) {
+      width: 100%;
+      margin: 0 0 25px 0;
+      float: none;
+    }
+    @media (--mobile-large), (--tablet-small) {
+      width: 50%;
+    }
+  }
+  &__gallery {
+    position: relative;
+  }
+  &__right {
+    width: 50%;
+    @media (--mobile) {
+      width: 100%;
+      margin: 0;
+      float: none;
+    }
+  }
+  &__info {
+    padding: 0 0 0 40px;
+    @media (--mobile) {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (--mobile-large), (--mobile-huge) {
+      padding: 0 0 0 10px;
+    }
+    &-title {
+      font: 24px/28px var(--font);
+      color: var(--color-blue);
+      @media (--mobile) {
+        font: 16px/20px var(--font);
+      }
+    }
+    &-label {
+      display: flex;
+      flex-flow: row wrap;
+      z-index: 2;
+      &-item {
+        font: 14px/14px var(--font);
+        color: #fff;
+        padding: 6px 10px 4px 10px;
+        margin: 10px 10px 0 0;
+        position: relative;
+        align-self: flex-start;
+        @media (--mobile) {
+          font: 500 12px/12px var(--font);
+        }
+        &_type_hit {
+          background: var(--color-red);
+        }
+        &_type_action {
+          background: var(--color-orange);
+        }
+        &_type_recommended {
+          color: var(--color-black);
+          background: var(--color-gray);
+        }
+      }
+    }
+    &-state {
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      &-text {
+        font: 500 14px/18px var(--font);
+        color: #fff;
+        padding: 4px 13px 2px 13px;
+        display: inline-block;
+        @media (--mobile) {
+          background: var(--color-orange);
+          padding: 4px 10px 2px 10px;
+        }
+      }
+      &-amount {
+        padding: 4px 4px 4px 8px;
+        margin: 0 0 0 15px;
+        border: solid 1px var(--color-gray);
+        position: relative;
+        display: flex;
+        box-sizing: border-box;
+        &:hover {
+          ^&-text {
+            display: block;
+          }
+        }
+        &-tick {
+          width: 6px;
+          height: 14px;
+          font-size: 0;
+          background: var(--color-gray);
+          margin: 0 4px 0 0;
+          &_type {
+            &_small {
+              background: var(--color-red);
+            }
+            &_medium {
+              background: var(--color-orange);
+            }
+            &_large {
+              background: var(--color-blue);
+            }
+          }
+        }
+        &-text {
+          font: 14px/14px var(--font);
+          color: var(--color-white);
+          white-space: nowrap;
+          background: var(--color-orange);
+          padding: 5px 10px;
+          position: absolute;
+          display: none;
+          align-self: flex-start;
+          left: 50%;
+          bottom: -30px;
+          transform: translate(-50%, 0);
+          @media (--mobile) {
+            font: 500 12px/12px var(--font);
+          }
+        }
+      }
+      &_exist {
+        & .catalog-item-detail__info-state-text {
+          background: var(--color-orange);
+        }
+      }
+      &_preorder {
+        & .catalog-item-detail__info-state-text {
+          background: var(--color-blue);
+        }
+      }
+    }
+    &-price {
+      font: 500 36px/32px var(--font);
+      color: #000;
+      margin: 20px 0;
+      @media (--mobile) {
+        font: 500 24px/22px var(--font);
+        margin: 13px 0;
+      }
+    }
+    &-desc {
+      font: 16px/24px var(--font);
+      color: var(--color-black);
+      padding: 20px 0 0 0;
+      margin: 0 0 30px 0;
+      @media (--mobile) {
+        font: 12px/16px var(--font);
+      }
+    }
+    &-param {
+      margin: 45px 0 0 0;
+      &-title {
+        font: 500 20px/20px var(--font);
+        color: #000;
+      }
+      &-item {
+        width: 100%;
+        padding: 5px 0;
+        display: flex;
+        &-name {
+          font: 13px/26px var(--font);
+          color: #000;
+          min-width: 250px;
+        }
+        &-value {
+          font: 13px/26px var(--font);
+          color: #000;
+          flex-grow: 1;
+          padding: 0 0 0 50px;
+        }
+      }
+    }
+  }
+}

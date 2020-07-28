@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load catalog_tags static fb_versions itcase_common itcase_feed %}
+{% load catalog_tags static fb_versions itcase_common itcase_logos itcase_feed %}
 
 {% block content %}
     {{ categories }}
@@ -8,10 +8,6 @@
         {% feed_list_main_page limit=3 %}
     {% endwith %}
 
-    {% comment %}
-        {% logos_list_main_page %}
-    {% endcomment %}
-
-    {% first_level_subcategories %}
+     {% logos_list_main_page %}
 
 {% endblock content %}

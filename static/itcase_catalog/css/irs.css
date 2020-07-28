@@ -1,0 +1,43 @@
+@import './import.css';
+
+span.irs {
+  height: 20px;
+  &-line {
+    height: 2px;
+    background: #d9d9d9;
+    border-radius: 10px;
+    top: 0;
+  }
+  &-min,
+  &-max {
+    display: none;
+  }
+  &-from,
+  &-to {
+    width: 15px;
+    height: 15px;
+    font-size: 0;
+    background: var(--color-blue);
+    padding: 0;
+    margin: -6px 0 0 0;
+    border-radius: 100px;
+    z-index: 1;
+    cursor: pointer;
+    &::after {
+      display: none;
+    }
+  }
+  &-bar {
+    height: 2px;
+    background: var(--color-blue);
+    top: 0;
+  }
+  &-bar-edge {
+    background: #777;
+    border-radius: 10px 0 0 10px;
+    top: 4px;
+  }
+  &-slider {
+    display: none;
+  }
+}

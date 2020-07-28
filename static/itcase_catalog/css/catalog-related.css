@@ -1,0 +1,44 @@
+@import './import.css';
+
+.catalog-related {
+  width: 100%;
+  margin: 50px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  @media (--mobile), (--tablet) {
+    margin: 20px 0 0 0;
+  }
+  &__wrapper {
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    @media (--mobile), (--tablet) {
+      overflow: scroll;
+      flex-wrap: nowrap;
+      &::after {
+        border: solid 15px transparent;
+        content: '';
+        display: inline-block;
+      }
+    }
+  }
+  &__title {
+    width: 100%;
+    font: 500 36px/48px var(--font);
+    color: #000;
+    padding: 0 30px 0 0;
+    position: relative;
+    @media (--mobile) {
+      font: 500 20px/20px var(--font);
+      padding: 20px 15px 10px 15px;
+    }
+  }
+  &__item {
+    flex: 0 0 auto;
+    @media (--mobile), (--tablet) {
+      width: auto;
+      margin: 0 15px 20px 15px;
+      flex: 0 0 200px;
+    }
+  }
+}

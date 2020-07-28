@@ -1,0 +1,32 @@
+@import './import.css';
+
+.catalog-list {
+  width: calc(100% + 20px);
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  @media (--mobile) {
+    width: 100%;
+    justify-content: space-between;
+  }
+  &_type_scroll {
+    margin: 0 0 15px 0;
+    z-index: 1;
+    @media (--mobile), (--tablet) {
+      padding: 0 0 15px 0;
+      margin: 0;
+      overflow: scroll;
+      flex-flow: nowrap row;
+      &::after {
+        border: solid 15px transparent;
+        content: '';
+        display: inline-block;
+      }
+      & .catalog-item {
+        margin: 0 15px;
+        flex: 0 0 200px;
+      }
+    }
+  }
+}

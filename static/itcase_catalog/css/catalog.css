@@ -1,0 +1,9 @@
+@import './import.css';
+
+.catalog {
+  position: relative;
+  z-index: 1;
+  &__wrapper {
+    width: 100%;
+  }
+}

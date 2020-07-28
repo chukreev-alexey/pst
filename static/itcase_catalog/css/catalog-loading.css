@@ -1,0 +1,41 @@
+@import './import.css';
+
+.catalog-loading {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0 0 0;
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  & .sk-three-bounce .sk-child {
+    background-color: var(--color-blue);
+  }
+  &_state_visible {
+    display: block;
+    animation-name: catalogLoadingFadeIn;
+  }
+  &_state_hidden {
+    animation-name: catalogLoadingFadeOut;
+  }
+}
+
+@keyframes catalogLoadingFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes catalogLoadingFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

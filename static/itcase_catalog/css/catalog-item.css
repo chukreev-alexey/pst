@@ -1,0 +1,314 @@
+@import './import.css';
+
+.catalog-item {
+  width: calc(25% - 20px);
+  padding: 20px;
+  margin: 0 20px 20px 0;
+  box-sizing: border-box;
+  transition: box-shadow 0.1s ease-in-out;
+  @media (--mobile), (--tablet) {
+    width: 47%;
+    padding: 0;
+    margin: 0 0 30px 0;
+  }
+  @media (--desktop-small) {
+    width: 28%;
+  }
+  &:hover {
+    box-shadow: 0 5px 30px -10px var(--color-gray);
+    @media (--mobile), (--tablet) {
+      box-shadow: none;
+    }
+  }
+  &__inner {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-flow: wrap column;
+    box-sizing: border-box;
+    &-left {
+      position: relative;
+    }
+    &-right {
+      display: flex;
+      flex-flow: wrap column;
+      flex-grow: 1;
+    }
+  }
+  &__icon {
+    position: absolute;
+    display: flex;
+    flex-flow: column wrap;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    &-item {
+      &:hover {
+        ^&-text {
+          display: block;
+        }
+      }
+      &_type_preorder {
+        width: 40px;
+        height: 40px;
+        background: var(--color-light-gray);
+        padding: 0;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        ^&-image {
+          width: 32px;
+          position: relative;
+        }
+      }
+      &-text {
+        font: 14px/14px var(--font);
+        color: var(--color-white);
+        white-space: nowrap;
+        background: var(--color-blue);
+        padding: 5px 10px;
+        position: absolute;
+        display: none;
+        align-self: flex-start;
+        left: 50%;
+        bottom: -20px;
+        transform: translate(-50%, 0);
+        @media (--mobile) {
+          font: 500 12px/12px var(--font);
+        }
+      }
+    }
+  }
+  &__image {
+    display: block;
+    box-sizing: border-box;
+    &_type_placeholder {
+      height: 200px;
+      &::after {
+        width: 140px;
+        height: 140px;
+        background: #efefef;
+        margin: 0 auto;
+        border-radius: 100px;
+        content: '';
+        display: block;
+      }
+    }
+    &-link {
+      width: 100%;
+      height: 240px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &-image {
+      width: auto;
+      max-width: 100%;
+      max-height: 240px;
+      vertical-align: bottom;
+    }
+  }
+  &__label {
+    display: flex;
+    flex-flow: row wrap;
+    z-index: 2;
+    &-item {
+      font: 14px/14px var(--font);
+      color: #fff;
+      padding: 6px 10px 4px 10px;
+      margin: 10px 10px 0 0;
+      position: relative;
+      align-self: flex-start;
+      @media (--mobile) {
+        font: 500 12px/12px var(--font);
+      }
+      &_type_hit {
+        background: var(--color-red);
+      }
+      &_type_action {
+        background: var(--color-orange);
+      }
+      &_type_recommended {
+        color: var(--color-black);
+        background: var(--color-gray);
+      }
+    }
+  }
+  &__category {
+    font: 500 11px/14px var(--font);
+    color: var(--color-black);
+    text-transform: uppercase;
+    margin: 25px 0 0 0;
+    &-link {
+      color: var(--color-black);
+      transition: all 0.15s ease-out;
+      &:hover {
+        color: var(--color-orange);
+      }
+    }
+  }
+  &__title {
+    margin: 10px 0 0 0;
+    &-link {
+      font: 16px/20px var(--font);
+      color: var(--color-blue);
+      display: block;
+      transition: all 0.15s ease-out;
+      @media (--mobile) {
+        font: 14px/18px var(--font);
+      }
+      &:hover {
+        color: var(--color-orange);
+      }
+    }
+  }
+  &__price {
+    width: 100%;
+    margin: 15px 0 10px 0;
+    display: inline-block;
+    vertical-align: top;
+    @media (--mobile) {
+      margin: 10px 0;
+    }
+    &-text {
+      font: 500 24px/22px var(--font);
+      color: var(--color-black);
+      margin: 0 10px 10px 0;
+      display: inline-block;
+      @media (--mobile) {
+        width: 100%;
+        font: 500 18px/16px var(--font);
+      }
+    }
+    &-old {
+      font: 500 16px/18px var(--font);
+      margin: -5px 0 0 0;
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      &::after {
+        width: calc(100% + 6px);
+        height: 3px;
+        background: var(--color-orange);
+        margin: -1px 0 0 0;
+        position: absolute;
+        content: '';
+        display: block;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        @media (--mobile) {
+          height: 2px;
+        }
+      }
+    }
+  }
+  &__button {
+    margin: auto 0 0 0;
+    position: relative;
+    display: inline-block;
+    align-self: flex-start;
+    transform: translate(0, 0);
+    animation-delay: 0;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    @media (--mobile), (--tablet) {
+      margin: auto 0 24px 0;
+    }
+    &:hover {
+      color: #fff;
+      background: var(--color-orange) !important;
+    }
+    &.button_border_orange {
+      & .catalog-item__button-loader {
+        background: #fff;
+        & .sk-three-bounce {
+          & .sk-child {
+            background: var(--color-orange);
+          }
+        }
+      }
+    }
+    &_state_added {
+      animation-name: catalogItemButtonAdded;
+    }
+    &_state_removed {
+      animation-name: catalogItemButtonRemoved;
+    }
+    &-loader {
+      width: 100%;
+      height: 100%;
+      background: var(--color-blue);
+      border-radius: 30px;
+      position: absolute;
+      visibility: hidden;
+      left: 0;
+      top: 0;
+      animation-delay: 0.5s;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      opacity: 0;
+      &_state_visible {
+        visibility: visible;
+        animation-name: catalogItemLoaderFadeIn;
+      }
+      &_state_hidden {
+        visibility: visible;
+        animation-name: catalogItemLoaderFadeOut;
+      }
+      & .sk-three-bounce {
+        width: 100%;
+        margin: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        & .sk-child {
+          background: #fff;
+        }
+      }
+    }
+    &-text {
+      &_state_hidden {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+@keyframes catalogItemButtonAdded {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(50px, 0);
+  }
+}
+
+@keyframes catalogItemButtonRemoved {
+  from {
+    transform: translate(50px, 0);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes catalogItemLoaderFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes catalogItemLoaderFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

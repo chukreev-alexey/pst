@@ -1,0 +1,64 @@
+@import './import.css';
+
+.catalog-item-gallery {
+  width: 100%;
+  position: relative;
+  &__image {
+    min-height: 300px;
+    margin: 0 70px 0 0;
+    border: solid 2px var(--color-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    @media (--mobile), (--tablet) {
+      min-height: 0;
+      margin: 0;
+      border: none;
+    }
+    &-image {
+      max-height: 400px;
+      @media (--mobile) {
+        width: 100%;
+      }
+    }
+  }
+  &-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    &__item {
+      width: 60px;
+      height: 60px;
+      background: var(--color-white);
+      margin: 0 0 20px 0;
+      border: solid 2px var(--color-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      cursor: pointer;
+      @media (--mobile) {
+        width: 45px;
+        height: 45px;
+        margin: 10px 0 20px 0;
+        border: solid 1px var(--color-white);
+      }
+      &:hover {
+        border: solid 2px var(--color-orange);
+        @media (--mobile) {
+          border: solid 1px var(--color-orange);
+        }
+      }
+      &_state_current {
+        border: solid 2px var(--color-blue);
+        @media (--mobile) {
+          border: solid 1px var(--color-blue);
+        }
+      }
+      & img {
+        width: 100%;
+      }
+    }
+  }
+}

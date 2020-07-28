@@ -1,0 +1,115 @@
+@import './import.css';
+
+.catalog-nav {
+  width: 100%;
+  background: var(--color-white);
+  padding: 0 0 20px 0;
+  position: relative;
+  @media print {
+    display: none;
+  }
+  @media (--mobile) {
+    padding: 0;
+  }
+  &_state_expand {
+    & .catalog-menu {
+      display: block;
+    }
+  }
+  &__wrapper {
+    width: 100%;
+    min-width: 985px;
+    max-width: 1366px;
+    padding: 20px 67px 0 67px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    @media (--mobile) {
+      min-width: 0;
+      padding: 0;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    @media (--tablet) {
+      min-width: 0;
+      padding: 15px 15px 0 15px;
+    }
+    @media (--desktop-small), (--desktop-medium) {
+      min-width: 0;
+      padding: 20px 40px 0 40px;
+    }
+  }
+  &__search {
+    margin: 0 0 0 20px;
+    float: left;
+    position: relative;
+    @media (--mobile) {
+      background: #f5f5f5;
+      margin: 0;
+      display: none;
+    }
+    &_type_mobile {
+      @media (--mobile) {
+        display: block;
+      }
+    }
+  }
+  &__title {
+    font: bold 42px/48px var(--font);
+    color: #000;
+    padding: 0 25px 0 0;
+    float: left;
+    position: relative;
+    cursor: pointer;
+    @media (--mobile) {
+      width: 100px;
+      font: 500 24px/24px var(--font);
+      margin: 15px 0 10px 15px;
+    }
+    @media (--tablet) {
+      font: 500 34px/43px var(--font);
+      margin: 0 0 25px 15px;
+    }
+    &::before {
+      width: calc(100% - 25px);
+      height: 2px;
+      background: var(--color-orange);
+      position: absolute;
+      content: '';
+      display: block;
+      left: 0;
+      bottom: 3px;
+      @media (--mobile) {
+        display: none;
+      }
+    }
+    &::after {
+      width: 17px;
+      height: 11px;
+      margin: 2px 0 0 0;
+      position: absolute;
+      content: '';
+      display: block;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      @media (--mobile) {
+        margin: 0;
+      }
+    }
+    &:hover {
+      color: var(--color-blue);
+    }
+    &_state_expand {
+      &::after {
+        background: url('./../img/icons/arrow_up_orange.svg') no-repeat;
+      }
+    }
+    &_state_collapse {
+      &::after {
+        background: url('./../img/icons/arrow_down_orange.svg') no-repeat;
+      }
+    }
+  }
+}
