@@ -1,0 +1,5 @@
+.button {
+  &&_type_shadow {
+    box-shadow: 0 8px 24px var(--color-surface-shadow);
+  }
+}

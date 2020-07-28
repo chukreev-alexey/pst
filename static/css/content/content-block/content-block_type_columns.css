@@ -1,0 +1,18 @@
+.content-block {
+  &&_type_columns {
+    & .content-block__wrapper {
+      display: flex;
+      justify-content: space-between;
+      & .content-block-item {
+        width: calc(50% - 16px);
+        margin: 0 0 32px 0;
+        @media (--mobile) {
+          width: 100%;
+        }
+        @media (--tablet) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

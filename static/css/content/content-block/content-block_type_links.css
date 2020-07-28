@@ -1,0 +1,10 @@
+.content-block {
+  &&_type_links {
+    & a {
+      display: inline-block;
+      margin: 0 0 16px 0;
+      @mixin font bold, 32px, 48px, 32px, 48px, var(--font);
+      color: var(--color-surface-text);
+    }
+  }
+}

@@ -1,0 +1,72 @@
+.footer-menu {
+  width: 80%;
+  position: relative;
+  display: flex;
+  @media (--mobile) {
+    width: 100%;
+    display: block;
+  }
+  @media (--tablet) {
+    width: 100%;
+    flex-flow: row wrap;
+  }
+  &__group {
+    max-width: 300px;
+    padding: 0 40px 0 0;
+    @media (--mobile) {
+      padding: 0 0 24px 0;
+    }
+    &_type_no-child {
+      float: left;
+      @media (--mobile) {
+        float: none;
+      }
+    }
+    &-link {
+      color: var(--color-fourthly-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 0 0 10px 0;
+      display: inline-block;
+      transition: all 0.1s linear;
+      @mixin font bold, 16px, 16px, 16px, 16px, var(--font-title);
+      &:hover {
+        color: var(--color-fourthly-text-hover);
+        transition: all 0.1s linear;
+      }
+    }
+    &-item {
+      padding: 3px 0;
+      @media (--mobile) {
+        padding: 2px 0;
+      }
+      &-link {
+        color: var(--color-fourthly-text);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: inline-block;
+        transition: all 0.1s linear;
+        @mixin font 500, 14px, 14px, 14px, 14px, var(--font-title);
+        &:hover {
+          color: var(--color-fourthly-text-hover);
+          transition: all 0.1s linear;
+        }
+      }
+    }
+  }
+  &__item {
+    &-link {
+      color: var(--color-fourthly-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 0 0 10px 0;
+      display: inline-block;
+      transition: all 0.1s linear;
+      @mixin font bold, 16px, 16px, 16px, 16px, var(--font-title);
+      &:hover {
+        color: var(--color-fourthly-text-hover);
+        transition: all 0.1s linear;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+/* stylelint-disable custom-property-empty-line-before */
+
+:root {
+  --font: 'dinpro', sans-serif;
+  --font-secondary: 'Arial', helvetica, sans-serif;
+  --font-title: 'dinpro', sans-serif;
+  --font-title-secondary: 'dincondensedc', sans-serif;
+  --font-email: 'arial', sans-serif;
+
+  --font-pdf: 'times new roman', serif;
+  --font-pdf-desc: 'verdana', geneva, sans-serif;
+
+  --color-primary: #16a9f4;
+  --color-primary-hover: color(rgba(#16a9f4, 1) l(30%));
+  --color-primary-text: #fff;
+  --color-primary-text-hover: #fff;
+  --color-primary-item: #000;
+  --color-primary-item-hover: #f4a404;
+
+  --color-secondary: #fb6e36;
+  --color-secondary-hover: color(rgba(#fb6e36, 1) l(30%));
+  --color-secondary-text: #fff;
+  --color-secondary-text-hover: #fff;
+  --color-secondary-text-accent: #fe0201;
+
+  --color-neutral: #f5f5f5;
+  --color-neutral-hover: #000;
+  --color-neutral-text: #000;
+  --color-neutral-text-hover: #f4a404;
+
+  --color-surface: #fff;
+  --color-surface-hover: #fafafa;
+  --color-surface-text: #000;
+  --color-surface-text-hover: #f4a404;
+  --color-surface-item: #000;
+  --color-surface-item-hover: #f4a404;
+  --color-surface-shadow: rgba(#000, 0.2);
+
+  --color-accent: #fe0201;
+  --color-accent-hover: color(rgba(#fe0201, 1) l(30%));
+  --color-accent-text: #fff;
+  --color-accent-text-hover: #fff;
+
+  --color-error: red;
+  --color-error-text: #fff;
+  --color-error-bg: rgba(#f00, 0.05);
+
+  --color-success: #00b159;
+  --color-success-text: #fff;
+  --color-success-bg: rgba(#00b159, 0.05);
+
+  --min-max: 320px 2560px;
+  --min: 320px;
+  --max: 1366px;
+}

@@ -1,0 +1,58 @@
+@define-mixin font $weight, $minFont, $maxFont, $minLine, $maxLine, $family {
+  font-size: responsive $minFont $maxFont;
+  font-range: var(--min-max);
+  font-weight: $weight;
+  font-family: $family;
+  line-height: responsive $minLine $maxLine;
+  line-height-range: var(--min-max);
+}
+
+@define-mixin dark {
+  @media (prefers-color-scheme: dark) {
+    & {
+      @mixin-content;
+    }
+  }
+}
+
+@define-mixin light {
+  @mixin-content;
+  @media (prefers-color-scheme: light) {
+    & {
+      @mixin-content;
+    }
+  }
+}
+
+@define-mixin disableAnimation {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+@define-mixin text-title {
+  @mixin font normal, 24px, 36px, 24px, 36px, var(--font);
+}
+
+@define-mixin text-h1 {
+  @mixin font normal, 20px, 28px, 24px, 32px, var(--font);
+}
+
+@define-mixin text-h2 {
+  @mixin font normal, 18px, 22px, 24px, 28px, var(--font);
+}
+
+@define-mixin text-h3 {
+  @mixin font bold, 16px, 18px, 18px, 24px, var(--font);
+}
+
+@define-mixin text-h4 {
+  @mixin font normal, 14px, 16px, 20px, 24px, var(--font);
+}
+
+@define-mixin text-h5 {
+  @mixin font normal, 14px, 16px, 20px, 24px, var(--font);
+}
+
+@define-mixin text-p {
+  @mixin font normal, 14px, 16px, 20px, 28px, var(--font);
+}

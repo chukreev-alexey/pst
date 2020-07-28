@@ -1,0 +1,7 @@
+.content-block {
+  &&_type_right-pattern-primary {
+    &::before {
+      background: var(--color-primary) url('./../img/blue_bg.png');
+    }
+  }
+}

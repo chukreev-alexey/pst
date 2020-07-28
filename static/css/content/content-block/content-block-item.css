@@ -1,0 +1,85 @@
+.content-block-item {
+  width: 100%;
+  background: var(--color-surface);
+  padding: 48px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  box-shadow: 0 4px 16px var(--color-surface-shadow);
+  @media (--mobile) {
+    padding: 24px;
+  }
+  @media (--tablet) {
+    padding: 32px;
+    box-shadow: 0 2px 14px var(--color-surface-shadow);
+  }
+  &__title {
+    color: var(--color-surface-text);
+    padding: 0 0 8px 0;
+    @mixin font bold, 24px, 32px, 24px, 42px, var(--font);
+  }
+  &__desc {
+    color: var(--color-surface-text);
+    margin: 0 0 48px 0;
+    @mixin font normal, 24px, 32px, 24px, 42px, var(--font);
+  }
+  &__amount {
+    color: var(--color-surface-text);
+    @mixin font normal, 24px, 32px, 24px, 42px, var(--font);
+  }
+  &__text {
+    color: var(--color-surface-text);
+    @mixin font normal, 14px, 24px, 18px, 28px, var(--font);
+  }
+  &__list {
+    margin: 16px 0 0 0;
+    &-item {
+      display: flex;
+      @media (--mobile) {
+        display: block;
+      }
+      &-title {
+        color: var(--color-surface-text);
+        padding: 0 16px 0 0;
+        @mixin font bold, 16px, 18px, 24px, 32px, var(--font);
+      }
+      &-text {
+        color: var(--color-surface-text);
+        padding: 0 56px 0 0;
+        @mixin font normal, 16px, 18px, 24px, 32px, var(--font);
+      }
+    }
+  }
+  &__type {
+    margin: 24px 0 48px 0;
+    display: flex;
+    @media (--mobile) {
+      margin: 0;
+      display: block;
+    }
+    &-item {
+      margin: 0 32px 0 0;
+      @media (--mobile) {
+        margin: 0 0 24px 0;
+      }
+      &-title {
+        color: var(--color-surface-text);
+        @mixin font normal, 16px, 18px, 16px, 18px, var(--font);
+      }
+      &-value {
+        color: var(--color-primary);
+        padding: 4px 0;
+        @mixin font bold, 24px, 32px, 24px, 42px, var(--font);
+      }
+      &-promo {
+        color: var(--color-surface-text);
+        @mixin font normal, 16px, 18px, 16px, 18px, var(--font);
+      }
+    }
+  }
+  &__button {
+    margin: 0 !important;
+  }
+}

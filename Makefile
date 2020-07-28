@@ -32,15 +32,6 @@ webpackconfig:
 loadrc:
 	git archive --remote=git@bitbucket.org:itcase-dev/gulp-tasks.git master .babelrc .browserslistrc .eslintignore .eslintrc .htmlhintrc .huskyrc .lintstagedrc .lintstagedrc .prettierignore .prettierrc .stylelintrc | tar -xv
 
-sprite:
-	gulp sprite-sketch --path static/itcase_files/img/ --file file_types
-
-font:
-	gulp font -F TimesNewRoman -N 'Times New Roman'
-	gulp font -F TimesNewRoman_Bold -N 'Times New Roman' -W bold
-	gulp font -F Verdana -N Verdana
-	gulp font -F Verdana_Bold -N Verdana -W bold
-
 email:
 	gulp email-templates --path templates/emails/ $(ARGV)
 	gulp email-templates --path templates/itcase_entry/emails/ $(ARGV)

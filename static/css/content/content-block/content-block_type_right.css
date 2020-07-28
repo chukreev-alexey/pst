@@ -1,0 +1,38 @@
+.content-block {
+  &&_type_right {
+    margin: 128px 0 72px 0;
+    @media (--mobile) {
+      margin: 0;
+    }
+    & .content-block {
+      &__wrapper {
+        padding: 0 0 72px 0;
+        margin: -112px 0 0 53%;
+        @media (--mobile) {
+          padding: 24px;
+          margin: 0;
+        }
+        @media (--tablet) {
+          margin: -112px 0 0 35%;
+        }
+        & h1 {
+          transform: translate(-18%, 0);
+          @mixin font bold, 24px, 96px, 28px, 96px, var(--font);
+          @media (--mobile) {
+            transform: none;
+          }
+        }
+        & h3 {
+          @mixin font bold, 24px, 48px, 24px, 48px, var(--font);
+        }
+        & p {
+          padding: 0;
+        }
+      }
+      &__image {
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+}

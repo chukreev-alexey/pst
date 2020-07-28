@@ -1,0 +1,35 @@
+.content-block {
+  &&_type_left {
+    margin: 72px 0;
+    @media (--mobile) {
+      margin: 0;
+    }
+    & .content-block {
+      &__wrapper {
+        padding: 0;
+        @media (--mobile) {
+          padding: 24px;
+        }
+        & h1 {
+          @mixin font bold, 24px, 96px, 28px, 96px, var(--font);
+        }
+        & h3 {
+          @mixin font bold, 24px, 48px, 24px, 48px, var(--font);
+        }
+      }
+      &__image {
+        left: 0;
+        top: 0;
+        &::after {
+          width: 280px;
+          height: 280px;
+          background: var(--color-accent);
+          transform: translate(-50%, -50%);
+        }
+        & img {
+          width: 256px;
+        }
+      }
+    }
+  }
+}

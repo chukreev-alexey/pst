@@ -127,11 +127,14 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="header__menu-phone">+7 908-630-79-47 +7 922-127-77-25</div>
+                    <div class="header__menu-phone">
+                        <a href="tel:+79086307947">+7 908-630-79-47</a>
+                        <a href="tel:+79221277725">+7 922-127-77-25</a>
+                    </div>
                 </div>
                 <div class="header__button">
                     <div class="button">
-                        <div class="button__text">order</div>
+                        <div class="button__text">Расчет материалов</div>
                     </div>
                 </div>
                 <div class="header__cart">{% cart_state %}</div>
@@ -142,11 +145,7 @@
         </div>
     </div>
 
-    <div class="catalog-menu">
-        {% block catalog_category %}
-            {% catalog_menu %}
-        {% endblock catalog_category %}
-    </div>
+    {% catalog_menu %}
 
     {% rotator page=request.page %}
 

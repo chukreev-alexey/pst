@@ -1,0 +1,12 @@
+@import './../import.css';
+
+.phone {
+  &&_type_footer {
+    width: auto;
+    & .phone__number {
+      @mixin font bold, 36px, 36px, 36px, 36px, var(--font-title-secondary);
+      color: var(--color-fourthly-text);
+      white-space: nowrap;
+    }
+  }
+}

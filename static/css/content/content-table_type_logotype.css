@@ -1,0 +1,36 @@
+.content {
+  & .content-table_type_logotype {
+    & tr {
+      @media (--mobile) {
+        display: block;
+      }
+      @media (--tablet) {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+      }
+      & td {
+        width: 100% !important;
+        padding: 24px 0;
+        vertical-align: middle;
+        @media (--mobile) {
+          display: block;
+        }
+        @media (--tablet) {
+          width: 50% !important;
+          text-align: center;
+          padding: 24px 0 !important;
+        }
+        & img {
+          @media (--mobile) {
+            height: auto;
+            max-width: 240px;
+          }
+        }
+        & a {
+          display: block;
+        }
+      }
+    }
+  }
+}

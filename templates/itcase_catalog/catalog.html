@@ -5,10 +5,8 @@
     {% catalog_menu %}
 
     <div class="catalog">
-        <div class="catalog__wrapper clearfix">
-            {% with show_title=True %}
-                {% include 'itcase_catalog/include/catalog_main_page_groups.html' %}
-            {% endwith %}
+        <div class="catalog__wrapper">
+            {% include 'itcase_catalog/include/catalog_main_page_groups.html' %}
         </div>
     </div>
 {% endblock %}

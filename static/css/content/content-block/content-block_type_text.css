@@ -1,0 +1,22 @@
+.content-block {
+  &&_type_text {
+    display: flex;
+    align-items: center;
+    &::after {
+      padding: 0 0 35% 0;
+      content: '';
+      display: block;
+    }
+    & .content-block {
+      &__wrapper {
+        padding: 56px 72px 56px 56px;
+        @media (--mobile) {
+          padding: 32px 20px;
+        }
+        @media (--tablet) {
+          padding: 48px 24px;
+        }
+      }
+    }
+  }
+}

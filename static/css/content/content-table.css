@@ -1,0 +1,124 @@
+.content {
+  & table {
+    width: 100% !important;
+    border-collapse: collapse;
+    margin: 0 auto 32px auto;
+    position: relative;
+    table-layout: fixed;
+    @media (--mobile) {
+      width: 100%;
+      border: none;
+      display: block;
+      overflow-x: auto;
+      & table {
+        & td {
+          min-width: 50px;
+          white-space: nowrap;
+        }
+      }
+    }
+    @media (--tablet) {
+      width: 100%;
+      border: none;
+    }
+    & tbody {
+      @media (--mobile) {
+        min-width: 300px;
+        display: block;
+      }
+    }
+    & tr {
+      color: var(--color-surface-text);
+      & th {
+        text-align: left;
+        padding: 6px 12px;
+        @mixin font bold, 16px, 16px, 24px, 24px, var(--font);
+        @media (--mobile), (--tablet) {
+          min-width: 250px;
+          padding: 6px 32px 6px 0;
+        }
+        &:first-child {
+          padding: 6px 12px 12px 0;
+        }
+        & p {
+          padding: 0;
+          @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
+        }
+      }
+      & td {
+        color: var(--color-surface-text);
+        padding: 6px 12px;
+        vertical-align: top;
+        @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
+        @media (--mobile), (--tablet) {
+          min-width: 250px;
+          padding: 6px 32px 6px 0;
+        }
+        &:first-child {
+          padding: 6px 12px 6px 0;
+          @media (--mobile) {
+            padding: 6px 32px 6px 0;
+          }
+        }
+        & p {
+          color: var(--color-surface-text);
+          padding: 0;
+          @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
+        }
+      }
+    }
+  }
+  & .table_type_border {
+    margin: 0 0 15px 0;
+    & tr {
+      &:hover {
+        background: #efefef;
+        @media (--mobile) {
+          background: none;
+        }
+      }
+      & th {
+        font: bold 12px var(--font-second);
+        color: var(--color-surface-text);
+        background: #eee;
+        border: solid 1px #ccc;
+        & p {
+          font: bold 12px/12px var(--font-second);
+        }
+      }
+      & td {
+        font: 14px/18px var(--font-second);
+        color: var(--color-surface-text);
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        vertical-align: top;
+        @media (--mobile), (--tablet) {
+          text-align: center;
+        }
+      }
+    }
+  }
+  & .table_type_text {
+    margin: 72px 0 96px 0;
+    & tr {
+      &:hover {
+        @media (--mobile) {
+          background: none;
+        }
+      }
+      & td {
+        &:first-child {
+          width: 350px !important;
+          color: var(--color-surface-text);
+          padding: 0 0 48px 0;
+          @mixin font 500, 24px, 36px, 28px, 48px, var(--font);
+        }
+        &:nth-child(2) {
+          color: var(--color-surface-text);
+          padding: 0 0 48px 40px;
+          @mixin font normal, 16px, 24px, 28px, 32px, var(--font);
+        }
+      }
+    }
+  }
+}

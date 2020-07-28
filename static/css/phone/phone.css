@@ -1,0 +1,21 @@
+.phone {
+  position: relative;
+  display: flex;
+  @media (--mobile) {
+    display: block;
+  }
+  &__item {
+    margin: 0 40px 0 0;
+    @media (--mobile) {
+      padding: 0 0 20px 0;
+    }
+    &-text {
+      color: var(--color-surface-text);
+      @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title);
+    }
+    &-number {
+      color: var(--color-surface-text);
+      @mixin font bold, 18px, 24px, 18px, 28px, var(--font-title);
+    }
+  }
+}

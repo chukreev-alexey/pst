@@ -1,0 +1,20 @@
+.content-block {
+  &&_type_services {
+    & .content {
+      &-block {
+        &__wrapper {
+          padding: 72px 72px 48px 56px;
+          @media (--mobile) {
+            padding: 32px 20px 16px 20px;
+          }
+          & h1 {
+            @mixin font bold, 32px, 124px, 32px, 112px, var(--font);
+            & a {
+              @mixin font bold, 32px, 124px, 32px, 112px, var(--font);
+            }
+          }
+        }
+      }
+    }
+  }
+}

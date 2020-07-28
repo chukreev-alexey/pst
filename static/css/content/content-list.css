@@ -1,0 +1,53 @@
+.content ol {
+  width: 100%;
+  counter-reset: list1;
+  padding: 0 0 15px 15px;
+  & li {
+    color: var(--color-surface-text);
+    padding: 0 0 15px 24px;
+    position: relative;
+    display: block;
+    @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
+    &::before {
+      position: absolute;
+      content: counter(list1) '.';
+      counter-increment: list1;
+      left: 0;
+      top: 0;
+    }
+    & ol {
+      padding: 0 0 0 15px;
+      margin: 25px 0 0 0;
+    }
+    & .content-list-item-number {
+      color: var(--color-surface-text);
+    }
+  }
+}
+
+.content ul {
+  width: 100%;
+  padding: 0 0 0 32px;
+  list-style-type: none;
+  text-indent: -1.5em;
+  & li {
+    color: var(--color-surface-text);
+    padding: 0 0 16px 0;
+    position: relative;
+    display: block;
+    @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
+    &::before {
+      padding: 0 3px 0 0;
+      content: '\2014\a0';
+    }
+    &:last-child {
+      padding: 0;
+    }
+    & ul {
+      margin: 20px 0 0 0;
+      & li {
+        font-size: 1em;
+      }
+    }
+  }
+}

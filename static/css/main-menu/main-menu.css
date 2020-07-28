@@ -1,0 +1,39 @@
+.main-menu {
+  position: relative;
+  @media (--mobile) {
+    display: none;
+  }
+  &-list {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    @media (--mobile) {
+      margin: 0;
+    }
+    &__item {
+      text-decoration: none;
+      margin: 0 16px 0 0;
+      position: relative;
+      &_state_current {
+        & .main-menu-list__item-link {
+          color: var(--color-accent);
+        }
+      }
+      &-link {
+        color: var(--color-surface-text);
+        text-decoration: none;
+        white-space: nowrap;
+        position: relative;
+        display: block;
+        transition: all 0.1s linear;
+        @mixin font 500, 14px, 16px, 18px, 28px, var(--font);
+        @media (--mobile) {
+          padding: 20px 20px 19px 20px;
+        }
+        &:hover {
+          color: var(--color-surface-text-hover);
+        }
+      }
+    }
+  }
+}

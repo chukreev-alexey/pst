@@ -1,0 +1,14 @@
+.button {
+  &&_type_accent {
+    padding: 16px 24px 16px 24px;
+    background: var(--color-accent);
+    &:hover {
+      background: var(--color-accent-hover);
+    }
+    & .button {
+      &__text {
+        color: var(--color-accent-text);
+      }
+    }
+  }
+}

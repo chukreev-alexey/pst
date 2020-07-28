@@ -1,0 +1,50 @@
+.footer-info {
+  width: 100%;
+  max-width: var(--max);
+  padding: 16px 0 40px 72px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  @media (--mobile) {
+    padding: 16px 20px 48px 20px;
+  }
+  @media (--tablet) {
+    padding: 16px 24px 48px 24px;
+  }
+  &__inner {
+    width: 75%;
+    @media (--mobile) {
+      width: auto;
+    }
+    ^&__copyright {
+      color: var(--color-surface-text);
+      margin: 0 0 8px 0;
+      @mixin font normal, 12px, 14px, 12px, 14px, var(--font-title);
+    }
+    ^&__agreements {
+      color: var(--color-surface-text);
+      @mixin font normal, 12px, 14px, 12px, 14px, var(--font-title);
+      & p {
+        padding: 0;
+        margin: 0;
+        & a {
+          color: var(--color-surface-text);
+          &:hover {
+            color: var(--color-surface-text-hover);
+          }
+        }
+      }
+    }
+  }
+  &__logo {
+    width: 25%;
+    margin: -56px 0 0 0;
+    position: relative;
+    @media (--mobile) {
+      width: auto;
+      margin: 0 0 24px 0;
+      order: -1;
+    }
+  }
+}

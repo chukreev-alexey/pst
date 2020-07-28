@@ -1,0 +1,32 @@
+.footer {
+  width: 100%;
+  position: relative;
+  @media (--warning) {
+    display: none;
+  }
+  &-wrapper {
+    position: relative;
+    &_type_menu {
+      background: var(--color-fourthly);
+      & .footer-wrapper__inner {
+        padding: 32px 72px 40px 72px;
+        @media (--mobile) {
+          padding: 48px 20px;
+        }
+        @media (--tablet) {
+          padding: 48px 24px;
+        }
+      }
+    }
+    &__inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      flex-flow: row wrap;
+      box-sizing: border-box;
+      @media (--tablet) {
+        display: block;
+      }
+    }
+  }
+}

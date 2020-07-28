@@ -1,0 +1,53 @@
+.content-cut {
+  margin: 10px 0;
+  &-button {
+    text-align: center;
+    margin: 0 0 20px 0;
+    &__inner {
+      color: var(--color-fifth-text);
+      text-decoration: none;
+      background: var(--color-fifth);
+      padding: 8px 32px 10px 32px;
+      border-radius: 100px;
+      position: relative;
+      display: inline-block;
+      transition: all 0.5s ease-out;
+      cursor: pointer;
+      @mixin font normal, 16px, 18px, 28px, 28px, var(--font);
+      @media (--mobile) {
+        padding: 8px 32px;
+      }
+      &::after {
+        padding: 3px;
+        margin: 0 0 0 12px;
+        border: solid var(--color-fifth-text);
+        border-width: 0 3px 3px 0;
+        position: relative;
+        content: '';
+        display: inline-block;
+      }
+      &:hover {
+        background: var(--color-fifth-hover);
+      }
+    }
+    &_state_collapse {
+      & .content-cut-button__inner {
+        &::after {
+          top: -3px;
+          transform: rotate(45deg);
+        }
+      }
+    }
+    &_state_expand {
+      & .content-cut-button__inner {
+        &::after {
+          top: 1px;
+          transform: rotate(-135deg);
+        }
+      }
+    }
+  }
+  &-text {
+    display: none;
+  }
+}

@@ -1,0 +1,14 @@
+.logo {
+  width: 100%;
+  position: relative;
+  &__image {
+    height: 200px;
+    position: relative;
+    @media (--mobile) {
+      height: 72px;
+    }
+    @media (--tablet) {
+      height: 144px;
+    }
+  }
+}
