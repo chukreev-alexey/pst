@@ -93,8 +93,9 @@ class ProductImageInline(admin.TabularInline):
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super().formfield_for_foreignkey(db_field, request, **kwargs)
         if db_field.name == 'color':
-            field.queryset = Parametr.objects.get(
-                name__iexact='цвет').product_parametres.all()
+            if Parametr.objects.filter(name__iexact='цвет').exists():
+                field.queryset = Parametr.objects.get(
+                    name__iexact='цвет').product_parametres.all()
         return field
 
 
@@ -120,7 +121,8 @@ class ProductAdmin(ProductAdminBase):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'price', 'article', ('category', 'brand'),
+            'fields': ('name', 'price', 'article', ('in_hit', 'border'),
+                       ('in_recommended', 'in_action'), ('category', 'brand'),
                        'recommend_categories', 'recommend_products',
                        'related_products', 'description', 'parametres',
                        'pdf_instructtion', 'pdf_components', 'scheme',

@@ -122,6 +122,13 @@ class Product(ProductBase):
     scheme = FileBrowseField('Схема', format='image',
                              max_length=255, blank=True)
 
+    in_hit = models.BooleanField('Хит?', default=False)
+    in_action = models.BooleanField('Учавствует в акции?', default=False)
+    in_recommended = models.BooleanField('Рекомендованный товар?',
+                                         default=False)
+
+    border = models.BooleanField('Выделить товар', default=False)
+
     parametres = models.ManyToManyField(
         ProductParametr,
         related_name='products',
