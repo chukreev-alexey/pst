@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'itcase_entry',
     'itcase_feed',
     'itcase_gallery',
+    'itcase_logos',
     'itcase_pages',
     'itcase_paginator',
     'itcase_rotator',

@@ -40,3 +40,11 @@ def catalog_menu(context, additional_class=None, title_additional_class=None,
         context['title_additional_class'] = str(title_additional_class)
 
     return context
+
+
+@register.inclusion_tag('itcase_catalog/include/subcategories_list.html',
+                        takes_context=True)
+def first_level_subcategories(context):
+    from ..models import Category
+    context['first_level_subcategories'] = Category.objects.filter(level=1)
+    return context
