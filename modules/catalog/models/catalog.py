@@ -38,6 +38,9 @@ class Category(MPTTModel, CategoryBase, SEOModel):
     image = FileBrowseField('Изображение', format='image', max_length=255,
                             blank=True)
 
+    on_main_page = models.BooleanField('Отображать на главной странице?',
+                                       default=False)
+
     class Meta(CategoryBase.Meta):
         pass
 
