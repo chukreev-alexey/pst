@@ -1,5 +1,11 @@
 {% if first_level_subcategories %}
-    {% for subcategory in first_level_subcategories %}
-        {{ subcategory }}
-    {% endfor %}
+    <div class="catalog-menu catalog-menu_type_footer">
+        <div class="catalog-menu__wrapper">
+            {% for subcategory in first_level_subcategories %}
+                <div class="catalog-menu__item ">
+                    <a href="{{ subcategory.get_absolute_url }}" class="catalog-menu__item-link">{{ subcategory }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endif %}
