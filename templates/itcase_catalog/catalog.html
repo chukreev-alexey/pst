@@ -1,13 +1,9 @@
 {% extends 'base.html' %}
 {% load fb_versions i18n static catalog_tags %}
-!!!
-{% block catalog_category %}
-    {% with additional_class='catalog-nav_state_expand' title_additional_class='catalog-nav__title_state_expand' %}
-        {% catalog_menu %}
-    {% endwith %}
-{% endblock catalog_category %}
 
 {% block content %}
+    {% catalog_menu %}
+
     <div class="catalog">
         <div class="catalog__wrapper clearfix">
             {% with show_title=True %}
