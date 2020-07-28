@@ -106,94 +106,53 @@
 
     <div class="fader">&nbsp;</div>
 
-    {% with show_close=True %}
-        {% include 'itcase_pages/include/site_menu_popup.html' %}
-    {% endwith %}
 
-    <div class="body-wrapper">
-
-        <div class="header" {% if site_version == 'mobile' %}data-sticky="True"{% endif %}>
-            <div class="header__wrapper">
-                <div class="header__menu menu">
-                    <div class="menu__wrapper">
-                        {% for item in header_menu %}
-                            <li class="menu__item {% if request.path|startswith:item.get_absolute_url %} main-menu-list__item_state_current {% endif %}">
-                                <a href="{{ item.get_absolute_url }}" class="menu__item-link" {{ item.in_new_tab|yesno:"target=_blank," }}>
-                                    {{ item.title }}
-                                </a>
-                            </li>
-                        {% endfor %}
+    <div class="header">
+        <div class="header__wrapper">
+            <div class="header__inner">
+                <div class="header__logo">
+                    <div class="logo">
+                        <a href="/" class="logo__link">
+                            <img src="{% static 'img/logo.png' %}" class="logo__link-image" alt="{{ request.site.name }}" title="{{ request.site.name }}" />
+                        </a>
                     </div>
                 </div>
-                <div class="header__inner clearfix">
-                    <div class="header__logo">
-                        <div class="logo">
-                            <a href="/" class="logo__link">
-                                <img src="{% static 'img/logo.png' %}" class="logo__link-image" alt="{{ request.site.name }}" title="{{ request.site.name }}" />
-                            </a>
+                <div class="header__menu">
+                    <div class="main-menu {% if request.page.url == '/' %}main-menu_type_main-page{% endif %}">
+                        <div class="main-menu-list">
+                            {% for item in header_menu %}
+                                <div class="main-menu-list__item {% if request.path|startswith:item.get_absolute_url %}main-menu-list__item_state_current {% endif %}">
+                                    <a href="{{ item.get_absolute_url }}" class="main-menu-list__item-link" {% if item.in_new_tab %} target="_blank" {% endif %}>{{ item.title }}</a>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
-                    <div class="header__store">
-                        {% with additional_class='point-list_type_selector' selector=True %}
-                            {# {% points %} #}
-                        {% endwith %}
-                    </div>
-                    <div class="header__cart">{% cart_state %}</div>
+                    <div class="header__menu-phone">+7 908-630-79-47 +7 922-127-77-25</div>
                 </div>
+                <div class="header__button">
+                    <div class="button">
+                        <div class="button__text">order</div>
+                    </div>
+                </div>
+                <div class="header__cart">{% cart_state %}</div>
                 <div class="header__nav">
                     {% include 'itcase_search/include/quick/quick_search_button.html' %}
-                    {% include 'itcase_pages/include/menu.html' %}
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="catalog-menu">
         {% block catalog_category %}
-            {% with title_additional_class='catalog-nav__title_state_collapse catalog-nav__title_type_popup' %}
-                {% catalog_menu %}
-            {% endwith %}
+            {% catalog_menu %}
         {% endblock catalog_category %}
+    </div>
 
-        <div class="wrapper">
-            <div class="wrapper__inner">
-                {% block content %}
-                {% endblock content %}
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="footer__wrapper clearfix">
-            <div class="footer-menu">
-                {% for item in footer_menu %}
-                    <div class="footer-menu__item">
-                        <a href="{{ item.get_absolute_url }}" class="footer-menu__item-link" {{ item.in_new_tab|yesno:"target=_blank," }}>{{ item.name }}</a>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="footer-info">
-                <div class="footer-info__text">
-                    {{ request.infoblock.footer_text|default:""|safe }}
-                </div>
-                <div class="footer__links">
-                    <a href="/agreement">Соглашение на обработку персональных данных данных</a>
-                    <br/>
-                    <a href="/politics">Политика обработки персональных данных</a>
-                </div>
-                <div class="footer-info__copyright">
-                    {{ request.infoblock.footer_copyright|default:""|safe }}
-                </div>
-                <div class="footer__author">
-                    Сделано в <a href="https://www.itcase.pro/">ITCase</a>
-                    <br/>
-                    <a href="#">Информация о сайте</a>
-                </div>
-            </div>
-            <div class="footer-store">
-                {% with additional_class='point-list_type_footer' %}
-                    {# {% points %} #}
-                {% endwith %}
-            </div>
-        </div>
-    </div>
+    {% rotator page=request.page %}
+
+    {% block content %}
+    {% endblock content %}
+
 
     {% include 'itcase_common/include/cookies.html' %}
 
