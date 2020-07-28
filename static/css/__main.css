@@ -5258,7 +5258,6 @@ sans-serif;
 
 .wrapper {
   width: 100%;
-  min-height: 100%;
   position: relative;
 }
 
@@ -5266,15 +5265,6 @@ sans-serif;
 
 .wrapper {
     padding: 0 !important
-}
-  }
-
-@media (min-width: 15em)
-  and (max-width: 47.999em), (min-width: 48em)
-  and (max-width: 59.999em) {
-
-.wrapper {
-    width: 100%
 }
   }
 

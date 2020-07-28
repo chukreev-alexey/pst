@@ -146,24 +146,27 @@
 
     {% rotator page=request.page %}
 
-    {% block content %}
-    {% endblock content %}
+    <div class="wrapper">
+        <div class="wrapper__inner">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="footer__wrapper">
             <div class="footer__left">
                 <div class="footer__form"></div>
                 <div class="footer__contact">
-                    +7 922-127-77-25
-                    +7 908-630-79-47
-                    +7 (343) 380-08-42
-                    +7 (343) 319-05-30
+                    <a href="+79221277725">+7 922-127-77-25</a>
+                    <a href="+79086307947">+7 908-630-79-47</a>
+                    <a href="+73433800842">+7 (343) 380-08-42</a>
+                    <a href="+73433190530">+7 (343) 319-05-30</a>
                 </div>
                 <div class="footer__copyright">© 2010-2020 ПрофСтройТорг</div>
             </div>
             <div class="footer__right">
                 <div class="footer__menu">
-                    {% first_level_subcategories %}
                 </div>
                 <div class="footer__menu">
                     {% for item in footer_menu %}

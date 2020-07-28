@@ -4,10 +4,38 @@
 {% block content %}
     {{ categories }}
 
+    <div class="catalog-group">
+        <div class="catalog-group__title">Системы отопления</div>
+        <ul class="catalog-group__inner-list">
+            <li class="catalog-group__inner-list-item">
+                <a href="#" class="catalog-group__inner-list-link">
+                    <img src="#" class="catalog-group__inner-list-link-image" alt="Металлочерепица" title="Металлочерепица">
+                    <span class="catalog-group__inner-list-link-text">Металлочерепица</span>
+                </a>
+                <ul class="catalog-group__inner-nested-list">
+                    <li class="catalog-group__inner-nested-list-item">
+                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3484" class="catalog-group__inner-nested-list-link">Монтерроса</a>
+                    </li>
+                    <li class="catalog-group__inner-nested-list-item">
+                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3485" class="catalog-group__inner-nested-list-link">Трамонтана</a>
+                    </li>
+                    <li class="catalog-group__inner-nested-list-item">
+                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3486" class="catalog-group__inner-nested-list-link">Монтекристо</a>
+                    </li>
+                    <li class="catalog-group__inner-nested-list-item">
+                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3487" class="catalog-group__inner-nested-list-link">Монтеррей</a>
+                    </li>
+                    <li class="catalog-group__inner-nested-list-item">
+                        <a href="/category/yi-otopleniya-a3ed0818-143b-4179-b02e-6b4d8b468554/?filter-category=3488" class="catalog-group__inner-nested-list-link">Супермонтеррей</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
     {% with feed_title='Скидки и акции' %}
         {% feed_list_main_page limit=3 %}
     {% endwith %}
 
-     {% logos_list_main_page %}
+    {% logos_list_main_page %}
 
 {% endblock content %}
