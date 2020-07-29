@@ -115,12 +115,6 @@ class Product(ProductBase):
         'self', blank=True, verbose_name='Рекомендуем товары')
     related_products = models.ManyToManyField(
         'self', blank=True, verbose_name='Комплектующие')
-    pdf_instructtion = FileBrowseField('Инструкция', format='file',
-                                       max_length=255, blank=True)
-    pdf_components = FileBrowseField('Комплектующие', format='file',
-                                     max_length=255, blank=True)
-    scheme = FileBrowseField('Схема', format='image',
-                             max_length=255, blank=True)
 
     in_hit = models.BooleanField('Хит?', default=False)
     in_action = models.BooleanField('Учавствует в акции?', default=False)

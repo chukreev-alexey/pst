@@ -125,7 +125,6 @@ class ProductAdmin(ProductAdminBase):
                        ('in_recommended', 'in_action'), ('category', 'brand'),
                        'recommend_categories', 'recommend_products',
                        'related_products', 'description', 'parametres',
-                       'pdf_instructtion', 'pdf_components', 'scheme',
                        'product_actions')
         }),
         ('Характеристики', {
