@@ -26,4 +26,24 @@
       }
     }
   }
+  &&_type_footer {
+    background: none;
+    & .catalog-menu {
+      &__wrapper {
+        display: block;
+        margin: 0 0 12px 0;
+      }
+      &__item {
+        &-link {
+          color: var(--color-surface-text);
+          padding: 0;
+           margin: 0 0 12px 0;
+          @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
+        &:hover {
+           background: none;
+        }
+        }
+      }
+    }
+  }
 }

@@ -4374,6 +4374,11 @@ sans-serif;
 
 .footer__wrapper .footer__right {
       margin: 0 0 0 56px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
     }
 
 /* stylelint-disable custom-property-empty-line-before */

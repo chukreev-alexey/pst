@@ -8,7 +8,7 @@
                 {% for category in categories %}
                     <li class="catalog-group__inner-list-item">
                         <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
-                            <img src="{{ category.image.path }}" class="catalog-group__inner-list-link-image" alt="{{ category.name }}" title="{{ category.name }}">
+                            <img src="media/{{ category.image }}" class="catalog-group__inner-list-link-image" alt="{{ category.name }}" title="{{ category.name }}">
                             <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
                         </a>
                         <ul class="catalog-group__inner-nested-list">
