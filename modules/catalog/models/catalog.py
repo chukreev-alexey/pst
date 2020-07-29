@@ -129,6 +129,15 @@ class Product(ProductBase):
         blank=True,
         verbose_name='Параметры')
 
+    LINEAR, SQUARE, THING = range(3)
+    MEASURING = [
+        (LINEAR, 'м.п.'),
+        (SQUARE, 'м.кв.'),
+        (THING, 'шт.'),
+    ]
+    measuring = models.PositiveSmallIntegerField(
+        verbose_name='Единицы измерения', choices=MEASURING)
+
     class Meta(ProductBase.Meta):
         pass
 

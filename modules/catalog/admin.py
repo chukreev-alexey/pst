@@ -121,7 +121,8 @@ class ProductAdmin(ProductAdminBase):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'price', 'article', ('in_hit', 'border'),
+            'fields': ('name', 'price', 'article', 'measuring',
+                       ('in_hit', 'border'),
                        ('in_recommended', 'in_action'), ('category', 'brand'),
                        'recommend_categories', 'recommend_products',
                        'related_products', 'description', 'parametres',
