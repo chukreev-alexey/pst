@@ -1,16 +1,14 @@
 .content .button,
 .button {
-  color: var(--color-primary-text);
   text-decoration: none;
   text-align: center;
-  padding: 12px 32px 12px 32px;
+  padding: 12px 24px;
   margin: 0;
   border-radius: 100px;
   position: relative;
   display: block;
   transition: all 0.15s ease-in-out;
   cursor: pointer;
-  @mixin font normal, 14px, 16px, 14px, 16px, var(--font-title);
   @media (--mobile) {
     min-width: 200px;
     padding: 12px 24px 14px 24px;
@@ -18,17 +16,8 @@
   &:focus {
     outline: none;
   }
-  &:hover {
-    background: var(--color-primary-hover);
-    & .button {
-      &__text {
-        color: var(--color-primary-text-hover);
-      }
-    }
-  }
   &__text {
-    color: var(--color-primary-text);
     display: inline-block;
-    @mixin font normal, 14px, 16px, 14px, 16px, var(--font-title);
+    @mixin font normal, 14px, 18px, 14px, 24px, var(--font-title);
   }
 }

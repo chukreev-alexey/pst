@@ -15,7 +15,7 @@
           & p {
             color: var(--color-neutral-text);
             @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
-            margin: 0;
+            margin: 0 0 6px 0;
             padding: 0;
             & a {
               color: var(--color-neutral-text);
@@ -28,7 +28,7 @@
           & p {
             color: var(--color-neutral-text);
             @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
-            margin: 0;
+            margin: 0 0 6px 0;
             padding: 0;
             & a {
               color: var(--color-neutral-text);
@@ -36,6 +36,10 @@
             }
           }
         }
+      }
+      ^^&__copyright {
+        padding: 32px 0 0 0;
+        @mixin font normal, 12px, 14px, 12px, 14px, var(--font-title);
       }
     }
     ^&__right {

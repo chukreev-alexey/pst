@@ -1,0 +1,8 @@
+.button {
+  &&_type_neutral {
+    background: var(--color-neutral);
+    &:hover {
+      background: var(--color-neutral-hover);
+    }
+  }
+}
