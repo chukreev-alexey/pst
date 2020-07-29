@@ -47,6 +47,11 @@ class Price(models.Model):
                                 on_delete=models.CASCADE)
     product_article = models.CharField('Артикул', max_length=255)
     price = models.DecimalField('Цена', max_digits=10, decimal_places=2)
+    old_price = models.DecimalField('Старая цена',
+                                    max_digits=10,
+                                    decimal_places=2,
+                                    blank=True,
+                                    null=True)
     amount = models.PositiveIntegerField('Количество в наличии')
 
     price_combination = models.ForeignKey(
