@@ -42,9 +42,9 @@ def catalog_menu(context, additional_class=None, title_additional_class=None,
     return context
 
 
-@register.inclusion_tag('itcase_catalog/include/subcategories_list.html',
+@register.inclusion_tag('itcase_catalog/include/footer_categories_list.html',
                         takes_context=True)
-def first_level_subcategories(context):
+def footer_categories(context):
     from ..models import Category
-    context['first_level_subcategories'] = Category.objects.filter(level=1)
+    context['footer_categories'] = Category.objects.filter(level=0)
     return context

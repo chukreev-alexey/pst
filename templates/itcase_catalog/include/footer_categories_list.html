@@ -1,9 +1,9 @@
-{% if first_level_subcategories %}
+{% if footer_categories %}
     <div class="catalog-menu catalog-menu_type_footer">
         <div class="catalog-menu__wrapper">
-            {% for subcategory in first_level_subcategories %}
+            {% for category in footer_categories %}
                 <div class="catalog-menu__item ">
-                    <a href="{{ subcategory.get_absolute_url }}" class="catalog-menu__item-link">{{ subcategory }}</a>
+                    <a href="{{ category.get_absolute_url }}" class="catalog-menu__item-link">{{ category }}</a>
                 </div>
             {% endfor %}
         </div>
