@@ -27,7 +27,7 @@ def catalog_menu(context, additional_class=None, title_additional_class=None,
                  queryset=None):
     from ..models import Category
 
-    queryset = queryset or Category.objects.filter(in_menu=True, level=0)
+    queryset = queryset or Category.objects.filter(in_menu=True)
     context['catalog_menu'] = queryset
 
     if additional_class is None:
