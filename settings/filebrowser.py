@@ -78,6 +78,11 @@ FILEBROWSER_VERSIONS = {
         'height': 60,
         'opts': 'crop'
     },
+    # Feed
+    'feed_thumb': {
+        'verbose_name': 'Feed List Thumb',
+        'width': 112, 'height': 112,
+        'opts': 'upscale crop'},
     # Rotator
     'rotator_image': {
         'verbose_name': 'Rotator Image',

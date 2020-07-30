@@ -2492,9 +2492,19 @@ div.catalog-item_type_recommended.catalog-item_type_big {
     display: flex;
   }
 
+.catalog-menu__wrapper .catalog-menu__item {
+      -webkit-box-flex:1;
+      -webkit-flex:1 1 auto;
+      -moz-box-flex:1;
+      -ms-flex:1 1 auto;
+      flex:1 1 auto;
+    }
+
 .catalog-menu__wrapper .catalog-menu__item-link {
+        text-align: center;
         display: block;
         padding: 16px 8px;
+        white-space: nowrap;
         color: #fff;
         font-size: calc(1rem + 0 * ((100vw - 20rem) / 140));
         font-weight: normal;

@@ -1,0 +1,10 @@
+.feed {
+  &&_type_main-page {
+    & .feed-list {
+      justify-content: space-between;
+      & .feed-list__item {
+        flex: 0 0 33%;
+      }
+    }
+  }
+}

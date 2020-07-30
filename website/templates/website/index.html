@@ -2,6 +2,11 @@
 {% load catalog_tags static fb_versions itcase_common itcase_logos itcase_feed %}
 
 {% block content %}
+
+    {% with feed_title='Скидки и акции' hide_feed_button=True %}
+        {% feed_list_main_page limit=3 %}
+    {% endwith %}
+
     <div class="catalog-group">
         <div class="catalog-group__title">Все для кровли и фасада — быстро и по выгодным ценам</div>
         <ul class="catalog-group__inner-list">
@@ -23,9 +28,6 @@
         </ul>
     </div>
 
-    {% with feed_title='Скидки и акции' %}
-        {% feed_list_main_page limit=3 %}
-    {% endwith %}
 
     {% logos_list_main_page %}
 
