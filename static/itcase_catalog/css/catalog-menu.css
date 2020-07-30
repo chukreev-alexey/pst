@@ -3,6 +3,7 @@
   background: var(--color-primary);
   position: relative;
   z-index: 10;
+  box-sizing: border-box;
   @media (--mobile), (--tablet) {
     overflow: hidden;
   }

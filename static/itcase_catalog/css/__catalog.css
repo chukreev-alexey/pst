@@ -2461,11 +2461,26 @@ div.catalog-item_type_recommended.catalog-item_type_big {
 
 /* stylelint-disable custom-property-empty-line-before */
 
+.catalog-menu-popup {
+  width: 100%;
+  background: #F9F9FA;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 10;
+  padding: 0 32px;
+}
+
+/* stylelint-disable custom-property-empty-line-before */
+
 .catalog-menu {
   width: 100%;
   background: #D82318;
   position: relative;
   z-index: 10;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 @media (min-width: 15em)
