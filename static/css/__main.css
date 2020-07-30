@@ -4900,7 +4900,7 @@ sans-serif;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     position: relative;
-    padding: 0 72px;
+    padding: 0 32px;
   }
 
 @media (max-width: 15em) {

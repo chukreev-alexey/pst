@@ -11,7 +11,7 @@
     flex-flow: row wrap;
     box-sizing: border-box;
     position: relative;
-    padding: 0 72px;
+    padding: 0 32px;
     @media (--warning) {
       min-width: 180px;
       &::after {
