@@ -1,0 +1,8 @@
+.rotator-wrapper {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding: 24px 0 32px 0;
+}

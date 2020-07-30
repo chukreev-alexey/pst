@@ -1,15 +1,5 @@
 .footer-menu {
-  width: 80%;
-  position: relative;
-  display: flex;
-  @media (--mobile) {
-    width: 100%;
-    display: block;
-  }
-  @media (--tablet) {
-    width: 100%;
-    flex-flow: row wrap;
-  }
+  margin: 0 32px 0 0;
   &__item {
     &-link {
       color: var(--color-surface-text);

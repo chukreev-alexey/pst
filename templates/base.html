@@ -173,10 +173,10 @@
                 <div class="footer__copyright">&copy; 2010-2020 ПрофСтройТорг</div>
             </div>
             <div class="footer__right">
-                <div class="footer__menu">
+                <div class="footer-menu">
                      {% footer_categories %}
                 </div>
-                <div class="footer__menu">
+                <div class="footer-menu">
                     {% for item in footer_menu %}
                         <div class="footer-menu__item">
                             <a href="{{ item.get_absolute_url }}" class="footer-menu__item-link" {{ item.in_new_tab|yesno:"target=_blank," }}>{{ item.name }}</a>

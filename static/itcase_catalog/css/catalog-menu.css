@@ -9,7 +9,7 @@
   &__wrapper {
     width: 100%;
     max-width: var(--max);
-    margin: 0 auto 40px auto;
+    margin: 0 auto;
     position: relative;
     box-sizing: border-box;
     display: flex;

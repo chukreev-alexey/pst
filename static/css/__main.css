@@ -4128,38 +4128,8 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .footer-menu {
-  width: 80%;
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
+  margin: 0 32px 0 0;
 }
-
-@media (min-width: 15em)
-  and (max-width: 47.999em) {
-
-.footer-menu {
-    width: 100%;
-    display: block
-}
-  }
-
-@media (min-width: 48em)
-  and (max-width: 59.999em) {
-
-.footer-menu {
-    width: 100%;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-flow: row wrap;
-    -moz-box-orient: horizontal;
-    -moz-box-direction: normal;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap
-}
-  }
 
 .footer-menu__item-link {
       color: #000;

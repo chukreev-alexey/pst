@@ -2480,7 +2480,7 @@ div.catalog-item_type_recommended.catalog-item_type_big {
 .catalog-menu__wrapper {
     width: 100%;
     max-width: 1366px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto;
     position: relative;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

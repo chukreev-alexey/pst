@@ -1,0 +1,29 @@
+div.rotator-container {
+  height: 100%;
+  @media (--mobile) {
+    height: auto;
+  }
+  &:hover {
+    & div.rotator-button {
+      opacity: 100;
+      &-prev {
+        left: 10px;
+      }
+      &-next {
+        right: 20px;
+      }
+    }
+  }
+  &_state_animated {
+    animation: rotatorContainerAnimation 1s forwards;
+  }
+}
+
+@keyframes rotatorContainerAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

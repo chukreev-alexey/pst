@@ -78,6 +78,11 @@ FILEBROWSER_VERSIONS = {
         'height': 60,
         'opts': 'crop'
     },
+    # Rotator
+    'rotator_image': {
+        'verbose_name': 'Rotator Image',
+        'width': '', 'height': 265,
+        'opts': 'upscale'},
     # Catalog
     'catalog_category_thumb': {
         'verbose_name': 'Catalog Category Thumb',
