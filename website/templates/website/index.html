@@ -7,26 +7,9 @@
         {% feed_list_main_page limit=3 %}
     {% endwith %}
 
-    <div class="catalog-group">
-        <div class="catalog-group__title">Все для кровли и фасада — быстро и по выгодным ценам</div>
-        <ul class="catalog-group__inner-list">
-            {% for category in categories %}
-                <li class="catalog-group__inner-list-item">
-                    <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
-                        <img src="media/{{ category.image }}" class="catalog-group__inner-list-link-image" alt="{{ category.name }}" title="{{ category.name }}">
-                        <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
-                    </a>
-                    <ul class="catalog-group__inner-nested-list">
-                        {% for subcategory in category.children.all %}
-                            <li class="catalog-group__inner-nested-list-item">
-                                <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">{{ subcategory.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+    {% with 'Все для кровли и фасада — быстро и по выгодным ценам' as title %}
+        {% get_categories_by on_main_page=True %}
+    {% endwith %}
 
 
     {% logos_list_main_page %}
