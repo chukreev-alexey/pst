@@ -16,6 +16,8 @@
 
 from django import template
 
+from ..models import Category
+
 register = template.Library()
 
 __all__ = ['catalog_menu']
@@ -25,8 +27,6 @@ __all__ = ['catalog_menu']
                         takes_context=True)
 def catalog_menu(context, additional_class=None, title_additional_class=None,
                  queryset=None):
-    from ..models import Category
-
     queryset = queryset or Category.objects.filter(in_menu=True)
     context['catalog_menu'] = queryset
 
@@ -45,6 +45,16 @@ def catalog_menu(context, additional_class=None, title_additional_class=None,
 @register.inclusion_tag('itcase_catalog/include/footer_categories_list.html',
                         takes_context=True)
 def footer_categories(context):
-    from ..models import Category
     context['footer_categories'] = Category.objects.filter(level=0)
     return context
+
+
+@register.inclusion_tag('itcase_catalog/include/get_categories_by.html',
+                        takes_context=True)
+def get_categories_by(context, level=None, on_main_page=False):
+    if level is not None:
+        context['categories'] = Category.objects.filter(level=level)
+        return context
+    if on_main_page:
+        context['categories'] = Category.objects.filter(on_main_page=True)
+        return context
