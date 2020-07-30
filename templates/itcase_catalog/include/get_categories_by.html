@@ -1,15 +1,18 @@
-<div class="catalog-menu-popup catalog-menu-popup_type_all">
-    <div class="catalog-menu-popup__title">{{ title }}</div>
-    <ul class="catalog-menu-popup__inner-list">
+<div class="catalog-group">
+    <div class="catalog-group__title">{{ title }}</div>
+    <ul class="catalog-group__inner-list">
         {% for category in categories %}
-            <li class="catalog-menu-popup__inner-list-item">
-                <a href="{{ category.get_absolute_url }}" class="catalog-menu-popup__inner-list-link">
-                    <span class="catalog-menu-popup__inner-list-link-text">{{ category.name }}</span>
+            <li class="catalog-group__inner-list-item">
+                <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
+                    {% if not hide_image %}
+                        <img src="media/{{ category.image }}" class="catalog-group__inner-list-link-image" alt="{{ category.name }}" title="{{ category.name }}">
+                    {% endif %}
+                    <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
                 </a>
-                <ul class="catalog-menu-popup__inner-nested-list">
+                <ul class="catalog-group__inner-nested-list">
                     {% for subcategory in category.children.all %}
-                        <li class="catalog-menu-popup__inner-nested-list-item">
-                            <a href="{{ subcategory.get_absolute_url }}" class="catalog-menu-popup__inner-nested-list-link">{{ subcategory.name }}</a>
+                        <li class="catalog-group__inner-nested-list-item">
+                            <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">{{ subcategory.name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
