@@ -1,4 +1,4 @@
-{% load itcase_common %}
+{% load itcase_common catalog_tags %}
 
 {% include 'itcase_search/include/quick/quick_search_popup.html' %}
 
@@ -16,7 +16,7 @@
             {% include 'itcase_search/include/quick/quick_search_button.html' %}
         {% endwith %}
         {% with hide_image=True class="catalog-menu-popup" %}
-            {% include 'itcase_catalog/include/get_categories_by.html' %}
+            {% get_categories_by level=0 %}
         {% endwith %}
     </div>
 </div>
