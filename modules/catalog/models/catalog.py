@@ -159,3 +159,6 @@ class Product(ProductBase):
     def get_parametres_dict(self):
         parametres = set(p.parametr for p in self.parametres.all())
         return {p: self.parametres.filter(parametr=p) for p in parametres}
+
+    def get_lowest_price(self):
+        return self.prices.order_by('price').first().price

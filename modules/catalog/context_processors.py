@@ -14,22 +14,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from modules.catalog.views import CatalogIndexView
+
+from django.urls import reverse
+
+
 from itcase_catalog.shortcuts import get_category_model
 
 
 Category = get_category_model()
 
 
-__all__ = ['IndexView']
+def base_categories(request):
+    '''
+        Возвращает QuerySet с категориями, которые будут отображаться
+        на всех страницах сайта
+    '''
 
-
-class IndexView(CatalogIndexView):
-    template_name = 'website/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        categories = Category.objects.filter(on_main_page=True)
-        context['categories_on_main_page'] = categories
-
-        return context
+    if not request.path.startswith(reverse('admin:index')):
+        return {'catalog_menu': Category.objects.filter(in_menu=True),
+                'footer_categories': Category.objects.filter(level=0)}
+    return {}
