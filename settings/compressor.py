@@ -12,22 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from pathlib import Path
+"""Configure Django Compressor.
 
-BASE_DIR = Path(__file__).parent.parent.absolute()
+See for more details: https://github.com/django-compressor/django-compressor.
 
-from .cache import CACHES  # noqa
-from .core import *  # noqa
-from .logging import LOGGING  # noqa
-from .static import *  # noqa
+"""
 
-from .compressor import *  # noqa
-from .filebrowser import *  # noqa
-from .grappelli import *  # noqa
-from .recaptcha import *  # noqa
-from .rest_framework import REST_FRAMEWORK  # noqa
-from .rq import RQ_QUEUES  # noqa
+from .static import STATIC_ROOT, STATICFILES_FINDERS
 
-from .project import *  # noqa
-
-from .local import *  # noqa
+COMPRESS_JS_FILTERS = []
+COMPRESS_OUTPUT_DIR = 'cache'
+COMPRESS_ROOT = STATIC_ROOT
+STATICFILES_FINDERS += ('compressor.finders.CompressorFinder', )
