@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright 2017 ItCase (info@itcase.pro)
+# Copyright 2020 ItCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,8 +27,12 @@ __all__ = ['catalog_menu']
                         takes_context=True)
 def catalog_menu(context, additional_class=None, title_additional_class=None,
                  queryset=None):
-    queryset = queryset or Category.objects.filter(in_menu=True)
-    context['catalog_menu'] = queryset
+    '''
+        catalog_menu поставляется из
+        catalog.context_processors.base_categories
+    '''
+    if queryset is not None:
+        context['catalog_menu'] = queryset
 
     if additional_class is None:
         additional_class = context.get('additional_class')
@@ -44,17 +48,22 @@ def catalog_menu(context, additional_class=None, title_additional_class=None,
 
 @register.inclusion_tag('itcase_catalog/include/footer_categories_list.html',
                         takes_context=True)
-def footer_categories(context):
-    context['footer_categories'] = Category.objects.filter(level=0)
-    return context
+def footer_categories(context, queryset=None):
+    '''
+        footer_categories поставляется из
+        catalog.context_processors.base_categories
+    '''
+    if queryset is not None:
+        context['footer_categories'] = queryset
+        return context
 
 
 @register.inclusion_tag('itcase_catalog/include/get_categories_by.html',
                         takes_context=True)
-def get_categories_by(context, level=None, on_main_page=False):
-    if level is not None:
-        context['categories'] = Category.objects.filter(level=level)
-        return context
-    if on_main_page:
-        context['categories'] = Category.objects.filter(on_main_page=True)
-        return context
+def get_categories_by(context, queryset=None, **kwargs):
+    if queryset is not None:
+        categories = queryset
+    elif 'level' in kwargs:
+        categories = Category.objects.filter(level=kwargs['level'])
+    context['categories_list'] = categories
+    return context
