@@ -3,24 +3,24 @@
     margin: 24px 0 40px 0;
     & .feed {
       &-title {
-        @mixin font 500, 14px, 32px, 18px, 44px, var(--font);
         color: var(--color-neutral-text);
+        @mixin font normal, 14px, 32px, 18px, 44px, var(--font-title);
         &-link {
           color: var(--color-neutral-text);
         }
       }
       &-list {
-      justify-content: space-between;
+        justify-content: space-between;
         & .feed-list__item {
-          background: var(--color-neutral);
-          position: relative;
-          flex: 0 0 32%;
           min-height: 144px;
+          background: var(--color-neutral);
           padding: 0 32px 0 156px;
-          box-sizing: border-box;
-          flex-flow: row wrap;
+          position: relative;
           display: flex;
+          flex: 0 0 32%;
+          flex-flow: row wrap;
           align-items: flex-start;
+          box-sizing: border-box;
           &-image {
             padding: 16px 16px 16px 24px;
             margin: 0;
@@ -29,21 +29,21 @@
             top: 0;
           }
           &-title {
+            color: var(--color-neutral-text);
+            text-transform: uppercase;
             padding: 24px 0 0 0;
             order: -1;
-            text-transform: uppercase;
             @mixin font bold, 14px, 16px, 18px, 22px, var(--font);
-            color: var(--color-neutral-text);
             &-link {
               color: var(--color-neutral-text);
-              @mixin font bold, 14px, 16px, 18px, 22px, var(--font);
               text-decoration: none;
+              @mixin font bold, 14px, 16px, 18px, 22px, var(--font);
             }
           }
           &-desc {
+            color: var(--color-neutral-text);
             order: 1;
-              color: var(--color-neutral-text);
-              @mixin font normal, 14px, 16px, 18px, 22px, var(--font);
+            @mixin font normal, 14px, 16px, 18px, 22px, var(--font);
           }
           &-date {
             order: 2;

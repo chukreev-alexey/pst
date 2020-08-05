@@ -6,8 +6,8 @@
 
 .feed.feed_type_main-page .feed-title {
         font-size: calc(0.875rem + 1.125 * ((100vw - 20rem) / 140));
-        font-weight: 500;
-        font-family: 'Fact'
+        font-weight: normal;
+        font-family: 'Fact Semi Expanded Medium'
 ,
 sans-serif;
         line-height: calc(1.125rem + 1.625 * ((100vw - 20rem) / 140));

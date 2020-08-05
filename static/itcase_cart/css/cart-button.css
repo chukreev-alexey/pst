@@ -1,0 +1,25 @@
+.cart-button {
+  text-decoration: none;
+  text-align: center;
+  background: var(--color-neutral);
+  padding: 12px 24px;
+  margin: 0;
+  border-radius: 100px;
+  position: relative;
+  display: block;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  @media (--mobile) {
+    min-width: 200px;
+    padding: 12px 24px 14px 24px;
+  }
+  &:hover {
+    background: var(--color-neutral-hover);
+  }
+  &__text {
+    color: var(--color-neutral-text);
+    text-decoration: none;
+    display: inline-block;
+    @mixin font normal, 14px, 18px, 14px, 24px, var(--font-title);
+  }
+}
