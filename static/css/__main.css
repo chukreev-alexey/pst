@@ -16,7 +16,7 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .button.button_type_neutral {
-    background: #F9F9FA;
+    background: #f9f9fa;
   }
 
 .button.button_type_neutral:hover {
@@ -26,7 +26,7 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .button.button_type_primary {
-    background: #D82318;
+    background: #d82318;
   }
 
 /* stylelint-disable custom-property-empty-line-before */
@@ -579,7 +579,7 @@ sans-serif;
 .content-block.content-block_type_main::after {
       width: 50%;
       height: 20%;
-      background: #D82318;
+      background: #d82318;
       position: absolute;
       content: '';
       display: block;
@@ -829,7 +829,7 @@ sans-serif;
               }
 
 .content-block.content-block_type_menu_state_fixed .content-block__wrapper .content-menu__list-item:hover {
-                background: #F9F9FA;
+                background: #f9f9fa;
               }
 
 .content-block.content-block_type_menu_state_fixed .content-block__wrapper .content-menu__list-item-link {
@@ -897,7 +897,7 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .content-block.content-block_type_neutral-pattern {
-    background: #F9F9FA url('./../img/gray_bg.png');
+    background: #f9f9fa url('./../img/gray_bg.png');
   }
 
 .content-block.content-block_type_neutral-pattern .content-block__wrapper {
@@ -999,7 +999,7 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .content-block.content-block_type_neutral {
-    background: #F9F9FA;
+    background: #f9f9fa;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -1045,7 +1045,7 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .content-block.content-block_type_pattern-primary {
-    background: #D82318 url('./../img/blue_bg.png');
+    background: #d82318 url('./../img/blue_bg.png');
   }
 
 .content-block.content-block_type_pattern-primary h1 {
@@ -1071,7 +1071,7 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .content-block.content-block_type_right-pattern-primary::before {
-      background: #D82318 url('./../img/blue_bg.png');
+      background: #d82318 url('./../img/blue_bg.png');
     }
 
 /* stylelint-disable custom-property-empty-line-before */
@@ -2030,7 +2030,7 @@ sans-serif;
 }
 
 .content-block-item__type-item-value {
-        color: #D82318;
+        color: #d82318;
         padding: 4px 0;
         font-size: calc(1.5rem + 0.5 * ((100vw - 20rem) / 140));
         font-weight: bold;
@@ -2423,7 +2423,7 @@ sans-serif;
 
 .content-hands {
   width: 100%;
-  background: #F9F9FA url('./../img/gray_bg.png');
+  background: #f9f9fa url('./../img/gray_bg.png');
 }
 
 .content-hands__swiper {
@@ -2476,7 +2476,7 @@ sans-serif;
       left: 50%;
       top: 50%;
       z-index: -1;
-      background: #D82318;
+      background: #d82318;
       -webkit-transform: translate(-50%, -50%);
       -moz-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
@@ -2541,7 +2541,7 @@ sans-serif;
       }
 
 .content-hands__item:nth-child(5n-2)::after {
-        background: #D82318;
+        background: #d82318;
       }
 
 .content-hands__item:nth-child(5n+4) {
@@ -2647,7 +2647,7 @@ sans-serif;
     }
 
 .content-hands__pagination span.swiper-pagination-bullet-active {
-      background: #D82318;
+      background: #d82318;
     }
 
 .content-hands__button {
@@ -2872,7 +2872,7 @@ sans-serif;
         }
 
 .content .content-menu__list-item_state_current {
-          background: #F9F9FA;
+          background: #f9f9fa;
         }
 
 .content .content-menu__list-item-link {
@@ -3705,7 +3705,7 @@ sans-serif;
 }
 
 .content a {
-    color: #D82318;
+    color: #d82318;
   }
 
 .content a:hover {
@@ -3940,7 +3940,7 @@ sans-serif;
       line-height: calc(0.75rem + 0.25 * ((100vw - 20rem) / 140));
       color: #fff;
       text-align: center;
-      background: #D82318;
+      background: #d82318;
       padding: 12px 32px;
       margin: 16px 0 0 0;
       -webkit-border-radius: 2px;
@@ -4187,7 +4187,7 @@ sans-serif;
 .footer {
   width: 100%;
   position: relative;
-  background: #F9F9FA;
+  background: #f9f9fa;
 }
 
 .footer__wrapper {
@@ -4388,7 +4388,7 @@ sans-serif;
     }
 
 .header__wrapper_state_show {
-      border-bottom: solid 1px #F9F9FA;
+      border-bottom: solid 1px #f9f9fa;
     }
 
 .header__wrapper .header__inner {

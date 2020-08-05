@@ -3,6 +3,7 @@
 .cart-button {
   text-decoration: none;
   text-align: center;
+  background: #f9f9fa;
   padding: 12px 24px;
   margin: 0;
   -webkit-border-radius: 100px;
@@ -15,7 +16,6 @@
   -moz-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   cursor: pointer;
-  background: #F9F9FA;
 }
 
 @media (min-width: 15em)
@@ -32,12 +32,12 @@
   }
 
 .cart-button__text {
-    display: inline-block;
     color: #000;
     text-decoration: none;
+    display: inline-block;
     font-size: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
     font-weight: normal;
-    font-family: 'Fact'
+    font-family: 'Fact Semi Expanded Medium'
 ,
 sans-serif;
     line-height: calc(0.875rem + 0.625 * ((100vw - 20rem) / 140));

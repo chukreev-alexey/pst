@@ -1,0 +1,6 @@
+
+div.catalog-item_type_action {
+  &.catalog-item_type_big {
+    border: solid 2px var(--color-orange);
+  }
+}

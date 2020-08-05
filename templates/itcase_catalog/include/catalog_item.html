@@ -1,9 +1,6 @@
 {% load fb_versions l10n %}
 
-<div class="catalog-item {{ item_class }}
-    {% if product.border %}
-        catalog-item_type_big
-    {% endif %}">
+<div class="catalog-item {{ item_class }} {% if product.border %} catalog-item_type_big {% endif %}">
     <div class="catalog-item__inner">
         <div class="catalog-item__inner-left">
             {% if product.get_first_image %}
@@ -24,6 +21,7 @@
             <div class="catalog-item__title">
                 <a href="{{ product.get_absolute_url }}" class="catalog-item__title-link">{{ product.name }}</a>
             </div>
+            <div class="catalog-item__desc">{{ product.description }}</div>
             <div class="catalog-item__price">
                 <div class="catalog-item__price-text">
                     {{ product.price|floatformat:'-2' }} Р
@@ -36,12 +34,7 @@
             </div>
             {% with id=product.pk|unlocalize %}
                 <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
-                   class="catalog-item__button button
-                          {% if product in cart %}
-                            button_border_orange
-                          {% else %}
-                            button_color_blue
-                          {% endif %}"
+                   class="catalog-item__button {% if product in cart %} catalog-item__button_state_in-cart {% endif %}"
                     data-add-url="{% url 'itcase_cart:cart_add' %}"
                     data-product="{{ id }}"
                     data-amount-{{ id }}="1">
