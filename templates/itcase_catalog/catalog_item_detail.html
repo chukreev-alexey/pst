@@ -27,7 +27,7 @@
                     {% if images %}
                         <div class="catalog-item-gallery">
                             <div class="catalog-item-gallery__image">
-                                <img src="{% version product.image 'catalog_detail' %}"
+                                <img src="{% version product.get_first_image.image 'catalog_detail' %}"
                                      class="catalog-item-gallery__image-image" alt="" title="" />
                             </div>
                             <div class="catalog-item-gallery-nav">
@@ -99,6 +99,9 @@
                 Цены:
                 {% for price in product.prices.all %}
                     <div>
+                        {% if price.image %}
+                            <img src="{% version price.image 'catalog_list_thumb' %}">
+                        {% endif %}
                         <p>{{ price.product_article }}(Кол-во на складе: {{ price.amount }}): {{ price.price }}</p>
                         {% for parametr in price.parametr.all %}
                             <p>{{ parametr }}</p>

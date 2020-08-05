@@ -60,6 +60,9 @@ class Price(models.Model):
         blank=True, null=True,
         verbose_name='Параметры', on_delete=models.CASCADE)
 
+    image = FileBrowseField('Изображение', format='image', max_length=255,
+                            blank=True)
+
     class Meta(object):
         verbose_name = 'Цена комплектации'
         verbose_name_plural = 'Цены комплектаций'
