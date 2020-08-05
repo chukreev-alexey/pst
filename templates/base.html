@@ -137,7 +137,11 @@
                         <div class="button__text">Расчет материалов</div>
                     </div>
                 </div>
-                <div class="header__cart">{% cart_state %}</div>
+                <div class="header__cart">
+                    {% with cart_empty_text='Заказ' %}
+                        {% cart_state %}
+                    {% endwith %}
+                </div>
             </div>
         </div>
     </div>

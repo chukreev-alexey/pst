@@ -1,0 +1,10 @@
+.catalog-menu-popup {
+  width: 100%;
+  background: var(--color-neutral);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 10;
+  display: none;
+  padding: 0 32px;
+}
