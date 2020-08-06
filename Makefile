@@ -40,23 +40,25 @@ email:
 
 MEDIA_PATH=media/uploads/
 
-DEV_PROJECT=sertification
-DEV_DB=sertification
+DEV_PROJECT=pst
+DEV_DB=pst
 DEV_SERVER=web@193.107.238.41
 DEV_SERVER_MEDIA=~/$(DEV_PROJECT)/src/$(MEDIA_PATH)
 DEV_DUMP=~/$(DEV_PROJECT)/$(DEV_PROJECT).sql
-DEV_DB_PASS="NMMXLbkrziqkWoRM26FT"
+DEV_DB_PASS="94hXvvdwFSaX5qicSDwR"
 
-LOCAL_PROJECT=sertification
-LOCAL_DB=sertification
+LOCAL_PROJECT=pst
+LOCAL_DB=pst
 LOCAL_SERVER=itcase@192.168.1.21
-LOCAL_DB_PASS="NMMXLbkrziqkWoRM26FT"
+LOCAL_DUMP=~/$(LOCAL_PROJECT).sql
+LOCAL_DB_PASS="94hXvvdwFSaX5qicSDwR"
 
-PROD_PROJECT=uralsertif
-PROD_DB=sertification
-PROD_SERVER=web@45.86.182.232
+PROD_PROJECT=pst
+PROD_DB=pst
+PROD_SERVER=web@185.41.161.250
 PROD_SERVER_MEDIA=~/$(PROD_PROJECT)/src/$(MEDIA_PATH)
 PROD_DUMP=~/$(PROD_PROJECT)/$(PROD_PROJECT).sql
+
 
 dev-uploadimages:
 	rsync -ahvz --exclude '.DS_Store' $(MEDIA_PATH) $(DEV_SERVER):$(DEV_SERVER_MEDIA)
@@ -74,6 +76,15 @@ dev-getdata:
 	ssh $(LOCAL_SERVER) 'PGPASSWORD=$(LOCAL_DB_PASS) psql -h localhost -U $(LOCAL_DB) -d $(LOCAL_DB) -f ./$(DEV_PROJECT).sql'
 	ssh -A $(LOCAL_SERVER) 'rm ./$(DEV_PROJECT).sql'
 	rm ./$(DEV_PROJECT).sql
+
+dev-uploaddata:
+	ssh -A $(LOCAL_SERVER) 'PGPASSWORD=$(LOCAL_DB_PASS) pg_dump -h localhost -U $(LOCAL_DB) -d $(LOCAL_DB) -f $(LOCAL_DUMP) -bcOv'
+	scp $(LOCAL_SERVER):$(LOCAL_DUMP) ${CURDIR}
+	ssh -A $(LOCAL_SERVER) 'rm $(LOCAL_DUMP)'
+	scp $(LOCAL_PROJECT).sql $(DEV_SERVER):~/
+	ssh $(DEV_SERVER) 'PGPASSWORD=$(DEV_DB_PASS) psql -h localhost -U $(DEV_DB) -d $(DEV_DB) -f ./$(LOCAL_PROJECT).sql'
+	ssh -A $(DEV_SERVER) 'rm ./$(LOCAL_PROJECT).sql'
+	rm ./$(LOCAL_PROJECT).sql
 
 prod-uploadimages:
 	rsync -ahvz --exclude '.DS_Store' $(MEDIA_PATH) $(PROD_SERVER):$(PROD_SERVER_MEDIA)
