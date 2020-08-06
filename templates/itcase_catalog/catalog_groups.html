@@ -17,8 +17,14 @@
                        class="nav__item-link">{{ crumb.name }}</a>
                 </div>
             {% endfor %}
+            {% if category %}
+                <div class="nav__item nav__item_state_current">
+                    <div class="nav__item-text">{{ category }}</div>
+                </div>
+            {% endif %}
         </div>
     {% endif %}
+
 
     {% if view.hide_products %}
         {% include './include/categories_list.html' %}
