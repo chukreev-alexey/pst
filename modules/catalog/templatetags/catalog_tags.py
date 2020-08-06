@@ -67,3 +67,15 @@ def get_categories_by(context, queryset=None, **kwargs):
         categories = Category.objects.filter(level=kwargs['level'])
     context['categories_list'] = categories
     return context
+
+
+@register.inclusion_tag('itcase_catalog/include/clipped_subcategories.html')
+def clipped_subcategories(category):
+    limit = 5
+    subcategories = category.children.all()
+    count = subcategories.count()
+    hidden_categories_count = count - limit
+    if hidden_categories_count <= 0:
+        hidden_categories_count = 0
+    return {'subcategories': subcategories[:limit],
+            'hidden_categories_count': hidden_categories_count}

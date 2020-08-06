@@ -1,3 +1,5 @@
+{% load catalog_tags %}
+
 {% if categories_list %}
     <div class="catalog-group {{ class }}">
         <div class="catalog-group__title">{{ title }}</div>
@@ -11,11 +13,14 @@
                         <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
                     </a>
                     <ul class="catalog-group__inner-nested-list">
+                        {% clipped_subcategories category %}
+                        {% comment %}
                         {% for subcategory in category.children.all %}
                             <li class="catalog-group__inner-nested-list-item">
                                 <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">{{ subcategory.name }}</a>
                             </li>
                         {% endfor %}
+                        {% endcomment %}
                     </ul>
                 </li>
             {% endfor %}
