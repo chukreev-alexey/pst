@@ -7,9 +7,9 @@
     @mixin font bold, 24px, 72px, 24px, 72px, var(--font);
     & a {
       color: var(--color-surface-text);
-      @mixin font bold, 24px, 72px, 24px, 72px, var(--font);
-      margin: 0;
       padding: 0;
+      margin: 0;
+      @mixin font bold, 24px, 72px, 24px, 72px, var(--font);
     }
   }
   & h2 {
@@ -20,9 +20,9 @@
     @mixin font 500, 18px, 48px, 24px, 56px, var(--font);
     & a {
       color: var(--color-surface-text);
-      @mixin font 500, 18px, 48px, 24px, 56px, var(--font);
-      margin: 0;
       padding: 0;
+      margin: 0;
+      @mixin font 500, 18px, 48px, 24px, 56px, var(--font);
     }
   }
   & h3 {
@@ -47,7 +47,7 @@
     color: var(--color-surface-text);
     padding: 0 0 16px 0;
     margin: 0;
-    @mixin font normal, 18px, 32px, 24px, 42px, var(--font);
+    @mixin font bold, 18px, 24px, 24px, 32px, var(--font);
   }
   & a {
     color: var(--color-primary);

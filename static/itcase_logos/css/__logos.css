@@ -1,0 +1,328 @@
+/* stylelint-disable custom-property-empty-line-before */
+
+.logos_type_main_page {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.logos_type_main_page .logos-list {
+    position: relative;
+  }
+
+.logos_type_main_page .logos-list__item {
+          width: 20%;
+    }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+.logos-list {
+  width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -moz-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: row wrap;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+.logos-list__title {
+    color: #000;
+    font-size: calc(0.875rem + 1.125 * ((100vw - 20rem) / 140));
+    font-weight: normal;
+    font-family: 'Fact Semi Expanded Medium'
+,
+sans-serif;
+    line-height: calc(1.125rem + 1.625 * ((100vw - 20rem) / 140));
+  }
+
+@media screen and (min-width: 2560px) {
+
+  .logos-list__title {
+    line-height: 2.75rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .logos-list__title {
+    line-height: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+
+  .logos-list__title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .logos-list__title {
+    font-size: 0.875rem;
+  }
+}
+
+.logos-list__title-link {
+      color: #000;
+    }
+
+.logos-list__item {
+    width: 25%;
+    padding: 0 0 24px 0;
+  }
+
+.logos-list__item-link {
+      display: block;
+      text-decoration: none;
+    }
+
+.logos-list__item-link .logos-list__item-image {
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -moz-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -moz-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+
+.logos-list__item-link .logos-list__item-image-image {
+          max-width: 160px;
+          width: auto;
+          height: auto;
+        }
+
+.logos-list__item-link .logos-list__item-text {
+        color: #000;
+        font: 0.875rem 'Fact' , sans-serif;
+        padding: 20px 0 0 0;
+        text-align: center;
+        display: block;
+      }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+.logos-title {
+  color: #000;
+  font-size: calc(0.875rem + 1.125 * ((100vw - 20rem) / 140));
+  font-weight: normal;
+  font-family: 'Fact Semi Expanded Medium'
+,
+sans-serif;
+  line-height: calc(1.125rem + 1.625 * ((100vw - 20rem) / 140));
+  margin: 0 0 24px 0;
+}
+
+@media screen and (min-width: 2560px) {
+
+  .logos-title {
+    line-height: 2.75rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .logos-title {
+    line-height: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+
+  .logos-title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .logos-title {
+    font-size: 0.875rem;
+  }
+}
+
+.logos-title-link {
+    color: #000;
+  }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+/* stylelint-disable custom-property-empty-line-before */
+
+div.logos-button {
+  background: none;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+div.logos-button::before {
+    font: 1.5rem/1.5rem 'FontAwesome';
+    color: #fff;
+    display: block;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  }
+
+div.logos-button-prev {
+    left: 0;
+  }
+
+div.logos-button-prev::before {
+      content: '\f053';
+    }
+
+div.logos-button-next {
+    right: 0;
+  }
+
+div.logos-button-next::before {
+      content: '\f054';
+    }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+div.logos-container:hover .swiper-button {
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10000)";
+      opacity: 100;
+    }
+
+div.logos-container:hover .swiper-button-prev {
+        left: 10px;
+      }
+
+div.logos-container:hover .swiper-button-next {
+        right: 10px;
+      }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+.logos-detail {
+  position: relative;
+  padding: 0 0 50px 0;
+}
+
+.logos-detail__title {
+    font: normal 1.5rem/1.5rem 'Arial' , Helvetica , sans-serif;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+
+.logos-detail__image {
+    display: table;
+    position: relative;
+  }
+
+.logos-detail__name {
+    width: 90%;
+    color: #336699;
+    font: 1.2em 'Arial' , Helvetica , sans-serif;
+    display: block;
+    padding: 1em 0 0.3em 0;
+  }
+
+.logos-detail__desc {
+    position: relative;
+  }
+
+.logos-detail__link {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+.logos-detail__link:hover {
+      color: #EF7F1B;
+    }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+div.logos-pagination {
+  margin: 5px 0 0 0;
+  position: relative;
+}
+
+div.logos-pagination .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    background: none;
+    margin: 0 10px;
+    border: solid 1px #ccc;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10000)";
+    opacity: 100;
+  }
+
+div.logos-pagination .swiper-pagination-bullet-active {
+      background: #39577b;
+      border: solid 1px #39577b;
+    }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+.logos {
+  width: 100%;
+  background: #fff;
+  padding: 0 0 40px 0;
+}
+
+.logos__left {
+    width: 225px;
+    float: left;
+    margin-right: -225px;
+    position: relative;
+    z-index: 10;
+  }
+
+.logos__left-inner {
+      position: relative;
+    }
+
+.logos__right {
+    width: 100%;
+    float: left;
+    position: relative;
+    z-index: 5;
+  }
+
+.logos__right-inner {
+      padding: 0 0 0 280px;
+    }
+
+.logos__inner {
+
+  }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+/* stylelint-disable custom-property-empty-line-before */
+
+/*# sourceMappingURL=__logos.css.map */

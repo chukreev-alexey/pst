@@ -1,0 +1,8 @@
+.logos-title {
+  color: var(--color-neutral-text);
+  margin: 0 0 24px 0;
+  @mixin font normal, 14px, 32px, 18px, 44px, var(--font-title);
+  &-link {
+    color: var(--color-neutral-text);
+  }
+}

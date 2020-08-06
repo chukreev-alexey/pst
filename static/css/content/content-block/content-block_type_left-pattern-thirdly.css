@@ -1,7 +1,0 @@
-.content-block {
-  &&_type_left-pattern-thirdly {
-    &::before {
-      background: var(--color-secondary) url('./../img/yellow_bg.png');
-    }
-  }
-}

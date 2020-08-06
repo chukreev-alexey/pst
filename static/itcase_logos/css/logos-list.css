@@ -1,0 +1,41 @@
+.logos-list {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  &__title {
+    color: var(--color-neutral-text);
+    @mixin font normal, 14px, 32px, 18px, 44px, var(--font-title);
+    &-link {
+      color: var(--color-neutral-text);
+    }
+  }
+  &__item {
+    width: 25%;
+    padding: 0 0 24px 0;
+    &-link {
+      text-decoration: none;
+      display: block;
+      ^&-image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &-image {
+          width: auto;
+          height: auto;
+          max-width: 160px;
+        }
+      }
+      ^&-text {
+        font: 14px var(--font);
+        color: #000;
+        text-align: center;
+        padding: 20px 0 0 0;
+        display: block;
+      }
+    }
+  }
+}

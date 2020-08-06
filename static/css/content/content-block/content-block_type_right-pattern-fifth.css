@@ -1,7 +1,0 @@
-.content-block {
-  &&_type_right-pattern-fifth {
-    &::before {
-      background: var(--color-fifth) url('./../img/green_bg.png');
-    }
-  }
-}

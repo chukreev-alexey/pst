@@ -1,0 +1,11 @@
+.logos_type_main_page {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  & .logos-list {
+    position: relative;
+    &__item {
+      width: 20%;
+    }
+  }
+}

@@ -1,7 +1,0 @@
-.content-block {
-  &&_type_right-pattern-secondary {
-    &::before {
-      background: var(--color-secondary) url('./../img/orange_bg.png');
-    }
-  }
-}

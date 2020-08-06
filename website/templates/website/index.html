@@ -13,8 +13,12 @@
 
     {% include 'itcase_catalog/include/catalog_main_page_groups.html' %}
 
-    {% with hide_text=True %}
+    {% with hide_text=True title='Торговые марки и партнеры' %}
         {% logos_list_main_page %}
     {% endwith %}
+
+    <div class="content">
+        {% render_content request.page.content %}
+    </div>
 
 {% endblock content %}
