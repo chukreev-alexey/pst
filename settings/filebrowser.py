@@ -89,7 +89,6 @@ FILEBROWSER_VERSIONS = {
         'width': '', 'height': 265,
         'opts': 'upscale'},
     # Catalog
-
     'catalog_category_thumb': {
         'verbose_name': 'Catalog Category Thumb',
         'width': 270, 'height': 210,
@@ -109,6 +108,15 @@ FILEBROWSER_VERSIONS = {
     'catalog_detail_thumb': {
         'verbose_name': 'Catalog Detail Thumb',
         'width': 60, 'height': 60,
+        'opts': 'upscale'},
+    # Logos
+    'logos_thumb': {
+        'verbose_name': 'Logo Thumb',
+        'width': '', 'height': 64,
+        'opts': 'upscale'},
+    'logos_detail': {
+        'verbose_name': 'Logo Detail',
+        'width': 150, 'height': '',
         'opts': 'upscale'},
 }
 
