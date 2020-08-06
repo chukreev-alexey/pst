@@ -70,9 +70,8 @@ def get_categories_by(context, queryset=None, **kwargs):
 
 
 @register.inclusion_tag('itcase_catalog/include/clipped_subcategories.html')
-def clipped_subcategories(category=None):
+def clipped_subcategories(category=None, limit=5):
     if category:
-        limit = 5
         subcategories = category.children.all()
         count = subcategories.count()
         hidden_categories_count = count - limit
