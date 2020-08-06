@@ -1,9 +1,9 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .logos_type_main_page {
-  position: relative;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  position: relative;
 }
 
 .logos_type_main_page .logos-list {
@@ -11,7 +11,7 @@
   }
 
 .logos_type_main_page .logos-list__item {
-          width: 20%;
+      width: 20%;
     }
 
 /* stylelint-disable custom-property-empty-line-before */
@@ -24,6 +24,13 @@
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: row wrap;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -moz-box-pack: start;
@@ -34,13 +41,6 @@
   -moz-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-flow: row wrap;
-  -moz-box-orient: horizontal;
-  -moz-box-direction: normal;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
 }
 
 .logos-list__title {
@@ -91,8 +91,8 @@ sans-serif;
   }
 
 .logos-list__item-link {
-      display: block;
       text-decoration: none;
+      display: block;
     }
 
 .logos-list__item-link .logos-list__item-image {
@@ -115,16 +115,16 @@ sans-serif;
       }
 
 .logos-list__item-link .logos-list__item-image-image {
-          max-width: 160px;
           width: auto;
           height: auto;
+          max-width: 160px;
         }
 
 .logos-list__item-link .logos-list__item-text {
-        color: #000;
         font: 0.875rem 'Fact' , sans-serif;
-        padding: 20px 0 0 0;
+        color: #000;
         text-align: center;
+        padding: 20px 0 0 0;
         display: block;
       }
 
@@ -132,13 +132,13 @@ sans-serif;
 
 .logos-title {
   color: #000;
+  margin: 0 0 24px 0;
   font-size: calc(0.875rem + 1.125 * ((100vw - 20rem) / 140));
   font-weight: normal;
   font-family: 'Fact Semi Expanded Medium'
 ,
 sans-serif;
   line-height: calc(1.125rem + 1.625 * ((100vw - 20rem) / 140));
-  margin: 0 0 24px 0;
 }
 
 @media screen and (min-width: 2560px) {
