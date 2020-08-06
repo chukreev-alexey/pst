@@ -77,6 +77,6 @@ def clipped_subcategories(category=None, limit=5):
         hidden_categories_count = count - limit
         if hidden_categories_count <= 0:
             hidden_categories_count = 0
-        return {'showed_subcategories': subcategories[:limit],
-                'hidden_subcategories': subcategories[limit:],
+        return {'subcategories': subcategories,
+                'limit': str(limit),
                 'hidden_categories_count': hidden_categories_count}
