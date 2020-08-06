@@ -1,10 +1,25 @@
-{% if subcategories %}
-    {% for subcategory in subcategories %}
-        <li class="catalog-group__inner-nested-list-item">
-            <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">{{ subcategory.name }}</a>
-        </li>
-    {% endfor %}
-    {% if hidden_categories_count %}
-        + {{ hidden_categories_count }} категорий
-    {% endif %}
+{% if showed_subcategories %}
+    <ul class="catalog-group__inner-nested-list">
+        {% for subcategory in showed_subcategories %}
+            <li class="catalog-group__inner-nested-list-item">
+                <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">
+                    {{ subcategory.name }}
+                </a>
+            </li>
+        {% endfor %}
+
+        {% if hidden_categories_count %}
+            <li class="catalog-group__inner-nested-list-count">
+                + {{ hidden_categories_count }} категорий
+            </li>
+        {% endif %}
+
+        {% for subcategory in hidden_subcategories %}
+            <li class="catalog-group__inner-nested-list-item catalog-group__inner-nested-list-item_type_hidden">
+                <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">
+                    {{ subcategory.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endif %}
