@@ -48,14 +48,14 @@ def catalog_menu(context, additional_class=None, title_additional_class=None,
 
 @register.inclusion_tag('itcase_catalog/include/footer_categories_list.html',
                         takes_context=True)
-def footer_categories(context, queryset=None):
+def footer_categories_tag(context, queryset=None):
     '''
         footer_categories поставляется из
         catalog.context_processors.base_categories
     '''
     if queryset is not None:
         context['footer_categories'] = queryset
-        return context
+    return context
 
 
 @register.inclusion_tag('itcase_catalog/include/get_categories_by.html',
