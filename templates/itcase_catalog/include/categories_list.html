@@ -12,7 +12,7 @@
             {% for category in categories %}
                 <li class="catalog-group__inner-list-item">
                     <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
-                        <img src="{% static 'img/__temp/unitaz-s-instalyaciey_1.jpg' %}" class="catalog-group__inner-list-link-image" />
+                        <img src="{{ category.image.url }}" class="catalog-group__inner-list-link-image" />
                         <span class="catalog-group__inner-list-link-text">{{ category }}</span>
                     </a>
                     {% with subcategories=category.children.all %}
