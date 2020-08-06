@@ -9,6 +9,9 @@
     width: 100%;
     justify-content: space-between;
   }
+  &__title {
+    width: 100%;
+  }
   &_type_scroll {
     margin: 0 0 15px 0;
     z-index: 1;

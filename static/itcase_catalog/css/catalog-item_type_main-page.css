@@ -1,0 +1,6 @@
+.catalog-item {
+  &&_type_main-page {
+    width: calc(25% - 32px);
+    margin: 0 32px 32px 0;
+  }
+}

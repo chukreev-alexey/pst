@@ -1,5 +1,5 @@
 .catalog-item {
-  width: calc(25% - 32px);
+  width: calc(33% - 32px);
   padding: 16px;
   margin: 0 32px 32px 0;
   border: solid 1px var(--color-neutral-border);

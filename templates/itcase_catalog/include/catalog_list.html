@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="catalog-list">
-    {{ category }}
+    <div class="catalog-list__title">{{ category }}</div>
     {% for product in products %}
         {% include './catalog_item.html' %}
     {% empty %}

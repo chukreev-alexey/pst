@@ -3,7 +3,7 @@
         {% include './catalog_sort.html' %}
     </div>
 
-    <div class="catalog-group__inner clearfix">
+    <div class="catalog-group__inner">
         {% if filter_enable %}
             <div class="catalog-filter-popup">
                 <span class="catalog-filter-popup__button button button_color_blue">Фильтр</span>
@@ -11,16 +11,16 @@
         {% endif %}
 
         <div class="catalog-group__inner-left">
-            <div class="catalog-group__inner-left-inner clearfix">
-                {% include './catalog_loading.html' %}
-                {% include './catalog_list.html' %}
+            <div class="catalog-group__inner-left-inner">
+                    {% include './catalog_filter.html' %}
             </div>
         </div>
 
         {% if filter_enable %}
             <div class="catalog-group__inner-right">
                 <div class="catalog-group__inner-right-inner">
-                    {% include './catalog_filter.html' %}
+                    {% include './catalog_loading.html' %}
+                    {% include './catalog_list.html' %}
                 </div>
             </div>
         {% endif %}
