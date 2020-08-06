@@ -59,6 +59,17 @@ class Category(MPTTModel, CategoryBase, SEOModel):
         return reverse_lazy('category-detail', args=[str(self.slug)])
 
 
+class Measurement(models.Model):
+    name = models.CharField('Обозначение', max_length=255)
+
+    class Meta(object):
+        verbose_name = 'Единица измерения'
+        verbose_name_plural = 'Единицы измерения'
+
+    def __str__(self):
+        return self.name
+
+
 class Brand(models.Model):
 
     name = models.CharField('Название', max_length=255)
@@ -129,14 +140,9 @@ class Product(ProductBase):
         blank=True,
         verbose_name='Параметры')
 
-    LINEAR, SQUARE, THING = range(3)
-    MEASURING = [
-        (LINEAR, 'м.п.'),
-        (SQUARE, 'м.кв.'),
-        (THING, 'шт.'),
-    ]
-    measuring = models.PositiveSmallIntegerField(
-        verbose_name='Единицы измерения', choices=MEASURING)
+    measuring = models.ForeignKey(
+        Measurement, related_name='products', verbose_name='Единица измерения',
+        on_delete=models.SET_NULL, blank=True, null=True)
 
     class Meta(ProductBase.Meta):
         pass

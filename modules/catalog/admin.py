@@ -7,7 +7,7 @@ from itcase_catalog.shortcuts import get_product_model, get_category_model
 from itcase_catalog.admin import ProductAdmin as ProductAdminBase
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 
-from .models.catalog import Brand, Parametr, ProductParametr
+from .models.catalog import Brand, Parametr, ProductParametr, Measurement
 from .models.parametres import ProductImage, Price, PriceCombinations
 
 
@@ -18,6 +18,7 @@ admin.site.unregister(Category)
 admin.site.unregister(Product)
 
 admin.site.register(Brand)
+admin.site.register(Measurement)
 
 
 @admin.register(PriceCombinations)
