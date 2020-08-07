@@ -4,6 +4,11 @@
 {% block content %}
     <div class="catalog">
         <div class="catalog__wrapper">
+
+            {% with title='Все для кровли и фасада — быстро и по выгодным ценам' %}
+                {% include "itcase_catalog/include/get_categories_by.html" %}
+            {% endwith %}
+
             {% with show_title=True %}
                 {% include 'itcase_catalog/include/catalog_main_page_groups.html' %}
             {% endwith %}
