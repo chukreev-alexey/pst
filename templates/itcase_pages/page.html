@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load fb_versions i18n static website_tags %}
+{% load fb_versions i18n static %}
 
 {% block content %}
     <div class="page">
@@ -8,7 +8,6 @@
             {% include 'itcase_pages/include/page_content.html' %}
             <div class="point">
                 {% include 'itcase_point/include/point_map.html' %}
-                {% points %}
             </div>
         {% elif request.page.path == '/comment' %}
             {% include 'itcase_point/include/point_comments.html' %}
