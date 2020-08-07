@@ -17,7 +17,8 @@
     "jquery": "~3.4.1",
     "js-cookie": "~2.2.0",
     "SpinKit": "spinkit#^1.2.5",
-    "swiper": "^5.2.1"
+    "swiper": "^5.2.1",
+    "ion-rangeslider": "ion.rangeSlider#^2.3.1"
   },
   "overrides": {
     "html5-boilerplate": {
@@ -34,6 +35,12 @@
     "SpinKit": {
       "main": [
         "css/spinners/7-three-bounce.css"
+      ]
+    },
+    "ion-rangeslider": {
+      "main": [
+        "js/ion.rangeSlider.min.js",
+        "css/ion.rangeSlider.css"
       ]
     }
   }

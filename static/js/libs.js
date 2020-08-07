@@ -6,6 +6,7 @@ import $ from 'expose-loader?exposes[]=$&exposes[]=jQuery!./vendor/jquery'
 import Cookies from 'expose-loader?exposes=Cookies!./vendor/js.cookie'
 import Swiper from 'expose-loader?exposes=Swiper!./vendor/swiper'
 
+require('./vendor/ion.rangeSlider.min.js')
 
 // Before libs call before common
 $(document).on('validator_start_initialize', 'form', function () {
