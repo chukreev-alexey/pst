@@ -107,7 +107,6 @@
 
     <div class="fader">&nbsp;</div>
 
-
     <div class="header">
         <div class="header__wrapper">
             <div class="header__inner">
@@ -146,6 +145,10 @@
             </div>
         </div>
     </div>
+
+    {% with hide_title=True %}
+        {% include 'itcase_search/include/quick/quick_search_popup.html' %}
+    {% endwith %}
 
     {% with hide_image=True %}
         {% catalog_menu %}

@@ -13,9 +13,9 @@
                             {% if not hide_image %}
                                 <span class="catalog-group__inner-list-link-image">
                                     {% if category.image %}
-                                        <span class="catalog-group__inner-list-link-image-placeholder">&nbsp;</span>
-                                    {% else %}
                                         <img src="{{ category.image.url }}" class="catalog-group__inner-list-link-image-image" alt="{{ category.name }}" title="{{ category.name }}">
+                                    {% else %}
+                                        <span class="catalog-group__inner-list-link-image-placeholder">&nbsp;</span>
                                     {% endif %}
                                 </span>
                             {% endif %}
