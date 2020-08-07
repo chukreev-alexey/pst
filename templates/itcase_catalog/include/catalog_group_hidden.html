@@ -1,3 +1,5 @@
+{% load itcase_common %}
+
 {% if subcategories %}
     <ul class="catalog-group__inner-nested-list">
         {% with limit_slice=":"|add:limit %}
@@ -10,10 +12,9 @@
             {% endfor %}
         {% endwith %}
 
-
         {% if hidden_categories_count %}
             <li class="catalog-group__inner-nested-list-count">
-                + {{ hidden_categories_count }} категорий
+                + {{ hidden_categories_count }} {{ hidden_categories_count|choose_plural:"категория,категории,категорий" }}
             </li>
         {% endif %}
 

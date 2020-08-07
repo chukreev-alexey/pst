@@ -46,7 +46,7 @@ def catalog_menu(context, additional_class=None, title_additional_class=None,
     return context
 
 
-@register.inclusion_tag('itcase_catalog/include/footer_categories_list.html',
+@register.inclusion_tag('itcase_catalog/include/catalog_footer_menu.html',
                         takes_context=True)
 def footer_categories_tag(context, queryset=None):
     '''
@@ -69,8 +69,8 @@ def get_categories_by(context, queryset=None, **kwargs):
     return context
 
 
-@register.inclusion_tag('itcase_catalog/include/clipped_subcategories.html')
-def clipped_subcategories(category=None, limit=5):
+@register.inclusion_tag('itcase_catalog/include/catalog_group_hidden.html')
+def catalog_group_hidden(category=None, limit=5):
     if category:
         subcategories = category.children.all()
         count = subcategories.count()

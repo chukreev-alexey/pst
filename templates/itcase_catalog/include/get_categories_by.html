@@ -7,21 +7,16 @@
             {% for category in categories_list %}
                 <li class="catalog-group__inner-list-item">
                     <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
-                        {% if not hide_image %}
-                            <img src="media/{{ category.image }}" class="catalog-group__inner-list-link-image" alt="{{ category.name }}" title="{{ category.name }}">
-                        {% endif %}
+                        <span class="catalog-group__inner-list-link-image">
+                            {% if not hide_image and category.image %}
+                                <img src="{{ category.image.url }}" class="catalog-group__inner-list-link-image-image" alt="{{ category.name }}" title="{{ category.name }}">
+                            {% else %}
+                                <span class="catalog-group__inner-list-link-image-placeholder">&nbsp;</span>
+                            {% endif %}
+                        </span>
                         <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
                     </a>
-                    {% clipped_subcategories category %}
-                    {% comment %}
-                    <ul class="catalog-group__inner-nested-list">
-                        {% for subcategory in category.children.all %}
-                            <li class="catalog-group__inner-nested-list-item">
-                                <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">{{ subcategory.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    {% endcomment %}
+                    {% catalog_group_hidden category %}
                 </li>
             {% endfor %}
         </ul>
