@@ -71,7 +71,7 @@ class CatalogPopupMenu {
   }
 }
 
-const $menuPopup = $('. catalog-menu__item_type_popup')
+const $menuPopup = $('.catalog-menu__item_type_popup')
 
 if ($menuPopup.length) {
   const menu = new CatalogPopupMenu()

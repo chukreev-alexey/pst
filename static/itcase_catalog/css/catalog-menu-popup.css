@@ -3,15 +3,15 @@
   height: 0;
   background: var(--color-neutral);
   padding: 16px 0 40px 0;
-  position: relative;
+  position: absolute;
   visibility: hidden;
   box-shadow: 0 5px 40px -20px var(--color-neutral-shadow);
   left: 0;
   top: 100%;
   z-index: 1000;
   z-index: 10;
-  transform: translate(0, 30px);
-  animation: all 0.3s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
+  transform: translate(0, 10px);
+  animation: all 0.4s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
   &_state_visible {
     height: auto;
     visibility: visible;
@@ -38,7 +38,7 @@
 
 @keyframes catalogMenuFadeIn {
   from {
-    transform: translate(0, 30px);
+    transform: translate(0, 10px);
     opacity: 0;
   }
   to {
@@ -53,7 +53,7 @@
     opacity: 1;
   }
   to {
-    transform: translate(0, 30px);
+    transform: translate(0, 10px);
     opacity: 0;
   }
 }

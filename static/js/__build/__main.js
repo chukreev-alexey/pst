@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "fdec4e3236d38f530027";
+/******/ 	var hotCurrentHash = "ac621af3ce7e85c33f9e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10839,7 +10839,7 @@ var CatalogPopupMenu = /*#__PURE__*/function () {
   return CatalogPopupMenu;
 }();
 
-var $menuPopup = $('. catalog-menu__item_type_popup');
+var $menuPopup = $('.catalog-menu__item_type_popup');
 
 if ($menuPopup.length) {
   var menu = new CatalogPopupMenu();

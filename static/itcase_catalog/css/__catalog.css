@@ -2540,27 +2540,27 @@ sans-serif;
 
 .catalog-menu-popup {
   width: 100%;
-  background: #f9f9fa;
   height: 0;
-  position: relative;
-  visibility: hidden;
-  z-index: 1000;
-  -webkit-transform: translate(0, 30px);
-  -moz-transform: translate(0, 30px);
-  -ms-transform: translate(0, 30px);
-  -o-transform: translate(0, 30px);
-  transform: translate(0, 30px);
-  left: 0;
-  top: 100%;
-  z-index: 10;
+  background: #f9f9fa;
   padding: 16px 0 40px 0;
+  position: absolute;
+  visibility: hidden;
   -webkit-box-shadow: 0 5px 40px -20px rgba(0,0,0, 0.2);
   -moz-box-shadow: 0 5px 40px -20px rgba(0,0,0, 0.2);
   box-shadow: 0 5px 40px -20px rgba(0,0,0, 0.2);
-  -webkit-animation: all 0.3s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
-  -moz-animation: all 0.3s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
-  -o-animation: all 0.3s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
-  animation: all 0.3s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
+  left: 0;
+  top: 100%;
+  z-index: 1000;
+  z-index: 10;
+  -webkit-transform: translate(0, 10px);
+  -moz-transform: translate(0, 10px);
+  -ms-transform: translate(0, 10px);
+  -o-transform: translate(0, 10px);
+  transform: translate(0, 10px);
+  -webkit-animation: all 0.4s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
+  -moz-animation: all 0.4s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
+  -o-animation: all 0.4s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
+  animation: all 0.4s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
 }
 
 .catalog-menu-popup_state_visible {
@@ -2595,8 +2595,8 @@ sans-serif;
 
 @-webkit-keyframes catalogMenuFadeIn {
   from {
-    -webkit-transform: translate(0, 30px);
-    transform: translate(0, 30px);
+    -webkit-transform: translate(0, 10px);
+    transform: translate(0, 10px);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
   }
@@ -2610,8 +2610,8 @@ sans-serif;
 
 @-moz-keyframes catalogMenuFadeIn {
   from {
-    -moz-transform: translate(0, 30px);
-    transform: translate(0, 30px);
+    -moz-transform: translate(0, 10px);
+    transform: translate(0, 10px);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
   }
@@ -2625,8 +2625,8 @@ sans-serif;
 
 @-o-keyframes catalogMenuFadeIn {
   from {
-    -o-transform: translate(0, 30px);
-    transform: translate(0, 30px);
+    -o-transform: translate(0, 10px);
+    transform: translate(0, 10px);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
   }
@@ -2640,10 +2640,10 @@ sans-serif;
 
 @keyframes catalogMenuFadeIn {
   from {
-    -webkit-transform: translate(0, 30px);
-    -moz-transform: translate(0, 30px);
-    -o-transform: translate(0, 30px);
-    transform: translate(0, 30px);
+    -webkit-transform: translate(0, 10px);
+    -moz-transform: translate(0, 10px);
+    -o-transform: translate(0, 10px);
+    transform: translate(0, 10px);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
   }
@@ -2665,8 +2665,8 @@ sans-serif;
     opacity: 1;
   }
   to {
-    -webkit-transform: translate(0, 30px);
-    transform: translate(0, 30px);
+    -webkit-transform: translate(0, 10px);
+    transform: translate(0, 10px);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
   }
@@ -2680,8 +2680,8 @@ sans-serif;
     opacity: 1;
   }
   to {
-    -moz-transform: translate(0, 30px);
-    transform: translate(0, 30px);
+    -moz-transform: translate(0, 10px);
+    transform: translate(0, 10px);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
   }
@@ -2695,8 +2695,8 @@ sans-serif;
     opacity: 1;
   }
   to {
-    -o-transform: translate(0, 30px);
-    transform: translate(0, 30px);
+    -o-transform: translate(0, 10px);
+    transform: translate(0, 10px);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
   }
@@ -2712,10 +2712,10 @@ sans-serif;
     opacity: 1;
   }
   to {
-    -webkit-transform: translate(0, 30px);
-    -moz-transform: translate(0, 30px);
-    -o-transform: translate(0, 30px);
-    transform: translate(0, 30px);
+    -webkit-transform: translate(0, 10px);
+    -moz-transform: translate(0, 10px);
+    -o-transform: translate(0, 10px);
+    transform: translate(0, 10px);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
   }
