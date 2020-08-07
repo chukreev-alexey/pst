@@ -119,7 +119,6 @@ class Product(ProductBase):
     brand = models.ForeignKey(Brand,
                               related_name='products', verbose_name='Бренд',
                               on_delete=models.SET_NULL, blank=True, null=True)
-    description = TinyMCEModelField('Подробное описание', blank=True)
     recommend_categories = models.ManyToManyField(
         Category, blank=True, verbose_name='Рекомендуем категории')
     recommend_products = models.ManyToManyField(
@@ -168,3 +167,19 @@ class Product(ProductBase):
 
     def get_lowest_price(self):
         return self.prices.order_by('price').first().price
+
+
+class SectionAtribute(models.Model):
+    product = models.ForeignKey(Product, related_name='sections',
+                                verbose_name=Product._meta.verbose_name,
+                                on_delete=models.CASCADE)
+    section_name = models.CharField('Название',
+                                    blank=True, max_length=255)
+    section_content = TinyMCEModelField('Контeнт', blank=True)
+    sort = models.PositiveSmallIntegerField('Позиция', default=0)
+    show = models.BooleanField('Показывать?', default=False)
+
+    class Meta(object):
+        ordering = ['sort']
+        verbose_name = 'Вкладка параметров'
+        verbose_name_plural = 'Вкладки параметров'

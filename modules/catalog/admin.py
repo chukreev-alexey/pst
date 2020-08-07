@@ -7,7 +7,8 @@ from itcase_catalog.shortcuts import get_product_model, get_category_model
 from itcase_catalog.admin import ProductAdmin as ProductAdminBase
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 
-from .models.catalog import Brand, Parametr, ProductParametr, Measurement
+from .models.catalog import (Brand, Parametr, ProductParametr, Measurement,
+                             SectionAtribute)
 from .models.parametres import ProductImage, Price, PriceCombinations
 
 
@@ -84,6 +85,19 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
     use_context_menu = True
 
 
+class SectionAtributeInline(admin.TabularInline):
+
+    model = SectionAtribute
+    extra = 0
+
+    sortable_field_name = 'sort'
+
+    fieldsets = (
+        (None, {'fields': (('section_name', 'sort', 'show'),
+                           'section_content')}),
+    )
+
+
 class ProductImageInline(admin.TabularInline):
 
     model = ProductImage
@@ -126,7 +140,7 @@ class ProductAdmin(ProductAdminBase):
                        ('in_hit', 'border'),
                        ('in_recommended', 'in_action'), ('category', 'brand'),
                        'recommend_categories', 'recommend_products',
-                       'related_products', 'description', 'parametres',
+                       'related_products', 'parametres',
                        'product_actions')
         }),
         ('Характеристики', {
@@ -141,7 +155,7 @@ class ProductAdmin(ProductAdminBase):
 
     form = ProductAdminForm
 
-    inlines = [ProductImageInline, PickingPriceInline]
+    inlines = [SectionAtributeInline, ProductImageInline, PickingPriceInline]
 
     readonly_fields = ('product_actions',)
 
