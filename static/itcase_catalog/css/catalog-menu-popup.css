@@ -1,13 +1,26 @@
 .catalog-menu-popup {
   width: 100%;
+  height: 0;
   background: var(--color-neutral);
-  position: absolute;
+  padding: 16px 0 40px 0;
+  position: relative;
+  visibility: hidden;
+  box-shadow: 0 5px 40px -20px var(--color-neutral-shadow);
   left: 0;
   top: 100%;
+  z-index: 1000;
   z-index: 10;
-  padding: 16px 0 40px 0;
-  box-shadow: 0 5px 40px -20px var(--color-neutral-shadow);
-  display: none;
+  transform: translate(0, 30px);
+  animation: all 0.3s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
+  &_state_visible {
+    height: auto;
+    visibility: visible;
+    animation-name: catalogMenuFadeIn;
+  }
+  &_state_hidden {
+    height: auto;
+    animation-name: catalogMenuFadeOut;
+  }
   & .catalog-group {
     &__inner-list {
       &-link {
@@ -20,5 +33,27 @@
         flex: 0 0 25%;
       }
     }
+  }
+}
+
+@keyframes catalogMenuFadeIn {
+  from {
+    transform: translate(0, 30px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes catalogMenuFadeOut {
+  from {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  to {
+    transform: translate(0, 30px);
+    opacity: 0;
   }
 }
