@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e3b86f4e9cd691363591";
+/******/ 	var hotCurrentHash = "89870dccbc51731f588a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10713,6 +10713,144 @@ module.exports.formatError = function(err) {
 
 /***/ }),
 
+/***/ "./static/itcase_catalog/js/main.js":
+/*!******************************************!*\
+  !*** ./static/itcase_catalog/js/main.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js");
+
+if (true) {
+  module.hot.accept();
+}
+
+/***/ }),
+
+/***/ "./static/itcase_catalog/js/popupMenu.js":
+/*!***********************************************!*\
+  !*** ./static/itcase_catalog/js/popupMenu.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+var CatalogPopupMenu = /*#__PURE__*/function () {
+  function CatalogPopupMenu() {
+    _classCallCheck(this, CatalogPopupMenu);
+
+    this.$menu = $('.catalog-menu-popup');
+    this.timerShow = null;
+    this.timerHide = null;
+    this.animationEvents = 'webkitAnimationEnd oanimationend msAnimationEnd animationend';
+    this.showClass = 'catalog-menu-popup_state_visible';
+    this.hideClass = 'catalog-menu-popup_state_hidden';
+    this.state = {
+      open: this.$menu.hasClass(this.showClass),
+      locked: false
+    };
+    this.show = this.show.bind(this);
+    this.hide = this.hide.bind(this);
+  }
+
+  _createClass(CatalogPopupMenu, [{
+    key: "show",
+    value: function show() {
+      var _this = this;
+
+      clearTimeout(this.timerHide);
+      clearTimeout(this.timerShow);
+      this.state.locked = true;
+
+      if (this.$menu.hasClass(this.showClass) && this.$menu.hasClass(this.hideClass)) {
+        this.$menu.removeClass([this.hideClass, this.showClass].join(' ')).off(this.animationEvents);
+      }
+
+      this.timerShow = setTimeout(function () {
+        _this.$menu.addClass(_this.showClass);
+
+        _this.state.open = true;
+        _this.state.locked = false;
+      }, 0);
+    }
+  }, {
+    key: "hide",
+    value: function hide() {
+      var _this2 = this;
+
+      clearTimeout(this.timerHide);
+      clearTimeout(this.timerShow);
+      this.state.locked = true;
+
+      if (this.state.open) {
+        this.timerHide = setTimeout(function () {
+          _this2.$menu.addClass(_this2.hideClass).on(_this2.animationEvents, function () {
+            _this2.$menu.removeClass([_this2.hideClass, _this2.showClass].join(' ')).off(_this2.animationEvents);
+
+            _this2.state.open = false;
+            _this2.state.locked = false;
+          });
+        }, 200);
+      }
+    }
+  }, {
+    key: "toggle",
+    value: function toggle() {
+      if (this.state.locked) {
+        return false;
+      }
+
+      if (this.state.open) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    }
+  }]);
+
+  return CatalogPopupMenu;
+}();
+
+var $menuPopup = $('.catalog-menu__item_type_popup');
+
+if ($menuPopup.length) {
+  var menu = new CatalogPopupMenu();
+  $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide);
+  menu.$menu.on('mouseenter', function () {
+    clearTimeout(menu.timerHide);
+  }).on('mouseleave', menu.hide);
+}
+
+/***/ }),
+
 /***/ "./static/js/main.js":
 /*!***************************!*\
   !*** ./static/js/main.js ***!
@@ -10820,15 +10958,16 @@ if (true) {
 /***/ }),
 
 /***/ 0:
-/*!******************************************************************************************************!*\
-  !*** multi webpack-dev-server/client?http://localhost:2000/ webpack/hot/dev-server ./static/js/main ***!
-  \******************************************************************************************************/
+/*!*****************************************************************************************************************************************!*\
+  !*** multi webpack-dev-server/client?http://localhost:2000/ webpack/hot/dev-server ./static/js/main ./static/itcase_catalog/js/main.js ***!
+  \*****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! webpack-dev-server/client?http://localhost:2000/ */"./node_modules/webpack-dev-server/client/index.js?http://localhost:2000/");
 __webpack_require__(/*! webpack/hot/dev-server */"./node_modules/webpack/hot/dev-server.js");
-module.exports = __webpack_require__(/*! ./static/js/main */"./static/js/main.js");
+__webpack_require__(/*! ./static/js/main */"./static/js/main.js");
+module.exports = __webpack_require__(/*! ./static/itcase_catalog/js/main.js */"./static/itcase_catalog/js/main.js");
 
 
 /***/ })

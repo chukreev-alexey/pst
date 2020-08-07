@@ -1,0 +1,42 @@
+.fader {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: fixed;
+  content: '';
+  display: none;
+  visibility: hidden;
+  left: 0;
+  top: 0;
+  z-index: 999999;
+  transition: opacity 1s ease-in-out;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  opacity: 0;
+  &_state_visible {
+    display: block;
+    animation-name: faderFadeIn;
+    visibility: visible !important;
+  }
+  &_state_hidden {
+    animation-name: faderFaderOut;
+  }
+}
+
+@keyframes faderFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+
+@keyframes faderFaderOut {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,13 @@
+input.form-field-error {
+  border: none !important;
+  &:focus {
+    border: none !important;
+  }
+}
+
+textarea.form-field-error {
+  border: none !important;
+  &:focus {
+    border: none !important;
+  }
+}

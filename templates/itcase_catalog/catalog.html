@@ -2,10 +2,13 @@
 {% load fb_versions i18n static catalog_tags %}
 
 {% block content %}
-    {% catalog_menu %}
-
     <div class="catalog">
         <div class="catalog__wrapper">
+
+            {% with title='Все для кровли и фасада — быстро и по выгодным ценам' %}
+                {% get_categories_by level=0 %}
+            {% endwith %}
+
             {% with show_title=True %}
                 {% include 'itcase_catalog/include/catalog_main_page_groups.html' %}
             {% endwith %}

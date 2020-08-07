@@ -21,7 +21,19 @@
                             {% endif %}
                             <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
                         </a>
-                        {% catalog_group_hidden category %}
+                        {% if limit %}
+                            {% catalog_group_hidden category limit=limit %}
+                        {% else %}
+                            <ul class="catalog-group__inner-nested-list">
+                                {% for subcategory in category.children.all %}
+                                    <li class="catalog-group__inner-nested-list-item">
+                                        <a href="{{ subcategory.get_absolute_url }}" class="catalog-group__inner-nested-list-link">
+                                            {{ subcategory.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ul>

@@ -1,0 +1,22 @@
+.form-button {
+  width: 100%;
+  @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
+  color: var(--color-primary-text);
+  text-decoration: none;
+  text-transform: uppercase;
+  background: var(--color-primary);
+  padding: 24px 32px;
+  margin: 0;
+  border: solid 1px var(--color-sufrace-item);
+  border-radius: 10px;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  &:hover {
+    background: var(--color-primary-hover);
+  }
+  &:focus {
+    outline: none;
+  }
+}

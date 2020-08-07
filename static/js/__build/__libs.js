@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e3b86f4e9cd691363591";
+/******/ 	var hotCurrentHash = "89870dccbc51731f588a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -30981,10 +30981,10 @@ function once(emitter, name) {
 
 /***/ }),
 
-/***/ "./node_modules/expose-loader/dist/cjs.js?exposes=Cookies!./static/js/vendor/js.cookie.js":
-/*!************************************************************************************************!*\
-  !*** ./node_modules/expose-loader/dist/cjs.js?exposes=Cookies!./static/js/vendor/js.cookie.js ***!
-  \************************************************************************************************/
+/***/ "./node_modules/expose-loader/dist/cjs.js?exposes=Cookies!./static/js/vendor/js.cookie-exposed.js":
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/expose-loader/dist/cjs.js?exposes=Cookies!./static/js/vendor/js.cookie-exposed.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30998,10 +30998,10 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./node_modules/expose-loader/dist/cjs.js?exposes=Swiper!./static/js/vendor/swiper.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/expose-loader/dist/cjs.js?exposes=Swiper!./static/js/vendor/swiper.js ***!
-  \********************************************************************************************/
+/***/ "./node_modules/expose-loader/dist/cjs.js?exposes=Swiper!./static/js/vendor/swiper-exposed.js":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/expose-loader/dist/cjs.js?exposes=Swiper!./static/js/vendor/swiper-exposed.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31015,10 +31015,10 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./node_modules/expose-loader/dist/cjs.js?exposes[]=$&exposes[]=jQuery!./static/js/vendor/jquery.js":
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/expose-loader/dist/cjs.js?exposes[]=$&exposes[]=jQuery!./static/js/vendor/jquery.js ***!
-  \**********************************************************************************************************/
+/***/ "./node_modules/expose-loader/dist/cjs.js?exposes[]=$&exposes[]=jQuery!./static/js/vendor/jquery-exposed.js":
+/*!******************************************************************************************************************!*\
+  !*** ./node_modules/expose-loader/dist/cjs.js?exposes[]=$&exposes[]=jQuery!./static/js/vendor/jquery-exposed.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41023,11 +41023,11 @@ module.exports.formatError = function(err) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var expose_loader_exposes_$_exposes_jQuery_vendor_jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! expose-loader?exposes[]=$&exposes[]=jQuery!./vendor/jquery */ "./node_modules/expose-loader/dist/cjs.js?exposes[]=$&exposes[]=jQuery!./static/js/vendor/jquery.js");
+/* harmony import */ var expose_loader_exposes_$_exposes_jQuery_vendor_jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! expose-loader?exposes[]=$&exposes[]=jQuery!./vendor/jquery */ "./node_modules/expose-loader/dist/cjs.js?exposes[]=$&exposes[]=jQuery!./static/js/vendor/jquery-exposed.js");
 /* harmony import */ var expose_loader_exposes_$_exposes_jQuery_vendor_jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(expose_loader_exposes_$_exposes_jQuery_vendor_jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var expose_loader_exposes_Cookies_vendor_js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! expose-loader?exposes=Cookies!./vendor/js.cookie */ "./node_modules/expose-loader/dist/cjs.js?exposes=Cookies!./static/js/vendor/js.cookie.js");
+/* harmony import */ var expose_loader_exposes_Cookies_vendor_js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! expose-loader?exposes=Cookies!./vendor/js.cookie */ "./node_modules/expose-loader/dist/cjs.js?exposes=Cookies!./static/js/vendor/js.cookie-exposed.js");
 /* harmony import */ var expose_loader_exposes_Cookies_vendor_js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(expose_loader_exposes_Cookies_vendor_js_cookie__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var expose_loader_exposes_Swiper_vendor_swiper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! expose-loader?exposes=Swiper!./vendor/swiper */ "./node_modules/expose-loader/dist/cjs.js?exposes=Swiper!./static/js/vendor/swiper.js");
+/* harmony import */ var expose_loader_exposes_Swiper_vendor_swiper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! expose-loader?exposes=Swiper!./vendor/swiper */ "./node_modules/expose-loader/dist/cjs.js?exposes=Swiper!./static/js/vendor/swiper-exposed.js");
 /* harmony import */ var expose_loader_exposes_Swiper_vendor_swiper__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(expose_loader_exposes_Swiper_vendor_swiper__WEBPACK_IMPORTED_MODULE_2__);
 /* eslint no-unused-vars: off, import/no-webpack-loader-syntax: off */
 

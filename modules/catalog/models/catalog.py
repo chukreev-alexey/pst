@@ -168,6 +168,9 @@ class Product(ProductBase):
     def get_lowest_price(self):
         return self.prices.order_by('price').first().price
 
+    def has_sections(self):
+        return self.sections.exists()
+
 
 class SectionAtribute(models.Model):
     product = models.ForeignKey(Product, related_name='sections',

@@ -1,0 +1,32 @@
+.cart-list {
+  @media (--mobile) {
+    margin: 0 0 20px 0;
+  }
+  &-sum {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    @media (--mobile) {
+      min-width: 0;
+      margin: 0;
+      float: left;
+    }
+    &__inner {
+      @media (--mobile) {
+        width: auto;
+      }
+      ^&__title {
+        @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
+        color: var(--color-surface-text);
+        text-align: left;
+      }
+      ^&__amount {
+        @mixin font bold, 14px, 36px, 18px, 36px, var(--font-title-secondary);
+        color: var(--color-accent);
+        margin: 0 10px 10px 0;
+        text-align: left;
+        margin: 8px 0 0 0;
+      }
+    }
+  }
+}

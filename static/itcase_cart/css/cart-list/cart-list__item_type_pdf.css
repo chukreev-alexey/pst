@@ -1,0 +1,5 @@
+.cart-list__item_type_pdf {
+  & .cart-list__item-info-title {
+    text-decoration: none;
+  }
+}

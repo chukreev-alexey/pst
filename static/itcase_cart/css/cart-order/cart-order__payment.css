@@ -1,0 +1,62 @@
+.cart-order__payment {
+  width: 100%;
+  padding: 15px 0 0 0;
+  clear: both;
+  &-title {
+    @mixin font normal, 14px, 18px, 14px, 18px, var(--font);
+    color: var(--color-surface-text);
+    margin: 0 0 14px 0;
+  }
+  &-item {
+    margin: 0 0 10px 0;
+    position: relative;
+    &:hover {
+      &::after {
+        border: solid 1px var(--color-blue);
+      }
+    }
+    &::before {
+      width: 9px;
+      height: 9px;
+      background: var(--color-surface-border);
+      border-radius: 100px;
+      position: absolute;
+      content: '';
+      display: none;
+      left: 4px;
+      top: 4px;
+      z-index: 2;
+    }
+    &::after {
+      width: 15px;
+      height: 15px;
+      border: solid 1px var(--color-surface-border);
+      border-radius: 100px;
+      position: absolute;
+      content: '';
+      display: inline-block;
+      left: 0;
+      top: 0;
+      z-index: 1;
+    }
+    &-radio {
+      position: absolute;
+      visibility: hidden;
+      left: 0;
+      top: 0;
+      z-index: 1;
+    }
+    &-label {
+      @mixin font normal, 14px, 18px, 14px, 18px, var(--font);
+      padding: 0 0 0 25px;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+    }
+    &_state_checked {
+      &::before {
+        display: block;
+      }
+    }
+  }
+}

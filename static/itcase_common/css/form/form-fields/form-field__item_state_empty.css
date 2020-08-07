@@ -1,0 +1,17 @@
+.form_type_vertical .form-fields .form-field__item,
+.form-fields .form-field__item,
+.content .form-fields .form-field__item {
+  &_state_empty {
+    border: solid 1px #000 !important;
+    .form-checkbox {
+      &__label {
+        &::after {
+          border: solid 1px #000 !important;
+        }
+      }
+    }
+    & .selectize-input {
+      border: solid 1px #000;
+    }
+  }
+}

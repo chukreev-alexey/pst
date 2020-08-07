@@ -61,6 +61,7 @@ def footer_categories_tag(context, queryset=None):
 @register.inclusion_tag('itcase_catalog/include/get_categories_by.html',
                         takes_context=True)
 def get_categories_by(context, queryset=None, **kwargs):
+    categories = ()
     if queryset is not None:
         categories = queryset
     elif 'level' in kwargs:
