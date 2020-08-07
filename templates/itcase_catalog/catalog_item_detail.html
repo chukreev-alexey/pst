@@ -16,7 +16,7 @@
             </div>
         {% endfor %}
         <div class="nav__item nav__item_state_current">
-            <div class="nav__item-text">{{ product.name }}</div>
+            <div class="nav__item-text">{{ product.name }} {{ product.article }}</div>
         </div>
     </div>
 
@@ -41,18 +41,54 @@
                     {% endif %}
                 {% endwith %}
             </div>
-            {% if product.content %}
-                <div class="catalog-item-detail__desc content">
-                    {{ product.content|safe }}
-                </div>
-            {% endif %}
         </div>
+
         <div class="catalog-item-detail__right">
-            <div class="catalog-item-detail__info">
-                <div class="catalog-item-detail__info-title">
-                    {{ product.name }}
-                    {{ product.article }}
+            <div class="catalog-item-detail__info-param">
+                {% for parametr, items in product.get_parametres_dict.items %}
+                     <div class="catalog-item-detail__info-param-item">
+                        <div class="catalog-item-detail__info-param-item-name">{{ parametr.name }}</div>
+                        {% for item in items %}
+                            <div class="catalog-item-detail__info-param-item-value">{{ item.value }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+                <div style="border: solid 1px red">
+                    Цены:
+                    {% for price in product.prices.all %}
+                        <div>
+                            {% if price.image %}
+                                <img src="{% version price.image 'catalog_list_thumb' %}" />
+                            {% endif %}
+                            <p>{{ price.product_article }}: {{ price.price }}</p>
+                            {% for parametr in price.parametr.all %}
+                                <p>{{ parametr }}</p>
+                            {% endfor %}
+                            {% with id=price.pk|unlocalize %}
+                                <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                                   class="catalog-item__button button
+                                          {% if price in cart %}
+                                            button_border_orange
+                                          {% else %}
+                                            button_color_blue
+                                          {% endif %}"
+                                    data-add-url="{% url 'itcase_cart:cart_add' %}"
+                                    data-product="{{ id }}"
+                                    data-amount-{{ id }}="1">
+                                    {% if price in cart %}
+                                        В заказе
+                                    {% else %}
+                                        Заказать
+                                    {% endif %}
+                                </a>
+                            {% endwith %}
+                        </div>
+                    {% endfor %}
                 </div>
+            </div>
+
+            <div class="catalog-item-detail__info">
                 {% if product.is_exist %}
                     <div class="catalog-item-detail__info-state catalog-item-detail__info-state_exist">
                         <div class="catalog-item-detail__info-state-text">В наличии</div>
@@ -84,72 +120,37 @@
                         {% endif %}
                     </a>
                 {% endwith %}
-                <div class="catalog-item-detail__info-param">
-                <div class="catalog-item-detail__info-param-title">Характеристики</div>
-                {% for parametr, items in product.get_parametres_dict.items %}
-                     <div class="catalog-item-detail__info-param-item">
-                        <div class="catalog-item-detail__info-param-item-name">{{ parametr.name }}</div>
-                        {% for item in items %}
-                            <div class="catalog-item-detail__info-param-item-value">{{ item.value }}</div>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-                </div>
-
-                Цены:
-                {% for price in product.prices.all %}
-                    <div>
-                        {% if price.image %}
-                            <img src="{% version price.image 'catalog_list_thumb' %}">
-                        {% endif %}
-                        <p>{{ price.product_article }}(Кол-во на складе: {{ price.amount }}): {{ price.price }}</p>
-                        {% for parametr in price.parametr.all %}
-                            <p>{{ parametr }}</p>
-                        {% endfor %}
-                        {% with id=price.pk|unlocalize %}
-                            <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
-                               class="catalog-item__button button
-                                      {% if price in cart %}
-                                        button_border_orange
-                                      {% else %}
-                                        button_color_blue
-                                      {% endif %}"
-                                data-add-url="{% url 'itcase_cart:cart_add' %}"
-                                data-product="{{ id }}"
-                                data-amount-{{ id }}="1">
-                                {% if price in cart %}
-                                    В заказе
-                                {% else %}
-                                    Заказать
-                                {% endif %}
-                            </a>
-                        {% endwith %}
-                    </div>
-                {% endfor %}
-
-                {% if product.recommend_categories %}
-                    <h2>Рекомендуем категории<h2>
-                    {% for category in product.recommend_categories.all %}
-                        <h3>{{ category }}</h3>
-                        <ul>
-                            {% for product in category.products.all %}
-                                <li>{{ product }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endfor %}
-                {% endif %}
-
-                {% if product.recommend_products %}
-                    <h2>Рекомендуем товары<h2>
-                    <ul>
-                        {% for product in product.recommend_products.all %}
-                            <li>{{ product }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
 
             </div>
         </div>
+
+        {% if product.content %}
+            <div class="catalog-item-detail__desc content">
+                {{ product.content|safe }}
+            </div>
+        {% endif %}
     </div>
+
+    {% if product.recommend_categories %}
+        <h2>Рекомендуем категории<h2>
+        {% for category in product.recommend_categories.all %}
+            <h3>{{ category }}</h3>
+            <ul>
+                {% for product in category.products.all %}
+                    <li>{{ product }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endif %}
+
+    {% if product.recommend_products %}
+        <h2>Рекомендуем товары<h2>
+        <ul>
+            {% for product in product.recommend_products.all %}
+                <li>{{ product }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     {% include './include/catalog_related.html' %}
 {% endblock %}

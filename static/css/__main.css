@@ -32,7 +32,7 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .button.button_type_secondary {
-    background: #fb6e36;
+    background: #069;
   }
 
 /* stylelint-disable custom-property-empty-line-before */
@@ -104,6 +104,44 @@ sans-serif;
   -moz-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   cursor: pointer;
+  font-size: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
+  font-weight: normal;
+  font-family: 'Fact-Semi-Expanded'
+,
+sans-serif;
+  line-height: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
+}
+
+@media screen and (min-width: 2560px) {
+
+  .content .button,
+.button {
+    line-height: 1.125rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .content .button,
+.button {
+    line-height: 0.875rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+
+  .content .button,
+.button {
+    font-size: 1.125rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .content .button,
+.button {
+    font-size: 0.875rem;
+  }
 }
 
 @media (min-width: 15em)

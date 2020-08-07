@@ -1,4 +1,3 @@
-
 .catalog-filter {
   width: 100%;
   background: var(--color-neutral);
@@ -28,8 +27,12 @@
     display: block;
   }
   &__button {
+    width: 100%;
     text-align: center;
-    margin: 30px 10px 0 0;
+    &-item {
+      width: 100%;
+      border: 0 solid;
+    }
   }
   &-group {
     &_state_level {

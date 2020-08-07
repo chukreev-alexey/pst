@@ -1,31 +1,18 @@
-
 .catalog-item-gallery {
   width: 100%;
   position: relative;
   &__image {
     min-height: 300px;
-    margin: 0 70px 0 0;
-    border: solid 2px var(--color-blue);
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    @media (--mobile), (--tablet) {
-      min-height: 0;
-      margin: 0;
-      border: none;
-    }
     &-image {
-      max-height: 400px;
-      @media (--mobile) {
-        width: 100%;
-      }
+      width: 100%;
+      position: relative;
     }
   }
   &-nav {
-    position: absolute;
-    top: 0;
-    right: 0;
     &__item {
       width: 60px;
       height: 60px;

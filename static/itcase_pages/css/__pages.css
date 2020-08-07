@@ -2,7 +2,7 @@
 
 .nav {
   width: 100%;
-  margin: 32px 0 20px 0;
+  margin: 0 0 20px 0;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -29,8 +29,8 @@
 
 .nav__item_state_current .nav__item-text {
         font-size: calc(0.875rem + 1.75 * ((100vw - 20rem) / 140));
-        font-weight: normal;
-        font-family: 'Fact Semi Expanded Medium'
+        font-weight: 500;
+        font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
         line-height: calc(1.125rem + 1.875 * ((100vw - 20rem) / 140));
