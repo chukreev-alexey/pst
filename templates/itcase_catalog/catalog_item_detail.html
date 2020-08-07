@@ -131,6 +131,15 @@
         {% endif %}
     </div>
 
+    {% if product.has_sections %}
+        {% for section in product.sections.all %}
+            {% if section.show %}
+                <h3>{{ section.section_name }}</h3>
+                {{ section.section_content|safe }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
     {% if product.recommend_categories %}
         <h2>Рекомендуем категории<h2>
         {% for category in product.recommend_categories.all %}
