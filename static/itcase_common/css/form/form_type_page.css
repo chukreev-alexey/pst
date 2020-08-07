@@ -1,0 +1,11 @@
+.form {
+  &&_type_page {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 72px 0 56px;
+    box-sizing: border-box;
+    @media (--mobile) {
+      padding: 0 20px;
+    }
+  }
+}

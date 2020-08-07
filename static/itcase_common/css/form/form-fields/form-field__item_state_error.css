@@ -1,0 +1,14 @@
+.form_type_vertical .form-fields .form-field__item,
+.form-fields .form-field__item,
+.content .form-fields .form-field__item {
+  &_state_error {
+    border: solid 1px var(--color-accent);
+    .form-checkbox {
+      &__label {
+        &::after {
+          border: solid 1px var(--color-accent);
+        }
+      }
+    }
+  }
+}

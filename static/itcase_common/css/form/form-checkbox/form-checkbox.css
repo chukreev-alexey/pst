@@ -1,0 +1,51 @@
+.form-checkbox {
+  margin: 0 0 8px 0;
+  position: relative;
+  display: block;
+  &__label {
+    padding: 8px 0 5px 0;
+    position: relative;
+    display: block;
+    &::after {
+      width: 18px;
+      height: 18px;
+      background: var(--color-surface);
+      border: solid 1px var(--color-surface-item);
+      border-radius: 3px;
+      position: absolute;
+      content: '';
+      display: block;
+      box-sizing: border-box;
+      left: 0;
+      top: 10px;
+      z-index: 1;
+    }
+  }
+  &__checkbox {
+    position: absolute;
+    visibility: hidden;
+    left: 0;
+    top: 1px;
+    z-index: 3;
+  }
+  &__name {
+    @mixin font normal, 18px, 18px, 20px, 20px, var(--font);
+    color: var(--color-surface-text);
+    text-align: left;
+    padding: 0 0 0 32px;
+    display: inline-block;
+    cursor: pointer;
+    & a {
+      color: var(--color-secondary);
+      &:hover {
+        color: var(--color-secondary-text-accent);
+      }
+    }
+  }
+  &__required {
+    display: none;
+  }
+  & .form-field-message {
+    display: none !important;
+  }
+}

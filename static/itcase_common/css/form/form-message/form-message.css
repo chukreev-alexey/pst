@@ -1,0 +1,11 @@
+.form-message {
+  font: 14px var(--font-second);
+  text-align: center;
+  background: #fff;
+  padding: 30px 10px;
+  margin: 0 30px 15px 0;
+  border: solid 1px #000;
+  border-radius: 20px;
+  display: none;
+  vertical-align: middle;
+}

@@ -1,0 +1,19 @@
+.form-textarea {
+  width: 100%;
+  min-height: 120px;
+  font: 16px var(--font-second);
+  color: #333;
+  background: #fff;
+  padding: 0;
+  border: solid 0 #000;
+  border-radius: 5px;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  box-shadow: none;
+  outline-width: 0;
+  transition: all 200ms linear;
+  &:focus {
+    background: #fff;
+  }
+}

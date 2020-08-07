@@ -1,0 +1,18 @@
+.form-input {
+  width: 100%;
+  color: var(--color-surface-text);
+  background: #fff;
+  padding: 0;
+  border: solid 0 #000;
+  border-radius: 5px;
+  position: relative;
+  display: block;
+  outline-width: 0;
+  box-sizing: border-box;
+  box-shadow: none;
+  transition: all 200ms linear;
+  @mixin font normal, 18px, 18px, 20px, 20px, var(--font);
+  &:focus {
+    background: #fff;
+  }
+}

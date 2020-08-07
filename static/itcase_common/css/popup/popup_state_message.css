@@ -1,0 +1,40 @@
+.popup_state_message {
+  & .popup-content {
+    &__link-text {
+      color: #000;
+    }
+    &__inner {
+      width: 100%;
+      border-radius: 20px;
+      display: table;
+      & .form-response {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+  & .form-response {
+    &__item {
+      padding: 0 30px;
+      margin: 0;
+    }
+  }
+  &_type_error {
+    & .popup-content__inner {
+      background: none;
+      & .form-response {
+        display: block;
+        &__item {
+          padding: 15px;
+          margin: 0 0 15px 0;
+          border-radius: 20px;
+        }
+      }
+    }
+  }
+  &_type_success {
+    & .popup-content__inner {
+      background: var(--color-green);
+    }
+  }
+}
