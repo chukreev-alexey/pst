@@ -1,0 +1,9 @@
+/* stylelint-disable */
+
+@font-face {
+  font-family: 'Fact-Expanded';
+  src: url('../fonts/Fact-Expanded.eot');
+  src: url('../fonts/Fact-Expanded.eot?#iefix') format('eot'), url('../fonts/Fact-Expanded.woff') format('woff'), url('../fonts/Fact-Expanded.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

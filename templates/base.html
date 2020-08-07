@@ -147,7 +147,9 @@
         </div>
     </div>
 
-    {% catalog_menu %}
+    {% with hide_image=True %}
+        {% catalog_menu %}
+    {% endwith %}
 
     {% rotator page=request.page %}
 

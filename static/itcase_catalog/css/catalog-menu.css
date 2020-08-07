@@ -31,7 +31,7 @@
         white-space: nowrap;
         padding: 16px 8px;
         display: block;
-        @mixin font normal, 16px, 16px, 22px, 22px, var(--font);
+        @mixin font normal, 16px, 16px, 22px, 22px, var(--font-title-secondary);
         &:hover {
           background: var(--color-primary-hover);
         }

@@ -47,7 +47,7 @@
     color: #000;
     font-size: calc(0.875rem + 1.125 * ((100vw - 20rem) / 140));
     font-weight: normal;
-    font-family: 'Fact Semi Expanded Medium'
+    font-family: 'Fact-Expanded'
 ,
 sans-serif;
     line-height: calc(1.125rem + 1.625 * ((100vw - 20rem) / 140));
@@ -131,42 +131,42 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .logos-title {
-  color: #000;
-  margin: 0 0 24px 0;
-  font-size: calc(0.875rem + 1.125 * ((100vw - 20rem) / 140));
-  font-weight: normal;
-  font-family: 'Fact Semi Expanded Medium'
+    color: #000;
+    margin: 0 0 24px 0;
+    font-size: calc(0.875rem + 1.75 * ((100vw - 20rem) / 140));
+    font-weight: 500;
+    font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
-  line-height: calc(1.125rem + 1.625 * ((100vw - 20rem) / 140));
+    line-height: calc(1.125rem + 1.875 * ((100vw - 20rem) / 140));
 }
 
 @media screen and (min-width: 2560px) {
 
-  .logos-title {
-    line-height: 2.75rem;
-  }
+    .logos-title {
+        line-height: 3rem;
+    }
 }
 
 @media screen and (max-width: 320px) {
 
-  .logos-title {
-    line-height: 1.125rem;
-  }
+    .logos-title {
+        line-height: 1.125rem;
+    }
 }
 
 @media screen and (min-width: 2560px) {
 
-  .logos-title {
-    font-size: 2rem;
-  }
+    .logos-title {
+        font-size: 2.625rem;
+    }
 }
 
 @media screen and (max-width: 320px) {
 
-  .logos-title {
-    font-size: 0.875rem;
-  }
+    .logos-title {
+        font-size: 0.875rem;
+    }
 }
 
 .logos-title-link {

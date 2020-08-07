@@ -130,56 +130,56 @@
     }
   }
   &__category {
-    font: 500 11px/14px var(--font);
-    color: var(--color-black);
+    @mixin font normal, 12px, 12px, 12px, 12px, var(--font-title);
+    color: var(--color-surface-text);
     text-transform: uppercase;
     &-link {
-      color: var(--color-black);
+      color: var(--color-surface-text);
       transition: all 0.15s ease-out;
       &:hover {
-        color: var(--color-orange);
+        color: var(--color-surface-text-hover);
       }
     }
   }
   &__title {
     margin: 10px 0 0 0;
     &-link {
-      font: 16px/20px var(--font);
-      color: var(--color-blue);
+      @mixin font normal, 14px, 24px, 18px, 28px, var(--font-title);
+      color: var(--color-surface-text);
       display: block;
       transition: all 0.15s ease-out;
-      @media (--mobile) {
-        font: 14px/18px var(--font);
-      }
+      text-decoration: none;
       &:hover {
-        color: var(--color-orange);
+        color: var(--color-surface-text-hover);
       }
     }
+  }
+  &__desc {
+    @mixin font normal, 14px, 16px, 14px, 24px, var(--font);
+    color: var(--color-surface-text);
+    padding: 8px 0 0 0;
   }
   &__price {
     width: 100%;
     margin: 12px 0;
     flex: 1;
     &-text {
-      font: 500 24px/22px var(--font);
-      color: var(--color-black);
+      @mixin font bold, 14px, 24px, 18px, 24px, var(--font-title-secondary);
+      color: var(--color-accent);
       margin: 0 10px 10px 0;
       display: inline-block;
-      @media (--mobile) {
-        width: 100%;
-        font: 500 18px/16px var(--font);
-      }
     }
     &-old {
-      font: 500 16px/18px var(--font);
+      @mixin font normal, 14px, 18px, 18px, 24px, var(--font);
       margin: -5px 0 0 0;
       position: relative;
       display: inline-block;
       vertical-align: top;
+      color: var(--color-surface-text);
       &::after {
         width: calc(100% + 6px);
         height: 3px;
-        background: var(--color-orange);
+        background: var(--color-surface-text);
         margin: -1px 0 0 0;
         position: absolute;
         content: '';

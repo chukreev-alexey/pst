@@ -75,7 +75,7 @@
       }
       &:hover {
         &::after {
-          background-color: var(--color-gray);
+          background-color: var(--color-surface-text);
         }
       }
     }
@@ -116,13 +116,13 @@
         &_state_disabled {
           & .catalog-filter-group__list-item-label {
             &::after {
-              border: solid 1px var(--color-gray);
+              border: solid 1px var(--color-surface-text);
             }
           }
           & .catalog-filter-group__list-item-text {
-            color: var(--color-gray);
+            color: var(--color-surface-text);
             &:hover {
-              color: var(--color-gray);
+              color: var(--color-surface-text);
             }
           }
         }
@@ -146,8 +146,8 @@
             width: 13px;
             height: 13px;
             font-size: 0;
-            background: var(--color-white);
-            border: solid 1px var(--color-dark-gray);
+            background: var(--color-surface);
+            border: solid 1px var(--color-surface-border);
             position: absolute;
             content: '';
             display: block;
@@ -157,10 +157,10 @@
           &:hover {
             cursor: pointer;
             &::after {
-              border: solid 1px var(--color-black);
+              border: solid 1px var(--color-surface-border);
             }
             & .catalog-filter-group__list-item-text {
-              color: var(--color-black);
+              color: var(--color-surface-border);
             }
           }
         }

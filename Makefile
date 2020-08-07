@@ -38,6 +38,17 @@ email:
 	gulp email-templates --path modules/certification/templates/certification/emails/ $(ARGV)
 	gulp email-templates --path modules/test_center/templates/test_center/emails/ $(ARGV)
 
+font:
+	gulp font -F Fact-Regular -N 'Fact' -W normal
+	gulp font -F Fact-Medium -N 'Fact' -W 500
+	gulp font -F Fact-Bold -N 'Fact' -W bold
+	gulp font -F Fact-Expanded -N 'Fact-Expanded' -W normal
+	gulp font -F Fact-ExpandedBold -N 'Fact-Expanded' -W bold
+	gulp font -F Fact-SemiExpanded -N 'Fact-Semi-Expanded' -W normal
+	gulp font -F Fact-SemiExpandedMedium -N 'Fact-Semi-Expanded' -W 500
+	gulp font -F Fact-SemiExpandedBold -N 'Fact-Semi-Expanded' -W bold
+
+
 MEDIA_PATH=media/uploads/
 
 DEV_PROJECT=pst

@@ -2,8 +2,8 @@
   text-decoration: none;
   text-align: center;
   background: var(--color-neutral);
-  padding: 12px 24px;
-  margin: 0;
+  padding: 14px 24px 12px 24px;
+  margin: 0 0 0 16px;
   border-radius: 100px;
   position: relative;
   display: block;
@@ -20,6 +20,6 @@
     color: var(--color-neutral-text);
     text-decoration: none;
     display: inline-block;
-    @mixin font normal, 14px, 18px, 14px, 24px, var(--font-title);
+    @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
   }
 }

@@ -4,8 +4,8 @@
   text-decoration: none;
   text-align: center;
   background: #f9f9fa;
-  padding: 12px 24px;
-  margin: 0;
+  padding: 14px 24px 12px 24px;
+  margin: 0 0 0 16px;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
   border-radius: 100px;
@@ -37,16 +37,16 @@
     display: inline-block;
     font-size: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
     font-weight: normal;
-    font-family: 'Fact Semi Expanded Medium'
+    font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
-    line-height: calc(0.875rem + 0.625 * ((100vw - 20rem) / 140));
+    line-height: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
   }
 
 @media screen and (min-width: 2560px) {
 
   .cart-button__text {
-    line-height: 1.5rem;
+    line-height: 1.125rem;
   }
 }
 

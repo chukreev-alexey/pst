@@ -1,0 +1,9 @@
+/* stylelint-disable */
+
+@font-face {
+  font-family: 'Fact';
+  src: url('../fonts/Fact-Medium.eot');
+  src: url('../fonts/Fact-Medium.eot?#iefix') format('eot'), url('../fonts/Fact-Medium.woff') format('woff'), url('../fonts/Fact-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}

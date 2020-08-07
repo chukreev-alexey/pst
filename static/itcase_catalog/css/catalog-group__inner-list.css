@@ -68,7 +68,7 @@
         margin: 16px 0 0 0;
         color: var(--color-surface-text);
         display: block;
-        @mixin font normal, 14px, 24px, 18px, 28px, var(--font-title);
+        @mixin font bold, 14px, 24px, 18px, 28px, var(--font-title-secondary);
       }
     }
     ^&-nested-list {

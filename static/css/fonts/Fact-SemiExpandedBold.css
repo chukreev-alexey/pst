@@ -1,0 +1,9 @@
+/* stylelint-disable */
+
+@font-face {
+  font-family: 'Fact-Semi-Expanded';
+  src: url('../fonts/Fact-SemiExpandedBold.eot');
+  src: url('../fonts/Fact-SemiExpandedBold.eot?#iefix') format('eot'), url('../fonts/Fact-SemiExpandedBold.woff') format('woff'), url('../fonts/Fact-SemiExpandedBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}

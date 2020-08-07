@@ -4,7 +4,7 @@
     & .feed {
       &-title {
         color: var(--color-neutral-text);
-        @mixin font normal, 14px, 32px, 18px, 44px, var(--font-title);
+        @mixin font 500, 14px, 42px, 18px, 48px, var(--font-title-secondary);
         &-link {
           color: var(--color-neutral-text);
         }

@@ -2,23 +2,29 @@
 
 {% if categories_list %}
     <div class="catalog-group {{ class }}">
-        <div class="catalog-group__title">{{ title }}</div>
-        <ul class="catalog-group__inner-list">
-            {% for category in categories_list %}
-                <li class="catalog-group__inner-list-item">
-                    <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
-                        <span class="catalog-group__inner-list-link-image">
-                            {% if not hide_image and category.image %}
-                                <img src="{{ category.image.url }}" class="catalog-group__inner-list-link-image-image" alt="{{ category.name }}" title="{{ category.name }}">
-                            {% else %}
-                                <span class="catalog-group__inner-list-link-image-placeholder">&nbsp;</span>
+        {% if title %}
+            <div class="catalog-group__title">{{ title }}</div>
+        {% endif %}
+        <div class="catalog-group__wrapper">
+            <ul class="catalog-group__inner-list">
+                {% for category in categories_list %}
+                    <li class="catalog-group__inner-list-item">
+                        <a href="{{ category.get_absolute_url }}" class="catalog-group__inner-list-link">
+                            {% if not hide_image %}
+                                <span class="catalog-group__inner-list-link-image">
+                                    {% if category.image %}
+                                        <span class="catalog-group__inner-list-link-image-placeholder">&nbsp;</span>
+                                    {% else %}
+                                        <img src="{{ category.image.url }}" class="catalog-group__inner-list-link-image-image" alt="{{ category.name }}" title="{{ category.name }}">
+                                    {% endif %}
+                                </span>
                             {% endif %}
-                        </span>
-                        <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
-                    </a>
-                    {% catalog_group_hidden category %}
-                </li>
-            {% endfor %}
-        </ul>
+                            <span class="catalog-group__inner-list-link-text">{{ category.name }}</span>
+                        </a>
+                        {% catalog_group_hidden category %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endif %}
