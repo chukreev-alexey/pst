@@ -42,12 +42,6 @@
             </div>
         {% endwith %}
     {% endfor %}
-    <div class="cart-list-sum">
-        <div class="cart-list-sum__title">Итого</div>
-        <div class="cart-list-sum__amount">
-            {% with total=cart.total|floatformat:'-2' %}
-                {{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}
-            {% endwith %}
-        </div>
-    </div>
+
+    {% include 'itcase_cart/include/cart_items_sum.html' %}
 </div>

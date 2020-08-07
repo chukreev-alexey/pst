@@ -104,6 +104,7 @@ sans-serif;
   -moz-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   cursor: pointer;
+  border: 0 solid;
   font-size: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
   font-weight: normal;
   font-family: 'Fact-Semi-Expanded'

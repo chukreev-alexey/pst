@@ -1,0 +1,32 @@
+.cart-order {
+  margin: 0 0 60px 0;
+  &__wrapper {
+    @media (--mobile-large), (--mobile-huge) {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+  &__title {
+    font: 500 24px/20px var(--font);
+    color: #000;
+    @media (--mobile) {
+      text-align: center;
+    }
+  }
+  &-button {
+    @media (--mobile) {
+      margin: 0 auto !important;
+      display: block !important;
+    }
+    &&_state_disabled {
+      color: #777;
+      background: #ccc;
+      border: solid 1px #ccc;
+      &:hover {
+        color: #777;
+        background: #ccc;
+        border: solid 1px #ccc;
+      }
+    }
+  }
+}

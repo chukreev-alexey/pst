@@ -9,6 +9,7 @@
   display: block;
   transition: all 0.15s ease-in-out;
   cursor: pointer;
+  border: 0 solid;
   @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
   @media (--mobile) {
     min-width: 200px;
