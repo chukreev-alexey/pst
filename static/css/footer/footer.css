@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
-  position: relative;
   background: var(--color-neutral);
+  position: relative;
   &__wrapper {
     max-width: var(--max);
     padding: 32px 0 48px 0;
@@ -9,8 +9,8 @@
     position: relative;
     display: flex;
     @media (--mobile) {
-      display: block;
       padding: 24px 16px 40px 16px;
+      display: block;
     }
     ^&__left {
       @media (--mobile) {
@@ -18,12 +18,15 @@
       }
       ^^&__contact {
         display: flex;
+        @media (--mobile) {
+          display: block;
+        }
         &-phone {
           & p {
             color: var(--color-neutral-text);
-            @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
-            margin: 0 0 6px 0;
             padding: 0;
+            margin: 0 0 6px 0;
+            @mixin font normal, 16px, 16px, 18px, 24px, var(--font);
             & a {
               color: var(--color-neutral-text);
               text-decoration: none;
@@ -32,11 +35,14 @@
         }
         &-address {
           margin: 0 0 0 32px;
+          @media (--mobile) {
+            margin: 16px 0 0 0;
+          }
           & p {
             color: var(--color-neutral-text);
-            @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
-            margin: 0 0 6px 0;
             padding: 0;
+            margin: 0 0 6px 0;
+            @mixin font normal, 16px, 16px, 18px, 24px, var(--font);
             & a {
               color: var(--color-neutral-text);
               text-decoration: none;

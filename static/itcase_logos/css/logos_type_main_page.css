@@ -4,8 +4,23 @@
   position: relative;
   & .logos-list {
     position: relative;
+    @media (--mobile) {
+      padding: 0 20px;
+      position: relative;
+      overflow: scroll;
+      flex-flow: row nowrap;
+      &::after {
+        border: solid 15px transparent;
+        content: '';
+        display: inline-block;
+      }
+    }
     &__item {
       width: 20%;
+      @media (--mobile) {
+        width: auto;
+        margin: 0 32px 0 0;
+      }
     }
   }
 }

@@ -5,9 +5,7 @@
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: center;
-  @media (--mobile) {
-    display: block;
-  }
+  box-sizing: border-box;
   &__title {
     color: var(--color-neutral-text);
     @mixin font normal, 14px, 32px, 18px, 44px, var(--font-title);

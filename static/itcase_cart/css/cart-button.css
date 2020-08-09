@@ -23,17 +23,21 @@
     display: inline-block;
     @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
     @media (--mobile) {
-      display: block;
       color: var(--color-neutral);
       background: var(--color-neutral);
+      display: block;
     }
     &::after {
       @media (--mobile) {
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
         background: var(--color-neutral) url('./../img/icon/add_to_cart.svg') no-repeat 50% 50%;
-        display: block;
+        background-size: 16px 16px;
+        position: absolute;
         content: '';
+        display: block;
+        left: 0;
+        top: 0;
       }
     }
   }

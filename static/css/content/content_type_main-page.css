@@ -1,0 +1,22 @@
+.content {
+  &&_type_main-page {
+    & table {
+      & tr {
+        display: block;
+        & td {
+          width: 100%;
+          padding: 0 20px;
+          margin: 0 0 20px 0;
+          display: block;
+          box-sizing: border-box;
+          &:first-child {
+            padding: 0 20px;
+          }
+          &:nth-child(2) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

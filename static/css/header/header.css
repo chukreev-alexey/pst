@@ -34,33 +34,32 @@
       }
     }
     ^&__hamburger {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       display: none;
-      border: solid 1px red;
       order: -5;
       @media (--mobile) {
+        margin: 0 16px 0 8px;
         display: block;
-        margin: 0 16px;
       }
     }
     ^&__search {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       display: none;
-      border: solid 1px red;
-        order: -4;
+      order: -4;
       @media (--mobile) {
+        background: url('./../img/icon/search_black.svg') no-repeat 50% 50%;
         display: block;
       }
     }
     ^&__logo {
-      position: relative;
       margin: 0 32px 0 0;
+      position: relative;
       align-self: center;
       @media (--mobile) {
+        margin: -2px 0 0 0;
         order: -3;
-        margin: 0;
         flex-grow: 1;
       }
     }
@@ -69,15 +68,14 @@
       @media (--mobile) {
         width: 100%;
         display: flex;
-        margin: 6px 0 0 0;
       }
     }
     ^&__catalog {
       color: var(--color-primary-text);
-      @mixin font normal, 16px, 20px, 16px, 20px, var(--font);
       background: var(--color-primary);
       padding: 12px 20px;
       display: none;
+      @mixin font normal, 16px, 20px, 16px, 20px, var(--font);
       @media (--mobile) {
         display: block;
       }
@@ -86,15 +84,15 @@
       margin: 12px 0 0 0;
       display: flex;
       @media (--mobile) {
-        flex-grow: 1;
-        justify-content: space-between;
         padding: 0 16px;
+        justify-content: space-between;
+        flex-grow: 1;
       }
       & p {
         color: var(--color-neutral-text);
-        @mixin font normal, 16px, 20px, 16px, 20px, var(--font);
         padding: 0 24px 0 0;
         margin: 0;
+        @mixin font normal, 16px, 20px, 16px, 20px, var(--font);
         @media (--mobile) {
           padding: 0;
         }
@@ -108,26 +106,26 @@
       position: relative;
       order: 1;
       @media (--mobile) {
-        width: 32px;
-        height: 32px;
-        overflow: hidden;
-        position: relative;
-        border: solid 1px red;
-        order: -1;
+        width: 40px;
+        height: 40px;
         margin: 0 16px 0 0;
+        border: solid 1px red;
+        position: relative;
+        overflow: hidden;
+        order: -2;
       }
     }
     ^&__cart {
       position: relative;
       order: 2;
       @media (--mobile) {
-        margin: 0 16px 0 16px;
-        width: 32px;
-        height: 32px;
-        overflow: hidden;
+        width: 40px;
+        height: 40px;
+        margin: 0 12px 0 0;
+        border-radius: 50%;
         position: relative;
-        border: solid 1px red;
-        order: -2;
+        overflow: hidden;
+        order: -1;
       }
     }
   }
