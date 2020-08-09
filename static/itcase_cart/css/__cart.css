@@ -76,9 +76,9 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .cart-button__text {
-      display: block;
       color: #f9f9fa;
-      background: #f9f9fa
+      background: #f9f9fa;
+      display: block
   }
     }
 
@@ -92,9 +92,9 @@ sans-serif;
         -moz-background-size: 16px 16px;
         -o-background-size: 16px 16px;
         background-size: 16px 16px;
-        display: block;
-        content: '';
         position: absolute;
+        content: '';
+        display: block;
         left: 0;
         top: 0
     }

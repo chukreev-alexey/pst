@@ -4,26 +4,29 @@
   position: relative;
   display: flex;
   flex-flow: row wrap;
+  @media (--mobile) {
+    margin: 8px 0 24px 16px;
+  }
   &__item {
     margin: 0 16px 0 0;
     position: relative;
     &_state_current {
       width: 100%;
       ^&-text {
-        @mixin font 500, 14px, 42px, 18px, 48px, var(--font-title-secondary);
         color: var(--color-neutral-text);
+        @mixin font 500, 24px, 42px, 24px, 48px, var(--font-title-secondary);
       }
     }
     &-link {
-      @mixin font normal, 14px, 16px, 18px, 22px, var(--font);
       color: var(--color-neutral-text);
+      @mixin font normal, 14px, 16px, 18px, 22px, var(--font);
       &:hover {
         color: var(--color-neutral-text-hover);
       }
     }
     &-text {
-      @mixin font normal, 14px, 16px, 18px, 22px, var(--font);
       color: var(--color-neutral-text);
+      @mixin font normal, 14px, 16px, 18px, 22px, var(--font);
     }
   }
 }

@@ -5,6 +5,10 @@
   border: solid 1px var(--color-neutral-border);
   box-sizing: border-box;
   transition: box-shadow 0.15s ease-in-out;
+  @media (--mobile) {
+    width: 100%;
+    margin: 0 8px 16px 8px;
+  }
   &:hover {
     box-shadow: 0 5px 40px -20px var(--color-neutral-shadow);
     @media (--mobile), (--tablet) {
@@ -17,9 +21,16 @@
     display: flex;
     flex-flow: column wrap;
     box-sizing: border-box;
+    @media (--mobile) {
+      flex-flow: row nowrap;
+    }
     &-left {
       margin: 0 0 24px 0;
       position: relative;
+      @media (--mobile) {
+        width: 120px;
+        margin: 0;
+      }
     }
     &-right {
       width: 100%;
@@ -28,6 +39,9 @@
       flex: 1;
       flex-flow: column wrap;
       align-self: flex-start;
+      @media (--mobile) {
+        margin: 0 0 0 16px;
+      }
     }
   }
   &__icon {
@@ -80,6 +94,9 @@
     box-sizing: border-box;
     &_type_placeholder {
       height: 240px;
+      @media (--mobile) {
+        height: 100%;
+      }
       &::after {
         width: 100%;
         height: 240px;
@@ -87,14 +104,21 @@
         margin: 0 auto;
         content: '';
         display: block;
+        @media (--mobile) {
+          height: 100%;
+        }
       }
     }
     &-link {
       width: 100%;
       height: 240px;
       display: flex;
+      flex-flow: column wrap;
       justify-content: center;
       align-items: center;
+      @media (--mobile) {
+        height: auto;
+      }
     }
     &-image {
       width: auto;
@@ -130,9 +154,9 @@
     }
   }
   &__category {
-    @mixin font normal, 12px, 12px, 12px, 12px, var(--font-title);
     color: var(--color-surface-text);
     text-transform: uppercase;
+    @mixin font normal, 12px, 12px, 12px, 12px, var(--font-title);
     &-link {
       color: var(--color-surface-text);
       transition: all 0.15s ease-out;
@@ -144,38 +168,38 @@
   &__title {
     margin: 10px 0 0 0;
     &-link {
-      @mixin font normal, 14px, 24px, 18px, 28px, var(--font-title);
       color: var(--color-surface-text);
+      text-decoration: none;
       display: block;
       transition: all 0.15s ease-out;
-      text-decoration: none;
+      @mixin font normal, 14px, 24px, 18px, 28px, var(--font-title);
       &:hover {
         color: var(--color-surface-text-hover);
       }
     }
   }
   &__desc {
-    @mixin font normal, 14px, 16px, 14px, 24px, var(--font);
     color: var(--color-surface-text);
     padding: 8px 0 0 0;
+    @mixin font normal, 14px, 16px, 14px, 24px, var(--font);
   }
   &__price {
     width: 100%;
     margin: 12px 0;
     flex: 1;
     &-text {
-      @mixin font bold, 14px, 24px, 18px, 24px, var(--font-title-secondary);
       color: var(--color-accent);
       margin: 0 10px 10px 0;
       display: inline-block;
+      @mixin font bold, 14px, 24px, 18px, 24px, var(--font-title-secondary);
     }
     &-old {
-      @mixin font normal, 14px, 18px, 18px, 24px, var(--font);
+      color: var(--color-surface-text);
       margin: -5px 0 0 0;
       position: relative;
       display: inline-block;
       vertical-align: top;
-      color: var(--color-surface-text);
+      @mixin font normal, 14px, 18px, 18px, 24px, var(--font);
       &::after {
         width: calc(100% + 6px);
         height: 3px;
@@ -204,6 +228,9 @@
     animation-delay: 0;
     animation-duration: 1s;
     animation-fill-mode: both;
+    @media (--mobile) {
+      margin: -48px 0 0 0;
+    }
     &::after {
       width: 52px;
       height: 52px;
