@@ -108,29 +108,26 @@
 
     <div class="fader">&nbsp;</div>
 
+    {% include 'itcase_pages/include/site_menu_popup.html' %}
+
     <div class="header">
         <div class="header__wrapper">
             <div class="header__inner">
+                <div class="header__hamburger">
+                    {% with hide_text=True %}
+                        {% include 'itcase_pages/include/site_menu.html' %}
+                    {% endwith %}
+                </div>
+                <div class="header__search">
+                    {% with class='catalog-menu__item_type_search' %}
+                        {% include 'itcase_search/include/quick/quick_search_button.html' %}
+                    {% endwith %}
+                </div>
                 <div class="header__logo">
                     <div class="logo">
                         <a href="/" class="logo__link">
                             <img src="{% static 'img/logo.png' %}" class="logo__link-image" alt="{{ request.site.name }}" title="{{ request.site.name }}" />
                         </a>
-                    </div>
-                </div>
-                <div class="header__menu">
-                    <div class="main-menu {% if request.page.url == '/' %}main-menu_type_main-page{% endif %}">
-                        <div class="main-menu-list">
-                            {% for item in header_menu %}
-                                <div class="main-menu-list__item {% if request.path|startswith:item.get_absolute_url %}main-menu-list__item_state_current {% endif %}">
-                                    <a href="{{ item.get_absolute_url }}" class="main-menu-list__item-link" {% if item.in_new_tab %} target="_blank" {% endif %}>{{ item.title }}</a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="header__phone">
-                        <p><a href="tel:+79086307947">+7 908-630-79-47</a></p>
-                        <p><a href="tel:+79221277725">+7 922-127-77-25</a></p>
                     </div>
                 </div>
                 <div class="header__button">
@@ -142,6 +139,27 @@
                     {% with cart_empty_text='Заказ' %}
                         {% cart_state %}
                     {% endwith %}
+                </div>
+                <div class="header__menu">
+                    <div class="main-menu {% if request.page.url == '/' %}main-menu_type_main-page{% endif %}">
+                        <div class="main-menu-list">
+                            {% for item in header_menu %}
+                                <div class="main-menu-list__item {% if request.path|startswith:item.get_absolute_url %}main-menu-list__item_state_current {% endif %}">
+                                    <a href="{{ item.get_absolute_url }}" class="main-menu-list__item-link" {% if item.in_new_tab %} target="_blank" {% endif %}>{{ item.title }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="header__catalog">Каталог</div>
+                    <div class="header__phone">
+                        {% if site_version == 'mobile' %}
+                            <p><a href="tel:+79086307947">908-630-79-47</a></p>
+                            <p><a href="tel:+79221277725">922-127-77-25</a></p>
+                        {% else %}
+                            <p><a href="tel:+79086307947">+7 908-630-79-47</a></p>
+                            <p><a href="tel:+79221277725">+7 922-127-77-25</a></p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,9 @@
 .catalog-menu {
   &&_type_footer {
     background: none;
+    @media (--mobile) {
+      margin: 0 0 16px 0;
+    }
     & .catalog-menu {
       &__wrapper {
         margin: 0 0 12px 0;

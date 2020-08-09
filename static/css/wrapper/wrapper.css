@@ -12,6 +12,9 @@
     box-sizing: border-box;
     position: relative;
     padding: 0 32px;
+    @media (--mobile) {
+      padding: 0;
+    }
     @media (--warning) {
       min-width: 180px;
       &::after {

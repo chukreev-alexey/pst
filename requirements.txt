@@ -13,6 +13,7 @@ django-tinymce-4
 django-rq
 django<3
 djangorestframework
+django-user-agents
 
 elasticsearch_dsl
 phonenumberslite

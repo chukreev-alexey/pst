@@ -1,0 +1,69 @@
+.site-menu {
+  display: inline-block;
+  vertical-align: top;
+  &__link {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    z-index: 3;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    padding: 7px 0 0 4px;
+    &_state_active {
+      & .site-menu__link-inner {
+        & span {
+          &:nth-child(1) {
+            margin: 0 0 0 0;
+            left: 50%;
+            top: 50%;
+            transform: rotate(45deg) translate(-50%, 50%);
+          }
+          &:nth-child(2) {
+            width: 0;
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            margin: 0 0 0 -1px;
+            left: 50%;
+            top: 50%;
+            transform: rotate(-45deg) translate(-50%, 50%);
+          }
+        }
+      }
+    }
+    &-inner {
+      width: 24px;
+      height: 16px;
+      position: relative;
+      display: inline-block;
+      transform: rotate(0deg);
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+      & span {
+        width: 100%;
+        height: 2px;
+        background: var(--color-surface-item);
+        position: absolute;
+        display: block;
+        left: 0;
+        transform: rotate(0deg);
+        transition: 0.25s ease-in-out;
+        opacity: 1;
+        &:nth-child(1) {
+          top: 0;
+          transform-origin: left center;
+        }
+        &:nth-child(2) {
+          margin: -1px 0 0 0;
+          top: 50%;
+          transform: translate(0, 50%);
+          transform-origin: left center;
+        }
+        &:nth-child(3) {
+          top: 100%;
+          transform-origin: left center;
+        }
+      }
+    }
+  }
+}

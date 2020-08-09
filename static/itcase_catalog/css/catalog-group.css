@@ -2,15 +2,24 @@
   width: 100%;
   margin: 0 0 20px 0;
   position: relative;
+  &-page {
+    width: 100%;
+  }
   &__wrapper {
     width: 100%;
     max-width: var(--max);
     margin: 0 auto;
+    @media (--mobile) {
+      background: var(--color-neutral);
+    }
   }
   &__title {
     color: var(--color-neutral-text);
     margin: 0 0 24px 0;
-    @mixin font 500, 14px, 42px, 18px, 48px, var(--font-title-secondary);
+    @mixin font 500, 18px, 42px, 24px, 48px, var(--font-title-secondary);
+    @media (--mobile) {
+      padding: 0 20px;
+    }
   }
   &__sort {
     @media (--mobile) {

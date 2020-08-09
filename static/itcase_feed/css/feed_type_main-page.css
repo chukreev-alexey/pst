@@ -4,13 +4,20 @@
     & .feed {
       &-title {
         color: var(--color-neutral-text);
-        @mixin font 500, 14px, 42px, 18px, 48px, var(--font-title-secondary);
+        @mixin font 500, 18px, 42px, 24px, 48px, var(--font-title-secondary);
+        @media (--mobile) {
+          padding: 0 20px;
+        }
         &-link {
           color: var(--color-neutral-text);
         }
       }
       &-list {
         justify-content: space-between;
+        @media (--mobile) {
+          position: relative;
+          overflow: scroll;
+        }
         & .feed-list__item {
           min-height: 144px;
           background: var(--color-neutral);

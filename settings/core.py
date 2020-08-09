@@ -81,6 +81,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'itcase_pages.middleware.PageMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 # A string representing the full Python import path to your root URLconf.

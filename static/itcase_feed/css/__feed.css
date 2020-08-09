@@ -6,12 +6,12 @@
 
 .feed.feed_type_main-page .feed-title {
         color: #000;
-        font-size: calc(0.875rem + 1.75 * ((100vw - 20rem) / 140));
+        font-size: calc(1.125rem + 1.5 * ((100vw - 20rem) / 140));
         font-weight: 500;
         font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
-        line-height: calc(1.125rem + 1.875 * ((100vw - 20rem) / 140));
+        line-height: calc(1.5rem + 1.5 * ((100vw - 20rem) / 140));
       }
 
 @media screen and (min-width: 2560px) {
@@ -24,7 +24,7 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
     .feed.feed_type_main-page .feed-title {
-        line-height: 1.125rem;
+        line-height: 1.5rem;
     }
 }
 
@@ -38,9 +38,17 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
     .feed.feed_type_main-page .feed-title {
-        font-size: 0.875rem;
+        font-size: 1.125rem;
     }
 }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.feed.feed_type_main-page .feed-title {
+          padding: 0 20px
+      }
+        }
 
 .feed.feed_type_main-page .feed-title-link {
           color: #000;
@@ -53,6 +61,15 @@ sans-serif;
         -ms-flex-pack: justify;
         justify-content: space-between;
       }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.feed.feed_type_main-page .feed-list {
+          position: relative;
+          overflow: scroll
+      }
+        }
 
 .feed.feed_type_main-page .feed-list .feed-list__item {
           min-height: 144px;

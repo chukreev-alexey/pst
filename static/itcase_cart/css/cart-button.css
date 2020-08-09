@@ -10,8 +10,9 @@
   transition: all 0.15s ease-in-out;
   cursor: pointer;
   @media (--mobile) {
-    min-width: 200px;
-    padding: 12px 24px 14px 24px;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
   }
   &:hover {
     background: var(--color-neutral-hover);
@@ -21,5 +22,19 @@
     text-decoration: none;
     display: inline-block;
     @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
+    @media (--mobile) {
+      display: block;
+      color: var(--color-neutral);
+      background: var(--color-neutral);
+    }
+    &::after {
+      @media (--mobile) {
+        width: 32px;
+        height: 32px;
+        background: var(--color-neutral) url('./../img/icon/add_to_cart.svg') no-repeat 50% 50%;
+        display: block;
+        content: '';
+      }
+    }
   }
 }

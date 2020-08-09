@@ -7,8 +7,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    box-sizing: border-box;
     @media (--mobile) {
-      margin: 0 15px;
+      display: block;
+      padding: 16px;
+      background: var(--color-neutral);
     }
     &-item {
       background: var(--color-neutral);
@@ -18,7 +21,10 @@
       box-sizing: border-box;
       @media (--mobile) {
         width: 100%;
-        margin: 0 0 25px 0;
+        margin: 0 0 8px 0;
+        background: var(--color-surface);
+        border-radius: 4px;
+        box-shadow: 0 1px 0 var(--color-surface-shadow) ;
       }
       &_type_placeholder {
         height: 0;
@@ -50,6 +56,9 @@
         position: relative;
         display: block;
         overflow: hidden;
+        @media (--mobile) {
+          display: none;
+        }
         &-image {
           min-width: 100%;
           min-height: 100%;
@@ -68,7 +77,10 @@
         margin: 16px 0 0 0;
         color: var(--color-surface-text);
         display: block;
-        @mixin font bold, 14px, 24px, 18px, 28px, var(--font-title-secondary);
+        @mixin font 500, 16px, 24px, 22px, 28px, var(--font-title-secondary);
+        @media (--mobile) {
+          margin: 0;
+        }
       }
     }
     ^&-nested-list {
@@ -77,6 +89,7 @@
       margin: 6px 0 0 0;
       @media (--mobile) {
         margin: 0;
+        display: none;
       }
       &-item {
         padding: 4px 0;

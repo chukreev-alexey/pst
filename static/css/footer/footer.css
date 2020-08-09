@@ -3,12 +3,19 @@
   position: relative;
   background: var(--color-neutral);
   &__wrapper {
-    padding: 32px 0 48px 0;
     max-width: var(--max);
+    padding: 32px 0 48px 0;
     margin: 0 auto;
     position: relative;
     display: flex;
+    @media (--mobile) {
+      display: block;
+      padding: 24px 16px 40px 16px;
+    }
     ^&__left {
+      @media (--mobile) {
+        padding: 0 0 24px 0;
+      }
       ^^&__contact {
         display: flex;
         &-phone {
@@ -45,6 +52,10 @@
     ^&__right {
       margin: 0 0 0 56px;
       display: flex;
+      @media (--mobile) {
+        margin: 0;
+        display: block;
+      }
     }
   }
 }

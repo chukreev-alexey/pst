@@ -6,7 +6,7 @@
   z-index: 10;
   margin: 0 0 32px 0;
   @media (--mobile), (--tablet) {
-    overflow: hidden;
+    display: none;
   }
   &__wrapper {
     width: 100%;

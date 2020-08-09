@@ -511,13 +511,18 @@ sans-serif;
     -moz-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
   }
 
 @media (min-width: 15em)
   and (max-width: 47.999em) {
 
 .catalog-group__inner-list {
-      margin: 0 15px
+      display: block;
+      padding: 16px;
+      background: #f9f9fa
   }
     }
 
@@ -540,7 +545,14 @@ sans-serif;
 
 .catalog-group__inner-list-item {
         width: 100%;
-        margin: 0 0 25px 0
+        margin: 0 0 8px 0;
+        background: #fff;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 0 rgba(0,0,0, 0.2);
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0, 0.2);
+        box-shadow: 0 1px 0 rgba(0,0,0, 0.2)
     }
       }
 
@@ -602,6 +614,14 @@ sans-serif;
     box-sizing: border-box;
 }
 
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-group__inner-list-link-image {
+          display: none
+      }
+        }
+
 .catalog-group__inner-list-link-image-image {
           min-width: 100%;
           min-height: 100%;
@@ -625,12 +645,12 @@ sans-serif;
         margin: 16px 0 0 0;
         color: #000;
         display: block;
-        font-size: calc(0.875rem + 0.625 * ((100vw - 20rem) / 140));
-        font-weight: bold;
+        font-size: calc(1rem + 0.5 * ((100vw - 20rem) / 140));
+        font-weight: 500;
         font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
-        line-height: calc(1.125rem + 0.625 * ((100vw - 20rem) / 140));
+        line-height: calc(1.375rem + 0.375 * ((100vw - 20rem) / 140));
       }
 
 @media screen and (min-width: 2560px) {
@@ -643,7 +663,7 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
     .catalog-group__inner-list-link-text {
-        line-height: 1.125rem;
+        line-height: 1.375rem;
     }
 }
 
@@ -657,9 +677,17 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
     .catalog-group__inner-list-link-text {
-        font-size: 0.875rem;
+        font-size: 1rem;
     }
 }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-group__inner-list-link-text {
+          margin: 0
+      }
+        }
 
 .catalog-group__inner-list .catalog-group__inner-nested-list {
       list-style: none;
@@ -671,7 +699,8 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .catalog-group__inner-list .catalog-group__inner-nested-list {
-        margin: 0
+        margin: 0;
+        display: none
     }
       }
 
@@ -773,21 +802,33 @@ sans-serif;
   position: relative;
 }
 
+.catalog-group-page {
+    width: 100%;
+  }
+
 .catalog-group__wrapper {
     width: 100%;
     max-width: 1366px;
     margin: 0 auto;
   }
 
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-group__wrapper {
+      background: #f9f9fa
+  }
+    }
+
 .catalog-group__title {
     color: #000;
     margin: 0 0 24px 0;
-    font-size: calc(0.875rem + 1.75 * ((100vw - 20rem) / 140));
+    font-size: calc(1.125rem + 1.5 * ((100vw - 20rem) / 140));
     font-weight: 500;
     font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
-    line-height: calc(1.125rem + 1.875 * ((100vw - 20rem) / 140));
+    line-height: calc(1.5rem + 1.5 * ((100vw - 20rem) / 140));
   }
 
 @media screen and (min-width: 2560px) {
@@ -800,7 +841,7 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
   .catalog-group__title {
-    line-height: 1.125rem;
+    line-height: 1.5rem;
   }
 }
 
@@ -814,9 +855,17 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
   .catalog-group__title {
-    font-size: 0.875rem;
+    font-size: 1.125rem;
   }
 }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-group__title {
+      padding: 0 20px
+  }
+    }
 
 @media (min-width: 15em)
   and (max-width: 47.999em) {
@@ -2486,6 +2535,14 @@ sans-serif;
     background: none;
   }
 
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-menu.catalog-menu_type_footer {
+      margin: 0 0 16px 0
+  }
+    }
+
 .catalog-menu.catalog-menu_type_footer .catalog-menu__wrapper {
         margin: 0 0 12px 0;
         display: block;
@@ -2739,7 +2796,7 @@ sans-serif;
   and (max-width: 59.999em) {
 
 .catalog-menu {
-    overflow: hidden
+    display: none
 }
   }
 
