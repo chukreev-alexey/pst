@@ -89,5 +89,11 @@ const $menuPopupMobile = $('.header__catalog')
 
 if ($menuPopupMobile.length) {
   const menu = new CatalogPopupMenu()
-  $menuPopupMobile.on('click', menu.show)
+  $menuPopupMobile.on('click', (event) => {
+    if (menu.$menu.hasClass(menu.showClass)) {
+      menu.hide()
+    } else {
+      menu.show()
+    }
+  })
 }

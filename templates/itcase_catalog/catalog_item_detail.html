@@ -53,43 +53,84 @@
             </div>
 
             <div class="catalog-item-detail__right">
-                <div class="catalog-item-detail__info-param">
-                    {% for parametr, items in product.get_parametres_dict.items %}
-                         <div class="catalog-item-detail__info-param-item">
-                            <div class="catalog-item-detail__info-param-item-name">{{ parametr.name }}</div>
-                            {% for item in items %}
-                                <div class="catalog-item-detail__info-param-item-value">{{ item.value }}</div>
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
+                <div class="catalog-item-detail__param">
+                    <div class="catalog-item-detail__param-group">
+                        <div class="catalog-item-detail__param-title">Группа параметров</div>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                    </div>
 
-                    {% for price in product.prices.all %}
-                        <div>
-                            <p>{{ price.product_article }}: {{ price.price }}</p>
-                            {% for parametr in price.parametr.all %}
-                                <p>{{ parametr }}</p>
-                            {% endfor %}
-                            {% with id=price.pk|unlocalize %}
-                                <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
-                                   class="catalog-item__button button
-                                          {% if price in cart %}
-                                            button_border_orange
-                                          {% else %}
-                                            button_color_blue
-                                          {% endif %}"
-                                    data-add-url="{% url 'itcase_cart:cart_add' %}"
-                                    data-product="{{ id }}"
-                                    data-amount-{{ id }}="1">
-                                    {% if price in cart %}
-                                        В заказе
-                                    {% else %}
-                                        Заказать
-                                    {% endif %}
-                                </a>
-                            {% endwith %}
-                        </div>
-                    {% endfor %}
+                    <div class="catalog-item-detail__param-group">
+                        <div class="catalog-item-detail__param-title">Группа параметров</div>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                        <label class="catalog-item-detail__param-item">
+                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                            <div class="catalog-item-detail__param-item-text">Название параметра</div>
+                        </label>
+                    </div>
                 </div>
+
+                {% for price in product.prices.all %}
+                    <div>
+                        <p>{{ price.product_article }}: {{ price.price }}</p>
+
+                        {% for param in price.price_combination.all %}
+                           <p>{{ param }}</p>
+                        {% endfor %}
+
+                        {% with id=price.pk|unlocalize %}
+                            <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                               class="catalog-item__button button
+                                      {% if price in cart %}
+                                        button_border_orange
+                                      {% else %}
+                                        button_color_blue
+                                      {% endif %}"
+                                data-add-url="{% url 'itcase_cart:cart_add' %}"
+                                data-product="{{ id }}"
+                                data-amount-{{ id }}="1">
+                                {% if price in cart %}
+                                    В заказе
+                                {% else %}
+                                    Заказать
+                                {% endif %}
+                            </a>
+                        {% endwith %}
+                    </div>
+                {% endfor %}
 
                 <div class="catalog-item-detail__info">
                     {% if product.is_exist %}

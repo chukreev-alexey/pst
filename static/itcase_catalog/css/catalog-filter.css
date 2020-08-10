@@ -98,7 +98,7 @@
       &-item {
         width: 70px;
         font: 14px/14px var(--font);
-        color: var(--color-dark-gray);
+        color: var(--color-neutral-text);
         text-align: center;
         padding: 6px 0 4px 0;
         margin: 0 0 15px 0;
@@ -107,11 +107,59 @@
       &-separator {
         width: 14px;
         height: 2px;
-        background: var(--color-dark-gray);
+        background: var(--color-neutral-text);
         margin: 0 5px;
         position: relative;
         display: inline-block;
         top: 9px;
+      }
+      & span.irs .irs {
+        height: 20px;
+        &-line {
+          height: 2px;
+          background: #d9d9d9;
+          border-radius: 10px;
+          top: 0;
+        }
+        &-min,
+        &-max {
+          display: none;
+        }
+        &-from,
+        &-to {
+          width: 15px;
+          height: 15px;
+          font-size: 0;
+          background: var(--color-primary);
+          padding: 0;
+          margin: -6px 0 0 0;
+          border-radius: 100px;
+          z-index: 1;
+          cursor: pointer;
+          transition: scale 0.15s ease-in-out;
+          &::before {
+            display: none;
+          }
+          &:hover {
+            transform: scale(1.3);
+          }
+        }
+        &-bar {
+          height: 2px;
+          background: var(--color-primary);
+          top: 0;
+        }
+        &-bar-edge {
+          background: #777;
+          border-radius: 10px 0 0 10px;
+          top: 4px;
+        }
+        &-slider {
+          display: none;
+        }
+        &-handle {
+          display: none;
+        }
       }
     }
     &__list {
