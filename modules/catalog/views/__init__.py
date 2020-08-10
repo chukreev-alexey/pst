@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from itertools import permutations
-
 from django.db.models import Max, Min, Q
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -29,14 +27,14 @@ from itcase_common.mixins import FilterMixin, SortMixin
 from itcase_common.views.mixins import RequestDataMixin
 from itcase_paginator.pagination import SlicePaginatorMixin
 
-from .models import Category, Product, Parametr, Price
-from .conf import get_settings
+from ..models import Category, Product, Parametr, Price
+from .mixins import PretyObjectMixin
 
 
 __all__ = ('CatalogIndexView', 'CategoryDetail', 'ProductDetail')
 
 
-class CatalogIndexView(TemplateView):
+class CatalogIndexView(TemplateView, PretyObjectMixin):
     template_name = get_template_name('catalog.html')
 
     def get_context_data(self, **kwargs):
@@ -56,97 +54,6 @@ class CatalogIndexView(TemplateView):
         context['products_groups'] = groups
 
         return context
-
-    @staticmethod
-    def get_pretty_object_list(queryset, b_size=2, box_size=4):
-
-        class Box(object):
-
-            def __init__(self, index):
-                super().__init__()
-
-                self._items = []
-                self._size = box_size
-
-            @property
-            def size(self):
-                if not self._items:
-                    return 0
-                return sum(self.item_size(item) for item in self._items)
-
-            @staticmethod
-            def item_size(item):
-                return b_size if item.border else 1
-
-            def add(self, item):
-                if self.size + self.item_size(item) <= self._size:
-                    self._items.append(item)
-                    return
-
-                items = self._items.copy()
-                items.append(item)
-                for comb in permutations(items, len(self._items)):
-
-                    _sum = sum(self.item_size(item) for item in comb)
-                    if not _sum == self._size:
-                        continue
-
-                    diff = set(self._items).difference(set(comb))
-
-                    self._items = list(comb)
-
-                    try:
-                        return diff.pop()
-                    except KeyError:
-                        return
-
-                return item
-
-            def complete(self):
-                return self.size == self._size
-
-        box = None
-        count = get_settings('SPECIAL_PRODUCTS_COUNT')
-        iteration = 0
-        objs = list(queryset.order_by('?')[:count])
-        result = []
-        while iteration < (count * b_size / box_size):
-
-            if box is None:
-                box = Box(iteration)
-                box.add(objs.pop(0))
-
-            empty = set()
-            for index, item in enumerate(objs):
-
-                obj = box.add(item)
-                objs[index] = obj
-
-                if obj is None:
-                    empty.add(index)
-
-                if box.complete():
-                    break
-
-            for index, pos in enumerate(empty):
-                del objs[pos - index]
-
-            if box.complete() or not objs:
-                result.append(box._items)
-                box = None
-
-            if not objs:
-                break
-
-            iteration += 1
-
-        if objs:
-            box = box or Box(len(result))
-            for orphan in objs:
-                box._items.append(orphan)
-            result.append(box._items)
-
-        return result
 
 
 class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
@@ -327,8 +234,8 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
     def get_filter_price(self):
         filtered = self._filter.get('filter') or {}
-        # data = self.queryset.aggregate(Max('price'), Min('price'))
-        data = Price.objects.filter(product__in=self.queryset).aggregate(Max('price'), Min('price'))
+        data = Price.objects.filter(
+            product__in=self.queryset).aggregate(Max('price'), Min('price'))
         initial = {}
 
         _max = filtered.get('price_max', data.get('price__max'))
@@ -395,12 +302,12 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
     def get_sort_data(self, queryset):
         initial = {}
-        # if queryset.filter(in_hit=True).exists():
-        #     initial['in_hit'] = True
-        # if queryset.filter(in_action=True).exists():
-        #     initial['in_action'] = True
-        # if queryset.filter(in_recommended=True).exists():
-        #     initial['in_recommended'] = True
+        if queryset.filter(in_hit=True).exists():
+            initial['in_hit'] = True
+        if queryset.filter(in_action=True).exists():
+            initial['in_action'] = True
+        if queryset.filter(in_recommended=True).exists():
+            initial['in_recommended'] = True
 
         if not initial:
             return {}
@@ -450,6 +357,12 @@ class CategoryDetail(RequestDataMixin, SingleObjectMixin, ProductListView):
         if not self.object:
             return False
         return self.object.level == 0 and self.object.children.exists()
+
+    def get_filter_fields(self):
+        products = self.object.get_products()
+        return Parametr.objects.filter(
+            product_parametres__products__in=products).values_list(
+                'query_name', flat=True).distinct()
 
 
 class ProductDetail(ProductDetailBase):
