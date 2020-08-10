@@ -1,17 +1,18 @@
 .wrapper {
   width: 100%;
   position: relative;
+  flex: 1 0 auto;
   @media (--warning) {
     padding: 0 !important;
   }
   &__inner {
     max-width: var(--max);
+    padding: 32px 32px 0 32px;
     margin: 0 auto;
+    position: relative;
     display: flex;
     flex-flow: row wrap;
     box-sizing: border-box;
-    position: relative;
-    padding: 32px 32px 0 32px;
     @media (--mobile) {
       padding: 0;
     }

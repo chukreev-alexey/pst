@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_mptt_admin',
     'django_rq',
     'tinymce_4',
+    'widget_tweaks',
     'grappelli.dashboard',
     'grappelli',
     'filebrowser',
