@@ -1,14 +1,12 @@
-
 .catalog-related {
   width: 100%;
-  margin: 50px 0 0 0;
   display: flex;
   flex-wrap: wrap;
   @media (--mobile), (--tablet) {
     margin: 20px 0 0 0;
   }
   &__wrapper {
-    width: auto;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     @media (--mobile), (--tablet) {
@@ -23,16 +21,14 @@
   }
   &__title {
     width: 100%;
-    font: 500 36px/48px var(--font);
-    color: #000;
-    padding: 0 30px 0 0;
     position: relative;
+    @mixin font 500, 18px, 42px, 24px, 48px, var(--font-title-secondary);
     @media (--mobile) {
-      font: 500 20px/20px var(--font);
-      padding: 20px 15px 10px 15px;
+      padding: 0 20px;
     }
   }
   &__item {
+    width: calc(25% - 32px);
     flex: 0 0 auto;
     @media (--mobile), (--tablet) {
       width: auto;
