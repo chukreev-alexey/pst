@@ -126,6 +126,12 @@ class Product(ProductBase, FieldExistsMixin):
     brand = models.ForeignKey(Brand,
                               related_name='products', verbose_name='Бренд',
                               on_delete=models.SET_NULL, blank=True, null=True)
+
+    price = models.DecimalField('Цена', max_digits=10, decimal_places=2,
+                                blank=True, null=True)
+    article = models.CharField(verbose_name='Артикул', max_length=255,
+                               blank=True, null=True)
+
     recommend_categories = models.ManyToManyField(
         Category, blank=True, verbose_name='Рекомендуем категории')
 
@@ -169,7 +175,7 @@ class Product(ProductBase, FieldExistsMixin):
         return {p: self.parametres.filter(parametr=p) for p in parametres}
 
     def get_lowest_price(self):
-        return self.prices.order_by('price').first().price
+        return self.prices.order_by('price').first()
 
     def has_sections(self):
         return self.sections.exists()
