@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "bfc5105be26caced190f";
+/******/ 	var hotCurrentHash = "9e366520b7215e2de94b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10713,6 +10713,31 @@ module.exports.formatError = function(err) {
 
 /***/ }),
 
+/***/ "./static/itcase_catalog/js/catalogGroups.js":
+/*!***************************************************!*\
+  !*** ./static/itcase_catalog/js/catalogGroups.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+ // Click on catalog group button(on main page) for showing hidden categories. (like "+ 12 категорий")
+
+$(document).on('click', '.catalog-group__inner-nested-list-count', function (event) {
+  event.stopPropagation();
+  event.preventDefault();
+  var hiddenCategories = this.parentElement.querySelectorAll('*[class*="_type_hidden"]');
+  hiddenCategories.forEach(function (element) {
+    var hiddenClass = Array.from(element.classList).find(function (cls) {
+      return cls.includes('_type_hidden');
+    });
+    element.classList.remove(hiddenClass);
+  });
+  this.remove();
+});
+
+/***/ }),
+
 /***/ "./static/itcase_catalog/js/main.js":
 /*!******************************************!*\
   !*** ./static/itcase_catalog/js/main.js ***!
@@ -10721,185 +10746,65 @@ module.exports.formatError = function(err) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* globals UserCartClass, ItcaseFilterClass, UserCart, ItcaseFilter */
 
 
 __webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js");
 
-if (true) {
-  module.hot.accept();
-}
+__webpack_require__(/*! ./catalogGroups */ "./static/itcase_catalog/js/catalogGroups.js"); // Create "Cart" instance for work with catalog and cart
 
-/***/ }),
-
-/***/ "./static/itcase_catalog/js/popupMenu.js":
-/*!***********************************************!*\
-  !*** ./static/itcase_catalog/js/popupMenu.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-var CatalogPopupMenu = /*#__PURE__*/function () {
-  function CatalogPopupMenu() {
-    _classCallCheck(this, CatalogPopupMenu);
-
-    this.$menu = $('.catalog-menu-popup');
-    this.timerShow = null;
-    this.timerHide = null;
-    this.animationEvents = 'webkitAnimationEnd oanimationend msAnimationEnd animationend';
-    this.showClass = 'catalog-menu-popup_state_visible';
-    this.hideClass = 'catalog-menu-popup_state_hidden';
-    this.state = {
-      open: this.$menu.hasClass(this.showClass),
-      locked: false
-    };
-    this.show = this.show.bind(this);
-    this.hide = this.hide.bind(this);
-  }
-
-  _createClass(CatalogPopupMenu, [{
-    key: "show",
-    value: function show() {
-      var _this = this;
-
-      clearTimeout(this.timerHide);
-      clearTimeout(this.timerShow);
-      this.state.locked = true;
-
-      if (this.$menu.hasClass(this.showClass) && this.$menu.hasClass(this.hideClass)) {
-        this.$menu.removeClass([this.hideClass, this.showClass].join(' ')).off(this.animationEvents);
-      }
-
-      this.timerShow = setTimeout(function () {
-        _this.$menu.addClass(_this.showClass);
-
-        _this.state.open = true;
-        _this.state.locked = false;
-      }, 0);
-    }
-  }, {
-    key: "hide",
-    value: function hide() {
-      var _this2 = this;
-
-      clearTimeout(this.timerHide);
-      clearTimeout(this.timerShow);
-      this.state.locked = true;
-
-      if (this.state.open) {
-        this.timerHide = setTimeout(function () {
-          _this2.$menu.addClass(_this2.hideClass).on(_this2.animationEvents, function () {
-            _this2.$menu.removeClass([_this2.hideClass, _this2.showClass].join(' ')).off(_this2.animationEvents);
-
-            _this2.state.open = false;
-            _this2.state.locked = false;
-          });
-        }, 200);
-      }
-    }
-  }, {
-    key: "toggle",
-    value: function toggle() {
-      if (this.state.locked) {
-        return false;
-      }
-
-      if (this.state.open) {
-        this.hide();
-      } else {
-        this.show();
-      }
-    }
-  }]);
-
-  return CatalogPopupMenu;
-}();
-
-var $menuPopup = $('.catalog-menu__item_type_popup');
-
-if ($menuPopup.length) {
-  var menu = new CatalogPopupMenu();
-  $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide);
-  menu.$menu.on('mouseenter', function () {
-    clearTimeout(menu.timerHide);
-  }).on('mouseleave', menu.hide);
-}
-
-var $menuPopupMobile = $('.header__catalog');
-
-if ($menuPopupMobile.length) {
-  var _menu = new CatalogPopupMenu();
-
-  $menuPopupMobile.on('click', function (event) {
-    if (_menu.$menu.hasClass(_menu.showClass)) {
-      _menu.hide();
-    } else {
-      _menu.show();
-    }
-  });
-}
-
-/***/ }),
-
-/***/ "./static/js/main.js":
-/*!***************************!*\
-  !*** ./static/js/main.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* globals SearchClass UserCartClass, ItcaseFilterClass ItcaseFilter */
-
-
-if (typeof SearchClass !== 'undefined') {
-  global.ItcaseSearch = new SearchClass();
-}
 
 if (typeof UserCartClass !== 'undefined') {
   global.UserCart = new UserCartClass({
+    // Header button(cart link) with total price and count text
     headerCartButton: 'cart-button',
-    headerCartButtonText: 'cart-button__text',
-    headerCartButtonCount: 'cart-button__count',
+    headerCartButtonText: 'cart-button__text-sum',
+    // 'cart-button__text'
+    headerCartButtonCount: 'cart-button__text-count',
+    changeCartText: function changeCartText(count, price, hint) {
+      var priceText = UserCart.getCartPriceText(price, 'р'); // '₽'
+
+      if (UserCart.cartCountBlock.length) {
+        UserCart.cartCountBlock.text(count);
+      }
+
+      if (UserCart.cartTextBlock.length) {
+        UserCart.cartTextBlock.text(priceText);
+      }
+
+      if (UserCart.orderSumTitleBlock.length) {
+        UserCart.orderSumTitleBlock.text(priceText); // `${count} ${countText} на сумму`
+      } // const countText = UserCart.getNumEnding(count, UserCart.props.productCountVariants)
+      // if (!hint) {
+      //   const priceText = UserCart.getCartPriceText(price)
+      //   hint = `В заявке ${count} ${countText} на сумму ${priceText}`
+      // }
+      // if (UserCart.cartHintBlock.length) {
+      //   UserCart.cartHintBlock.text(hint)
+      // }
+
+    },
+    // Button for add item to cart
     addToCartButton: '.catalog-item__button, .search-result-list__item-button',
     // baseAddToButtonClass: 'button_color_blue',
     // inOrderAddToButtonClass: 'button_border_orange',
     // inOrderAddToButtonText: 'В заказе',
+    // Input and "+/-" buttons on cart page for change item count.
     productAmountInput: 'cart-list__item-count-input',
     productAmountMinusButton: 'cart-list__item-count-button_action_minus',
     productAmountPlusButton: 'cart-list__item-count-button_action_plus',
+    // Button for delete item from cart
     deleteFromCartButton: 'cart-list__item-action-link',
+    // Items(divs) for "payment"(Способ оплаты) and "agree"(обработка ПД) fields
     orderPaymentItem: 'cart-order__payment-item',
     orderPaymentItemChecked: 'cart-order__payment-item_state_checked',
     orderAgreeCheckbox: 'cart-order__agree-checkbox',
     orderAgreeCheckboxChecked: 'cart-order__agree_state_checked',
+    // Count of numbers after decimal point in prices
+    priceFractionDigits: 0,
     // productCountVariants: ['позиция', 'позиции', 'позиций'],
-    // priceFractionDigits: 0,
     // emptyCartText: 'Ваш заказ',
+    // Cart page container and items in product list
     cartListContainer: 'cart-list',
     cartListProductRow: 'cart-list__item',
     cartListProductSum: 'cart-list__item-cost-second',
@@ -10963,6 +10868,158 @@ $(document).ready(function () {
   // Range sliders for catalog filters
   initializeRangeSliders();
 });
+
+if (true) {
+  module.hot.accept();
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./static/itcase_catalog/js/popupMenu.js":
+/*!***********************************************!*\
+  !*** ./static/itcase_catalog/js/popupMenu.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+var CatalogPopupMenu = /*#__PURE__*/function () {
+  function CatalogPopupMenu() {
+    _classCallCheck(this, CatalogPopupMenu);
+
+    this.$menu = $('.catalog-menu-popup');
+    this.timerShow = null;
+    this.timerHide = null;
+    this.animationEvents = 'webkitAnimationEnd oanimationend msAnimationEnd animationend';
+    this.showClass = 'catalog-menu-popup_state_visible';
+    this.hideClass = 'catalog-menu-popup_state_hidden';
+    this.state = {
+      open: this.$menu.hasClass(this.showClass),
+      locked: false
+    };
+    this.show = this.show.bind(this);
+    this.hide = this.hide.bind(this);
+    this.toggle = this.toggle.bind(this);
+  }
+
+  _createClass(CatalogPopupMenu, [{
+    key: "show",
+    value: function show() {
+      var _this = this;
+
+      clearTimeout(this.timerHide);
+      clearTimeout(this.timerShow);
+      this.state.locked = true;
+
+      if (this.$menu.hasClass(this.showClass) && this.$menu.hasClass(this.hideClass)) {
+        this.$menu.removeClass([this.hideClass, this.showClass].join(' ')).off(this.animationEvents);
+      }
+
+      this.timerShow = setTimeout(function () {
+        _this.$menu.addClass(_this.showClass);
+
+        _this.state.open = true;
+        _this.state.locked = false;
+      }, 0);
+    }
+  }, {
+    key: "hide",
+    value: function hide() {
+      var _this2 = this;
+
+      clearTimeout(this.timerHide);
+      clearTimeout(this.timerShow);
+      this.state.locked = true;
+
+      if (this.state.open) {
+        this.timerHide = setTimeout(function () {
+          _this2.$menu.addClass(_this2.hideClass).on(_this2.animationEvents, function () {
+            _this2.$menu.removeClass([_this2.hideClass, _this2.showClass].join(' ')).off(_this2.animationEvents);
+
+            _this2.state.open = false;
+            _this2.state.locked = false;
+          });
+        }, 200);
+      }
+    }
+  }, {
+    key: "toggle",
+    value: function toggle() {
+      if (this.state.locked) {
+        return false;
+      }
+
+      if (this.state.open) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    }
+  }]);
+
+  return CatalogPopupMenu;
+}();
+
+var menu = new CatalogPopupMenu();
+var $menuPopup = $('.catalog-menu__item_type_popup');
+
+if ($menuPopup.length) {
+  $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide); // prettier-ignore
+
+  menu.$menu.on('mouseenter', function () {
+    clearTimeout(menu.timerHide);
+  }).on('mouseleave', menu.hide);
+}
+
+var $menuPopupMobile = $('.header__catalog');
+
+if ($menuPopupMobile.length) {
+  $menuPopupMobile.on('click', function () {
+    return menu.toggle();
+  });
+}
+
+/***/ }),
+
+/***/ "./static/js/main.js":
+/*!***************************!*\
+  !*** ./static/js/main.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* globals SearchClass */
+
+
+if (typeof SearchClass !== 'undefined') {
+  global.ItcaseSearch = new SearchClass();
+}
 
 if (true) {
   module.hot.accept();

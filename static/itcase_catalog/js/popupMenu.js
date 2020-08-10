@@ -19,6 +19,7 @@ class CatalogPopupMenu {
 
     this.show = this.show.bind(this)
     this.hide = this.hide.bind(this)
+    this.toggle = this.toggle.bind(this)
   }
 
   show() {
@@ -71,29 +72,19 @@ class CatalogPopupMenu {
   }
 }
 
+const menu = new CatalogPopupMenu()
 const $menuPopup = $('.catalog-menu__item_type_popup')
 
 if ($menuPopup.length) {
-  const menu = new CatalogPopupMenu()
-
   $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide)
 
+  // prettier-ignore
   menu.$menu
-    .on('mouseenter', () => {
-      clearTimeout(menu.timerHide)
-    })
+    .on('mouseenter', () => { clearTimeout(menu.timerHide) })
     .on('mouseleave', menu.hide)
 }
 
 const $menuPopupMobile = $('.header__catalog')
-
 if ($menuPopupMobile.length) {
-  const menu = new CatalogPopupMenu()
-  $menuPopupMobile.on('click', (event) => {
-    if (menu.$menu.hasClass(menu.showClass)) {
-      menu.hide()
-    } else {
-      menu.show()
-    }
-  })
+  $menuPopupMobile.on('click', () => menu.toggle())
 }
