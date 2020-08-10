@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f0e74f5d93241c906703";
+/******/ 	var hotCurrentHash = "075d4616c19355ccd8a0";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10761,8 +10761,15 @@ if (typeof UserCartClass !== 'undefined') {
     headerCartButtonText: 'cart-button__text-sum',
     // 'cart-button__text'
     headerCartButtonCount: 'cart-button__text-count',
+    emptyCartText: 'Заказ',
     changeCartText: function changeCartText(count, price, hint) {
+      var cartButton = document.querySelector(".".concat(UserCart.props.headerCartButton));
       var priceText = UserCart.getCartPriceText(price, 'р'); // '₽'
+
+      if (cartButton.innerHTML.includes(UserCart.props.emptyCartText)) {
+        var cartButtonText = cartButton.querySelector('.cart-button__text');
+        UserCart.replaceHeaderCartButtonEmptyText(cartButtonText || cartButton, count, priceText);
+      }
 
       if (UserCart.cartCountBlock.length) {
         UserCart.cartCountBlock.text(count);
@@ -10803,7 +10810,6 @@ if (typeof UserCartClass !== 'undefined') {
     // Count of numbers after decimal point in prices
     priceFractionDigits: 0,
     // productCountVariants: ['позиция', 'позиции', 'позиций'],
-    // emptyCartText: 'Ваш заказ',
     // Cart page container and items in product list
     cartListContainer: 'cart-list',
     cartListProductRow: 'cart-list__item',

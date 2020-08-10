@@ -193,3 +193,20 @@ class SectionAtribute(models.Model):
         ordering = ['sort']
         verbose_name = 'Вкладка параметров'
         verbose_name_plural = 'Вкладки параметров'
+
+
+class OptionalProduct(models.Model):
+    product = models.ForeignKey(Product, related_name='optional_products',
+                                verbose_name=Product._meta.verbose_name,
+                                on_delete=models.CASCADE)
+    name = models.CharField('Название', blank=True, max_length=255,
+                            default='Рекомендованные товары')
+    products = models.ManyToManyField(
+        Product, blank=True, verbose_name='Товары')
+    sort = models.PositiveSmallIntegerField('Позиция', default=0)
+    show = models.BooleanField('Показывать?', default=False)
+
+    class Meta(object):
+        ordering = ['sort']
+        verbose_name = 'Cвязанные товары'
+        verbose_name_plural = 'Cвязанные товары'
