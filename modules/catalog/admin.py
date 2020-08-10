@@ -143,10 +143,6 @@ class ProductAdmin(ProductAdminBase):
                        'related_products', 'parametres',
                        'product_actions')
         }),
-        ('Характеристики', {
-            'fields': ['options'],
-            'classes': ('grp-collapse', 'grp-closed'),
-        }),
     )
     filter_horizontal = ['related_products',
                          'recommend_categories',
