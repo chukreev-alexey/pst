@@ -134,7 +134,7 @@ class ProductImageInline(admin.TabularInline):
 class PickingPriceInline(admin.TabularInline):
 
     model = Price
-    extra = 0
+    extra = 1
 
 
 class ProductAdminForm(forms.ModelForm):
@@ -153,7 +153,7 @@ class ProductAdmin(ProductAdminBase):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'price', 'article', 'measuring',
+            'fields': ('name', 'measuring',
                        ('in_hit', 'border'),
                        ('in_recommended', 'in_action'), ('category', 'brand'),
                        'recommend_categories', 'parametres',
@@ -166,6 +166,13 @@ class ProductAdmin(ProductAdminBase):
 
     inlines = [OptionalProductInline, SectionAtributeInline,
                ProductImageInline, PickingPriceInline]
+
+    list_display = ('name', 'category')
+
+    prepopulated_fields = {}
+
+    search_fields = ('name', 'prices__price', 'prices__article',
+                     'category__name')
 
     readonly_fields = ('product_actions',)
 
