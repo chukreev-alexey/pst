@@ -35,10 +35,7 @@
     <meta name="theme-color" content="#ffffff" />
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    {% if site_version == 'mobile' or site_version == 'tablet' %}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {% if site_domain in request.get_host %}
         <meta name="robots" content="index,follow" />

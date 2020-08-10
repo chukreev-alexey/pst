@@ -109,39 +109,40 @@
                         </div>
                         <div class="catalog-item-detail__price">607 р/м2</div>
                         <div class="catalog-item-detail__button button button_type_primary">
-                            <div class="button__text">В заказ</div>
+                            <div class="button__text">&nbsp;</div>
                         </div>
                     </div>
                 </div>
 
-                {% for price in product.prices.all %}
-                    <div>
-                        <p>{{ price.product_article }}: {{ price.price }}</p>
+                {% comment %}
+                    {% for price in product.prices.all %}
+                        <div>
+                            <p>{{ price.product_article }}: {{ price.price }}</p>
 
-                        {% for param in price.price_combination.all %}
-                           <p>{{ param }}</p>
-                        {% endfor %}
+                            {% for param in price.price_combination.all %}
+                               <p>{{ param }}</p>
+                            {% endfor %}
 
-                        {% with id=price.pk|unlocalize %}
-                            <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
-                               class="catalog-item__button button
-                                      {% if price in cart %}
-                                        button_border_orange
-                                      {% else %}
-                                        button_color_blue
-                                      {% endif %}"
-                                data-add-url="{% url 'itcase_cart:cart_add' %}"
-                                data-product="{{ id }}"
-                                data-amount-{{ id }}="1">
-                                {% if price in cart %}
-                                    В заказе
-                                {% else %}
-                                    Заказать
-                                {% endif %}
-                            </a>
-                        {% endwith %}
-                    </div>
-                {% endfor %}
+                            {% with id=price.pk|unlocalize %}
+                                <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                                   class="catalog-item__button button
+                                          {% if price in cart %}
+                                            button_border_orange
+                                          {% else %}
+                                            button_color_blue
+                                          {% endif %}"
+                                    data-add-url="{% url 'itcase_cart:cart_add' %}"
+                                    data-product="{{ id }}"
+                                    data-amount-{{ id }}="1">
+                                    {% if price in cart %}
+                                        В заказе
+                                    {% else %}
+                                        Заказать
+                                    {% endif %}
+                                </a>
+                            {% endwith %}
+                        </div>
+                    {% endfor %}
 
                 <div class="catalog-item-detail__info">
                     {% if product.is_exist %}
@@ -175,6 +176,7 @@
                             {% endif %}
                         </a>
                     {% endwith %}
+                {% endcomment %}
 
                 </div>
             </div>

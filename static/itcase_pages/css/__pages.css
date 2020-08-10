@@ -467,6 +467,7 @@ sans-serif;
 .site-menu-popup__wrapper {
     width: 100%;
     max-width: 1366px;
+    background: #fff;
     padding: 156px 0 0 56px;
     margin: 0 auto;
     display: -webkit-box;
@@ -474,7 +475,6 @@ sans-serif;
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
-    background: #fff;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
@@ -579,8 +579,8 @@ sans-serif;
     @media (min-width: 15em)
   and (max-width: 47.999em) {
   from {
-      -webkit-transform: translate(0, 0px);
-      transform: translate(0, 0px)
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0)
   }
     }
   to {
@@ -601,8 +601,8 @@ sans-serif;
     @media (min-width: 15em)
   and (max-width: 47.999em) {
   from {
-      -moz-transform: translate(0, 0px);
-      transform: translate(0, 0px)
+      -moz-transform: translate(0, 0);
+      transform: translate(0, 0)
   }
     }
   to {
@@ -623,8 +623,8 @@ sans-serif;
     @media (min-width: 15em)
   and (max-width: 47.999em) {
   from {
-      -o-transform: translate(0, 0px);
-      transform: translate(0, 0px)
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0)
   }
     }
   to {
@@ -647,10 +647,10 @@ sans-serif;
     @media (min-width: 15em)
   and (max-width: 47.999em) {
   from {
-      -webkit-transform: translate(0, 0px);
-      -moz-transform: translate(0, 0px);
-      -o-transform: translate(0, 0px);
-      transform: translate(0, 0px)
+      -webkit-transform: translate(0, 0);
+      -moz-transform: translate(0, 0);
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0)
   }
     }
   to {
@@ -679,8 +679,8 @@ sans-serif;
     @media (min-width: 15em)
   and (max-width: 47.999em) {
   to {
-      -webkit-transform: translate(0, 0px);
-      transform: translate(0, 0px)
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0)
   }
     }
 }
@@ -701,8 +701,8 @@ sans-serif;
     @media (min-width: 15em)
   and (max-width: 47.999em) {
   to {
-      -moz-transform: translate(0, 0px);
-      transform: translate(0, 0px)
+      -moz-transform: translate(0, 0);
+      transform: translate(0, 0)
   }
     }
 }
@@ -723,8 +723,8 @@ sans-serif;
     @media (min-width: 15em)
   and (max-width: 47.999em) {
   to {
-      -o-transform: translate(0, 0px);
-      transform: translate(0, 0px)
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0)
   }
     }
 }
@@ -749,10 +749,10 @@ sans-serif;
     @media (min-width: 15em)
   and (max-width: 47.999em) {
   to {
-      -webkit-transform: translate(0, 0px);
-      -moz-transform: translate(0, 0px);
-      -o-transform: translate(0, 0px);
-      transform: translate(0, 0px)
+      -webkit-transform: translate(0, 0);
+      -moz-transform: translate(0, 0);
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0)
   }
     }
 }
