@@ -63,7 +63,8 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
     fieldsets = (
         (None, {'fields': (('on_main_page', 'in_menu'),
-                           'name', 'slug', 'parent', 'image')}),
+                           'name', 'slug', 'parent', 'image',
+                           'filter_parametres')}),
         ('Контент', {
             'fields': ['content'],
             'classes': ('grp-collapse', 'grp-open'),
@@ -78,6 +79,8 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
     inlines = []
 
     prepopulated_fields = {'slug': ('name',)}
+
+    filter_horizontal = ['filter_parametres']
 
     # DjangoMpttAdmin
     change_tree_template = 'itcase_pages/django_mptt_admin/change_list.html'
