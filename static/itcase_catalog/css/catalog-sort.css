@@ -1,38 +1,23 @@
-
 .catalog-sort {
   width: 100%;
   display: flex;
   &__group {
-    margin: 0 40px 0 0;
-    border-bottom: solid 3px var(--color-orange);
+    margin: 0 40px 16px 0;
     display: flex;
-    @media (--mobile-small), (--mobile-medium) {
-      margin: 0;
+    &:first-child {
+      flex: 1;
     }
     &:last-child {
-      margin: 0;
-      border-bottom: solid 3px var(--color-blue);
-      @media (--mobile-small), (--mobile-medium) {
-        margin: 0 0 0 auto;
-      }
-      & .catalog-sort__group-item {
-        &:hover {
-          color: var(--color-blue);
-        }
-      }
+      margin: 0 0 16px 0;
     }
     &-item {
-      font: 14px/24px var(--font);
+      @mixin font normal, 14px, 16px, 14px, 16px, var(--font-title-secondary);
       color: var(--color-black);
       text-decoration: none;
-      margin: 0 20px 3px 0;
+      margin: 0 20px 0 0;
       position: relative;
       display: block;
       transition: all 0.15s ease-out;
-      @media (--mobile-small), (--mobile-medium) {
-        font: 11px/21px var(--font);
-        margin: 0 16px 5px 0;
-      }
       &:hover {
         color: var(--color-orange);
       }

@@ -83,9 +83,9 @@
         {% endif %}
 
         {% if filter_price_max and filter_price_min %}
-            <div class="catalog-filter-group catalog-filter-group_state_close">
+            <div class="catalog-filter-group">
                 <div class="catalog-filter-group__title">Стоимость</div>
-                <div class="catalog-filter-group__range clearfix">
+                <div class="catalog-filter-group__range">
                     <input class="catalog-filter-group__range-item" type="text" name="filter-price_min" value="{{ filter_price_min }}" data-price-min="true" />
                     <div class="catalog-filter-group__range-separator">&nbsp;</div>
                     <input class="catalog-filter-group__range-item" type="text" name="filter-price_max" value="{{ filter_price_max }}" data-price-max="true" />
@@ -102,7 +102,7 @@
                         {% for parametr, parametr_data in parametres.items %}
                             <div class="catalog-filter-group__list-item
                                         {% if parametr_data.checked %} catalog-filter-group__list-item_state_checked{% endif %}
-                                        {% if parametr_data.items_count %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                                        {% if not parametr_data.items_count %} catalog-filter-group__list-item_state_disabled{% endif %}">
                                 <label class="catalog-filter-group__list-item-label">
                                     <input class="catalog-filter-group__list-item-checkbox"
                                            type="checkbox"
@@ -121,15 +121,13 @@
             {% endfor %}
         {% endif %}
 
-
         <div class="catalog-filter__button">
-            <input class="catalog-filter__button-item button button_type_neutral" type="submit" name="" value="Показать" />
+            <input class="catalog-filter__button-item button button_type_primary" type="submit" name="" value="Показать" />
         </div>
 
         <div class="catalog-filter__clear button button_type_neutral">
             <div class="button__text">Очистить фильтры</div>
         </div>
-
     </form>
 
 {% endlocalize %}

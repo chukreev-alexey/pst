@@ -5,21 +5,17 @@
   }
   &__wrapper {
     width: 100%;
-    border-bottom: solid 1px transparent;
     position: relative;
     box-sizing: border-box;
     z-index: 1000;
     transition: all 0.2s cubic-bezier(0.21, 1.03, 0.7, 1);
+    background: var(--color-surface);
     &_state_show,
     &_state_hide {
-      background: var(--color-surface);
       position: fixed;
       left: 0;
       top: 0;
       right: 0;
-    }
-    &_state_show {
-      border-bottom: solid 1px var(--color-neutral);
     }
     ^&__inner {
       width: 100%;

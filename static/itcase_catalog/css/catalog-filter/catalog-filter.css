@@ -1,0 +1,55 @@
+.catalog-filter {
+  width: 100%;
+  background: var(--color-neutral);
+  padding: 24px;
+  box-sizing: border-box;
+  @media (--mobile) {
+    height: 100%;
+    padding: 45px 20px 110px 20px;
+    position: relative;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    z-index: 100;
+    transform: translateX(100%);
+    overflow-y: scroll;
+  }
+  &_state_visible.catalog-filter {
+    animation: catalogFilterAnimationShow 0.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  &_state_hidden.catalog-filter {
+    animation: catalogFilterAnimationHide 0.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  &__clear.button {
+    padding: 15px 17px 13px 17px;
+    margin: 15px 0 0 0;
+    display: block;
+  }
+  &__button {
+    width: 100%;
+    text-align: center;
+    &-item {
+      width: 100%;
+      border: 0 solid;
+    }
+  }
+}
+
+@keyframes catalogFilterAnimationShow {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes catalogFilterAnimationHide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

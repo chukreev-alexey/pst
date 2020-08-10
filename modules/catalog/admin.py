@@ -8,7 +8,7 @@ from itcase_catalog.admin import ProductAdmin as ProductAdminBase
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 
 from .models.catalog import (Brand, Parametr, ProductParametr, Measurement,
-                             SectionAtribute)
+                             SectionAtribute, OptionalProduct)
 from .models.parametres import ProductImage, Price, PriceCombinations
 
 
@@ -63,7 +63,8 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
     fieldsets = (
         (None, {'fields': (('on_main_page', 'in_menu'),
-                           'name', 'slug', 'parent', 'image')}),
+                           'name', 'slug', 'parent', 'image',
+                           'filter_parametres')}),
         ('Контент', {
             'fields': ['content'],
             'classes': ('grp-collapse', 'grp-open'),
@@ -78,6 +79,8 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
     inlines = []
 
     prepopulated_fields = {'slug': ('name',)}
+
+    filter_horizontal = ['filter_parametres']
 
     # DjangoMpttAdmin
     change_tree_template = 'itcase_pages/django_mptt_admin/change_list.html'
@@ -96,6 +99,20 @@ class SectionAtributeInline(admin.TabularInline):
         (None, {'fields': (('section_name', 'sort', 'show'),
                            'section_content')}),
     )
+
+
+class OptionalProductInline(admin.TabularInline):
+
+    model = OptionalProduct
+    extra = 0
+
+    sortable_field_name = 'sort'
+
+    fieldsets = (
+        (None, {'fields': (('name', 'sort', 'show'), 'products')}),
+    )
+
+    filter_horizontal = ['products']
 
 
 class ProductImageInline(admin.TabularInline):
@@ -151,7 +168,8 @@ class ProductAdmin(ProductAdminBase):
 
     form = ProductAdminForm
 
-    inlines = [SectionAtributeInline, ProductImageInline, PickingPriceInline]
+    inlines = [OptionalProductInline, SectionAtributeInline,
+               ProductImageInline, PickingPriceInline]
 
     readonly_fields = ('product_actions',)
 

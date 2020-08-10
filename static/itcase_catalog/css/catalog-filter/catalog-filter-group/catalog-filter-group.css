@@ -1,0 +1,17 @@
+.catalog-filter-group {
+  &_state_close {
+    & .catalog-filter-group__title {
+      &::after {
+        background: url('./../img/icons/arrow_up_black.svg') no-repeat 50% 50%;
+      }
+    }
+  }
+  &_state_open {
+    & .catalog-filter-group__title {
+      &::before {
+        top: 17px;
+        transform: rotate(-135deg);
+      }
+    }
+  }
+}

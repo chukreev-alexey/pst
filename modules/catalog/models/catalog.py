@@ -26,40 +26,6 @@ from itcase_common.models import SEOModel
 from itcase_common.models.mixins import FieldExistsMixin
 
 
-class Category(MPTTModel, CategoryBase, SEOModel):
-    from mptt.fields import TreeForeignKey
-    from django.core.validators import validate_slug
-
-    slug = models.SlugField('Slug', unique=True, validators=[validate_slug])
-    parent = TreeForeignKey('self', related_name='children',
-                            verbose_name='Родительский элемент',
-                            on_delete=models.SET_NULL, blank=True, null=True)
-
-    content = TinyMCEModelField('Подробное описание', blank=True)
-    image = FileBrowseField('Изображение', format='image', max_length=255,
-                            blank=True)
-
-    on_main_page = models.BooleanField('Отображать на главной странице?',
-                                       default=False)
-    in_menu = models.BooleanField('Отображать в меню?', default=False)
-
-    class Meta(CategoryBase.Meta):
-        pass
-
-    def get_products(self):
-        """Return products from all nested categories."""
-        descendants = self.get_descendants(include_self=True)
-
-        return Product.objects.filter(category__in=descendants)
-
-    def get_absolute_url(self):
-        if self.level == 2:
-            url = reverse_lazy('category-detail', args=[str(self.parent.slug)])
-            return str(url) + '?filter-category=%s' % self.pk
-
-        return reverse_lazy('category-detail', args=[str(self.slug)])
-
-
 class Measurement(models.Model):
     name = models.CharField('Обозначение', max_length=255)
 
@@ -114,6 +80,46 @@ class ProductParametr(models.Model):
 
     def __str__(self):
         return f'{self.parametr.name}: {self.value}'
+
+
+class Category(MPTTModel, CategoryBase, SEOModel):
+    from mptt.fields import TreeForeignKey
+    from django.core.validators import validate_slug
+
+    slug = models.SlugField('Slug', unique=True, validators=[validate_slug])
+    parent = TreeForeignKey('self', related_name='children',
+                            verbose_name='Родительский элемент',
+                            on_delete=models.SET_NULL, blank=True, null=True)
+
+    content = TinyMCEModelField('Подробное описание', blank=True)
+    image = FileBrowseField('Изображение', format='image', max_length=255,
+                            blank=True)
+
+    on_main_page = models.BooleanField('Отображать на главной странице?',
+                                       default=False)
+    in_menu = models.BooleanField('Отображать в меню?', default=False)
+
+    filter_parametres = models.ManyToManyField(
+        Parametr,
+        related_name='categories',
+        verbose_name='Параметры для фильтра',
+        blank=True)
+
+    class Meta(CategoryBase.Meta):
+        pass
+
+    def get_products(self):
+        """Return products from all nested categories."""
+        descendants = self.get_descendants(include_self=True)
+
+        return Product.objects.filter(category__in=descendants)
+
+    def get_absolute_url(self):
+        if self.level == 2:
+            url = reverse_lazy('category-detail', args=[str(self.parent.slug)])
+            return str(url) + '?filter-category=%s' % self.pk
+
+        return reverse_lazy('category-detail', args=[str(self.slug)])
 
 
 class Product(ProductBase, FieldExistsMixin):
@@ -187,3 +193,20 @@ class SectionAtribute(models.Model):
         ordering = ['sort']
         verbose_name = 'Вкладка параметров'
         verbose_name_plural = 'Вкладки параметров'
+
+
+class OptionalProduct(models.Model):
+    product = models.ForeignKey(Product, related_name='optional_products',
+                                verbose_name=Product._meta.verbose_name,
+                                on_delete=models.CASCADE)
+    name = models.CharField('Название', blank=True, max_length=255,
+                            default='Рекомендованные товары')
+    products = models.ManyToManyField(
+        Product, blank=True, verbose_name='Товары')
+    sort = models.PositiveSmallIntegerField('Позиция', default=0)
+    show = models.BooleanField('Показывать?', default=False)
+
+    class Meta(object):
+        ordering = ['sort']
+        verbose_name = 'Cвязанные товары'
+        verbose_name_plural = 'Cвязанные товары'
