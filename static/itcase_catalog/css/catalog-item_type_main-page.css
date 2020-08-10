@@ -2,5 +2,22 @@
   &&_type_main-page {
     width: calc(25% - 32px);
     margin: 0 32px 32px 0;
+    & .catalog-item {
+      &__inner {
+        @media (--mobile) {
+          flex-flow: row wrap;
+        }
+        &-left {
+          @media (--mobile) {
+            width: 100%;
+          }
+        }
+        &-right {
+          @media (--mobile) {
+            margin: 16px 0 0 0;
+          }
+        }
+      }
+    }
   }
 }
