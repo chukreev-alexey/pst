@@ -101,6 +101,17 @@
                             <div class="catalog-item-detail__param-item-text">Название параметра</div>
                         </label>
                     </div>
+                    <div class="catalog-item-detail__info">
+                        <div class="catalog-item-detail__count">
+                            <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus">&nbsp;</div>
+                            <input class="catalog-item-detail__count-input" maxlength="3" type="text">
+                            <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus">&nbsp;</div>
+                        </div>
+                        <div class="catalog-item-detail__price">607 р/м2</div>
+                        <div class="catalog-item-detail__button button button_type_primary">
+                            <div class="button__text">В заказ</div>
+                        </div>
+                    </div>
                 </div>
 
                 {% for price in product.prices.all %}
