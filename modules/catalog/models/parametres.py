@@ -9,9 +9,6 @@ class ProductImage(models.Model):
     image = FileBrowseField('Изображение', format='image', max_length=255,
                             blank=True)
     sort = models.PositiveSmallIntegerField('Позиция', default=0)
-    color = models.ForeignKey(ProductParametr, related_name='color_images',
-                              verbose_name='Цвет',
-                              on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Product, related_name='images',
                                 verbose_name=Product._meta.verbose_name,
                                 on_delete=models.CASCADE)
