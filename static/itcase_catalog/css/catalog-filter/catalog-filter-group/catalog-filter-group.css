@@ -1,9 +1,4 @@
 .catalog-filter-group {
-  &_state_level {
-    & .catalog-filter-group__list-item-text {
-      color: var(--color-blue);
-    }
-  }
   &_state_close {
     & .catalog-filter-group__title {
       &::after {

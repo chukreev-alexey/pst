@@ -116,25 +116,25 @@
     margin: 0 0 10px 0;
   }
 
-.catalog-filter-group__list-item_state_checked .catalog-filter-group__list-item-label::before {
-          display: block;
+.catalog-filter-group__list-item.catalog-filter-group__list-item_state_checked .catalog-filter-group__list-item-label::before {
+            display: block;
+          }
+
+.catalog-filter-group__list-item.catalog-filter-group__list-item_state_checked .catalog-filter-group__list-item-label::after {
+            border: solid 1px #000;
+          }
+
+.catalog-filter-group__list-item.catalog-filter-group__list-item_state_disabled .catalog-filter-group__list-item-label::after {
+            border: solid 1px #999;
+          }
+
+.catalog-filter-group__list-item.catalog-filter-group__list-item_state_disabled .catalog-filter-group__list-item-text {
+          color: #999;
         }
 
-.catalog-filter-group__list-item_state_checked .catalog-filter-group__list-item-label::after {
-          border: solid 1px #000;
-        }
-
-.catalog-filter-group__list-item_state_disabled .catalog-filter-group__list-item-label::after {
-          border: solid 1px #000;
-        }
-
-.catalog-filter-group__list-item_state_disabled .catalog-filter-group__list-item-text {
-        color: #000;
-      }
-
-.catalog-filter-group__list-item_state_disabled .catalog-filter-group__list-item-text:hover {
-          color: #000;
-        }
+.catalog-filter-group__list-item.catalog-filter-group__list-item_state_disabled .catalog-filter-group__list-item-text:hover {
+            color: #999;
+          }
 
 .catalog-filter-group__list-item-label {
       width: 100%;
@@ -177,13 +177,9 @@
         cursor: pointer;
       }
 
-.catalog-filter-group__list-item-label:hover::after {
-          border: solid 1px #333;
-        }
-
 .catalog-filter-group__list-item-label:hover .catalog-filter-group__list-item-text {
-          color: #333;
-        }
+            color: #d82318;
+          }
 
 .catalog-filter-group__list-item-checkbox {
       position: absolute;
@@ -197,7 +193,7 @@
 .catalog-filter-group__list-item-text {
       color: #000;
       padding: 1px 0 0 0;
-      margin: 0 0 0 25px;
+      margin: 0 0 0 24px;
       display: block;
       font-size: calc(1rem + 0 * ((100vw - 20rem) / 140));
       font-weight: normal;
@@ -418,10 +414,6 @@ sans-serif;
     }
 
 /* stylelint-disable custom-property-empty-line-before */
-
-.catalog-filter-group_state_level .catalog-filter-group__list-item-text {
-      color: var(--color-blue);
-    }
 
 .catalog-filter-group_state_close .catalog-filter-group__title::after {
         background: url('./../img/icons/arrow_up_black.svg') no-repeat 50% 50%;

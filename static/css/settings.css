@@ -32,8 +32,10 @@
   --color-surface-hover: #fafafa;
   --color-surface-text: #000;
   --color-surface-text-hover: #f4a404;
+  --color-surface-text-disabled: #999;
   --color-surface-item: #000;
   --color-surface-item-hover: #f4a404;
+  --color-surface-item-disabled: #999;
   --color-surface-shadow: rgba(#000, 0.2);
   --color-surface-border: #333;
 
