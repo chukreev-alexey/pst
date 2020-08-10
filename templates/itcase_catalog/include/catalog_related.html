@@ -15,28 +15,17 @@
     {% endfor %}
 {% endif %}
 
-{% if product.recommend_products %}
+{% if product.get_optional_products %}
     <div class="catalog-related">
         <div class="catalog-related__title">Вам может пригодиться</div>
         <div class="catalog-related__wrapper">
-            {% for product in product.recommend_products.all %}
-                {% with item_class='catalog-related__item' product=product %}
-                    {% include './catalog_item.html' %}
-                {% endwith %}
-            {% endfor %}
-        </div>
-    </div>
-{% endif %}
-
-
-{% if product.related_products.all %}
-    <div class="catalog-related">
-        <div class="catalog-related__title">{{ title|default:"Вам может пригодиться" }}</div>
-        <div class="catalog-related__wrapper">
-            {% for related_product in product.related_products.all %}
-                {% with item_class='catalog-related__item' product=related_product %}
-                    {% include './catalog_item.html' %}
-                {% endwith %}
+            {% for optional_products in product.get_optional_products %}
+                {{ optional_products.name }}
+                {% for product in optional_products.products.all %}
+                    {% with item_class='catalog-related__item' product=product %}
+                        {% include './catalog_item.html' %}
+                    {% endwith %}
+                {% endfor %}
             {% endfor %}
         </div>
     </div>

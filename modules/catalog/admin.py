@@ -156,15 +156,11 @@ class ProductAdmin(ProductAdminBase):
             'fields': ('name', 'price', 'article', 'measuring',
                        ('in_hit', 'border'),
                        ('in_recommended', 'in_action'), ('category', 'brand'),
-                       'recommend_categories', 'recommend_products',
-                       'related_products', 'parametres',
+                       'recommend_categories', 'parametres',
                        'product_actions')
         }),
     )
-    filter_horizontal = ['related_products',
-                         'recommend_categories',
-                         'recommend_products',
-                         'parametres']
+    filter_horizontal = ['recommend_categories', 'parametres']
 
     form = ProductAdminForm
 

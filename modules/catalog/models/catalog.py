@@ -128,10 +128,6 @@ class Product(ProductBase, FieldExistsMixin):
                               on_delete=models.SET_NULL, blank=True, null=True)
     recommend_categories = models.ManyToManyField(
         Category, blank=True, verbose_name='Рекомендуем категории')
-    recommend_products = models.ManyToManyField(
-        'self', blank=True, verbose_name='Рекомендуем товары')
-    related_products = models.ManyToManyField(
-        'self', blank=True, verbose_name='Комплектующие')
 
     in_hit = models.BooleanField('Хит?', default=False)
     in_action = models.BooleanField('Учавствует в акции?', default=False)
@@ -177,6 +173,9 @@ class Product(ProductBase, FieldExistsMixin):
 
     def has_sections(self):
         return self.sections.exists()
+
+    def get_optional_products(self):
+        return self.optional_products.filter(show=True)
 
 
 class SectionAtribute(models.Model):
