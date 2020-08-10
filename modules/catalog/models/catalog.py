@@ -23,6 +23,7 @@ from filebrowser.fields import FileBrowseField
 
 from itcase_catalog.models import ProductBase, CategoryBase
 from itcase_common.models import SEOModel
+from itcase_common.models.mixins import FieldExistsMixin
 
 
 class Category(MPTTModel, CategoryBase, SEOModel):
@@ -115,7 +116,7 @@ class ProductParametr(models.Model):
         return f'{self.parametr.name}: {self.value}'
 
 
-class Product(ProductBase):
+class Product(ProductBase, FieldExistsMixin):
     brand = models.ForeignKey(Brand,
                               related_name='products', verbose_name='Бренд',
                               on_delete=models.SET_NULL, blank=True, null=True)
