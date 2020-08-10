@@ -11,7 +11,7 @@
   --color-primary-hover: color(rgba(#d82318, 1) l(30%));
   --color-primary-text: #fff;
   --color-primary-text-hover: #fff;
-  --color-primary-item: #000;
+  --color-primary-item: #fff;
   --color-primary-item-hover: #f4a404;
 
   --color-secondary: #069;
@@ -24,6 +24,7 @@
   --color-neutral-hover: color(rgba(#f9f9fa, 1) l(90%));
   --color-neutral-text: #000;
   --color-neutral-text-hover: #f4a404;
+  --color-neutral-item: #eee;
   --color-neutral-border: #eee;
   --color-neutral-shadow: rgba(#000, 0.2);
 

@@ -411,42 +411,25 @@ sans-serif;
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 32px;
+  bottom: -32px;
 }
-
-@media (min-width: 15em)
-  and (max-width: 47.999em) {
-
-.rotator-pagination {
-    bottom: 12px
-}
-  }
 
 .rotator-pagination_state_hidden {
     display: none;
   }
 
 .rotator-pagination .swiper-pagination-bullet {
-      width: 16px;
-      height: 16px;
-      background: #f9f9fa;
-      margin: 0 12px;
+      width: 12px;
+      height: 12px;
+      background: #eee;
+      margin: 0 16px;
       outline: 0;
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
       opacity: 1;
     }
 
-@media (min-width: 15em)
-  and (max-width: 47.999em) {
-
-.rotator-pagination .swiper-pagination-bullet {
-        width: 12px;
-        height: 12px
-    }
-      }
-
 .rotator-pagination .swiper-pagination-bullet-active {
-        background: #d82318;
+        background: #069;
       }
 
 /* stylelint-disable custom-property-empty-line-before */

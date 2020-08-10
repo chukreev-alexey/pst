@@ -2,27 +2,20 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 32px;
-  @media (--mobile) {
-    bottom: 12px;
-  }
+  bottom: -32px;
   &_state_hidden {
     display: none;
   }
   & .swiper-pagination {
     &-bullet {
-      width: 16px;
-      height: 16px;
-      background: var(--color-neutral);
-      margin: 0 12px;
+      width: 12px;
+      height: 12px;
+      background: var(--color-neutral-item);
+      margin: 0 16px;
       outline: 0;
       opacity: 1;
-      @media (--mobile) {
-        width: 12px;
-        height: 12px;
-      }
       &-active {
-        background: var(--color-primary);
+        background: var(--color-secondary);
       }
     }
   }

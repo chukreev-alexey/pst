@@ -1,7 +1,36 @@
 {% load fb_versions static %}
 
+{% if product.recommend_categories %}
+    {% for category in product.recommend_categories.all %}
+        <div class="catalog-related">
+            <div class="catalog-related__title">{{ category }}</div>
+            <div class="catalog-related__wrapper">
+                {% for product in category.products.all %}
+                    {% with item_class='catalog-related__item' product=product %}
+                        {% include './catalog_item.html' %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if product.recommend_products %}
+    <div class="catalog-related">
+        <div class="catalog-related__title">Рекомендуем товары</div>
+        <div class="catalog-related__wrapper">
+            {% for product in product.recommend_products.all %}
+                {% with item_class='catalog-related__item' product=product %}
+                    {% include './catalog_item.html' %}
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+
 {% if product.related_products.all %}
-    <div class="catalog-related clearfix">
+    <div class="catalog-related">
         <div class="catalog-related__title">{{ title|default:"Рекомендуем" }}</div>
         <div class="catalog-related__wrapper">
             {% for related_product in product.related_products.all %}

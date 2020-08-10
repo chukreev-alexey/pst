@@ -71,6 +71,7 @@
         top: 23px;
         right: 25px;
         transform: rotate(-45deg);
+        display: none;
         @media (--mobile) {
           display: inline-block;
         }
