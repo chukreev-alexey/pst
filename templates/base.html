@@ -107,7 +107,7 @@
 
     {% include 'itcase_pages/include/site_menu_popup.html' %}
 
-    <div class="header">
+    <div class="header" data-sticky-static="true">
         <div class="header__wrapper">
             <div class="header__inner">
                 <div class="header__hamburger">
@@ -159,6 +159,9 @@
                     </div>
                 </div>
             </div>
+            {% with hide_image=True %}
+                {% catalog_menu %}
+            {% endwith %}
         </div>
     </div>
 
@@ -166,9 +169,6 @@
         {% include 'itcase_search/include/quick/quick_search_popup.html' %}
     {% endwith %}
 
-    {% with hide_image=True %}
-        {% catalog_menu %}
-    {% endwith %}
 
     {% rotator page=request.page %}
 

@@ -1,5 +1,11 @@
 .button {
   &&_type_primary {
     background: var(--color-primary);
+    color: var(--color-primary-text);
+    & .button {
+      &__text {
+        color: var(--color-primary-text);
+      }
+    }
   }
 }
