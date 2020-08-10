@@ -360,9 +360,12 @@ class CategoryDetail(RequestDataMixin, SingleObjectMixin, ProductListView):
 
     def get_filter_fields(self):
         products = self.object.get_products()
-        return Parametr.objects.filter(
-            product_parametres__products__in=products).values_list(
-                'query_name', flat=True).distinct()
+        products_query = Q(product_parametres__products__in=products)
+        if self.object.filter_parametres.exists():
+            queryset = self.object.filter_parametres.filter(products_query)
+        else:
+            queryset = Parametr.objects.filter(products_query)
+        return queryset.values_list('query_name', flat=True).distinct()
 
 
 class ProductDetail(ProductDetailBase):
