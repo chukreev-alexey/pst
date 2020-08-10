@@ -8,7 +8,7 @@ from itcase_catalog.admin import ProductAdmin as ProductAdminBase
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 
 from .models.catalog import (Brand, Parametr, ProductParametr, Measurement,
-                             SectionAtribute)
+                             SectionAtribute, OptionalProduct)
 from .models.parametres import ProductImage, Price, PriceCombinations
 
 
@@ -101,6 +101,20 @@ class SectionAtributeInline(admin.TabularInline):
     )
 
 
+class OptionalProductInline(admin.TabularInline):
+
+    model = OptionalProduct
+    extra = 0
+
+    sortable_field_name = 'sort'
+
+    fieldsets = (
+        (None, {'fields': (('name', 'sort', 'show'), 'products')}),
+    )
+
+    filter_horizontal = ['products']
+
+
 class ProductImageInline(admin.TabularInline):
 
     model = ProductImage
@@ -154,7 +168,8 @@ class ProductAdmin(ProductAdminBase):
 
     form = ProductAdminForm
 
-    inlines = [SectionAtributeInline, ProductImageInline, PickingPriceInline]
+    inlines = [OptionalProductInline, SectionAtributeInline,
+               ProductImageInline, PickingPriceInline]
 
     readonly_fields = ('product_actions',)
 
