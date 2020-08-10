@@ -11,6 +11,7 @@ django-recaptcha
 django-redis
 django-tinymce-4
 django-rq
+django-widget-tweaks
 django<3
 djangorestframework
 django-user-agents
