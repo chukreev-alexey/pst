@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "89870dccbc51731f588a";
+/******/ 	var hotCurrentHash = "c617f69cf6c9890de19f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10847,6 +10847,14 @@ if ($menuPopup.length) {
   menu.$menu.on('mouseenter', function () {
     clearTimeout(menu.timerHide);
   }).on('mouseleave', menu.hide);
+}
+
+var $menuPopupMobile = $('.header__catalog');
+
+if ($menuPopupMobile.length) {
+  var _menu = new CatalogPopupMenu();
+
+  $menuPopupMobile.on('click', _menu.show);
 }
 
 /***/ }),

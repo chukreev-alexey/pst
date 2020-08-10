@@ -84,3 +84,10 @@ if ($menuPopup.length) {
     })
     .on('mouseleave', menu.hide)
 }
+
+const $menuPopupMobile = $('.header__catalog')
+
+if ($menuPopupMobile.length) {
+  const menu = new CatalogPopupMenu()
+  $menuPopupMobile.on('click', menu.show)
+}

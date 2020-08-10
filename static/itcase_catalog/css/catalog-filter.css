@@ -49,21 +49,21 @@
     }
     &_state_open {
       & .catalog-filter-group__title {
-        &::after {
-          background: url('./../img/icons/arrow_down_black.svg') no-repeat 50% 50%;
+        &::before {
+          top: 17px;
+          transform: rotate(-135deg);
         }
       }
     }
     &__title {
       padding: 10px 0 0 0;
-      margin: 0 10px 10px 0;
+      margin: 0 0 10px 0;
       position: relative;
       cursor: pointer;
-      @mixin font normal, 16px, 16px, 22px, 22px, var(--font);
+      @mixin font 500, 16px, 16px, 22px, 22px, var(--font-title-secondary);
       &::after {
         width: 20px;
         height: 20px;
-        color: var(--color-black);
         padding: 5px;
         margin: 3px 0 0 0;
         border-radius: 100px;
@@ -76,9 +76,21 @@
         transform: translateY(-50%);
         transition: all 0.15s ease-out;
       }
+      &::before {
+        padding: 3px;
+        border: solid var(--color-neutral-text);
+        border-width: 0 2px 2px 0;
+        position: absolute;
+        content: '';
+        top: 13px;
+        right: 11px;
+        transform: rotate(45deg);
+        display: inline-block;
+        z-index: 2;
+      }
       &:hover {
         &::after {
-          background-color: var(--color-surface-text);
+          background: var(--color-neutral-hover);
         }
       }
     }
@@ -112,7 +124,7 @@
               display: block;
             }
             &::after {
-              border: solid 1px var(--color-blue);
+              border: solid 1px var(--color-surface-item);
             }
           }
         }
@@ -134,16 +146,17 @@
           position: relative;
           display: block;
           &::before {
-            width: 18px;
-            height: 13px;
-            background: url('./../img/icons/arrow_check_black.svg') no-repeat 50% 50%;
-            background-size: contain;
             position: absolute;
-            content: '';
             display: none;
-            left: 2px;
+            left: 5px;
             top: 5px;
             z-index: 2;
+            padding: 3px 3px 3px 8px;
+            border: solid var(--color-surface-item);
+            border-width: 0 0 3px 3px;
+            position: absolute;
+            content: '';
+            transform: rotate(-45deg);
           }
           &::after {
             width: 13px;

@@ -1490,7 +1490,7 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .cookies-warning__inner {
-      padding: 0 15px;
+      padding: 20px 16px;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
       -webkit-flex-direction: column;
@@ -1610,7 +1610,7 @@ sans-serif;
 .cookies-warning__inner .cookies-warning__button {
         width: 100%;
         text-align: center;
-        margin: 10px 0 20px 0;
+        margin: 10px 0 0 0;
         display: block
     }
       }

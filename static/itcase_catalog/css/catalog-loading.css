@@ -10,7 +10,7 @@
   animation-duration: 0.5s;
   animation-fill-mode: both;
   & .sk-three-bounce .sk-child {
-    background-color: var(--color-blue);
+    background-color: var(--color-primary);
   }
   &_state_visible {
     display: block;

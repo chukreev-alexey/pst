@@ -31,7 +31,7 @@
     flex-flow: column wrap;
     box-sizing: border-box;
     @media (--mobile) {
-      padding: 0 15px;
+      padding: 20px 16px;
       flex-direction: column;
     }
     ^&__text {
@@ -60,7 +60,7 @@
       @media (--mobile) {
         width: 100%;
         text-align: center;
-        margin: 10px 0 20px 0;
+        margin: 10px 0 0 0;
         display: block;
       }
       &:hover {

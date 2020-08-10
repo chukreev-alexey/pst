@@ -176,18 +176,23 @@
           background: url('./../img/icons/arrow_up_black.svg') no-repeat 50% 50%;
         }
 
-.catalog-filter-group_state_open .catalog-filter-group__title::after {
-          background: url('./../img/icons/arrow_down_black.svg') no-repeat 50% 50%;
+.catalog-filter-group_state_open .catalog-filter-group__title::before {
+          top: 17px;
+          -webkit-transform: rotate(-135deg);
+          -moz-transform: rotate(-135deg);
+          -ms-transform: rotate(-135deg);
+          -o-transform: rotate(-135deg);
+          transform: rotate(-135deg);
         }
 
 .catalog-filter-group__title {
       padding: 10px 0 0 0;
-      margin: 0 10px 10px 0;
+      margin: 0 0 10px 0;
       position: relative;
       cursor: pointer;
       font-size: calc(1rem + 0 * ((100vw - 20rem) / 140));
-      font-weight: normal;
-      font-family: 'Fact'
+      font-weight: 500;
+      font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
       line-height: calc(1.375rem + 0 * ((100vw - 20rem) / 140));
@@ -224,7 +229,6 @@ sans-serif;
 .catalog-filter-group__title::after {
         width: 20px;
         height: 20px;
-        color: var(--color-black);
         padding: 5px;
         margin: 3px 0 0 0;
         -webkit-border-radius: 100px;
@@ -247,8 +251,25 @@ sans-serif;
         transition: all 0.15s ease-out;
       }
 
+.catalog-filter-group__title::before {
+        padding: 3px;
+        border: solid #000;
+        border-width: 0 2px 2px 0;
+        position: absolute;
+        content: '';
+        top: 13px;
+        right: 11px;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+        display: inline-block;
+        z-index: 2;
+      }
+
 .catalog-filter-group__title:hover::after {
-          background-color: #000;
+          background: rgb(227, 227, 232);
         }
 
 .catalog-filter-group__range-item {
@@ -284,7 +305,7 @@ sans-serif;
             }
 
 .catalog-filter-group__list-item_state_checked .catalog-filter-group__list-item-label::after {
-              border: solid 1px var(--color-blue);
+              border: solid 1px #000;
             }
 
 .catalog-filter-group__list-item_state_disabled .catalog-filter-group__list-item-label::after {
@@ -306,18 +327,21 @@ sans-serif;
         }
 
 .catalog-filter-group__list-item-label::before {
-            width: 18px;
-            height: 13px;
-            background: url('./../img/icons/arrow_check_black.svg') no-repeat 50% 50%;
-            -moz-background-size: contain;
-            -o-background-size: contain;
-            background-size: contain;
             position: absolute;
-            content: '';
             display: none;
-            left: 2px;
+            left: 5px;
             top: 5px;
             z-index: 2;
+            padding: 3px 3px 3px 8px;
+            border: solid #000;
+            border-width: 0 0 3px 3px;
+            position: absolute;
+            content: '';
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
           }
 
 .catalog-filter-group__list-item-label::after {
@@ -2606,7 +2630,7 @@ sans-serif;
 }
 
 .catalog-loading .sk-three-bounce .sk-child {
-    background-color: var(--color-blue);
+    background-color: #d82318;
   }
 
 .catalog-loading_state_visible {
@@ -2975,11 +2999,11 @@ sans-serif;
 }
 
 @media (min-width: 15em)
-  and (max-width: 47.999em), (min-width: 48em)
-  and (max-width: 59.999em) {
+  and (max-width: 47.999em) {
 
 .catalog-menu {
-    display: none
+    background: none;
+    margin: 0
 }
   }
 
@@ -2997,6 +3021,14 @@ sans-serif;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-menu__wrapper {
+      display: none
+  }
+    }
 
 .catalog-menu__wrapper .catalog-menu__item {
       -webkit-box-flex: 1;

@@ -5,8 +5,9 @@
   box-sizing: border-box;
   z-index: 10;
   margin: 0 0 32px 0;
-  @media (--mobile), (--tablet) {
-    display: none;
+  @media (--mobile) {
+    background: none;
+    margin: 0;
   }
   &__wrapper {
     width: 100%;
@@ -15,6 +16,9 @@
     position: relative;
     display: flex;
     box-sizing: border-box;
+    @media (--mobile) {
+      display: none;
+    }
     ^&__item {
       flex: 1 1 auto;
       position: relative;
