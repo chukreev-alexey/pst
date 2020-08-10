@@ -12,8 +12,15 @@ if (typeof UserCartClass !== 'undefined') {
     headerCartButton: 'cart-button',
     headerCartButtonText: 'cart-button__text-sum', // 'cart-button__text'
     headerCartButtonCount: 'cart-button__text-count',
+    emptyCartText: 'Заказ',
     changeCartText: (count, price, hint) => {
+      const cartButton = document.querySelector(`.${UserCart.props.headerCartButton}`)
       const priceText = UserCart.getCartPriceText(price, 'р') // '₽'
+
+      if (cartButton.innerHTML.includes(UserCart.props.emptyCartText)) {
+        const cartButtonText = cartButton.querySelector('.cart-button__text')
+        UserCart.replaceHeaderCartButtonEmptyText(cartButtonText || cartButton, count, priceText)
+      }
 
       if (UserCart.cartCountBlock.length) {
         UserCart.cartCountBlock.text(count)
@@ -60,7 +67,6 @@ if (typeof UserCartClass !== 'undefined') {
     // Count of numbers after decimal point in prices
     priceFractionDigits: 0,
     // productCountVariants: ['позиция', 'позиции', 'позиций'],
-    // emptyCartText: 'Ваш заказ',
 
     // Cart page container and items in product list
     cartListContainer: 'cart-list',
