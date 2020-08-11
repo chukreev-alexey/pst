@@ -2805,7 +2805,9 @@ sans-serif;
 
 .wrapper__inner {
     max-width: 1366px;
+    padding: 32px 32px 0 32px;
     margin: 0 auto;
+    position: relative;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -2821,8 +2823,6 @@ sans-serif;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    position: relative;
-    padding: 32px 32px 0 32px;
   }
 
 @media (min-width: 15em)

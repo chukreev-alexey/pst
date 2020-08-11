@@ -248,6 +248,183 @@ sans-serif;
 
 /* stylelint-disable custom-property-empty-line-before */
 
+.feed-list__item {
+  min-height: 144px;
+  background: #f9f9fa;
+  padding: 0 32px 0 156px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 32%;
+  -moz-box-flex: 0;
+  -ms-flex: 0 0 32%;
+  flex: 0 0 32%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: row wrap;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -moz-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.feed-list__item-image {
+    padding: 16px 16px 16px 24px;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+.feed-list__item-title {
+    color: #000;
+    text-transform: uppercase;
+    padding: 24px 0 0 0;
+    -webkit-box-ordinal-group: 0;
+    -webkit-order: -1;
+    -moz-box-ordinal-group: 0;
+    -ms-flex-order: -1;
+    order: -1;
+    font-size: calc(0.875rem + 0.125 * ((100vw - 20rem) / 140));
+    font-weight: bold;
+    font-family: 'Fact'
+,
+sans-serif;
+    line-height: calc(1.125rem + 0.25 * ((100vw - 20rem) / 140));
+  }
+
+@media screen and (min-width: 2560px) {
+
+  .feed-list__item-title {
+    line-height: 1.375rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .feed-list__item-title {
+    line-height: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+
+  .feed-list__item-title {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .feed-list__item-title {
+    font-size: 0.875rem;
+  }
+}
+
+.feed-list__item-title-link {
+      color: #000;
+      text-decoration: none;
+      font-size: calc(0.875rem + 0.125 * ((100vw - 20rem) / 140));
+      font-weight: bold;
+      font-family: 'Fact'
+,
+sans-serif;
+      line-height: calc(1.125rem + 0.25 * ((100vw - 20rem) / 140));
+    }
+
+@media screen and (min-width: 2560px) {
+
+  .feed-list__item-title-link {
+    line-height: 1.375rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .feed-list__item-title-link {
+    line-height: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+
+  .feed-list__item-title-link {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .feed-list__item-title-link {
+    font-size: 0.875rem;
+  }
+}
+
+.feed-list__item-desc {
+    color: #000;
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+    -moz-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    font-size: calc(0.875rem + 0.125 * ((100vw - 20rem) / 140));
+    font-weight: normal;
+    font-family: 'Fact'
+,
+sans-serif;
+    line-height: calc(1.125rem + 0.25 * ((100vw - 20rem) / 140));
+  }
+
+@media screen and (min-width: 2560px) {
+
+  .feed-list__item-desc {
+    line-height: 1.375rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .feed-list__item-desc {
+    line-height: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+
+  .feed-list__item-desc {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .feed-list__item-desc {
+    font-size: 0.875rem;
+  }
+}
+
+.feed-list__item-date {
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+    -moz-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+  }
+
+/* stylelint-disable custom-property-empty-line-before */
+
 .feed-list {
   margin: 0;
   list-style: none;
@@ -416,49 +593,6 @@ sans-serif;
       padding: 0 0 0 100px;
       display: block;
     }
-
-/* stylelint-disable custom-property-empty-line-before */
-
-.feed-list__item {
-  margin: 0 0 20px 0;
-}
-
-.feed-list__item-image {
-    margin: 0 0 20px 0;
-  }
-
-.feed-list__item-image-link {
-      display: inline-block;
-      text-decoration: none;
-    }
-
-.feed-list__item-image-image {
-      position: relative;
-      vertical-align: bottom;
-    }
-
-.feed-list__item-date {
-    display: block;
-    color: #777;
-    font: 0.75em 'Arial' , Helvetica , sans-serif;
-    padding: 0 0 0.3em 0;
-  }
-
-.feed-list__item-desc {
-    display: block;
-  }
-
-.feed-list__item-desc-text {
-      font: 0.8em 'Arial' , Helvetica , sans-serif;
-      padding: 0.3em 0 0 0;
-      line-height: 1.3em;
-      color: #444;
-    }
-
-.feed-list__item-text {
-    display: block;
-    padding: 0.3em 0 0 0;
-  }
 
 /* stylelint-disable custom-property-empty-line-before */
 

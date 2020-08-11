@@ -1,0 +1,5 @@
+.page-title {
+  color: var(--color-neutral-text);
+  @mixin font 500, 18px, 42px, 24px, 48px, var(--font-title-secondary);
+  padding: 0 0 24px 0;
+}

@@ -4,17 +4,6 @@
 {% block content %}
     <div class="page">
         <div class="page-title">{{ request.page.title }}</div>
-        {% if request.page.path == '/stores' %}
-            {% include 'itcase_pages/include/page_content.html' %}
-            <div class="point">
-                {% include 'itcase_point/include/point_map.html' %}
-            </div>
-        {% elif request.page.path == '/comment' %}
-            {% include 'itcase_point/include/point_comments.html' %}
-            {% include 'itcase_pages/include/page_content.html' %}
-        {% else %}
-            {% include 'itcase_pages/include/page_content.html' %}
-        {% endif %}
-
+        {% include 'itcase_pages/include/page_content.html' %}
     </div>
 {% endblock content %}

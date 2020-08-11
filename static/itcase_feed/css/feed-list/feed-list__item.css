@@ -1,0 +1,38 @@
+.feed-list__item {
+  min-height: 144px;
+  background: var(--color-neutral);
+  padding: 0 32px 0 156px;
+  position: relative;
+  display: flex;
+  flex: 0 0 32%;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  box-sizing: border-box;
+  &-image {
+    padding: 16px 16px 16px 24px;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  &-title {
+    color: var(--color-neutral-text);
+    text-transform: uppercase;
+    padding: 24px 0 0 0;
+    order: -1;
+    @mixin font bold, 14px, 16px, 18px, 22px, var(--font);
+    &-link {
+      color: var(--color-neutral-text);
+      text-decoration: none;
+      @mixin font bold, 14px, 16px, 18px, 22px, var(--font);
+    }
+  }
+  &-desc {
+    color: var(--color-neutral-text);
+    order: 1;
+    @mixin font normal, 14px, 16px, 18px, 22px, var(--font);
+  }
+  &-date {
+    order: 2;
+  }
+}
