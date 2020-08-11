@@ -115,7 +115,29 @@
                         </div>
                     </div>
                 </div>
-
+                {% for price in product.prices.all %}
+                    {{ price.product }}
+                    {{ price.product_article }}
+                    {{ price.price }}
+                    {% if price.old_price %}
+                        {{ price.old_price }}
+                    {% endif %}
+                    {{ price.amount }}
+                    {% for parametr in price.get_parametres_struct %}
+                        <div class="catalog-item-detail__param">
+                            <div class="catalog-item-detail__param-group">
+                                <div class="catalog-item-detail__param-title">{{ parametr.name }}</div>
+                                    {% for value in parametr.values %}
+                                        <label class="catalog-item-detail__param-item">
+                                            <input type="radio" id="radioButton"class="catalog-item-detail__param-item-input" />
+                                            <div class="catalog-item-detail__param-item-text">{{ value }}</div>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
                 {% comment %}
                     {% for price in product.prices.all %}
                         <div>

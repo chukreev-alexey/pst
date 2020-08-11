@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'raven.contrib.django.raven_compat',
     'rest_framework',
     'rest_framework.authtoken',
+    'nested_admin',
+    'smart_selects',
 
     'itcase_cart',
     'itcase_catalog',

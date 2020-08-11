@@ -1,15 +1,17 @@
-from django import forms
 from django.contrib import admin
 
+import nested_admin
 from django_mptt_admin.admin import DjangoMpttAdmin
 
 from itcase_catalog.shortcuts import get_product_model, get_category_model
-from itcase_catalog.admin import ProductAdmin as ProductAdminBase
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 
-from .models.catalog import (Brand, Parametr, ProductParametr, Measurement,
-                             SectionAtribute, OptionalProduct)
-from .models.parametres import ProductImage, Price, PriceCombinations
+from ..models.catalog import (Brand, Parametr, ProductParametr, Measurement,
+                              SectionAtribute, OptionalProduct)
+from ..models.parametres import (ProductImage, Price, PriceCombinations,
+                                 SeparateParametrPicking)
+
+from .forms import ProductAdminForm
 
 
 Product = get_product_model()
@@ -20,6 +22,7 @@ admin.site.unregister(Product)
 
 admin.site.register(Brand)
 admin.site.register(Measurement)
+admin.site.register(ProductParametr)
 
 
 @admin.register(PriceCombinations)
@@ -124,32 +127,36 @@ class ProductImageInline(admin.TabularInline):
 
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super().formfield_for_foreignkey(db_field, request, **kwargs)
-        if db_field.name == 'color':
-            if Parametr.objects.filter(name__iexact='цвет').exists():
+        if db_field.name == '':
+            if Parametr.objects.filter(name__icontains='цвет').exists():
                 field.queryset = Parametr.objects.get(
-                    name__iexact='цвет').product_parametres.all()
+                    name__icontains='цвет').product_parametres.all()
+            else:
+                field.queryset = ProductParametr.objects.none()
         return field
 
 
-class PickingPriceInline(admin.TabularInline):
+class SeparateParametrPickingInline(nested_admin.NestedTabularInline):
+
+    model = SeparateParametrPicking
+    extra = 0
+
+
+class PickingPriceInline(nested_admin.NestedTabularInline):
 
     model = Price
     extra = 1
 
+    fieldsets = (
+        (None, {'fields': ('product_article', 'price', 'old_price',
+                           'amount', 'image')}),
+    )
 
-class ProductAdminForm(forms.ModelForm):
-    from mptt.forms import TreeNodeChoiceField
-
-    category = TreeNodeChoiceField(queryset=Category.objects.all(),
-                                   label=Category._meta.verbose_name)
-
-    class Meta(object):
-        model = Product
-        fields = '__all__'
+    inlines = [SeparateParametrPickingInline]
 
 
 @admin.register(Product)
-class ProductAdmin(ProductAdminBase):
+class ProductAdmin(nested_admin.NestedModelAdmin):
 
     fieldsets = (
         (None, {
