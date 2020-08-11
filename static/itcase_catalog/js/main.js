@@ -4,6 +4,7 @@
 
 require('./popupMenu')
 require('./catalogGroups')
+require('./catalogSort')
 
 // Create "Cart" instance for work with catalog and cart
 if (typeof UserCartClass !== 'undefined') {
@@ -125,6 +126,7 @@ if (typeof ItcaseFilterClass !== 'undefined') {
     dropPagination: true,
     productListClass: 'catalog-list',
     sortBlockClass: 'catalog-sort',
+    sortItemClass: ['catalog-sort__group-item', 'catalog-sort-dropdown__item'],
     contentRequestCB: initializeRangeSliders,
   })
 }

@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6c70af57e9e23f5712ea";
+/******/ 	var hotCurrentHash = "4092b1f0063c97811cd4";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10726,12 +10726,41 @@ module.exports.formatError = function(err) {
 $(document).on('click', '.catalog-group__inner-nested-list-count', function (event) {
   event.stopPropagation();
   event.preventDefault();
-  const hiddenCategories = this.parentElement.querySelectorAll('*[class*="_type_hidden"]');
-  hiddenCategories.forEach(element => {
-    const hiddenClass = Array.from(element.classList).find(cls => cls.includes('_type_hidden'));
+  var hiddenCategories = this.parentElement.querySelectorAll('*[class*="_type_hidden"]');
+  hiddenCategories.forEach(function (element) {
+    var hiddenClass = Array.from(element.classList).find(function (cls) {
+      return cls.includes('_type_hidden');
+    });
     element.classList.remove(hiddenClass);
   });
   this.remove();
+});
+
+/***/ }),
+
+/***/ "./static/itcase_catalog/js/catalogSort.js":
+/*!*************************************************!*\
+  !*** ./static/itcase_catalog/js/catalogSort.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+$(document).on('click', '*[data-sort-dropdown]', function () {
+  var baseClass = this.classList[0];
+  var openClass = "".concat(baseClass, "_state_open");
+  var isNeedOpen = !this.classList.contains(openClass);
+  this.classList.toggle(openClass, isNeedOpen);
+});
+$(document).on('click', '.catalog-sort-dropdown__item', function (event) {
+  var dropdownBlock = this.closest('*[data-sort-dropdown]');
+  if (!dropdownBlock) return event;
+  dropdownBlock.click();
+  var currentSort = dropdownBlock.querySelector('.catalog-sort-dropdown__current');
+  if (!currentSort) return event;
+  currentSort.textContent = this.textContent;
 });
 
 /***/ }),
@@ -10749,7 +10778,9 @@ $(document).on('click', '.catalog-group__inner-nested-list-count', function (eve
 
 __webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js");
 
-__webpack_require__(/*! ./catalogGroups */ "./static/itcase_catalog/js/catalogGroups.js"); // Create "Cart" instance for work with catalog and cart
+__webpack_require__(/*! ./catalogGroups */ "./static/itcase_catalog/js/catalogGroups.js");
+
+__webpack_require__(/*! ./catalogSort */ "./static/itcase_catalog/js/catalogSort.js"); // Create "Cart" instance for work with catalog and cart
 
 
 if (typeof UserCartClass !== 'undefined') {
@@ -10760,12 +10791,12 @@ if (typeof UserCartClass !== 'undefined') {
     // 'cart-button__text'
     headerCartButtonCount: 'cart-button__text-count',
     emptyCartText: 'Заказ',
-    changeCartText: (count, price, hint) => {
-      const cartButton = document.querySelector(`.${UserCart.props.headerCartButton}`);
-      const priceText = UserCart.getCartPriceText(price, 'р'); // '₽'
+    changeCartText: function changeCartText(count, price, hint) {
+      var cartButton = document.querySelector(".".concat(UserCart.props.headerCartButton));
+      var priceText = UserCart.getCartPriceText(price, 'р'); // '₽'
 
       if (cartButton.innerHTML.includes(UserCart.props.emptyCartText)) {
-        const cartButtonText = cartButton.querySelector('.cart-button__text');
+        var cartButtonText = cartButton.querySelector('.cart-button__text');
         UserCart.replaceHeaderCartButtonEmptyText(cartButtonText || cartButton, count, priceText);
       }
 
@@ -10817,13 +10848,13 @@ if (typeof UserCartClass !== 'undefined') {
 } // initialize ionRangeSlider for "price" fields in filter form.
 
 
-const initializeRangeSliders = () => {
-  const $priceMin = $('input[data-price-min]');
-  const $priceMax = $('input[data-price-max]');
+var initializeRangeSliders = function initializeRangeSliders() {
+  var $priceMin = $('input[data-price-min]');
+  var $priceMax = $('input[data-price-max]');
 
   if ($priceMin.length && $priceMax.length) {
-    const valFrom = parseInt($priceMin.val(), 10) || 0;
-    const valTo = parseInt($priceMax.val(), 10) || 100000; // Save first min price value in catalog object for replacement filter block
+    var valFrom = parseInt($priceMin.val(), 10) || 0;
+    var valTo = parseInt($priceMax.val(), 10) || 100000; // Save first min price value in catalog object for replacement filter block
 
     if (!ItcaseFilter.rangeFirstMinVal || valFrom < ItcaseFilter.rangeFirstMinVal) {
       ItcaseFilter.rangeFirstMinVal = valFrom;
@@ -10844,15 +10875,15 @@ const initializeRangeSliders = () => {
       from: valFrom,
       to: valTo,
       postfix: ' р',
-      onStart: data => {
+      onStart: function onStart(data) {
         $priceMin.val(data.from);
         $priceMax.val(data.to);
       },
-      onChange: data => {
+      onChange: function onChange(data) {
         $priceMin.val(data.from);
         $priceMax.val(data.to);
       },
-      onFinish: data => {
+      onFinish: function onFinish(data) {
         ItcaseFilter.sendCheckedFilters();
       }
     });
@@ -10864,11 +10895,12 @@ if (typeof ItcaseFilterClass !== 'undefined') {
     dropPagination: true,
     productListClass: 'catalog-list',
     sortBlockClass: 'catalog-sort',
+    sortItemClass: ['catalog-sort__group-item', 'catalog-sort-dropdown__item'],
     contentRequestCB: initializeRangeSliders
   });
 }
 
-$(document).ready(() => {
+$(document).ready(function () {
   // Range sliders for catalog filters
   initializeRangeSliders();
 });
@@ -10890,8 +10922,32 @@ if (true) {
 "use strict";
 
 
-class CatalogPopupMenu {
-  constructor() {
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+var CatalogPopupMenu = /*#__PURE__*/function () {
+  function CatalogPopupMenu() {
+    _classCallCheck(this, CatalogPopupMenu);
+
     this.$menu = $('.catalog-menu-popup');
     this.timerShow = null;
     this.timerHide = null;
@@ -10907,67 +10963,81 @@ class CatalogPopupMenu {
     this.toggle = this.toggle.bind(this);
   }
 
-  show() {
-    clearTimeout(this.timerHide);
-    clearTimeout(this.timerShow);
-    this.state.locked = true;
+  _createClass(CatalogPopupMenu, [{
+    key: "show",
+    value: function show() {
+      var _this = this;
 
-    if (this.$menu.hasClass(this.showClass) && this.$menu.hasClass(this.hideClass)) {
-      this.$menu.removeClass([this.hideClass, this.showClass].join(' ')).off(this.animationEvents);
+      clearTimeout(this.timerHide);
+      clearTimeout(this.timerShow);
+      this.state.locked = true;
+
+      if (this.$menu.hasClass(this.showClass) && this.$menu.hasClass(this.hideClass)) {
+        this.$menu.removeClass([this.hideClass, this.showClass].join(' ')).off(this.animationEvents);
+      }
+
+      this.timerShow = setTimeout(function () {
+        _this.$menu.addClass(_this.showClass);
+
+        _this.state.open = true;
+        _this.state.locked = false;
+      }, 0);
     }
+  }, {
+    key: "hide",
+    value: function hide() {
+      var _this2 = this;
 
-    this.timerShow = setTimeout(() => {
-      this.$menu.addClass(this.showClass);
-      this.state.open = true;
-      this.state.locked = false;
-    }, 0);
-  }
+      clearTimeout(this.timerHide);
+      clearTimeout(this.timerShow);
+      this.state.locked = true;
 
-  hide() {
-    clearTimeout(this.timerHide);
-    clearTimeout(this.timerShow);
-    this.state.locked = true;
+      if (this.state.open) {
+        this.timerHide = setTimeout(function () {
+          _this2.$menu.addClass(_this2.hideClass).on(_this2.animationEvents, function () {
+            _this2.$menu.removeClass([_this2.hideClass, _this2.showClass].join(' ')).off(_this2.animationEvents);
 
-    if (this.state.open) {
-      this.timerHide = setTimeout(() => {
-        this.$menu.addClass(this.hideClass).on(this.animationEvents, () => {
-          this.$menu.removeClass([this.hideClass, this.showClass].join(' ')).off(this.animationEvents);
-          this.state.open = false;
-          this.state.locked = false;
-        });
-      }, 200);
+            _this2.state.open = false;
+            _this2.state.locked = false;
+          });
+        }, 200);
+      }
     }
-  }
+  }, {
+    key: "toggle",
+    value: function toggle() {
+      if (this.state.locked) {
+        return false;
+      }
 
-  toggle() {
-    if (this.state.locked) {
-      return false;
+      if (this.state.open) {
+        this.hide();
+      } else {
+        this.show();
+      }
     }
+  }]);
 
-    if (this.state.open) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
+  return CatalogPopupMenu;
+}();
 
-}
-
-const menu = new CatalogPopupMenu();
-const $menuPopup = $('.catalog-menu__item_type_popup');
+var menu = new CatalogPopupMenu();
+var $menuPopup = $('.catalog-menu__item_type_popup');
 
 if ($menuPopup.length) {
   $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide); // prettier-ignore
 
-  menu.$menu.on('mouseenter', () => {
+  menu.$menu.on('mouseenter', function () {
     clearTimeout(menu.timerHide);
   }).on('mouseleave', menu.hide);
 }
 
-const $menuPopupMobile = $('.header__catalog');
+var $menuPopupMobile = $('.header__catalog');
 
 if ($menuPopupMobile.length) {
-  $menuPopupMobile.on('click', () => menu.toggle());
+  $menuPopupMobile.on('click', function () {
+    return menu.toggle();
+  });
 }
 
 /***/ }),

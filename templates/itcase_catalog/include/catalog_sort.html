@@ -36,15 +36,23 @@
             {% endif %}
         </div>
 
-        <div class="catalog-sort-dropdown catalog-sort-dropdown_state_open">
+        <div data-sort-dropdown class="catalog-sort-dropdown">
             {% comment %}
                 Value for "sort"(price/name) is a reverse of the active one.
                 for control of sort icon direction. eg: when "sort-price=0" then "value" be "1"
             {% endcomment %}
 
-            <div class="catalog-sort-dropdown__current catalog-sort-dropdown__item_sort_default">По умолчанию</div>
+            <div class="catalog-sort-dropdown__current catalog-sort-dropdown__item_sort_default">
+                {% if 'price' in sort %}
+                    По цене
+                {% elif 'name' in sort  %}
+                    По названию
+                {% else %}
+                    По умолчанию
+                {% endif %}
+            </div>
 
-            <div data-sort-dropdown class="catalog-sort-dropdown__list">
+            <div class="catalog-sort-dropdown__list">
                 <a href="#" class="catalog-sort-dropdown__item catalog-sort-dropdown__item_sort_default">По умолчанию</a>
                 {% with value=sort.price|default:0 %}
                     <a href="?sort-price=0"
