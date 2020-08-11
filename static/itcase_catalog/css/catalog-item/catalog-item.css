@@ -202,7 +202,7 @@
       @mixin font normal, 14px, 18px, 18px, 24px, var(--font);
       &::after {
         width: calc(100% + 6px);
-        height: 3px;
+        height: 1px;
         background: var(--color-surface-text);
         margin: -1px 0 0 0;
         position: absolute;

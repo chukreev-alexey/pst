@@ -1,8 +1,9 @@
 from django.db import models
 
 from filebrowser.fields import FileBrowseField
+from smart_selects.db_fields import ChainedForeignKey
 
-from .catalog import Product, ProductParametr
+from .catalog import Product, Parametr, ProductParametr
 
 
 class ProductImage(models.Model):
@@ -69,3 +70,43 @@ class Price(models.Model):
             return f'{self.price_combination.data.first()}: {self.price}'
         else:
             return 'None'
+
+    def get_parametr_list(self):
+        return self.price_parametres.values_list(
+            'parametr__name', flat=True).distinct()
+
+    def get_parametres_struct(self):
+        parametres = []
+
+        for parametr_name in self.get_parametr_list():
+            parametr = {}
+            parametr['name'] = parametr_name
+            parametr['values'] = self.price_parametres.values_list(
+                'parametr_value__value', flat=True).filter(
+                parametr__name=parametr_name)
+            parametres.append(parametr)
+
+        return parametres
+
+
+# TODO: maybe add amount for each parametr_value
+class SeparateParametrPicking(models.Model):
+    price = models.ForeignKey(Price, related_name='price_parametres',
+                              verbose_name=Price._meta.verbose_name,
+                              on_delete=models.CASCADE)
+
+    parametr = models.ForeignKey(Parametr,
+                                 related_name='separated_product_parametres',
+                                 verbose_name='Параметр',
+                                 on_delete=models.DO_NOTHING)
+    parametr_value = ChainedForeignKey(
+        ProductParametr,
+        chained_field="parametr",
+        chained_model_field="parametr",
+        show_all=False,
+        auto_choose=True,
+        sort=True)
+
+    class Meta(object):
+        verbose_name = 'Параметр комплектаций'
+        verbose_name_plural = 'Параметры комплектаций'

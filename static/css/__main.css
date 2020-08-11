@@ -69,6 +69,10 @@ sans-serif;
     color: #fff;
   }
 
+.button.button_type_primary:hover {
+      background: rgb(138, 21, 15);
+    }
+
 .button.button_type_primary .button__text {
         color: #fff;
       }
@@ -134,7 +138,7 @@ sans-serif;
 .button {
   text-decoration: none;
   text-align: center;
-  padding: 14px 24px 12px 24px;
+  padding: 14px 24px 14px 24px;
   margin: 0;
   border: 0 solid;
   border-radius: 100px;
