@@ -132,7 +132,9 @@
           }
         }
         &__text {
-          display: none;
+          @media (--mobile) {
+            display: none;
+          }
         }
       }
     }
