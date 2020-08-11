@@ -38,11 +38,14 @@
   --color-surface-item-disabled: #999;
   --color-surface-shadow: rgba(#000, 0.2);
   --color-surface-border: #333;
+  --color-surface-border-hover: #000;
+  --color-surface-border-focus: #000;
 
   --color-accent: #fe0201;
   --color-accent-hover: color(rgba(#fe0201, 1) l(30%));
   --color-accent-text: #fff;
   --color-accent-text-hover: #fff;
+  --color-accent-border: #fe0201;
 
   --color-error: red;
   --color-error-text: #fff;

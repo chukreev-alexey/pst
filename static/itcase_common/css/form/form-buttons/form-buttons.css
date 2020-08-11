@@ -2,6 +2,33 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  @media (--mobile) {
+    display: block;
+    justify-content: flex-start;
+  }
+  @media (--mobile-large), (--mobile-huge) {
+    display: flex;
+  }
   &__item {
+    margin: 20px 0 0 0;
+    @media (--mobile) {
+      text-align: center;
+      margin: 0 0 15px 0;
+    }
+    @media (--mobile-large), (--mobile-huge) {
+      margin: 0 10px;
+    }
+  }
+  &.form-field__item {
+    & .form-field {
+      &__item {
+        &-c1 {
+          display: none;
+        }
+        &-c2 {
+          padding: 0;
+        }
+      }
+    }
   }
 }

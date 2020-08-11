@@ -1,0 +1,52 @@
+.form-radioselect {
+  &-item {
+    padding: 0 0 16px 0;
+    cursor: pointer;
+    &:last-child {
+      padding: 0;
+    }
+    &__label {
+      color: var(--color-black);
+      padding: 0 32px;
+      position: relative;
+      display: block;
+      cursor: pointer;
+      &::after {
+        width: 17px;
+        height: 17px;
+        background: var(--color-white);
+        border: solid 1px var(--color-gray);
+        border-radius: 50px;
+        position: absolute;
+        content: '';
+        display: block;
+        box-sizing: border-box;
+        left: 0;
+        top: 4px;
+        z-index: 1;
+        transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      &:hover {
+        &::after {
+          border: solid 1px var(--color-black);
+        }
+      }
+      & > input {
+        position: absolute;
+        visibility: hidden;
+        left: 0;
+        top: 0;
+      }
+    }
+    &__radio {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    &__text {
+      font: 18px/24px var(--font);
+      color: var(--color-black);
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.form-fields .form-field__item,
+.content .form-fields .form-field__item {
+  &_state_valid {
+    .form-checkbox {
+      &__label {
+        &::after {
+          border: solid 1px var(--color-green);
+        }
+      }
+    }
+    & .selectize-input {
+      border: solid 1px var(--color-green);
+    }
+    & .form-field__item-c2 {
+      &::before {
+        width: 8px;
+        height: 16px;
+        border: solid var(--color-green);
+        border-width: 0 4px 4px 0;
+        position: absolute;
+        content: '';
+        display: block;
+        top: 12px;
+        right: 20px;
+        z-index: 1;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}

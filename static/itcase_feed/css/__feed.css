@@ -544,12 +544,12 @@ sans-serif;
 }
 
 .feed-list__item-date {
+    color: #000;
     -webkit-box-ordinal-group: 3;
     -webkit-order: 2;
     -moz-box-ordinal-group: 3;
     -ms-flex-order: 2;
     order: 2;
-    color: #000;
     font-size: calc(0.875rem + 0.125 * ((100vw - 20rem) / 140));
     font-weight: normal;
     font-family: 'Fact'
@@ -589,10 +589,9 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .feed-list {
-  margin: 0;
-  list-style: none;
-  position: relative;
   padding: 0;
+  margin: 0;
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -603,6 +602,7 @@ sans-serif;
   -moz-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  list-style: none;
 }
 
 /* stylelint-disable custom-property-empty-line-before */

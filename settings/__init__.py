@@ -23,6 +23,7 @@ from .static import *  # noqa
 
 from .compressor import *  # noqa
 from .filebrowser import *  # noqa
+from .forms_builder import *  # noqa
 from .grappelli import *  # noqa
 from .recaptcha import *  # noqa
 from .rest_framework import REST_FRAMEWORK  # noqa

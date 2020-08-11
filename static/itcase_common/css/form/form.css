@@ -1,21 +1,10 @@
 .form {
-  white-space: normal;
   position: relative;
-  @media (--mobile) {
-    margin: 15px 15px 0 15px;
-  }
   &-inner {
     width: 100%;
-    position: relative;
-    & .form-fields > li.form-field__item_state_in-group.form-field__item_state_error.form-field__item_state_empty ~ li.form-field__item_state_in-group.form-field__item_state_error.form-field__item_state_empty {
-      & .form-field__item-hint {
-        display: block !important;
-      }
-    }
-    & .form-fields > li.form-field__item_state_in-group.form-field__item_state_empty ~ li.form-field__item_state_in-group.form-field__item_state_empty {
-      & .form-field__item-hint {
-        display: none !important;
-      }
-    }
+    max-width: 1366px;
+    padding: 20px 37px 15px 37px;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 }

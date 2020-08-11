@@ -1,22 +1,24 @@
+
 .form-response {
   text-align: center;
   &__item {
-    font: 16px var(--font);
-    color: #000;
+    font: 18px/24px var(--font);
+    color: var(--color-black);
+    padding: 10px 40px;
     margin: 0 0 30px 0;
     &_type_success {
-      color: #000;
+      color: var(--color-white);
       background: var(--color-green);
     }
     &_type_error {
-      color: #fff;
+      color: var(--color-white);
       background: var(--color-red);
     }
     &_type_debug {
       background: #d2d2d2;
     }
     &_type_info {
-      color: #fff;
+      color: var(--color-white);
       background: #00aedb;
     }
     &_type_warning {

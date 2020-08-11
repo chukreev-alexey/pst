@@ -1,17 +1,30 @@
-.form_type_vertical .form-fields .form-field__item,
+
 .form-fields .form-field__item,
 .content .form-fields .form-field__item {
   &_state_empty {
-    border: solid 1px #000 !important;
-    .form-checkbox {
+    & .form-checkbox {
       &__label {
         &::after {
-          border: solid 1px #000 !important;
+          border: solid 1px var(--color-gray);
         }
       }
     }
     & .selectize-input {
-      border: solid 1px #000;
+      border: solid 1px var(--color-gray);
+    }
+    &.form-field__item_state_valid {
+      & .form-field__item-c2 {
+        &::before {
+          display: none;
+        }
+      }
+      & .form-checkbox {
+        &__label {
+          &::after {
+            border: solid 1px var(--color-gray);
+          }
+        }
+      }
     }
   }
 }

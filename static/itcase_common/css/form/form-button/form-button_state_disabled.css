@@ -1,7 +1,8 @@
-button.form-button_state_disabled,
-button.form-button_state_disabled:hover {
-  color: #999;
-  background: #eee;
-  border: solid 1px #ccc;
+.form-button.form-button_state_disabled,
+.form-button.form-button_state_disabled:hover {
+  color: var(--color-gray);
+  background: var(--color-light-gray);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  transform: translate(0, 0);
   cursor: default;
 }

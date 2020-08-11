@@ -1,0 +1,16 @@
+
+.form-radioselect-item_state_checked {
+  position: relative;
+  & .form-radioselect-item__label::before {
+    width: 9px;
+    height: 9px;
+    background: var(--color-black);
+    border-radius: 100px;
+    position: absolute;
+    content: '';
+    display: block;
+    left: 4px;
+    top: 8px;
+    z-index: 2;
+  }
+}

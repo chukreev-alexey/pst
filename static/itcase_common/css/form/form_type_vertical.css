@@ -1,0 +1,33 @@
+.form_type_vertical {
+  padding: 0;
+  display: block;
+  & .form {
+    &-inner {
+      padding: 0 32px;
+    }
+    &-title {
+      font: bold 28px/28px var(--font-title);
+      color: var(--color-black);
+      margin: 0 0 24px 0;
+    }
+    &-fields {
+      width: 100%;
+      margin: 0 0 48px 0;
+      display: block;
+      & .form-field__item {
+        display: block;
+        &_type_no-label {
+          & .form-field__item-c1 {
+            display: none;
+          }
+        }
+        &-c2 {
+          width: 100%;
+          padding: 0;
+          margin: 0 0 16px 0;
+          display: block;
+        }
+      }
+    }
+  }
+}

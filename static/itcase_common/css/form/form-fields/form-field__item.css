@@ -1,90 +1,62 @@
-.form-field__item {
-  background: var(--color-surface);
-  padding: 20px 20px 14px 20px;
-  margin: 0 0 20px 0;
-  border: solid 1px var(--color-surface-item);
-  border-radius: 10px;
+.form-fields .form-field__item {
+  width: 100%;
   position: relative;
-  display: block !important;
+  @media (--mobile), (--tablet) {
+    padding: 0 0 10px 0;
+    display: block;
+  }
   &::before {
-    content: '';
+    content: ' ';
     display: none !important;
   }
   &::after {
-    content: '';
+    content: ' ';
     display: none !important;
   }
-  &:last-child {
-    background: none;
-    padding: 0;
-    border: none;
-    & .form-field__item-c1 {
-      display: none;
-    }
-    & .form-field__item-c2 {
-      width: auto;
-      text-align: right;
-      display: block;
-    }
-  }
   &-c1 {
-    width: 10%;
-    min-width: 0;
-    padding: 0;
-    border-right: 0;
-    display: table-cell;
+    width: 100%;
+    padding: 8px 0 4px 0;
+    position: relative;
     vertical-align: top;
-    @media (--mobile) {
+    @media (--mobile), (--tablet) {
       width: 100%;
+      padding: 0 0 10px 0;
       display: block;
     }
   }
   &-name {
-    min-width: 100px;
     color: var(--color-surface-text);
-    text-transform: uppercase;
-    display: inline-block;
-    vertical-align: top;
-    @mixin font normal, 18px, 18px, 20px, 20px, var(--font);
+    padding: 8px 0 0 0;
+    display: block;
+    @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
   }
   &-required {
-    font: 14px var(--font-second);
-    color: var(--color-red);
-    position: relative;
-    display: inline-block;
-    top: -5px;
-    @media (--mobile) {
-      top: 0;
-    }
+    font: 16px var(--font);
+    color: orange;
   }
   &-label {
     width: 100%;
     &-text {
-      font: 14px var(--font-second);
+      font: 12px var(--font);
       color: #444;
     }
   }
   &-c2 {
-    width: 90%;
-    display: table-cell;
-    vertical-align: top;
-    @media (--mobile) {
+    width: 100%;
+    padding: 8px 24px 8px 0;
+    position: relative;
+    @media (--mobile), (--tablet) {
       width: 100%;
-      margin: 12px 0 6px 0;
+      padding: 0;
       display: block;
     }
-    &::after {
-      height: 0.5em;
-      content: '';
-      display: block;
-      @media (--mobile) {
-        display: none;
-      }
+    &_state_full {
+      width: 100%;
     }
   }
   &-error {
-    font: 13px var(--font-second);
-    color: var(--color-red);
-    padding: 5px 0 0 0;
+    font: 12px var(--font);
+    color: red;
+    padding: 4px 0 0 0;
   }
 }

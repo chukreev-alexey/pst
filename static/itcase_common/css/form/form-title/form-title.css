@@ -1,0 +1,8 @@
+.form-title {
+  color: var(--color-surface-text);
+  margin: 0 0 20px 0;
+  @mixin font bold, 24px, 56px, 28px, 56px, var(--font-title);
+  @media (--mobile) {
+    margin: 0 0 16px 0;
+  }
+}

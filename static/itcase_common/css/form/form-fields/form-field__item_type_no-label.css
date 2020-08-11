@@ -1,0 +1,11 @@
+.form-field__item {
+  &&_type_no-label {
+    & .form-field__item {
+      &-c1 {
+        @media (--mobile), (--tablet) {
+          display: none;
+        }
+      }
+    }
+  }
+}

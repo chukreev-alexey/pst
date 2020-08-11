@@ -1,0 +1,15 @@
+
+.form-checkbox_state_checked {
+  position: relative;
+  & .form-checkbox__label::before {
+    width: 8px;
+    height: 8px;
+    background: var(--color-black);
+    position: absolute;
+    content: '';
+    display: block;
+    left: 4px;
+    top: 10px;
+    z-index: 2;
+  }
+}
