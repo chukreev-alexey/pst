@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6c70af57e9e23f5712ea";
+/******/ 	var hotCurrentHash = "cf1d3a0d046a598fe6d0";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10736,6 +10736,32 @@ $(document).on('click', '.catalog-group__inner-nested-list-count', function (eve
 
 /***/ }),
 
+/***/ "./static/itcase_catalog/js/itemGallery.js":
+/*!*************************************************!*\
+  !*** ./static/itcase_catalog/js/itemGallery.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+if (document.querySelector('.catalog-item-gallery')) {
+  new Swiper('.catalog-item-gallery', {
+    wrapperClass: 'catalog-item-gallery__wrapper',
+    slidesPerView: 1,
+    slideClass: 'catalog-item-gallery__image',
+    slideActiveClass: 'catalog-item-gallery__image-active',
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./static/itcase_catalog/js/main.js":
 /*!******************************************!*\
   !*** ./static/itcase_catalog/js/main.js ***!
@@ -10747,9 +10773,11 @@ $(document).on('click', '.catalog-group__inner-nested-list-count', function (eve
 /* WEBPACK VAR INJECTION */(function(global) {/* globals UserCartClass, ItcaseFilterClass, UserCart, ItcaseFilter */
 
 
-__webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js");
+__webpack_require__(/*! ./catalogGroups */ "./static/itcase_catalog/js/catalogGroups.js");
 
-__webpack_require__(/*! ./catalogGroups */ "./static/itcase_catalog/js/catalogGroups.js"); // Create "Cart" instance for work with catalog and cart
+__webpack_require__(/*! ./itemGallery */ "./static/itcase_catalog/js/itemGallery.js");
+
+__webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js"); // Create "Cart" instance for work with catalog and cart
 
 
 if (typeof UserCartClass !== 'undefined') {

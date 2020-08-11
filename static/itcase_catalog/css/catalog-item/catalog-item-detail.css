@@ -16,6 +16,7 @@
       width: 100%;
     }
     ^&__gallery {
+      width: 100%;
       position: relative;
       @media (--mobile) {
         margin: 0 20px;

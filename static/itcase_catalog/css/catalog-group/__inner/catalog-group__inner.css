@@ -8,6 +8,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     box-sizing: border-box;
+    align-items: flex-start;
     @media (--mobile) {
       background: var(--color-neutral);
       padding: 16px;

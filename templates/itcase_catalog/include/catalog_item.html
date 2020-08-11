@@ -21,12 +21,14 @@
             <div class="catalog-item__title">
                 <a href="{{ product.get_absolute_url }}" class="catalog-item__title-link">{{ product.name }}</a>
             </div>
-            <div class="catalog-item__desc">{{ product.description }}</div>
+            {% if product.description %}
+                <div class="catalog-item__desc">{{ product.description }}</div>
+            {% endif %}
             {% if product.get_lowest_price %}
                 {% with price=product.get_lowest_price %}
                     <div class="catalog-item__price">
                         <div class="catalog-item__price-text">
-                            {{ price.price|floatformat:'-2' }} Р
+                            {{ price.price|floatformat:'-2' }} Р {{ product.measuring|default:'' }}
                         </div>
                         {% if price.old_price %}
                             <div class="catalog-item__price-old">
