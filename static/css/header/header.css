@@ -5,11 +5,11 @@
   }
   &__wrapper {
     width: 100%;
+    background: var(--color-surface);
     position: relative;
     box-sizing: border-box;
     z-index: 1000;
     transition: all 0.2s cubic-bezier(0.21, 1.03, 0.7, 1);
-    background: var(--color-surface);
     &_state_show,
     &_state_hide {
       position: fixed;
@@ -105,10 +105,35 @@
         width: 40px;
         height: 40px;
         margin: 0 16px 0 0;
-        border: solid 1px red;
         position: relative;
         overflow: hidden;
         order: -2;
+      }
+      & .button {
+        @media (--mobile) {
+          width: 40px;
+          height: 40px;
+          padding: 0;
+        }
+        &::after {
+          width: 24px;
+          height: 24px;
+          background: url('./../img/icon/calculator.svg') no-repeat 50% 50%;
+          background-size: contain;
+          position: absolute;
+          content: '';
+          display: none;
+          left: 50%;
+          top: 50%;
+          z-index: 2;
+          transform: translate(-50%, -50%);
+          @media (--mobile) {
+            display: block;
+          }
+        }
+        &__text {
+          display: none;
+        }
       }
     }
     ^&__cart {

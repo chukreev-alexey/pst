@@ -194,7 +194,6 @@ sans-serif;
 
 .content .button,
 .button {
-    min-width: 200px;
     padding: 12px 24px 14px 24px
 }
   }
@@ -2438,7 +2437,6 @@ sans-serif;
         width: 40px;
         height: 40px;
         margin: 0 16px 0 0;
-        border: solid 1px red;
         position: relative;
         overflow: hidden;
         -webkit-box-ordinal-group: -1;
@@ -2448,6 +2446,48 @@ sans-serif;
         order: -2
     }
       }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.header__wrapper .header__button .button {
+          width: 40px;
+          height: 40px;
+          padding: 0
+      }
+        }
+
+.header__wrapper .header__button .button::after {
+          width: 24px;
+          height: 24px;
+          display: none;
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          -moz-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iX3gzMV9fcHgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI0IDI0IiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGlkPSJYTUxJRF8xXyI+PHBhdGggZD0ibTIzLjUgMTEuNWMuMjggMCAuNS4yMi41LjVzLS4yMi41LS41LjVoLS41di0xeiIvPjxwYXRoIGQ9Im0xMi41IDExLjVoMTAuNXYxaC0xMC41eiIvPjxwYXRoIGQ9Im0yMS41IDI0aC05LjVjLjI4IDAgLjUtLjIyLjUtLjV2LS41aDljLjgzIDAgMS41LS42NyAxLjUtMS41di05aC41Yy4yOCAwIC41LS4yMi41LS41djkuNWMwIDEuMzgtMS4xMiAyLjUtMi41IDIuNXoiLz48cGF0aCBkPSJtMjQgMi41djkuNWMwLS4yOC0uMjItLjUtLjUtLjVoLS41di05YzAtLjgzLS42Ny0xLjUtMS41LTEuNWgtOXYtLjVjMC0uMjgtLjIyLS41LS41LS41aDkuNWMxLjM4IDAgMi41IDEuMTIgMi41IDIuNXoiLz48cGF0aCBkPSJtMjAgNmMuMjggMCAuNS4yMi41LjVzLS4yMi41LS41LjVoLTRjLS4yOCAwLS41LS4yMi0uNS0uNXMuMjItLjUuNS0uNXoiLz48cGF0aCBkPSJtMjAgMTZjLjI4IDAgLjUuMjIuNS41cy0uMjIuNS0uNS41aC00Yy0uMjggMC0uNS0uMjItLjUtLjVzLjIyLS41LjUtLjV6Ii8+PHBhdGggZD0ibTIwIDE5Yy4yOCAwIC41LjIyLjUuNXMtLjIyLjUtLjUuNWgtNGMtLjI4IDAtLjUtLjIyLS41LS41cy4yMi0uNS41LS41eiIvPjxwYXRoIGQ9Im0xMi41IDIzdi41YzAgLjI4LS4yMi41LS41LjVzLS41LS4yMi0uNS0uNXYtLjV6Ii8+PHBhdGggZD0ibTExLjUgMTIuNWgxdjEwLjVoLTF6Ii8+PHBhdGggZD0ibTExLjUgMTEuNWgxdjFoLTF6Ii8+PHBhdGggZD0ibTExLjUgMWgxdjEwLjVoLTF6Ii8+PHBhdGggZD0ibTEyLjUuNXYuNWgtMXYtLjVjMC0uMjguMjItLjUuNS0uNXMuNS4yMi41LjV6Ii8+PHBhdGggZD0ibTEgMTEuNWgxMC41djFoLTEwLjV6Ii8+PHBhdGggZD0ibTggNmMuMjggMCAuNS4yMi41LjVzLS4yMi41LS41LjVoLTEuNXYtMXoiLz48cGF0aCBkPSJtNy44NSAxOS4xNWMuMi4xOS4yLjUxIDAgLjctLjA5LjEtLjIyLjE1LS4zNS4xNXMtLjI2LS4wNS0uMzUtLjE1bC0xLjE1LTEuMTUuNy0uN3oiLz48cGF0aCBkPSJtNy4xNSAxNi4xNWMuMTktLjIuNTEtLjIuNyAwIC4yLjE5LjIuNTEgMCAuN2wtMS4xNSAxLjE1LS43LS43eiIvPjxwYXRoIGQ9Im01LjUwNSAxNy41MDVoLjk5di45OWgtLjk5eiIgdHJhbnNmb3JtPSJtYXRyaXgoLjcwNyAtLjcwNyAuNzA3IC43MDcgLTEwLjk3MSA5LjUxNSkiLz48cGF0aCBkPSJtNi41IDd2MS41YzAgLjI4LS4yMi41LS41LjVzLS41LS4yMi0uNS0uNXYtMS41eiIvPjxwYXRoIGQ9Im01LjUgNmgxdjFoLTF6Ii8+PHBhdGggZD0ibTYuNSA0LjV2MS41aC0xdi0xLjVjMC0uMjguMjItLjUuNS0uNXMuNS4yMi41LjV6Ii8+PHBhdGggZD0ibTYgMTcuMy0uNy43LTEuMTUtMS4xNWMtLjItLjE5LS4yLS41MSAwLS43LjE5LS4yLjUxLS4yLjcgMHoiLz48cGF0aCBkPSJtNS41IDZ2MWgtMS41Yy0uMjggMC0uNS0uMjItLjUtLjVzLjIyLS41LjUtLjV6Ii8+PHBhdGggZD0ibTQuODUgMTkuODVjLS4wOS4xLS4yMi4xNS0uMzUuMTVzLS4yNi0uMDUtLjM1LS4xNWMtLjItLjE5LS4yLS41MSAwLS43bDEuMTUtMS4xNS43Ljd6Ii8+PHBhdGggZD0ibTEgMTEuNXYxaC0uNWMtLjI4IDAtLjUtLjIyLS41LS41cy4yMi0uNS41LS41eiIvPjxwYXRoIGQ9Im0wIDIuNWMwLTEuMzggMS4xMi0yLjUgMi41LTIuNWg5LjVjLS4yOCAwLS41LjIyLS41LjV2LjVoLTljLS44MyAwLTEuNS42Ny0xLjUgMS41djloLS41Yy0uMjggMC0uNS4yMi0uNS41eiIvPjxwYXRoIGQ9Im0xIDIxLjVjMCAuODMuNjcgMS41IDEuNSAxLjVoOXYuNWMwIC4yOC4yMi41LjUuNWgtOS41Yy0xLjM4IDAtMi41LTEuMTItMi41LTIuNXYtOS41YzAgLjI4LjIyLjUuNS41aC41eiIvPjwvZz48L3N2Zz4=) no-repeat 50% 50%;
+          -moz-background-size: contain;
+          -o-background-size: contain;
+          background-size: contain;
+        }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.header__wrapper .header__button .button::after {
+            display: block
+        }
+          }
+
+.header__wrapper .header__button .button__text {
+          display: none;
+        }
 
 .header__wrapper .header__cart {
       position: relative;

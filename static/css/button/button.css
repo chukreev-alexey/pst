@@ -4,15 +4,14 @@
   text-align: center;
   padding: 14px 24px 12px 24px;
   margin: 0;
+  border: 0 solid;
   border-radius: 100px;
   position: relative;
   display: block;
   transition: all 0.15s ease-in-out;
   cursor: pointer;
-  border: 0 solid;
   @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
   @media (--mobile) {
-    min-width: 200px;
     padding: 12px 24px 14px 24px;
   }
   &:focus {
