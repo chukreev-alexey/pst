@@ -8,9 +8,15 @@
     "**/import.css"
   ],
   "plugins": [
-    "stylelint-order"
+    "stylelint-order",
+    "stylelint-no-unsupported-browser-features"
   ],
   "rules": {
+    "plugin/no-unsupported-browser-features": [
+      true, {
+        "severity": "warning"
+      }
+    ],
     "at-rule-empty-line-before": [
       "always", {
         "except": "inside-block",

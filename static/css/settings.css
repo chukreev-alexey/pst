@@ -30,6 +30,7 @@
 
   --color-surface: #fff;
   --color-surface-hover: #fafafa;
+  --color-surface-active: #fafafa;
   --color-surface-text: #000;
   --color-surface-text-hover: #f4a404;
   --color-surface-text-disabled: #999;

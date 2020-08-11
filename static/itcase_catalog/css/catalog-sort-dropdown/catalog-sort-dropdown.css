@@ -1,0 +1,93 @@
+.catalog-sort-dropdown {
+  min-width: 250px;
+  position: relative;
+  &::after {
+    padding: 3px;
+    border: solid var(--color-surface-item);
+    border-width: 0 2px 2px 0;
+    position: absolute;
+    content: '';
+    top: 19px;
+    right: 24px;
+    transform: rotate(45deg);
+    display: inline-block;
+  }
+  &_state_open {
+    ^&__list {
+      display: block;
+    }
+    &::after {
+      transform: rotate(-135deg);
+      top: 24px;
+    }
+  }
+  &__current {
+    padding: 12px 48px 12px 20px;
+    @mixin font normal, 18px, 20px, 18px, 20px, var(--font);
+    background: var(--color-surface-active);
+    color: var(--color-surface-text);
+    border: solid 1px var(--color-neutral-border);
+    display: flex;
+    align-items: center;
+    &::before {
+      min-width: 24px;
+      min-height: 24px;
+      content: '—';
+      display: block;
+      margin: 0 12px 0 0;
+    }
+  }
+  &__list {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin: 8px 0 0 0;
+    background: var(--color-surface);
+    border: solid 1px var(--color-neutral-border);
+    box-shadow: 0 5px 10px -5px var(--color-neutral-shadow);
+    border-bottom: 0;
+    z-index: 1;
+    display: none;
+    ^&__item {
+      @mixin font normal, 18px, 20px, 18px, 20px, var(--font);
+      border-bottom: solid 1px var(--color-neutral-border);
+      padding: 12px 48px 12px 20px;
+      white-space: nowrap;
+      color: var(--color-neutral-text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      &:hover {
+        background: var(--color-surface-hover);
+      }
+      &_sort_default {
+        &::before {
+          min-width: 24px;
+          min-height: 24px;
+          content: '-';
+          display: block;
+          margin: 0 12px 0 0;
+        }
+      }
+      &_sort_asc {
+        &::before {
+          min-width: 24px;
+          min-height: 24px;
+          content: '>';
+          display: block;
+          margin: 0 12px 0 0;
+        }
+      }
+      &_sort_desc {
+        &::before {
+          min-width: 24px;
+          min-height: 24px;
+          content: '<';
+          display: block;
+          margin: 0 12px 0 0;
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,5 @@
-Firefox >= 3
-Explorer >= 6
-Opera >= 9
-Chrome >= 15
-Safari >= 4
-> 1%
+defaults
+not IE 11
+not IE_Mob 11
+not OperaMini all
+maintained node versions
