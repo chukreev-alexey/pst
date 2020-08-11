@@ -111,7 +111,6 @@
                         </div>
                     </div>
                 </div>
-{% comment %}
 
                 {% for price in product.prices.all %}
                     {{ price.product }}
@@ -136,11 +135,8 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
-{% endcomment %}
-                {% comment %}
-                    {% for price in product.prices.all %}
-                        <div>
-                            <p>{{ price.product_article }}: {{ price.price }}</p>
+
+
 
                 {% for price in product.prices.all %}
                     <div>
