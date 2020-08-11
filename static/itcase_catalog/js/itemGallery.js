@@ -1,3 +1,5 @@
+/* globals Swiper */
+
 'use strict'
 
 if (document.querySelector('.catalog-item-gallery')) {

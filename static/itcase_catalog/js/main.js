@@ -3,6 +3,7 @@
 'use strict'
 
 require('./catalogGroups')
+require('./catalogSort')
 require('./itemGallery')
 require('./popupMenu')
 
@@ -126,6 +127,7 @@ if (typeof ItcaseFilterClass !== 'undefined') {
     dropPagination: true,
     productListClass: 'catalog-list',
     sortBlockClass: 'catalog-sort',
+    sortItemClass: ['catalog-sort__group-item', 'catalog-sort-dropdown__item'],
     contentRequestCB: initializeRangeSliders,
   })
 }

@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0b1a0864c20be1fdb5ae";
+/******/ 	var hotCurrentHash = "4a37eb35d256135a7259";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10736,6 +10736,33 @@ $(document).on('click', '.catalog-group__inner-nested-list-count', function (eve
 
 /***/ }),
 
+/***/ "./static/itcase_catalog/js/catalogSort.js":
+/*!*************************************************!*\
+  !*** ./static/itcase_catalog/js/catalogSort.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+$(document).on('click', '*[data-sort-dropdown]', function () {
+  const baseClass = this.classList[0];
+  const openClass = `${baseClass}_state_open`;
+  const isNeedOpen = !this.classList.contains(openClass);
+  this.classList.toggle(openClass, isNeedOpen);
+});
+$(document).on('click', '.catalog-sort-dropdown__item', function (event) {
+  const dropdownBlock = this.closest('*[data-sort-dropdown]');
+  if (!dropdownBlock) return event;
+  dropdownBlock.click();
+  const currentSort = dropdownBlock.querySelector('.catalog-sort-dropdown__current');
+  if (!currentSort) return event;
+  currentSort.textContent = this.textContent;
+});
+
+/***/ }),
+
 /***/ "./static/itcase_catalog/js/itemGallery.js":
 /*!*************************************************!*\
   !*** ./static/itcase_catalog/js/itemGallery.js ***!
@@ -10744,6 +10771,7 @@ $(document).on('click', '.catalog-group__inner-nested-list-count', function (eve
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* globals Swiper */
 
 
 if (document.querySelector('.catalog-item-gallery')) {
@@ -10774,6 +10802,8 @@ if (document.querySelector('.catalog-item-gallery')) {
 
 
 __webpack_require__(/*! ./catalogGroups */ "./static/itcase_catalog/js/catalogGroups.js");
+
+__webpack_require__(/*! ./catalogSort */ "./static/itcase_catalog/js/catalogSort.js");
 
 __webpack_require__(/*! ./itemGallery */ "./static/itcase_catalog/js/itemGallery.js");
 
@@ -10892,6 +10922,7 @@ if (typeof ItcaseFilterClass !== 'undefined') {
     dropPagination: true,
     productListClass: 'catalog-list',
     sortBlockClass: 'catalog-sort',
+    sortItemClass: ['catalog-sort__group-item', 'catalog-sort-dropdown__item'],
     contentRequestCB: initializeRangeSliders
   });
 }
