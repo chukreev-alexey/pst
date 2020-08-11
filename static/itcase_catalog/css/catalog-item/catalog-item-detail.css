@@ -35,35 +35,47 @@
   &__info {
     width: 100%;
     display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    margin: 32px 0 0 0;
     @media (--mobile) {
+      margin: 0;
       background: var(--color-primary);
-      flex-flow: row wrap;
       justify-content: center;
-      align-items: center;
     }
   }
   &__price {
     @mixin font bold, 24px, 32px, 24px, 32px, var(--font-title-secondary);
+    margin: 0 24px;
     @media (--mobile) {
       color: var(--color-primary-text);
     }
   }
   &__button {
-    min-width: 0 !important;
-    padding: 0 !important;
-    &::after {
-      width: 52px;
-      height: 52px;
-      background: url('./../img/icon/add_to_cart_white.svg') no-repeat 50% 50%;
-      border: solid 1px var(--color-surface-border);
-      border-radius: 50%;
-      content: '';
-      display: inline-block;
+    width: 100%;
+    & .button {
+      max-width: 180px;
+      background: none;
+      margin: 24px 0 0 0;
+      &::after {
+        @media (--mobile) {
+          width: 52px;
+          height: 52px;
+          background: url('./../img/icon/add_to_cart_white.svg') no-repeat 50% 50%;
+          border-radius: 50%;
+          content: '';
+          display: inline-block;
+        }
+      }
+      &__text {
+        @media (--mobile) {
+          display: none;
+        }
+      }
     }
   }
   &__count {
     width: 120px;
-    margin: 0 30px;
     position: relative;
     display: flex;
     justify-content: space-between;
