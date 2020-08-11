@@ -20,16 +20,14 @@ div.popup-loading {
   &__inner {
     width: 100px;
     height: 100px;
-    background: #fff;
-    border: solid 1px #000;
     border-radius: 20px;
     position: absolute;
     display: block;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    & .sk-double-bounce {
-      margin: 30px auto 0 auto;
+    & .sk-three-bounce .sk-child {
+      background-color: var(--color-primary);
     }
   }
 }

@@ -4,5 +4,12 @@
     &:hover {
       background: var(--color-neutral-hover);
     }
+    & .button {
+      &__text {
+        display: inline-block;
+         color: var(--color-neutral-text);
+        @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
+      }
+    }
   }
 }

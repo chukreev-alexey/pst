@@ -92,9 +92,10 @@
                 </a>
                 <div class="popup-loading">
                     <div class="popup-loading__inner">
-                        <div class="sk-double-bounce">
-                            <div class="sk-child sk-double-bounce1"></div>
-                            <div class="sk-child sk-double-bounce2"></div>
+                        <div class="sk-three-bounce">
+                            <div class="sk-child sk-bounce1"></div>
+                            <div class="sk-child sk-bounce2"></div>
+                            <div class="sk-child sk-bounce3"></div>
                         </div>
                     </div>
                 </div>
@@ -128,9 +129,19 @@
                     </div>
                 </div>
                 <div class="header__button">
-                    <div class="button button_type_neutral">
-                        <div class="button__text">Расчет материалов</div>
-                    </div>
+                    <a href="{% url 'form_detail' slug='request-cost' %}"
+                       data-yandex-target="YANDEX_REQUEST_COST"
+                       data-yandex-target-submit="YANDEX_REQUEST_COST_SUBMIT"
+                       class="button button_type_neutral button_action_cost {{ additional_class }} {% if site_version == 'desktop' %}forms_ajax{% endif %}"
+                       data-popup-type-class="entry-popup"
+                       data-show-form-header="false"
+                       data-show-form-footer="false"
+                       data-form-validatior-options='{"disableSubmitButton": false}'
+                       data-require-group-fields="phone,email"
+                       data-show-required-block="false"
+                       data-form-additional-class="form_type_hide_messages">
+                        <span class="button__text">Расчет материалов</span>
+                    </a>
                 </div>
                 <div class="header__cart">
                     {% with cart_empty_text='Заказ' %}

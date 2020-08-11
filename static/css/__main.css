@@ -23,6 +23,45 @@
       background: rgb(227, 227, 232);
     }
 
+.button.button_type_neutral .button__text {
+        display: inline-block;
+         color: #000;
+        font-size: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
+        font-weight: normal;
+        font-family: 'Fact-Semi-Expanded'
+,
+sans-serif;
+        line-height: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
+      }
+
+@media screen and (min-width: 2560px) {
+
+    .button.button_type_neutral .button__text {
+        line-height: 1.125rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    .button.button_type_neutral .button__text {
+        line-height: 0.875rem;
+    }
+}
+
+@media screen and (min-width: 2560px) {
+
+    .button.button_type_neutral .button__text {
+        font-size: 1.125rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    .button.button_type_neutral .button__text {
+        font-size: 0.875rem;
+    }
+}
+
 /* stylelint-disable custom-property-empty-line-before */
 
 .button.button_type_primary {
