@@ -27,26 +27,22 @@
                     {% with images=product.get_images %}
                         {% if images %}
                             <div class="catalog-item-gallery">
-                                <div class="catalog-item-gallery__image">
-                                    <img src="{% version product.get_first_image.image 'catalog_detail' %}"
-                                         class="catalog-item-gallery__image-image" alt="" title="" />
-                                </div>
-                                {% for price in product.prices.all %}
-                                    {% if price.image %}
-                                        <div class="catalog-item-gallery__image">
-                                            <img src="{% version price.image 'catalog_detail' %}"
-                                                 class="catalog-item-gallery__image-image" alt="" title="" />
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                                <div class="catalog-item-gallery-nav">
-                                    {% for image in images %}
-                                        <div class="catalog-item-gallery-nav__item{% if forloop.first %} catalog-item-gallery-nav__item_state_current{% endif %}">
-                                            <img src="{% version image.image 'catalog_detail_thumb' %}" alt="" title="" />
-                                        </div>
+                                <div class="catalog-item-gallery__wrapper">
+                                    <div class="catalog-item-gallery__image">
+                                        <img src="{% version product.get_first_image.image 'catalog_detail' %}"
+                                             class="catalog-item-gallery__image-image" alt="" title="" />
+                                    </div>
+                                    {% for price in product.prices.all %}
+                                        {% if price.image %}
+                                            <div class="catalog-item-gallery__image">
+                                                <img src="{% version price.image 'catalog_detail' %}"
+                                                     class="catalog-item-gallery__image-image" alt="" title="" />
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
+                            <div class="catalog-item-gallery-pagination swiper-pagination"></div>
                         {% endif %}
                     {% endwith %}
                 </div>
@@ -115,6 +111,8 @@
                         </div>
                     </div>
                 </div>
+{% comment %}
+
                 {% for price in product.prices.all %}
                     {{ price.product }}
                     {{ price.product_article }}
@@ -138,35 +136,39 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
+{% endcomment %}
                 {% comment %}
                     {% for price in product.prices.all %}
                         <div>
                             <p>{{ price.product_article }}: {{ price.price }}</p>
 
-                            {% for param in price.price_combination.all %}
-                               <p>{{ param }}</p>
-                            {% endfor %}
+                {% for price in product.prices.all %}
+                    <div>
+                        <p>{{ price.product_article }}: {{ price.price }}</p>
+                        {% for param in price.price_combination.all %}
+                           <p>{{ param }}</p>
+                        {% endfor %}
 
-                            {% with id=price.pk|unlocalize %}
-                                <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
-                                   class="catalog-item__button button
-                                          {% if price in cart %}
-                                            button_border_orange
-                                          {% else %}
-                                            button_color_blue
-                                          {% endif %}"
-                                    data-add-url="{% url 'itcase_cart:cart_add' %}"
-                                    data-product="{{ id }}"
-                                    data-amount-{{ id }}="1">
-                                    {% if price in cart %}
-                                        В заказе
-                                    {% else %}
-                                        Заказать
-                                    {% endif %}
-                                </a>
-                            {% endwith %}
-                        </div>
-                    {% endfor %}
+                        {% with id=price.pk|unlocalize %}
+                            <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                               class="catalog-item__button button
+                                      {% if price in cart %}
+                                        button_border_orange
+                                      {% else %}
+                                        button_color_blue
+                                      {% endif %}"
+                                data-add-url="{% url 'itcase_cart:cart_add' %}"
+                                data-product="{{ id }}"
+                                data-amount-{{ id }}="1">
+                                {% if price in cart %}
+                                    В заказе
+                                {% else %}
+                                    Заказать
+                                {% endif %}
+                            </a>
+                        {% endwith %}
+                    </div>
+                {% endfor %}
 
                 <div class="catalog-item-detail__info">
                     {% if product.is_exist %}
@@ -200,7 +202,6 @@
                             {% endif %}
                         </a>
                     {% endwith %}
-                {% endcomment %}
 
                 </div>
             </div>

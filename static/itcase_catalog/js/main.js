@@ -2,8 +2,9 @@
 
 'use strict'
 
-require('./popupMenu')
 require('./catalogGroups')
+require('./itemGallery')
+require('./popupMenu')
 
 // Create "Cart" instance for work with catalog and cart
 if (typeof UserCartClass !== 'undefined') {
