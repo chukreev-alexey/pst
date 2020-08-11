@@ -1,0 +1,8 @@
+.feed-detail {
+  &__date {
+    color: var(--color-surface-text);
+    padding: 0 0 20px 0;
+    margin: 0;
+    @mixin font 500, 14px, 16px, 18px, 22px, var(--font);
+  }
+}

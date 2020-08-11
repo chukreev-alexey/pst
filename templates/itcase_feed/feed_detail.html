@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load itcase_common itcase_feed %}
+
+{% block title %}
+    {{ feed.name }} -
+    {% if request.page.seo_title %}
+        {{ request.page.seo_title }}
+    {% elif request.page.title %}
+        {{ request.page.title }}
+    {% else %}
+        {{ page_parent.title|default:"Новости" }}
+    {% endif %} -
+    {{ feed.date|date:"Y - F" }}
+{% endblock title %}
+
+{% block content %}
+    <div class="nav">
+        {% if page_feed %}
+            <div class="nav__item">
+                <a href="{% url 'page' url=cur_page.url %}" class="nav__item-link">{{ cur_page.name }}</a>
+            </div>
+        {% else %}
+            <div class="nav__item">
+                <a href="{% url 'feed_list' %}" class="nav__item-link">{{ page_parent.title|default:"Новости" }}</a>
+            </div>
+            {% if feedline %}
+                <div class="nav__item">
+                    <a href="{% get_feed_url url_name='feed_list' feedline=feedline.slug %}" class="nav__item-link">{{ feedline.name }}</a>
+                </div>
+            {% endif %}
+        {% endif %}
+        <div class="nav__item">
+            <a href="{% get_feed_url url_name=feed_list_url|default:'feed_list' year=feed.date|date:'Y' feedline=feedline.slug %}"
+               class="nav__item-link">{{ feed.date|date:"Y" }}</a>
+        </div>
+        <div class="nav__item">
+            <a href="{% get_feed_url url_name=feed_list_url|default:'feed_list' month=feed.date|date:'m' year=feed.date|date:'Y' feedline=feedline.slug %}"
+               class="nav__item-link">{{ feed.date|date:"F" }}</a>
+        </div>
+        <div class="nav__item nav__item_state_current">
+            <div class="nav__item-text">{{ feed.name }}</div>
+        </div>
+    </div>
+
+    <div class="feed">
+        {% with hide_title=True %}
+            {% include 'itcase_feed/include/feed_info.html' %}
+        {% endwith %}
+    </div>
+{% endblock %}
