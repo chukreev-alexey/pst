@@ -189,7 +189,7 @@
                 <div class="catalog-item-detail__tabs-list">
                     {% for section in product.sections.all %}
                         {% if section.show %}
-                            <div class="catalog-item-detail__tabs-list-item">
+                            <div class="catalog-item-detail__tabs-list-item catalog-item-detail__tabs-list-item_state_active">
                                 {{ section.section_name }}
                             </div>
                         {% endif %}
@@ -197,7 +197,9 @@
                 </div>
                 {% for section in product.sections.all %}
                     {% if section.show %}
-                        <div class="catalog-item-detail__tabs-content content" {% if forloop.first %} style="display: block" {% endif %} >{{ section.section_content|safe }}</div>
+                        <div class="catalog-item-detail__tabs-content catalog-item-detail__tabs-content_state_active content">
+                            {{ section.section_content|safe }}
+                        </div>
                     {% endif %}
                 {% endfor %}
             </div>
