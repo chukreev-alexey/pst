@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4a37eb35d256135a7259";
+/******/ 	var hotCurrentHash = "950a1546d7d96eb678a5";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10807,7 +10807,9 @@ __webpack_require__(/*! ./catalogSort */ "./static/itcase_catalog/js/catalogSort
 
 __webpack_require__(/*! ./itemGallery */ "./static/itcase_catalog/js/itemGallery.js");
 
-__webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js"); // Create "Cart" instance for work with catalog and cart
+__webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js");
+
+__webpack_require__(/*! ./productDetail/contentTabs */ "./static/itcase_catalog/js/productDetail/contentTabs.js"); // Create "Cart" instance for work with catalog and cart
 
 
 if (typeof UserCartClass !== 'undefined') {
@@ -11028,6 +11030,31 @@ const $menuPopupMobile = $('.header__catalog');
 if ($menuPopupMobile.length) {
   $menuPopupMobile.on('click', () => menu.toggle());
 }
+
+/***/ }),
+
+/***/ "./static/itcase_catalog/js/productDetail/contentTabs.js":
+/*!***************************************************************!*\
+  !*** ./static/itcase_catalog/js/productDetail/contentTabs.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+$(document).on('click', '*[data-product-tab-menu]', function changeActiceTab() {
+  const baseClass = this.classList[0];
+  const activeClass = `${baseClass}_state_active`;
+  document.querySelector(`.${activeClass}`).classList.remove(activeClass);
+  this.classList.add(activeClass);
+  const contentSelector = `*[data-product-tab-content="${this.dataset.productTabMenu}"]`;
+  const tabContent = document.querySelector(contentSelector);
+  const contentBaseClass = tabContent.classList[0];
+  const contentActiveClass = `${contentBaseClass}_state_active`;
+  document.querySelector(`.${contentActiveClass}`).classList.remove(contentActiveClass);
+  tabContent.classList.add(contentActiveClass);
+});
 
 /***/ }),
 

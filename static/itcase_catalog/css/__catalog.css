@@ -1564,6 +1564,10 @@ sans-serif;
       box-sizing: border-box;
     }
 
+.catalog-item-detail__tabs-content_state_active {
+        display: block;
+      }
+
 /* stylelint-disable custom-property-empty-line-before */
 
 .catalog-item-gallery {

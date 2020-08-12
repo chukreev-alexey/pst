@@ -27,34 +27,10 @@ div.rotator-container:hover div.rotator-button-next {
 
 div.rotator-container_state_animated {
     -webkit-animation: rotatorContainerAnimation 1s forwards;
-    -moz-animation: rotatorContainerAnimation 1s forwards;
-    -o-animation: rotatorContainerAnimation 1s forwards;
     animation: rotatorContainerAnimation 1s forwards;
   }
 
 @-webkit-keyframes rotatorContainerAnimation {
-  from {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    opacity: 0;
-  }
-  to {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    opacity: 1;
-  }
-}
-
-@-moz-keyframes rotatorContainerAnimation {
-  from {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    opacity: 0;
-  }
-  to {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    opacity: 1;
-  }
-}
-
-@-o-keyframes rotatorContainerAnimation {
   from {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     opacity: 0;
@@ -79,10 +55,6 @@ div.rotator-container_state_animated {
 /* stylelint-disable custom-property-empty-line-before */
 
 .rotator-item {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -167,10 +139,6 @@ div.rotator-container_state_animated {
       position: absolute;
       left: 50% !important;
       top: 50% !important;
-      -webkit-transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      -o-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
 
@@ -214,10 +182,6 @@ div.rotator-container_state_animated {
       position: absolute;
       left: 50%;
       top: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      -o-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
 
@@ -232,17 +196,9 @@ div.rotator-container_state_animated {
       }
 
 .rotator-item__text {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 1;
-    -moz-box-flex: 1;
-    -ms-flex: 1 1;
     flex: 1 1;
     margin: 0 0 0 72px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
-    -webkit-align-self: center;
-    -ms-flex-item-align: center;
     align-self: center;
     position: relative;
   }

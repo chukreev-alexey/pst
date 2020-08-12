@@ -63,30 +63,30 @@
                             {% endfor %}
                         </div>
                     {% endfor %}
+
                     {% comment %}
-
-
-                    {% for price in product.prices.all %}
-                        {% for parametr in price.get_parametres_struct %}
-                            <div class="catalog-item-detail__param-group">
-                                <div class="catalog-item-detail__param-title">{{ parametr.name }}</div>
-                                {% for value in parametr.values %}
-                                    <label class="catalog-item-detail__param-item">
-                                        <input type="radio" id="radioButton" class="catalog-item-detail__param-item-input" />
-                                        <div class="catalog-item-detail__param-item-text">{{ value }}<</div>
-                                    </label>
-                                {% endfor %}
-                            </div>
+                        {% for price in product.prices.all %}
+                            {% for parametr in price.get_parametres_struct %}
+                                <div class="catalog-item-detail__param-group">
+                                    <div class="catalog-item-detail__param-title">{{ parametr.name }}</div>
+                                    {% for value in parametr.values %}
+                                        <label class="catalog-item-detail__param-item">
+                                            <input type="radio" id="radioButton" class="catalog-item-detail__param-item-input" />
+                                            <div class="catalog-item-detail__param-item-text">{{ value }}<</div>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                            {{ price.product }}
+                            {{ price.product_article }}
+                            {{ price.price }}
+                            {% if price.old_price %}
+                                {{ price.old_price }}
+                            {% endif %}
+                            {{ price.amount }}
                         {% endfor %}
-                        {{ price.product }}
-                        {{ price.product_article }}
-                        {{ price.price }}
-                        {% if price.old_price %}
-                            {{ price.old_price }}
-                        {% endif %}
-                        {{ price.amount }}
-                    {% endfor %}
-{% endcomment %}
+                    {% endcomment %}
+
                     <div class="catalog-item-detail__info">
                         <div class="catalog-item-detail__count">
                             <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus">&nbsp;</div>
@@ -102,9 +102,7 @@
                     </div>
                 </div>
 
-
                 {% comment %}
-
                     {% for price in product.prices.all %}
                         <div>
                             <p>{{ price.product_article }}: {{ price.price }}</p>
@@ -144,6 +142,7 @@
                             <div class="catalog-item-detail__info-state-text">Под заказ</div>
                         </div>
                     {% endif %}
+
                     <div class="catalog-item-detail__info-price">
                         {{ product.price|floatformat:'-2' }} Р
                     </div>
@@ -166,7 +165,6 @@
                             {% endif %}
                         </a>
                     {% endwith %}
-
                 </div>
             </div>
         </div>
@@ -176,15 +174,16 @@
                 <div class="catalog-item-detail__tabs-list">
                     {% for section in product.sections.all %}
                         {% if section.show %}
-                            <div class="catalog-item-detail__tabs-list-item catalog-item-detail__tabs-list-item_state_active">
+                            <div data-product-tab-menu="{{ section.pk }}" class="catalog-item-detail__tabs-list-item{% if forloop.counter == 1 %} catalog-item-detail__tabs-list-item_state_active{% endif %}">
                                 {{ section.section_name }}
                             </div>
                         {% endif %}
                     {% endfor %}
                 </div>
+
                 {% for section in product.sections.all %}
                     {% if section.show %}
-                        <div class="catalog-item-detail__tabs-content catalog-item-detail__tabs-content_state_active content">
+                        <div data-product-tab-content="{{ section.pk }}" class="catalog-item-detail__tabs-content content{% if forloop.counter == 1 %} catalog-item-detail__tabs-content_state_active{% endif %}">
                             {{ section.section_content|safe }}
                         </div>
                     {% endif %}

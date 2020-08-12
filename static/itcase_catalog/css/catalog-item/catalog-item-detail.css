@@ -258,6 +258,9 @@
       display: none;
       padding: 16px 0 0 16px;
       box-sizing: border-box;
+      &_state_active {
+        display: block;
+      }
     }
   }
 }
