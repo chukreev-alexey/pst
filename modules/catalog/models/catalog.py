@@ -105,6 +105,8 @@ class Category(MPTTModel, CategoryBase, SEOModel):
         verbose_name='Параметры для фильтра',
         blank=True)
 
+    other_template = models.BooleanField('Выбор товаров', default=False)
+
     class Meta(CategoryBase.Meta):
         pass
 

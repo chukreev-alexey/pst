@@ -325,6 +325,9 @@ class CategoryDetail(RequestDataMixin, SingleObjectMixin, ProductListView):
         queryset = Category.objects.filter(level__lte=1)
         self.object = self.get_object(queryset=queryset)
 
+        if self.object.other_template:
+            self.template_name = get_template_name('other_catalog_groups.html')
+
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

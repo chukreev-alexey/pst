@@ -65,7 +65,7 @@ class ParametrAdmin(admin.ModelAdmin):
 class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
     fieldsets = (
-        (None, {'fields': (('on_main_page', 'in_menu'),
+        (None, {'fields': (('on_main_page', 'in_menu', 'other_template'),
                            'name', 'slug', 'parent', 'image',
                            'filter_parametres')}),
         ('Контент', {
