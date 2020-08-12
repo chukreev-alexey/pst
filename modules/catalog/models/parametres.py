@@ -66,27 +66,10 @@ class Price(models.Model):
         verbose_name_plural = 'Цены комплектаций'
 
     def __str__(self):
-        if self.price_combination:
-            return f'{self.price_combination.data.first()}: {self.price}'
+        if self.price_parametres:
+            return f'{self.price}'
         else:
             return 'None'
-
-    def get_parametr_list(self):
-        return self.price_parametres.values_list(
-            'parametr__name', flat=True).distinct()
-
-    def get_parametres_struct(self):
-        parametres = []
-
-        for parametr_name in self.get_parametr_list():
-            parametr = {}
-            parametr['name'] = parametr_name
-            parametr['values'] = self.price_parametres.values_list(
-                'parametr_value__value', flat=True).filter(
-                parametr__name=parametr_name)
-            parametres.append(parametr)
-
-        return parametres
 
 
 # TODO: maybe add amount for each parametr_value

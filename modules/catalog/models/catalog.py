@@ -15,6 +15,7 @@
 # limitations under the License.
 
 from django.db import models
+
 from django.urls import reverse_lazy
 from mptt.models import MPTTModel
 
@@ -184,6 +185,29 @@ class Product(ProductBase, FieldExistsMixin):
 
     def get_optional_products(self):
         return self.optional_products.filter(show=True)
+
+    def get_prices_parametres(self):
+        from .parametres import SeparateParametrPicking
+
+        parametres = []
+
+        prices_qs = self.prices.filter(price_parametres__isnull=False)
+
+        parametres_names = prices_qs.values_list(
+            'price_parametres__parametr__name', flat=True).distinct()
+
+        for parametr_name in parametres_names:
+            parametr = {}
+            parametr['name'] = parametr_name
+
+            values = SeparateParametrPicking.objects.values_list(
+                'parametr_value__value', flat=True).filter(
+                price__in=prices_qs, parametr__name=parametr_name).distinct()
+
+            parametr['values'] = values
+            parametres.append(parametr)
+
+        return parametres
 
 
 class SectionAtribute(models.Model):

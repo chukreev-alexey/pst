@@ -50,6 +50,22 @@
 
             <div class="catalog-item-detail__right">
                 <div class="catalog-item-detail__param">
+                    {% for parametr in product.get_prices_parametres %}
+                        <div class="catalog-item-detail__param-group">
+                            <div class="catalog-item-detail__param-title">{{ parametr.name }}</div>
+                            {% for value in parametr.values %}
+                                <label class="catalog-item-detail__param-item">
+                                    <input type="radio" id="radioButton" class="catalog-item-detail__param-item-input" />
+                                    <div class="catalog-item-detail__param-item-text">
+                                        {{ value }}
+                                    </div>
+                                </label>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    {% comment %}
+
+
                     {% for price in product.prices.all %}
                         {% for parametr in price.get_parametres_struct %}
                             <div class="catalog-item-detail__param-group">
@@ -70,7 +86,7 @@
                         {% endif %}
                         {{ price.amount }}
                     {% endfor %}
-
+{% endcomment %}
                     <div class="catalog-item-detail__info">
                         <div class="catalog-item-detail__count">
                             <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus">&nbsp;</div>
