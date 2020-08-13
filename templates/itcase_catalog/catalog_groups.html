@@ -3,10 +3,22 @@
 {% load itcase_common l10n %}
 
 {% block title %}
-    {% for crumb in catalog_breadcrumbs %}
-        {{ crumb.name }} {% if not forloop.last %} | {% endif %}
-    {% endfor %}
+    {% if category.seo_title %}
+        {{ category.seo_title }}
+    {% else %}
+        {% for crumb in catalog_breadcrumbs %}
+            {{ crumb.name }} {% if not forloop.last %} | {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock title %}
+
+{% block meta %}
+    <meta name="description" content="{{ category.seo_description|default:""|safe }}" />
+    <meta name="keywords" content="{{ category.seo_keywords|default:""|safe }}" />
+    {% if category.seo_other %}
+        {{ category.seo_other|safe }}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     {% if not view.hide_products %}

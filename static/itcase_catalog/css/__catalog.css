@@ -1158,47 +1158,47 @@ sans-serif;
       }
 
 .catalog-item-detail__right {
-    box-sizing: border-box;
-    flex: 1 1;
     margin: 0 0 0 56px;
     position: relative;
+    flex: 1 1;
+    box-sizing: border-box;
   }
 
 @media (min-width: 15em)
   and (max-width: 47.999em) {
 
 .catalog-item-detail__right {
-      flex: none;
-      margin: 0
+      margin: 0;
+      flex: none
   }
     }
 
 .catalog-item-detail__info {
     width: 100%;
-    display: flex;
-    align-items: center;
-    flex-flow: row wrap;
     margin: 32px 0 0 0;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
   }
 
 @media (min-width: 15em)
   and (max-width: 47.999em) {
 
 .catalog-item-detail__info {
-      margin: 0;
       background: #d82318;
+      margin: 0;
       justify-content: center
   }
     }
 
 .catalog-item-detail__price {
+    margin: 0 24px;
     font-size: calc(1.5rem + 0.5 * ((100vw - 20rem) / 140));
     font-weight: bold;
     font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
     line-height: calc(1.5rem + 0.5 * ((100vw - 20rem) / 140));
-    margin: 0 24px;
   }
 
 @media screen and (min-width: 2560px) {
@@ -1283,21 +1283,21 @@ sans-serif;
 
 .catalog-item-detail__count {
       width: 100%;
-      margin: 0;
+      background: #eee;
       padding: 24px 0;
-      justify-content: center;
-      background: #eee
+      margin: 0;
+      justify-content: center
   }
     }
 
 .catalog-item-detail__count-button {
       width: 24px;
       height: 24px;
+      border-radius: 50%;
       position: relative;
       display: block;
       flex: 0 0 auto;
       cursor: pointer;
-      border-radius: 50%;
     }
 
 @media (min-width: 15em)
@@ -1332,7 +1332,7 @@ sans-serif;
             display: block;
             left: 50%;
             top: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
           }
 
 .catalog-item-detail__count-button_action_minus:hover {
@@ -1343,10 +1343,6 @@ sans-serif;
           background: #d82318;
           margin: 0 0 0 10px;
         }
-
-.catalog-item-detail__count-button_action_plus:hover {
-            background: rgb(138, 21, 15);
-          }
 
 .catalog-item-detail__count-button_action_plus::before {
             width: 50%;
@@ -1370,6 +1366,10 @@ sans-serif;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%) rotate(90deg);
+          }
+
+.catalog-item-detail__count-button_action_plus:hover {
+            background: rgb(138, 21, 15);
           }
 
 .catalog-item-detail__count-value {
@@ -1407,18 +1407,18 @@ sans-serif;
 .catalog-item-detail__count-input {
       width: 50%;
       min-width: 52px;
-      font-size: calc(1.5rem + 0.5 * ((100vw - 20rem) / 140));
-      font-weight: normal;
-      font-family: 'Fact-Semi-Expanded'
-,
-sans-serif;
-      line-height: calc(1.5rem + 0.5 * ((100vw - 20rem) / 140));
       color: #000;
       text-align: center;
       padding: 8px 0 6px 0;
       margin: 0;
       border: solid 1px #979797;
       display: inline-block;
+      font-size: calc(1.5rem + 0.5 * ((100vw - 20rem) / 140));
+      font-weight: normal;
+      font-family: 'Fact-Semi-Expanded'
+,
+sans-serif;
+      line-height: calc(1.5rem + 0.5 * ((100vw - 20rem) / 140));
     }
 
 @media screen and (min-width: 2560px) {
@@ -1468,8 +1468,8 @@ sans-serif;
 
 .catalog-item-detail__param-group {
       background: #f9f9fa;
-      margin: 0 24px 0 0;
       padding: 16px 32px 16px 16px;
+      margin: 0 24px 0 0;
       box-sizing: border-box;
     }
 
@@ -1477,21 +1477,21 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .catalog-item-detail__param-group {
+        width: 100%;
         background: none;
         padding: 0 0 16px 0;
-        width: 100%;
         margin: 0
     }
       }
 
 .catalog-item-detail__param-group .catalog-item-detail__param-title {
+        padding: 0 0 8px 0;
         font-size: calc(1rem + 0 * ((100vw - 20rem) / 140));
         font-weight: 500;
         font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
         line-height: calc(1.125rem + 0.375 * ((100vw - 20rem) / 140));
-        padding: 0 0 8px 0;
       }
 
 @media screen and (min-width: 2560px) {
@@ -1526,8 +1526,8 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .catalog-item-detail__param-group .catalog-item-detail__param-title {
-          padding: 16px 16px;
-          background: #f9f9fa
+          background: #f9f9fa;
+          padding: 16px 16px
       }
         }
 
@@ -1548,13 +1548,13 @@ sans-serif;
         }
 
 .catalog-item-detail__param-group .catalog-item-detail__param-item-text {
+          color: #000;
           font-size: calc(1rem + 0 * ((100vw - 20rem) / 140));
           font-weight: normal;
           font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
           line-height: calc(1.125rem + 0.375 * ((100vw - 20rem) / 140));
-          color: #000;
         }
 
 @media screen and (min-width: 2560px) {
@@ -1590,8 +1590,8 @@ sans-serif;
   }
 
 .catalog-item-detail__tabs-list {
-      display: flex;
       background: #f9f9fa;
+      display: flex;
     }
 
 @media (min-width: 15em)
@@ -1604,16 +1604,16 @@ sans-serif;
 
 .catalog-item-detail__tabs-list-item {
         width: 25%;
+        background: #f9f9fa;
+        padding: 16px;
+        box-sizing: border-box;
+        cursor: pointer;
         font-size: calc(1rem + 0.125 * ((100vw - 20rem) / 140));
         font-weight: 500;
         font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
         line-height: calc(1.5rem + 0 * ((100vw - 20rem) / 140));
-        padding: 16px;
-        background: #f9f9fa;
-        box-sizing: border-box;
-        cursor: pointer;
       }
 
 @media screen and (min-width: 2560px) {
@@ -1649,12 +1649,12 @@ sans-serif;
         }
 
 .catalog-item-detail__tabs-list-item_state_active {
-         background: rgb(227, 227, 232);
+          background: rgb(227, 227, 232);
         }
 
 .catalog-item-detail__tabs-content {
-      display: none;
       padding: 16px 0 0 16px;
+      display: none;
       box-sizing: border-box;
     }
 
@@ -2738,8 +2738,8 @@ sans-serif;
     }
 
 .catalog-menu__wrapper .catalog-menu__item {
-      flex: 1 1 auto;
       position: relative;
+      flex: 1 1 auto;
     }
 
 .catalog-menu__wrapper .catalog-menu__item_type_search {
@@ -2756,20 +2756,20 @@ sans-serif;
           background: rgb(138, 21, 15);
         }
 
-.catalog-menu__wrapper .catalog-menu__item_type_popup .catalog-menu__item-link {
-          padding: 16px 24px 16px 8px;
-        }
-
 .catalog-menu__wrapper .catalog-menu__item_type_popup::after {
           padding: 3px;
           border: solid #fff;
           border-width: 0 2px 2px 0;
           position: absolute;
           content: '';
+          display: inline-block;
           top: 22px;
           right: 17px;
           transform: rotate(45deg);
-          display: inline-block;
+        }
+
+.catalog-menu__wrapper .catalog-menu__item_type_popup .catalog-menu__item-link {
+          padding: 16px 24px 16px 8px;
         }
 
 .catalog-menu__wrapper .catalog-menu__item-link {
