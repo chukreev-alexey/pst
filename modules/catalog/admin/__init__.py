@@ -166,6 +166,11 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
                        'recommend_categories', 'parametres',
                        'product_actions')
         }),
+        ('SEO-информация', {
+            'fields': ('seo_title', 'seo_description', 'seo_keywords',
+                       'seo_other'),
+            'classes': ('grp-collapse', 'grp-closed')
+        }),
     )
     filter_horizontal = ['recommend_categories', 'parametres']
 

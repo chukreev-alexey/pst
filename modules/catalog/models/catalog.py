@@ -125,7 +125,7 @@ class Category(MPTTModel, CategoryBase, SEOModel):
         return reverse_lazy('category-detail', args=[str(self.slug)])
 
 
-class Product(ProductBase, FieldExistsMixin):
+class Product(ProductBase, FieldExistsMixin, SEOModel):
     brand = models.ForeignKey(Brand,
                               related_name='products', verbose_name='Бренд',
                               on_delete=models.SET_NULL, blank=True, null=True)
