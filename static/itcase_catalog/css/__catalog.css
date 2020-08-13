@@ -796,6 +796,72 @@ sans-serif;
 
 /* stylelint-disable custom-property-empty-line-before */
 
+.catalog-group-second {
+  width: 100%;
+  margin: 0 0 20px 0;
+  position: relative;
+  background: #f9f9fa;
+  padding: 24px;
+}
+
+.catalog-group-second__list {
+    display: flex;
+    flex-flow: row wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+.catalog-group-second__list-item {
+      width: 30%;
+      margin: 0 0 12px 0;
+    }
+
+.catalog-group-second__list-item-link {
+        text-decoration: none;
+        font-size: calc(1rem + 0.25 * ((100vw - 20rem) / 140));
+        font-weight: normal;
+        font-family: 'Fact-Semi-Expanded'
+,
+sans-serif;
+        line-height: calc(1.25rem + 0.25 * ((100vw - 20rem) / 140));
+        color: #000;
+      }
+
+@media screen and (min-width: 2560px) {
+
+  .catalog-group-second__list-item-link {
+    line-height: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .catalog-group-second__list-item-link {
+    line-height: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+
+  .catalog-group-second__list-item-link {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .catalog-group-second__list-item-link {
+    font-size: 1rem;
+  }
+}
+
+.catalog-group-second__list-item-link:hover {
+          color: #d82318;
+        }
+
+/* stylelint-disable custom-property-empty-line-before */
+
 .catalog-group {
   width: 100%;
   margin: 0 0 20px 0;
@@ -806,6 +872,30 @@ sans-serif;
     width: 100%;
     padding: 0 0 60px 0;
   }
+
+.catalog-group-page_type_second .catalog-group__inner-left {
+          width: 100%;
+        }
+
+.catalog-group-page_type_second .catalog-group__inner-right {
+          width: 100%;
+        }
+
+.catalog-group-page_type_second .catalog-item {
+        width: calc(25% - 32px);
+        flex: 0 0 auto;
+      }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em), (min-width: 48em)
+  and (max-width: 59.999em) {
+
+.catalog-group-page_type_second .catalog-item {
+          width: auto;
+          margin: 0 15px 20px 15px;
+          flex: 0 0 200px
+      }
+        }
 
 .catalog-group__wrapper {
     width: 100%;

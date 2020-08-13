@@ -25,11 +25,10 @@
         </div>
     {% endif %}
 
-    {% if view.hide_products %}
-        {% include './include/catalog_categories_list.html' %}
-    {% else %}
-        {% include './include/catalog_group.html' %}
-    {% endif %}
+    {% with hide_sort=True %}
+        {% include './include/catalog_group_second.html' %}
+    {% endwith %}
+
 
     {% if category.content %}
         {% render_content category.content %}
