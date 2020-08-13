@@ -1603,16 +1603,16 @@ sans-serif;
       }
 
 .catalog-item-detail__tabs-list-item {
-        max-width: 25%;
+        width: 25%;
         font-size: calc(1rem + 0.125 * ((100vw - 20rem) / 140));
         font-weight: 500;
         font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
         line-height: calc(1.5rem + 0 * ((100vw - 20rem) / 140));
-        flex: 1 1;
         padding: 16px;
         background: #f9f9fa;
+        box-sizing: border-box;
         cursor: pointer;
       }
 
@@ -1646,6 +1646,10 @@ sans-serif;
 
 .catalog-item-detail__tabs-list-item:hover {
           background: rgb(227, 227, 232);
+        }
+
+.catalog-item-detail__tabs-list-item_state_active {
+         background: rgb(227, 227, 232);
         }
 
 .catalog-item-detail__tabs-content {
@@ -2746,6 +2750,10 @@ sans-serif;
 
 .catalog-menu__wrapper .catalog-menu__item_type_search:hover {
           background-color: rgb(138, 21, 15);
+        }
+
+.catalog-menu__wrapper .catalog-menu__item_state_current .catalog-menu__item-link {
+          background: rgb(138, 21, 15);
         }
 
 .catalog-menu__wrapper .catalog-menu__item_type_popup .catalog-menu__item-link {
