@@ -387,8 +387,6 @@ class ProductDetail(ProductDetailBase):
         context = super().get_context_data()
 
         breadcrumbs = self.object.category.get_ancestors(include_self=True)
-        context['catalog_breadcrumbs'] = breadcrumbs.filter(level__lte=1)
-
-        context['filter_category'] = breadcrumbs.filter(level=2).first()
+        context['catalog_breadcrumbs'] = breadcrumbs
 
         return context
