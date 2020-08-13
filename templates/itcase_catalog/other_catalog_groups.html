@@ -31,7 +31,9 @@
 
 
     {% if category.content %}
-        {% render_content category.content %}
+        <div class="content">
+            {% render_content category.content %}
+        </div>
     {% endif %}
 
 {% endblock content %}
