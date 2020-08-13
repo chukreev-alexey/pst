@@ -38,18 +38,18 @@ urlpatterns = [
         path('token/', rest_token_views.obtain_auth_token),
     ])),
 
-    path(r'', include('website.urls')),
-    path(r'', include('modules.catalog.urls')),
+    path('', include('website.urls')),
+    path('', include('modules.catalog.urls')),
 
-    path(r'cart/', include('itcase_cart.urls')),
-    path(r'', include('itcase_catalog.urls')),
-    path(r'', include('itcase_feed.urls')),
-    path(r'', include('itcase_gallery.urls')),
-    path(r'', include('itcase_logos.urls')),
-    path(r'search/', include('itcase_search.urls')),
-    path(r'forms/', include('itcase_entry.urls')),
+    path('cart/', include('itcase_cart.urls')),
+    path('', include('itcase_catalog.urls')),
+    path('', include('itcase_feed.urls')),
+    path('', include('itcase_gallery.urls')),
+    path('', include('itcase_logos.urls')),
+    path('search/', include('itcase_search.urls')),
+    path('forms/', include('itcase_entry.urls')),
 
-    path(r'', include('itcase_pages.urls')),
+    path('', include('itcase_pages.urls')),
 ]
 
 

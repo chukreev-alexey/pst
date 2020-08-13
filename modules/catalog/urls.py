@@ -14,16 +14,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    url(r'^catalog/$', views.CatalogIndexView.as_view(), name='catalog-index'),
+    path('catalog/', views.CatalogIndexView.as_view(), name='catalog-index'),
 
-    url(r'^category/(?P<slug>[\w-]+)/(?:page(?P<page_num>\d+)/)?$',
-        views.CategoryDetail.as_view(), name='category-detail'),
+    path('category/<slug>/',
+         views.CategoryDetail.as_view(), name='category-detail'),
+    path('category/<slug>/page<int:page>/',
+         views.CategoryDetail.as_view(), name='category-detail'),
 
-    url(r'^product/(?P<slug>[\w-]+)/$', views.ProductDetail.as_view(),
-        name='product-detail'),
+    path('category/<parent_slug>/<slug>/',
+         views.SubCategoryDetail.as_view(), name='subcategory-detail'),
+    path('category/<parent_slug>/<slug>/page<int:page>/',
+         views.SubCategoryDetail.as_view(), name='subcategory-detail'),
+
+    path('product/<slug>/', views.ProductDetail.as_view(),
+         name='product-detail'),
 ]

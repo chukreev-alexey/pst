@@ -371,6 +371,16 @@ class CategoryDetail(RequestDataMixin, SingleObjectMixin, ProductListView):
         return queryset.values_list('query_name', flat=True).distinct()
 
 
+class SubCategoryDetail(CategoryDetail):
+
+    paginator_url_name = 'subcategory-detail'
+
+    def get(self, request, *args, **kwargs):
+        queryset = Category.objects.filter(level__gte=1)
+        self.object = self.get_object(queryset=queryset)
+        return super(ListView, self).get(request, *args, **kwargs)
+
+
 class ProductDetail(ProductDetailBase):
 
     def get_context_data(self, **kwargs):
