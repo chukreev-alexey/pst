@@ -50,7 +50,8 @@ class Price(models.Model):
                                     decimal_places=2,
                                     blank=True,
                                     null=True)
-    amount = models.PositiveIntegerField('Количество в наличии')
+    amount = models.PositiveIntegerField('Количество в наличии',
+                                         blank=True, null=True)
 
     price_combination = models.ForeignKey(
         PriceCombinations,
