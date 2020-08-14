@@ -7,6 +7,7 @@ require('./catalogSort')
 require('./itemGallery')
 require('./popupMenu')
 require('./productDetail/contentTabs')
+require('./productDetail/parametres')
 
 // Create "Cart" instance for work with catalog and cart
 if (typeof UserCartClass !== 'undefined') {

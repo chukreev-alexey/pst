@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ff3236c8cb33c07002c0";
+/******/ 	var hotCurrentHash = "cc6b13e8734ca01910e3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10823,7 +10823,9 @@ __webpack_require__(/*! ./itemGallery */ "./static/itcase_catalog/js/itemGallery
 
 __webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js");
 
-__webpack_require__(/*! ./productDetail/contentTabs */ "./static/itcase_catalog/js/productDetail/contentTabs.js"); // Create "Cart" instance for work with catalog and cart
+__webpack_require__(/*! ./productDetail/contentTabs */ "./static/itcase_catalog/js/productDetail/contentTabs.js");
+
+__webpack_require__(/*! ./productDetail/parametres */ "./static/itcase_catalog/js/productDetail/parametres.js"); // Create "Cart" instance for work with catalog and cart
 
 
 if (typeof UserCartClass !== 'undefined') {
@@ -11068,6 +11070,39 @@ $(document).on('click', '*[data-product-tab-menu]', function changeActiceTab() {
   const contentActiveClass = `${contentBaseClass}_state_active`;
   document.querySelector(`.${contentActiveClass}`).classList.remove(contentActiveClass);
   tabContent.classList.add(contentActiveClass);
+});
+
+/***/ }),
+
+/***/ "./static/itcase_catalog/js/productDetail/parametres.js":
+/*!**************************************************************!*\
+  !*** ./static/itcase_catalog/js/productDetail/parametres.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+$(document).on('mousedown', '.catalog-item-detail__param-item:has(input[id^="product_parametr-"]:checked)', function (event) {
+  const radioButton = this.querySelector('input');
+  radioButton.dataset._blockChange = true;
+  radioButton.checked = false;
+});
+$(document).on('change', 'input[id^="product_parametr-"]', function (event) {
+  let blockChange;
+
+  try {
+    blockChange = JSON.parse(this.dataset._blockChange);
+  } catch (e) {
+    blockChange = false;
+  }
+
+  if (this.checked && blockChange) {
+    this.checked = false;
+  }
+
+  this.dataset._blockChange = false;
 });
 
 /***/ }),
