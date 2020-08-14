@@ -16,7 +16,9 @@
             </div>
         {% endfor %}
         <div class="nav__item nav__item_state_current">
-            <div class="nav__item-text">{{ product.name }} {{ product.article }}</div>
+            <div class="nav__item-text">
+                {{ product.name }} <span data-product-article></span>
+            </div>
         </div>
     </div>
 
@@ -24,45 +26,55 @@
         <div class="catalog-item-detail__wrapper">
             <div class="catalog-item-detail__left">
                 <div class="catalog-item-detail__gallery">
-                    {% with images=product.get_images %}
-                        {% if images %}
-                            <div class="catalog-item-gallery">
-                                <div class="catalog-item-gallery__wrapper">
+                    <div class="catalog-item-gallery">
+                        <div class="catalog-item-gallery__wrapper">
+                            {% for product_image in product.get_images %}
+                                {% if product_image and product_image.image.exists %}
                                     <div class="catalog-item-gallery__image">
-                                        <img src="{% version product.get_first_image.image 'catalog_detail' %}"
+                                        <img src="{% version product_image.image 'catalog_detail' %}"
                                              class="catalog-item-gallery__image-image" alt="" title="" />
                                     </div>
-                                    {% for price in product.prices.all %}
-                                        {% if price.image %}
-                                            <div class="catalog-item-gallery__image">
-                                                <img src="{% version price.image 'catalog_detail' %}"
-                                                     class="catalog-item-gallery__image-image" alt="" title="" />
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="catalog-item-gallery-pagination swiper-pagination"></div>
-                        {% endif %}
-                    {% endwith %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for price in product.prices.all %}
+                                {% if price.image and price.image.exists %}
+                                    <div class="catalog-item-gallery__image">
+                                        <img src="{% version price.image 'catalog_detail' %}"
+                                             class="catalog-item-gallery__image-image" alt="" title="" />
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="catalog-item-gallery-pagination swiper-pagination"></div>
                 </div>
             </div>
 
             <div class="catalog-item-detail__right">
                 <div class="catalog-item-detail__param">
-                    {% for parametr in product.get_prices_parametres %}
-                        <div class="catalog-item-detail__param-group">
-                            <div class="catalog-item-detail__param-title">{{ parametr.name }}</div>
-                            {% for value in parametr.values %}
-                                <label class="catalog-item-detail__param-item">
-                                    <input type="radio" id="radioButton" class="catalog-item-detail__param-item-input" />
-                                    <div class="catalog-item-detail__param-item-text">
-                                        {{ value }}
-                                    </div>
-                                </label>
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
+                    {% with prices_parametres=product.get_prices_parametres %}
+                        {% regroup prices_parametres by parametr as product_parametrs %}
+                        {% for group in product_parametrs %}
+                            <div class="catalog-item-detail__param-group">
+                                <div class="catalog-item-detail__param-title">{{ group.grouper }}</div>
+                                {% for product_parametr in group.list %}
+                                    <label class="catalog-item-detail__param-item">
+                                        <input
+                                            type="radio"
+                                            class="catalog-item-detail__param-item-input"
+                                            id="product_parametr-{{ forloop.counter0 }}"
+                                            name="product_parametr-{{ group.grouper.pk }}"
+                                            value="{{ product_parametr.pk }}"
+                                        />
+                                        <div class="catalog-item-detail__param-item-text">
+                                            {{ product_parametr.value }}
+                                        </div>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    {% endwith %}
 
                     {% comment %}
                         {% for price in product.prices.all %}
@@ -90,7 +102,7 @@
                     <div class="catalog-item-detail__info">
                         <div class="catalog-item-detail__count">
                             <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus">&nbsp;</div>
-                            <input class="catalog-item-detail__count-input" maxlength="3" type="text">
+                            <input class="catalog-item-detail__count-input" maxlength="3" type="text" />
                             <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus">&nbsp;</div>
                         </div>
                         <div class="catalog-item-detail__price">607 р/м2</div>
@@ -142,10 +154,6 @@
                             <div class="catalog-item-detail__info-state-text">Под заказ</div>
                         </div>
                     {% endif %}
-
-                    <div class="catalog-item-detail__info-price">
-                        {{ product.price|floatformat:'-2' }} Р
-                    </div>
 
                     {% with id=product.pk|unlocalize %}
                         <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"

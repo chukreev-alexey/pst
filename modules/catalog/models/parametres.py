@@ -85,6 +85,7 @@ class SeparateParametrPicking(models.Model):
                                  on_delete=models.DO_NOTHING)
     parametr_value = ChainedForeignKey(
         ProductParametr,
+        related_name='separated_product_parametres',
         chained_field="parametr",
         chained_model_field="parametr",
         show_all=False,
