@@ -33,4 +33,15 @@
         </div>
     {% endif %}
 
+    {% if category.sections.exists %}
+        <div class="content">
+            {% for section in category.sections.all %}
+                {% if section.show %}
+                    {{ section.name }}
+                    {% render_content section.content %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
 {% endblock content %}
