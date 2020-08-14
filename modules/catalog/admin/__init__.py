@@ -95,6 +95,7 @@ class SectionAtributeInline(admin.TabularInline):
 
     model = SectionAtribute
     extra = 0
+    classes = ('grp_inline_tinymce',)
 
     sortable_field_name = 'sort'
 
