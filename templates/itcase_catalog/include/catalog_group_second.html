@@ -1,101 +1,20 @@
-
 <div class="catalog-group-page catalog-group-page_type_second">
     <div class="catalog-group-second">
         <ul class="catalog-group-second__list">
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=12" class="catalog-group-second__list-item-link">
-                    Монтерроса
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=13" class="catalog-group-second__list-item-link">
-                    Трамонтана
-                </a>
-            </li>
-
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=14" class="catalog-group-second__list-item-link">
-                    Монтекристо
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=15" class="catalog-group-second__list-item-link">
-                    Монтеррей
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=16" class="catalog-group-second__list-item-link">
-                    Супермонтеррей
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=17" class="catalog-group-second__list-item-link">
-                    Макси
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=18" class="catalog-group-second__list-item-link">
-                    Комплектующие металлочерепицы
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=19" class="catalog-group-second__list-item-link">
-                    Монтаж металлочерепицы
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=20" class="catalog-group-second__list-item-link">
-                    Полиэстер
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=21" class="catalog-group-second__list-item-link">
-                    Norman
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=22" class="catalog-group-second__list-item-link">
-                    Viking
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=23" class="catalog-group-second__list-item-link">
-                    Cloudy
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=24" class="catalog-group-second__list-item-link">
-                    Пластизол
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=25" class="catalog-group-second__list-item-link">
-                    Prizma
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=26" class="catalog-group-second__list-item-link">
-                    Agneta
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=27" class="catalog-group-second__list-item-link">
-                    Puretang
-                </a>
-            </li>
-            <li class="catalog-group-second__list-item">
-                <a href="/category/metallocherepica/?filter-category=28" class="catalog-group-second__list-item-link">
-                    Lossy
-                </a>
-            </li>
+            {% for subcategory in category.children.all %}
+                <li class="catalog-group-second__list-item">
+                    <a href="{{ subcategory.get_absolute_url }}" class="catalog-group-second__list-item-link">
+                        {{ subcategory.name }}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 
-
     <div class="catalog-group__inner-right">
         <div class="catalog-group__inner-right-inner">
-            {% include './catalog_loading.html' %}
-            {% include './catalog_list.html' %}
+            {% include 'itcase_catalog/include/catalog_loading.html' %}
+            {% include 'itcase_catalog/include/catalog_list.html' %}
         </div>
     </div>
 

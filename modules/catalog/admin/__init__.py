@@ -7,7 +7,8 @@ from itcase_catalog.shortcuts import get_product_model, get_category_model
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 
 from ..models.catalog import (Brand, Parametr, ProductParametr, Measurement,
-                              SectionAtribute, OptionalProduct)
+                              SectionAtribute, OptionalProduct,
+                              CategorySectionAtribute)
 from ..models.parametres import (ProductImage, Price, PriceCombinations,
                                  SeparateParametrPicking)
 
@@ -61,6 +62,19 @@ class ParametrAdmin(admin.ModelAdmin):
     inlines = [ProductParametrAdminInline]
 
 
+class CategorySectionAtributeInline(admin.TabularInline):
+
+    model = CategorySectionAtribute
+    extra = 0
+
+    sortable_field_name = 'sort'
+
+    fieldsets = (
+        (None, {'fields': (('name', 'sort', 'show'),
+                           'content')}),
+    )
+
+
 @admin.register(Category)
 class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
@@ -79,7 +93,7 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
         }),
     )
 
-    inlines = []
+    inlines = [CategorySectionAtributeInline]
 
     prepopulated_fields = {'slug': ('name',)}
 
@@ -166,6 +180,11 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
                        ('in_recommended', 'in_action'), ('category', 'brand'),
                        'recommend_categories', 'parametres',
                        'product_actions')
+        }),
+        ('SEO-информация', {
+            'fields': ('seo_title', 'seo_description', 'seo_keywords',
+                       'seo_other'),
+            'classes': ('grp-collapse', 'grp-closed')
         }),
     )
     filter_horizontal = ['recommend_categories', 'parametres']

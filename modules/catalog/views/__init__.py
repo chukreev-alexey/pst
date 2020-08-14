@@ -371,14 +371,22 @@ class CategoryDetail(RequestDataMixin, SingleObjectMixin, ProductListView):
         return queryset.values_list('query_name', flat=True).distinct()
 
 
+class SubCategoryDetail(CategoryDetail):
+
+    paginator_url_name = 'subcategory-detail'
+
+    def get(self, request, *args, **kwargs):
+        queryset = Category.objects.filter(level__gte=1)
+        self.object = self.get_object(queryset=queryset)
+        return super(ListView, self).get(request, *args, **kwargs)
+
+
 class ProductDetail(ProductDetailBase):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
 
         breadcrumbs = self.object.category.get_ancestors(include_self=True)
-        context['catalog_breadcrumbs'] = breadcrumbs.filter(level__lte=1)
-
-        context['filter_category'] = breadcrumbs.filter(level=2).first()
+        context['catalog_breadcrumbs'] = breadcrumbs
 
         return context

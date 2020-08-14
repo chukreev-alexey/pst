@@ -119,13 +119,32 @@ class Category(MPTTModel, CategoryBase, SEOModel):
 
     def get_absolute_url(self):
         if self.level == 2:
-            url = reverse_lazy('category-detail', args=[str(self.parent.slug)])
-            return str(url) + '?filter-category=%s' % self.pk
+            return reverse_lazy('subcategory-detail',
+                                args=[str(self.parent.slug), str(self.slug)])
 
         return reverse_lazy('category-detail', args=[str(self.slug)])
 
 
-class Product(ProductBase, FieldExistsMixin):
+class CategorySectionAtribute(models.Model):
+    category = models.ForeignKey(Category, related_name='sections',
+                                 verbose_name=Category._meta.verbose_name,
+                                 on_delete=models.CASCADE)
+    name = models.CharField('Название',
+                            blank=True, max_length=255)
+    content = TinyMCEModelField('Контeнт', blank=True)
+    sort = models.PositiveSmallIntegerField('Позиция', default=0)
+    show = models.BooleanField('Показывать?', default=True)
+
+    class Meta(object):
+        ordering = ['sort']
+        verbose_name = 'Вкладка'
+        verbose_name_plural = 'Вкладки'
+
+    def __str__(self):
+        return self.name
+
+
+class Product(ProductBase, FieldExistsMixin, SEOModel):
     brand = models.ForeignKey(Brand,
                               related_name='products', verbose_name='Бренд',
                               on_delete=models.SET_NULL, blank=True, null=True)
@@ -218,7 +237,7 @@ class SectionAtribute(models.Model):
                                     blank=True, max_length=255)
     section_content = TinyMCEModelField('Контeнт', blank=True)
     sort = models.PositiveSmallIntegerField('Позиция', default=0)
-    show = models.BooleanField('Показывать?', default=False)
+    show = models.BooleanField('Показывать?', default=True)
 
     class Meta(object):
         ordering = ['sort']
