@@ -91,7 +91,9 @@ class SeparateParametrPicking(models.Model):
         show_all=False,
         auto_choose=True,
         sort=True)
+    sort = models.PositiveSmallIntegerField('Позиция', default=0)
 
     class Meta(object):
+        ordering = ['sort']
         verbose_name = 'Параметр комплектаций'
         verbose_name_plural = 'Параметры комплектаций'

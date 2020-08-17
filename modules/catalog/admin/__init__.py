@@ -156,6 +156,8 @@ class SeparateParametrPickingInline(nested_admin.NestedTabularInline):
     model = SeparateParametrPicking
     extra = 0
 
+    sortable_field_name = 'sort'
+
 
 class PickingPriceInline(nested_admin.NestedTabularInline):
 
