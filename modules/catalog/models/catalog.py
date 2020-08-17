@@ -25,6 +25,9 @@ from filebrowser.fields import FileBrowseField
 from itcase_catalog.models import ProductBase, CategoryBase
 from itcase_common.models import SEOModel
 from itcase_common.models.mixins import FieldExistsMixin
+from itcase_rotator.models import Rotator
+
+from ..conf import get_settings
 
 
 class Measurement(models.Model):
@@ -107,6 +110,12 @@ class Category(MPTTModel, CategoryBase, SEOModel):
         blank=True)
 
     other_template = models.BooleanField('Выбор товаров', default=False)
+
+    rotator_units = models.ManyToManyField(
+        get_settings('ITCASE_ROTATOR_ROTATOR_MODEL'),
+        related_name='categories',
+        verbose_name='Элементы ротатора',
+        blank=True)
 
     class Meta(CategoryBase.Meta):
         pass

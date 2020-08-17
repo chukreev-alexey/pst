@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load itcase_common l10n %}
+{% load itcase_common l10n rotator_tags %}
 
 {% block title %}
     {% if category.seo_title %}
@@ -21,6 +21,9 @@
 {% endblock %}
 
 {% block content %}
+
+    {% category_rotator category %}
+
     {% if not view.hide_products %}
         <div class="nav">
             {% for crumb in catalog_breadcrumbs %}

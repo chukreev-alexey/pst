@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'itcase_search',
 
     'modules.catalog',
+    'modules.rotator',
 
     'website',
 
