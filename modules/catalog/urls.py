@@ -48,3 +48,15 @@ urlpatterns = [
          views.ProductDetail.as_view(),
          name='product-detail'),
 ]
+
+from .views import foo  # noqa
+urlpatterns += [
+    path(
+        'foo/',
+        include([
+            path('filter/<category>/', foo.FilterView.as_view()),
+            path('products/page<int:page>/',
+                 foo.ProductsListView.as_view(),
+                 name='foo-products'),
+        ])),
+]
