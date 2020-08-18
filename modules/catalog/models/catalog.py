@@ -20,7 +20,7 @@ from django.urls import reverse_lazy
 from django.core.validators import validate_slug
 
 from filebrowser.fields import FileBrowseField
-from mptt.fields import TreeForeignKey
+from mptt.fields import TreeForeignKey, TreeManyToManyField
 from mptt.models import MPTTModel
 from tinymce_4.fields import TinyMCEModelField
 
@@ -132,7 +132,7 @@ class Category(MPTTModel, CategoryBase, SEOModel):
         """Return products from all nested categories."""
         descendants = self.get_descendants(include_self=True)
 
-        return Product.objects.filter(category__in=descendants)
+        return Product.objects.filter(categories__in=descendants)
 
     def get_absolute_url(self):
         if self.level == 2:
@@ -163,6 +163,7 @@ class CategorySectionAtribute(models.Model):
 
 
 class Product(ProductBase, FieldExistsMixin, SEOModel):
+
     brand = models.ForeignKey(Brand,
                               related_name='products',
                               verbose_name='Бренд',
@@ -201,6 +202,15 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
                                   on_delete=models.SET_NULL,
                                   blank=True,
                                   null=True)
+
+    categories = TreeManyToManyField(
+        Category,
+        related_name='products',
+        verbose_name=Category._meta.verbose_name_plural)
+
+    slug = models.SlugField('ЧПУ', max_length=255, unique=True)
+
+    content = TinyMCEModelField('Описание', blank=True)
 
     class Meta(ProductBase.Meta):
         pass

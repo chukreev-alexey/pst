@@ -30,7 +30,6 @@ from itcase_paginator.pagination import SlicePaginatorMixin
 from ..models import Category, Product, Parametr, Price
 from .mixins import PretyObjectMixin
 
-
 __all__ = ('CatalogIndexView', 'CategoryDetail', 'ProductDetail')
 
 
@@ -81,22 +80,34 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
             html_filter = render_to_string(
                 get_template_name('include/catalog_filter.html'),
-                context=context, request=self.request)
+                context=context,
+                request=self.request)
             html_list = render_to_string(
                 get_template_name('include/catalog_group.html'),
-                context=context, request=self.request)
+                context=context,
+                request=self.request)
             html_paginator = render_to_string(
                 'itcase_paginator/include/paginator.html',
-                context=context, request=self.request)
+                context=context,
+                request=self.request)
             html_sort = render_to_string(
                 get_template_name('include/catalog_sort.html'),
-                context=context, request=self.request)
+                context=context,
+                request=self.request)
 
             response = {
-                'catalog_filter': {'html': html_filter.strip()},
-                'catalog_sort': {'html': html_sort.strip()},
-                'paginator': {'html': html_paginator.strip()},
-                'products_list': {'html': html_list.strip()},
+                'catalog_filter': {
+                    'html': html_filter.strip()
+                },
+                'catalog_sort': {
+                    'html': html_sort.strip()
+                },
+                'paginator': {
+                    'html': html_paginator.strip()
+                },
+                'products_list': {
+                    'html': html_list.strip()
+                },
                 'query': context.get('query'),
                 'sort': context.get('sort'),
                 'sort_group': context.get('sort_group'),
@@ -134,12 +145,12 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
             _value = []
             for category in queryset:
                 descendants = category.get_descendants(include_self=True)
-                _value.extend(descendants.values_list('pk', flat=True))
+                _value.extend(descendants)
             if _value:
-                return Q(**{'category__pk__in': _value}), _and
+                return Q(**{'categories__in': _value}), _and
 
         if field == 'special':
-            return Q(**{'category': value}), _and
+            return Q(**{'categories__in': [value]}), _and
 
         if field in self.get_filter_fields():
             if type(value) is list:
@@ -175,8 +186,8 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         return data
 
     def get_filter_category(self):
-        if (not hasattr(self, 'object') or
-                getattr(self.object, 'level', 0) != 1):
+        if (not hasattr(self, 'object')
+                or getattr(self.object, 'level', 0) != 1):
             return
 
         _filter = self._filter.get('filter') or {}
@@ -197,7 +208,7 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
             category.checked = checked
 
             descendants = category.get_descendants(include_self=True)
-            enabled = queryset.filter(category__in=descendants).exists()
+            enabled = queryset.filter(categories__in=descendants).exists()
             category.disabled = not enabled and not single
 
             category.items_count = category.get_products().count()
@@ -207,8 +218,8 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         return data
 
     def get_filter_special(self):
-        if (not hasattr(self, 'object') or
-                getattr(self.object, 'level', 0) != 1):
+        if (not hasattr(self, 'object')
+                or getattr(self.object, 'level', 0) != 1):
             return
 
         _filter = self._filter.get('filter') or {}
@@ -223,7 +234,7 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
             category.checked = str(category.pk) in filtered
 
             descendants = category.get_descendants(include_self=True)
-            enabled = queryset.filter(category__in=descendants).exists()
+            enabled = queryset.filter(categories__in=descendants).exists()
             category.disabled = not enabled and not single
 
             category.items_count = category.get_products().count()
@@ -234,8 +245,8 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
     def get_filter_price(self):
         filtered = self._filter.get('filter') or {}
-        data = Price.objects.filter(
-            product__in=self.queryset).aggregate(Max('price'), Min('price'))
+        data = Price.objects.filter(product__in=self.queryset).aggregate(
+            Max('price'), Min('price'))
         initial = {}
 
         _max = filtered.get('price_max', data.get('price__max'))
@@ -259,14 +270,15 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
             picked_parametres = _filter.get(field.query_name, False)
 
             if type(picked_parametres) is not list:
-                picked_parametres = [picked_parametres, ]
+                picked_parametres = [
+                    picked_parametres,
+                ]
 
             product_parametres = {}
             for parametr in field.product_parametres.all():
                 checked = False
                 items_count = 0
-                items_count = len(
-                    parametr.products.intersection(queryset))
+                items_count = len(parametr.products.intersection(queryset))
                 if str(parametr.pk) in picked_parametres:
                     checked = True
                 p_data = {'items_count': items_count, 'checked': checked}
@@ -386,7 +398,9 @@ class ProductDetail(ProductDetailBase):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
 
-        breadcrumbs = self.object.category.get_ancestors(include_self=True)
-        context['catalog_breadcrumbs'] = breadcrumbs
+        category = self.object.categories.first()
+        if category is not None:
+            context['catalog_breadcrumbs'] = category.get_ancestors(
+                include_self=True)
 
         return context

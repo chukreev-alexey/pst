@@ -1,19 +1,17 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
-import nested_admin
 from django_mptt_admin.admin import DjangoMpttAdmin
+import nested_admin
 
-from itcase_catalog.shortcuts import get_product_model, get_category_model
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
+from itcase_catalog.shortcuts import get_product_model, get_category_model
 
 from ..models.catalog import (Brand, Parametr, ProductParametr, Measurement,
                               SectionAtribute, OptionalProduct,
                               CategorySectionAtribute)
 from ..models.parametres import (ProductImage, Price, PriceCombinations,
                                  SeparateParametrPicking)
-
-from .forms import ProductAdminForm
-
 
 Product = get_product_model()
 Category = get_category_model()
@@ -29,14 +27,15 @@ admin.site.register(ProductParametr)
 @admin.register(PriceCombinations)
 class PriceCombinationsAdmin(admin.ModelAdmin):
 
-    filter_horizontal = ['data', ]
+    filter_horizontal = [
+        'data',
+    ]
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         field = super().formfield_for_manytomany(db_field, request, **kwargs)
         if db_field.name == 'data':
             field.queryset = ProductParametr.objects.filter(
-                parametr__in=Parametr.objects.filter(
-                    is_affects_price=True))
+                parametr__in=Parametr.objects.filter(is_affects_price=True))
         return field
 
 
@@ -49,12 +48,11 @@ class ProductParametrAdminInline(admin.TabularInline):
 @admin.register(Parametr)
 class ParametrAdmin(admin.ModelAdmin):
 
-    fieldsets = (
-        (None, {'fields': ('name', 'query_name', 'is_affects_price',
-                           'filter_by')}),
-    )
+    fieldsets = ((None, {
+        'fields': ('name', 'query_name', 'is_affects_price', 'filter_by')
+    }), )
 
-    prepopulated_fields = {'query_name': ('name',)}
+    prepopulated_fields = {'query_name': ('name', )}
 
     list_display = ('name', 'query_name', 'filter_by', 'is_affects_price')
     list_editable = ['is_affects_price', 'filter_by']
@@ -69,19 +67,18 @@ class CategorySectionAtributeInline(admin.TabularInline):
 
     sortable_field_name = 'sort'
 
-    fieldsets = (
-        (None, {'fields': (('name', 'sort', 'show'),
-                           'content')}),
-    )
+    fieldsets = ((None, {'fields': (('name', 'sort', 'show'), 'content')}), )
 
 
 @admin.register(Category)
 class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
     fieldsets = (
-        (None, {'fields': (('on_main_page', 'in_menu', 'other_template'),
-                           'name', 'slug', 'parent', 'image',
-                           'filter_parametres', 'rotator_units')}),
+        (None, {
+            'fields': (('on_main_page', 'in_menu',
+                        'other_template'), 'name', 'slug', 'parent', 'image',
+                       'filter_parametres', 'rotator_units')
+        }),
         ('Контент', {
             'fields': ['content'],
             'classes': ('grp-collapse', 'grp-open'),
@@ -95,7 +92,7 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
     inlines = [CategorySectionAtributeInline]
 
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('name', )}
 
     filter_horizontal = ['filter_parametres', 'rotator_units']
 
@@ -109,14 +106,13 @@ class SectionAtributeInline(admin.TabularInline):
 
     model = SectionAtribute
     extra = 0
-    classes = ('grp_inline_tinymce',)
+    classes = ('grp_inline_tinymce', )
 
     sortable_field_name = 'sort'
 
-    fieldsets = (
-        (None, {'fields': (('section_name', 'sort', 'show'),
-                           'section_content')}),
-    )
+    fieldsets = ((None, {
+        'fields': (('section_name', 'sort', 'show'), 'section_content')
+    }), )
 
 
 class OptionalProductInline(admin.TabularInline):
@@ -126,9 +122,7 @@ class OptionalProductInline(admin.TabularInline):
 
     sortable_field_name = 'sort'
 
-    fieldsets = (
-        (None, {'fields': (('name', 'sort', 'show'), 'products')}),
-    )
+    fieldsets = ((None, {'fields': (('name', 'sort', 'show'), 'products')}), )
 
     filter_horizontal = ['products']
 
@@ -164,10 +158,9 @@ class PickingPriceInline(nested_admin.NestedTabularInline):
     model = Price
     extra = 1
 
-    fieldsets = (
-        (None, {'fields': ('product_article', 'price', 'old_price',
-                           'amount', 'image')}),
-    )
+    fieldsets = ((None, {
+        'fields': ('product_article', 'price', 'old_price', 'amount', 'image')
+    }), )
 
     inlines = [SeparateParametrPickingInline]
 
@@ -177,11 +170,10 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'measuring',
-                       ('in_hit', 'border'),
-                       ('in_recommended', 'in_action'), ('category', 'brand'),
-                       'recommend_categories', 'parametres',
-                       'product_actions')
+            'fields': ('name', 'slug', 'measuring', ('in_hit', 'border'),
+                       ('in_recommended', 'in_action'), 'brand', 'categories',
+                       'recommend_categories', 'parametres', 'product_actions',
+                       'content')
         }),
         ('SEO-информация', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords',
@@ -189,21 +181,26 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
             'classes': ('grp-collapse', 'grp-closed')
         }),
     )
-    filter_horizontal = ['recommend_categories', 'parametres']
+    filter_horizontal = ('categories', 'recommend_categories', 'parametres')
 
-    form = ProductAdminForm
+    inlines = [
+        OptionalProductInline, SectionAtributeInline, ProductImageInline,
+        PickingPriceInline
+    ]
 
-    inlines = [OptionalProductInline, SectionAtributeInline,
-               ProductImageInline, PickingPriceInline]
+    list_display = ('name', 'get_categories')
+    list_filter = ('border', 'categories', 'in_action', 'in_hit',
+                   'in_recommended')
 
-    list_display = ('name', 'category')
+    prepopulated_fields = {'slug': ['name']}
 
-    prepopulated_fields = {}
+    search_fields = ('name', 'prices__price', 'prices__article')
 
-    search_fields = ('name', 'prices__price', 'prices__article',
-                     'category__name')
+    readonly_fields = ['product_actions']
 
-    readonly_fields = ('product_actions',)
+    def get_categories(self, obj):
+        return mark_safe('<br>'.join(
+            str(category) for category in obj.categories.iterator()))
 
     def get_form(self, request, obj=None, **kwargs):
         request._obj_ = obj
