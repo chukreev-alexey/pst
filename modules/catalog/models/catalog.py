@@ -17,15 +17,16 @@
 from django.db import models
 
 from django.urls import reverse_lazy
-from mptt.models import MPTTModel
+from django.core.validators import validate_slug
 
-from tinymce_4.fields import TinyMCEModelField
 from filebrowser.fields import FileBrowseField
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
+from tinymce_4.fields import TinyMCEModelField
 
 from itcase_catalog.models import ProductBase, CategoryBase
 from itcase_common.models import SEOModel
 from itcase_common.models.mixins import FieldExistsMixin
-from itcase_rotator.models import Rotator
 
 from ..conf import get_settings
 
@@ -47,7 +48,9 @@ class Brand(models.Model):
     sort = models.PositiveSmallIntegerField('Порядок сортировки', default=0)
 
     class Meta(object):
-        ordering = ['sort', ]
+        ordering = [
+            'sort',
+        ]
         verbose_name = 'Бренд'
         verbose_name_plural = verbose_name + 'ы'
 
@@ -58,10 +61,8 @@ class Brand(models.Model):
 class Parametr(models.Model):
     name = models.CharField('Название', max_length=255)
     query_name = models.SlugField('Query name')
-    is_affects_price = models.BooleanField('Влияет на цену?',
-                                           default=False)
-    filter_by = models.BooleanField('Фильтровать по параметру?',
-                                    default=False)
+    is_affects_price = models.BooleanField('Влияет на цену?', default=False)
+    filter_by = models.BooleanField('Фильтровать по параметру?', default=False)
 
     class Meta(object):
         verbose_name = 'Параметр'
@@ -72,7 +73,8 @@ class Parametr(models.Model):
 
 
 class ProductParametr(models.Model):
-    parametr = models.ForeignKey(Parametr, related_name='product_parametres',
+    parametr = models.ForeignKey(Parametr,
+                                 related_name='product_parametres',
                                  verbose_name='Параметры продуктов',
                                  on_delete=models.CASCADE)
     value = models.CharField('Значение параметра', max_length=255)
@@ -87,16 +89,22 @@ class ProductParametr(models.Model):
 
 
 class Category(MPTTModel, CategoryBase, SEOModel):
-    from mptt.fields import TreeForeignKey
-    from django.core.validators import validate_slug
 
-    slug = models.SlugField('Slug', unique=True, validators=[validate_slug])
-    parent = TreeForeignKey('self', related_name='children',
+    slug = models.SlugField('Slug',
+                            max_length=255,
+                            unique=True,
+                            validators=[validate_slug])
+    parent = TreeForeignKey('self',
+                            related_name='children',
                             verbose_name='Родительский элемент',
-                            on_delete=models.SET_NULL, blank=True, null=True)
+                            on_delete=models.SET_NULL,
+                            blank=True,
+                            null=True)
 
     content = TinyMCEModelField('Подробное описание', blank=True)
-    image = FileBrowseField('Изображение', format='image', max_length=255,
+    image = FileBrowseField('Изображение',
+                            format='image',
+                            max_length=255,
                             blank=True)
 
     on_main_page = models.BooleanField('Отображать на главной странице?',
@@ -129,17 +137,18 @@ class Category(MPTTModel, CategoryBase, SEOModel):
     def get_absolute_url(self):
         if self.level == 2:
             return reverse_lazy('subcategory-detail',
-                                args=[str(self.parent.slug), str(self.slug)])
+                                args=[str(self.parent.slug),
+                                      str(self.slug)])
 
         return reverse_lazy('category-detail', args=[str(self.slug)])
 
 
 class CategorySectionAtribute(models.Model):
-    category = models.ForeignKey(Category, related_name='sections',
+    category = models.ForeignKey(Category,
+                                 related_name='sections',
                                  verbose_name=Category._meta.verbose_name,
                                  on_delete=models.CASCADE)
-    name = models.CharField('Название',
-                            blank=True, max_length=255)
+    name = models.CharField('Название', blank=True, max_length=255)
     content = TinyMCEModelField('Контeнт', blank=True)
     sort = models.PositiveSmallIntegerField('Позиция', default=0)
     show = models.BooleanField('Показывать?', default=True)
@@ -155,13 +164,21 @@ class CategorySectionAtribute(models.Model):
 
 class Product(ProductBase, FieldExistsMixin, SEOModel):
     brand = models.ForeignKey(Brand,
-                              related_name='products', verbose_name='Бренд',
-                              on_delete=models.SET_NULL, blank=True, null=True)
+                              related_name='products',
+                              verbose_name='Бренд',
+                              on_delete=models.SET_NULL,
+                              blank=True,
+                              null=True)
 
-    price = models.DecimalField('Цена', max_digits=10, decimal_places=2,
-                                blank=True, null=True)
-    article = models.CharField(verbose_name='Артикул', max_length=255,
-                               blank=True, null=True)
+    price = models.DecimalField('Цена',
+                                max_digits=10,
+                                decimal_places=2,
+                                blank=True,
+                                null=True)
+    article = models.CharField(verbose_name='Артикул',
+                               max_length=255,
+                               blank=True,
+                               null=True)
 
     recommend_categories = models.ManyToManyField(
         Category, blank=True, verbose_name='Рекомендуем категории')
@@ -173,15 +190,17 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
 
     border = models.BooleanField('Выделить товар', default=False)
 
-    parametres = models.ManyToManyField(
-        ProductParametr,
-        related_name='products',
-        blank=True,
-        verbose_name='Параметры')
+    parametres = models.ManyToManyField(ProductParametr,
+                                        related_name='products',
+                                        blank=True,
+                                        verbose_name='Параметры')
 
-    measuring = models.ForeignKey(
-        Measurement, related_name='products', verbose_name='Единица измерения',
-        on_delete=models.SET_NULL, blank=True, null=True)
+    measuring = models.ForeignKey(Measurement,
+                                  related_name='products',
+                                  verbose_name='Единица измерения',
+                                  on_delete=models.SET_NULL,
+                                  blank=True,
+                                  null=True)
 
     class Meta(ProductBase.Meta):
         pass
@@ -238,24 +257,22 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
     #     return parametres
 
     def get_prices_parametres(self):
-        from .catalog import ProductParametr
-
         prices_qs = self.prices.filter(
             price_parametres__isnull=False).distinct()
 
         parametres = ProductParametr.objects.filter(
-            separated_product_parametres__price__in=prices_qs
-        ).order_by('parametr__id').distinct()
+            separated_product_parametres__price__in=prices_qs).order_by(
+                'parametr__id').distinct()
 
         return parametres
 
 
 class SectionAtribute(models.Model):
-    product = models.ForeignKey(Product, related_name='sections',
+    product = models.ForeignKey(Product,
+                                related_name='sections',
                                 verbose_name=Product._meta.verbose_name,
                                 on_delete=models.CASCADE)
-    section_name = models.CharField('Название',
-                                    blank=True, max_length=255)
+    section_name = models.CharField('Название', blank=True, max_length=255)
     section_content = TinyMCEModelField('Контeнт', blank=True)
     sort = models.PositiveSmallIntegerField('Позиция', default=0)
     show = models.BooleanField('Показывать?', default=True)
@@ -267,13 +284,17 @@ class SectionAtribute(models.Model):
 
 
 class OptionalProduct(models.Model):
-    product = models.ForeignKey(Product, related_name='optional_products',
+    product = models.ForeignKey(Product,
+                                related_name='optional_products',
                                 verbose_name=Product._meta.verbose_name,
                                 on_delete=models.CASCADE)
-    name = models.CharField('Название', blank=True, max_length=255,
+    name = models.CharField('Название',
+                            blank=True,
+                            max_length=255,
                             default='Рекомендованные товары')
-    products = models.ManyToManyField(
-        Product, blank=True, verbose_name='Товары')
+    products = models.ManyToManyField(Product,
+                                      blank=True,
+                                      verbose_name='Товары')
     sort = models.PositiveSmallIntegerField('Позиция', default=0)
     show = models.BooleanField('Показывать?', default=False)
 
