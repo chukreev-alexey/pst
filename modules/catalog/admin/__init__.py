@@ -173,7 +173,8 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
             'fields': ('name', 'slug', 'sort', 'measuring',
                        ('in_hit', 'border'), ('in_recommended', 'in_action'),
                        'brand', 'categories', 'recommend_categories',
-                       'parametres', 'product_actions', 'content')
+                       'parametres', 'product_actions', 'short_description',
+                       'content')
         }),
         ('SEO-информация', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords',

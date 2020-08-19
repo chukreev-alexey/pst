@@ -212,6 +212,8 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
 
     content = TinyMCEModelField('Описание', blank=True)
     sort = models.PositiveSmallIntegerField('Порядок', default=0)
+    short_description = models.TextField('Краткое описание',
+                                         blank=True, null=True)
 
     class Meta(ProductBase.Meta):
         ordering = ('sort', 'name', 'price')
