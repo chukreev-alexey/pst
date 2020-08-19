@@ -76,27 +76,32 @@ LOGGING['loggers']['management'] = {
 }
 
 # ****************************************************************
+# ITCASE
+
+from itcase_common import logging as itcase_common_logging  # noqa
+LOGGING['formatters'].update(itcase_common_logging.FORMATTERS)
+LOGGING['handlers'].update(itcase_common_logging.HANDLERS)
+LOGGING['loggers'].update(itcase_common_logging.LOGGERS)
+
+from itcase_search import logging as itcase_search_logging  # noqa
+LOGGING['formatters'].update(itcase_search_logging.FORMATTERS)
+LOGGING['handlers'].update(itcase_search_logging.HANDLERS)
+LOGGING['loggers'].update(itcase_search_logging.LOGGERS)
+
+# ****************************************************************
 # THIRD-PARTY
 
 # Django RQ
 # https://github.com/rq/django-rq
 LOGGING['formatters']['rq_console'] = {'format': '%(asctime)s %(message)s'}
 LOGGING['handlers']['rq_console'] = {
-    'level': 'DEBUG',
     'class': 'rq.utils.ColorizingStreamHandler',
-    'formatter': 'rq_console',
     'exclude': ['%(asctime)s'],
+    'filters': ['require_debug_true'],
+    'formatter': 'rq_console',
+    'level': 'DEBUG',
 }
 LOGGING['loggers']['rq.worker'] = {
-    'handlers': ('rq_console', 'sentry'),
+    'handlers': ['rq_console'],
     'level': 'WARNING'
-}
-
-# Sentry
-# https://github.com/getsentry/sentry
-LOGGING['root'] = {'level': 'WARNING', 'handlers': ['sentry']}
-LOGGING['handlers']['sentry'] = {
-    'level': 'WARNING',
-    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-    'filters': ['require_debug_false'],
 }

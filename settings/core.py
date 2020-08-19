@@ -41,18 +41,17 @@ INSTALLED_APPS = [
     'compressor',
     'django_mptt_admin',
     'django_rq',
-    'tinymce_4',
-    'widget_tweaks',
+    'filebrowser',
     'grappelli.dashboard',
     'grappelli',
-    'filebrowser',
     'mptt',
-    'sortedm2m',
-    'raven.contrib.django.raven_compat',
+    'nested_admin',
     'rest_framework',
     'rest_framework.authtoken',
-    'nested_admin',
     'smart_selects',
+    'sortedm2m',
+    'tinymce_4',
+    'widget_tweaks',
 
     'itcase_cart',
     'itcase_catalog',
@@ -169,11 +168,3 @@ SESSION_CACHE_ALIAS = 'session'
 
 # The ID, as an integer, of the current site in the django_site database table.
 SITE_ID = 1
-
-# Settings for sending email
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
-EMAIL_HOST = 'localhost'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_HOST_USER = DEFAULT_FROM_EMAIL
-EMAIL_PORT = 465
-EMAIL_USE_TLS = True

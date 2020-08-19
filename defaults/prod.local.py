@@ -15,21 +15,37 @@
 # ****************************************************************
 # DJANGO
 
-ALLOWED_HOSTS = ['*.pst.example.com']
+
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+ALLOWED_HOSTS = ['.pst.itcase.pro']
 
 # DATABASES
 from .core import DATABASES  # noqa
 DATABASES['default']['PASSWORD'] =
 
 # EMAIL
-# put here only password, other settings in `core.py`
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+EMAIL_HOST = 'localhost'
 EMAIL_HOST_PASSWORD =
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+
+# LOGGING
+from .logging import LOGGING  # noqa
+LOGGING['loggers']['management']['level'] = 'ERROR'
 
 # ****************************************************************
 # THIRD-PARTY
 
 # Sentry
 # See for more details: https://docs.sentry.io/
-RAVEN_CONFIG = {'dsn': }
-
+import sentry_sdk  # noqa
+from sentry_sdk.integrations.django import DjangoIntegration  # noqa
+from sentry_sdk.integrations.rq import RqIntegration  # noqa
+sentry_sdk.init(
+    dsn=,
+    integrations=[DjangoIntegration(), RqIntegration()],
+    send_default_pii=True
+)
