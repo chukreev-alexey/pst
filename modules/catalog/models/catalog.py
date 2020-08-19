@@ -211,9 +211,10 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
     slug = models.SlugField('ЧПУ', max_length=255, unique=True)
 
     content = TinyMCEModelField('Описание', blank=True)
+    sort = models.PositiveSmallIntegerField('Порядок', default=0)
 
     class Meta(ProductBase.Meta):
-        pass
+        ordering = ('sort', 'name', 'price')
 
     def get_first_image(self):
         """Return first image."""
@@ -242,29 +243,6 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
 
     def get_optional_products(self):
         return self.optional_products.filter(show=True)
-
-    # def get_prices_parametres(self):
-    #     from .parametres import SeparateParametrPicking
-
-    #     parametres = []
-
-    #     prices_qs = self.prices.filter(price_parametres__isnull=False)
-
-    #     parametres_names = prices_qs.values_list(
-    #         'price_parametres__parametr__name', flat=True).distinct()
-
-    #     for parametr_name in parametres_names:
-    #         parametr = {}
-    #         parametr['name'] = parametr_name
-
-    #         values = SeparateParametrPicking.objects.values_list(
-    #             'parametr_value__value', flat=True).filter(
-    #             price__in=prices_qs, parametr__name=parametr_name).distinct()
-
-    #         parametr['values'] = values
-    #         parametres.append(parametr)
-
-    #     return parametres
 
     def get_prices_parametres(self):
         prices_qs = self.prices.filter(
