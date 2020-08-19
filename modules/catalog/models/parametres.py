@@ -61,6 +61,9 @@ class Price(models.Model):
 
     image = FileBrowseField('Изображение', format='image', max_length=255,
                             blank=True)
+    image_description = models.CharField('Описание изображения',
+                                         max_length=255,
+                                         blank=True, null=True)
 
     class Meta(object):
         verbose_name = 'Цена комплектации'
