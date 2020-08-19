@@ -28,22 +28,11 @@
                 <div class="catalog-item-detail__gallery">
                     <div class="catalog-item-gallery">
                         <div class="catalog-item-gallery__wrapper">
-                            {% for product_image in product.get_images %}
-                                {% if product_image and product_image.image.exists %}
-                                    <div class="catalog-item-gallery__image">
-                                        <img src="{% version product_image.image 'catalog_detail' %}"
-                                             class="catalog-item-gallery__image-image" alt="" title="" />
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-
-                            {% for price in product.prices.all %}
-                                {% if price.image and price.image.exists %}
-                                    <div class="catalog-item-gallery__image" data-price-id="{{ price.pk }}">
-                                        <img src="{% version price.image 'catalog_detail' %}"
-                                             class="catalog-item-gallery__image-image" alt="" title="" />
-                                    </div>
-                                {% endif %}
+                            {% for product_image in product.get_all_images %}
+                                <div class="catalog-item-gallery__image">
+                                    <img src="{% version product_image 'catalog_detail' %}"
+                                         class="catalog-item-gallery__image-image" alt="" title="" />
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
