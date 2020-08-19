@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
-{% load itcase_common l10n %}
+{% load itcase_common l10n rotator_tags %}
 
 {% block title %}
     {% for crumb in catalog_breadcrumbs %}
         {{ crumb.name }} {% if not forloop.last %} | {% endif %}
     {% endfor %}
 {% endblock title %}
+
+
 
 {% block content %}
     {% if not view.hide_products %}
@@ -24,6 +26,8 @@
             {% endif %}
         </div>
     {% endif %}
+
+    {% category_rotator category %}
 
     {% include './include/catalog_group_second.html' %}
 
