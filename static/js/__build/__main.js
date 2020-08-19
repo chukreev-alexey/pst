@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "cc6b13e8734ca01910e3";
+/******/ 	var hotCurrentHash = "50b811470cfc03add894";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10825,7 +10825,9 @@ __webpack_require__(/*! ./popupMenu */ "./static/itcase_catalog/js/popupMenu.js"
 
 __webpack_require__(/*! ./productDetail/contentTabs */ "./static/itcase_catalog/js/productDetail/contentTabs.js");
 
-__webpack_require__(/*! ./productDetail/parametres */ "./static/itcase_catalog/js/productDetail/parametres.js"); // Create "Cart" instance for work with catalog and cart
+__webpack_require__(/*! ./productDetail/parametres */ "./static/itcase_catalog/js/productDetail/parametres.js");
+
+__webpack_require__(/*! ./productDetail/events */ "./static/itcase_catalog/js/productDetail/events.js"); // Create "Cart" instance for work with catalog and cart
 
 
 if (typeof UserCartClass !== 'undefined') {
@@ -11070,6 +11072,48 @@ $(document).on('click', '*[data-product-tab-menu]', function changeActiceTab() {
   const contentActiveClass = `${contentBaseClass}_state_active`;
   document.querySelector(`.${contentActiveClass}`).classList.remove(contentActiveClass);
   tabContent.classList.add(contentActiveClass);
+});
+
+/***/ }),
+
+/***/ "./static/itcase_catalog/js/productDetail/events.js":
+/*!**********************************************************!*\
+  !*** ./static/itcase_catalog/js/productDetail/events.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* globals UserCart */
+
+
+$(document).on('click', '.catalog-item-detail__count-button_action_plus', function (event) {
+  UserCart.onAmountButtonClick(event, 1);
+});
+$(document).on('click', '.catalog-item-detail__count-button_action_minus', function (event) {
+  UserCart.onAmountButtonClick(event, -1);
+});
+$(document).on('input', '.catalog-item-detail__count-input', function (event) {
+  const intValue = parseInt(this.value);
+
+  if (this.value !== '' && (isNaN(this.value) || isNaN(intValue))) {
+    this.value = this.dataset.prevValue || 0;
+    return event;
+  }
+
+  this.value = this.value !== '' ? intValue : '';
+  this.dataset.prevValue = this.value;
+});
+$(document).on('change', '.catalog-item-detail__count-input', function (event) {
+  const intValue = parseInt(this.value);
+
+  if (isNaN(this.value) || isNaN(intValue) || intValue < 0) {
+    this.value = this.dataset.prevValue || 0;
+    return event;
+  }
+
+  this.value = this.value !== '' ? intValue : '';
+  this.dataset.prevValue = this.value;
 });
 
 /***/ }),

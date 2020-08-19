@@ -90,9 +90,15 @@
 
                     <div class="catalog-item-detail__info">
                         <div class="catalog-item-detail__count">
-                            <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus">&nbsp;</div>
-                            <input class="catalog-item-detail__count-input" maxlength="3" type="text" />
-                            <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus">&nbsp;</div>
+                            <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus" data-input-name="amount">&nbsp;</div>
+                                <input
+                                    class="catalog-item-detail__count-input"
+                                    name="amount"
+                                    value="0"
+                                    maxlength="3"
+                                    type="text"
+                                />
+                            <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus" data-input-name="amount">&nbsp;</div>
                         </div>
                         <div class="catalog-item-detail__price">607 р/м2</div>
                         <div class="catalog-item-detail__button">
