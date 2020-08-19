@@ -219,17 +219,28 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
     def get_first_image(self):
         """Return first image."""
         if self.image and self.image.exists:
-            return self.image
+            return self.image.image
 
-        for image in self.get_images():
-            return image
+        if self.images.exists():
+            for image in self.get_images():
+                return image
+        # if object product does not have images then get image from prices
+        if self.prices.exists():
+            for image in self.get_prices_images():
+                return image
 
     def get_images(self):
         """Yield over not None and exist images."""
         for image in self.images.all():
             if not image.image or not image.image.exists:
                 continue
-            yield image
+            yield image.image
+
+    def get_prices_images(self):
+        for price in self.prices.exclude(image__exact=''):
+            if not price.image.exists:
+                continue
+            yield price.image
 
     def get_parametres_dict(self):
         parametres = set(p.parametr for p in self.parametres.all())
