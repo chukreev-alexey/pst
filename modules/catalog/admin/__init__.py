@@ -160,7 +160,7 @@ class PickingPriceInline(nested_admin.NestedTabularInline):
 
     fieldsets = ((None, {
         'fields': ('product_article', 'price', 'old_price', 'amount', 'image',
-                   'image_description')
+                   'image_description', 'show')
     }), )
 
     inlines = [SeparateParametrPickingInline]

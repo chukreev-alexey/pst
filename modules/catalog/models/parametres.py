@@ -64,6 +64,7 @@ class Price(models.Model):
     image_description = models.CharField('Описание изображения',
                                          max_length=255,
                                          blank=True, null=True)
+    show = models.BooleanField('Показывать?', default=True)
 
     class Meta(object):
         verbose_name = 'Цена комплектации'
