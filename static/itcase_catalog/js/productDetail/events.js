@@ -14,7 +14,7 @@ $(document).on('input', '.catalog-item-detail__count-input', function (event) {
   const intValue = parseInt(this.value)
 
   if (this.value !== '' && (isNaN(this.value) || isNaN(intValue))) {
-    this.value = this.dataset.prevValue || 0
+    this.value = this.dataset.prevValue || 1
     return event
   }
 
@@ -23,13 +23,22 @@ $(document).on('input', '.catalog-item-detail__count-input', function (event) {
 })
 
 $(document).on('change', '.catalog-item-detail__count-input', function (event) {
-  const intValue = parseInt(this.value)
+  let intValue = parseInt(this.value)
+  const min = parseInt(this.dataset.min || this.min || 1) || 1
+  const max = parseInt(this.dataset.max || this.max) || null
 
-  if (isNaN(this.value) || isNaN(intValue) || intValue < 0) {
-    this.value = this.dataset.prevValue || 0
+  if (isNaN(this.value) || isNaN(intValue)) {
+    this.value = this.dataset.prevValue || min
     return event
   }
 
-  this.value = this.value !== '' ? intValue : ''
+  if (intValue < min) {
+    intValue = min
+  }
+  if (max !== null && intValue > max) {
+    intValue = max
+  }
+
+  this.value = intValue
   this.dataset.prevValue = this.value
 })

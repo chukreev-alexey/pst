@@ -57,6 +57,7 @@
                                                     id="product_parametr-{{ forloop.counter0 }}"
                                                     name="product_parametr-{{ group.grouper.pk }}"
                                                     value="{{ product_parametr.pk }}"
+                                                    {% if group.list|length == 1 %}checked="checked"{% endif %}
                                                 />
                                                 <div class="catalog-item-detail__param-item-text">
                                                     {{ product_parametr.value }}
@@ -96,7 +97,9 @@
                                         <input
                                             class="catalog-item-detail__count-input"
                                             name="amount"
-                                            value="0"
+                                            value="1"
+                                            min="1"
+                                            max="15"
                                             maxlength="3"
                                             type="text"
                                         />
