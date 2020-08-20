@@ -181,15 +181,10 @@
         {% include 'itcase_search/include/quick/quick_search_popup.html' %}
     {% endwith %}
 
-
     {% rotator page=request.page %}
 
-    <div class="wrapper">
-        <div class="wrapper__inner">
-            {% block content %}
-            {% endblock content %}
-        </div>
-    </div>
+    {% block content %}
+    {% endblock content %}
 
     <footer class="footer">
         <div class="footer__wrapper">

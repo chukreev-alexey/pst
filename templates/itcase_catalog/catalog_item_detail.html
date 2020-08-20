@@ -8,151 +8,155 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="nav">
-        {% for crumb in catalog_breadcrumbs %}
-            <div class="nav__item">
-                <a href="{{ crumb.get_absolute_url }}"
-                   class="nav__item-link">{{ crumb.name }}</a>
-            </div>
-        {% endfor %}
-        <div class="nav__item nav__item_state_current">
-            <div class="nav__item-text">
-                {{ product.name }} <span data-product-article></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="catalog-item-detail">
-        <div class="catalog-item-detail__wrapper">
-            <div class="catalog-item-detail__left">
-                <div class="catalog-item-detail__gallery">
-                    <div class="catalog-item-gallery">
-                        <div class="catalog-item-gallery__wrapper">
-                            {% for product_image in product.get_all_images %}
-                                <div class="catalog-item-gallery__image">
-                                    <img src="{% version product_image 'catalog_detail' %}"
-                                         class="catalog-item-gallery__image-image" alt="" title="" />
-                                </div>
-                            {% endfor %}
-                        </div>
+    <div class="wrapper">
+        <div class="wrapper__inner">
+            <div class="nav">
+                {% for crumb in catalog_breadcrumbs %}
+                    <div class="nav__item">
+                        <a href="{{ crumb.get_absolute_url }}"
+                           class="nav__item-link">{{ crumb.name }}</a>
                     </div>
-                    <div class="catalog-item-gallery-pagination swiper-pagination"></div>
+                {% endfor %}
+                <div class="nav__item nav__item_state_current">
+                    <div class="nav__item-text">
+                        {{ product.name }} <span data-product-article></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="catalog-item-detail__right">
-                <div class="catalog-item-detail__param">
-                    {% with prices_parametres=product.get_prices_parametres %}
-                        {% regroup prices_parametres by parametr as product_parametres %}
-                        {% for group in product_parametres %}
-                            <div class="catalog-item-detail__param-group">
-                                <div class="catalog-item-detail__param-title">{{ group.grouper }}</div>
-                                {% for product_parametr in group.list %}
-                                    <label class="catalog-item-detail__param-item">
-                                        <input
-                                            type="radio"
-                                            class="catalog-item-detail__param-item-input"
-                                            id="product_parametr-{{ forloop.counter0 }}"
-                                            name="product_parametr-{{ group.grouper.pk }}"
-                                            value="{{ product_parametr.pk }}"
-                                        />
-                                        <div class="catalog-item-detail__param-item-text">
-                                            {{ product_parametr.value }}
+            <div class="catalog-item-detail">
+                <div class="catalog-item-detail__wrapper">
+                    <div class="catalog-item-detail__left">
+                        <div class="catalog-item-detail__gallery">
+                            <div class="catalog-item-gallery">
+                                <div class="catalog-item-gallery__wrapper">
+                                    {% for product_image in product.get_all_images %}
+                                        <div class="catalog-item-gallery__image">
+                                            <img src="{% version product_image 'catalog_detail' %}"
+                                                 class="catalog-item-gallery__image-image" alt="" title="" />
                                         </div>
-                                    </label>
-                                {% endfor %}
-                            </div>
-                        {% endfor %}
-                    {% endwith %}
-
-                    {% comment %}
-                        {% for price in product.prices.all %}
-                            {% for parametr in price.get_parametres_struct %}
-                                <div class="catalog-item-detail__param-group">
-                                    <div class="catalog-item-detail__param-title">{{ parametr.name }}</div>
-                                    {% for value in parametr.values %}
-                                        <label class="catalog-item-detail__param-item">
-                                            <input type="radio" id="radioButton" class="catalog-item-detail__param-item-input" />
-                                            <div class="catalog-item-detail__param-item-text">{{ value }}<</div>
-                                        </label>
                                     {% endfor %}
                                 </div>
-                            {% endfor %}
-                            {{ price.product }}
-                            {{ price.product_article }}
-                            {{ price.price }}
-                            {% if price.old_price %}
-                                {{ price.old_price }}
-                            {% endif %}
-                            {{ price.amount }}
-                        {% endfor %}
-                    {% endcomment %}
-
-                    <div class="catalog-item-detail__info">
-                        <div class="catalog-item-detail__count">
-                            <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus" data-input-name="amount">&nbsp;</div>
-                                <input
-                                    class="catalog-item-detail__count-input"
-                                    name="amount"
-                                    value="0"
-                                    maxlength="3"
-                                    type="text"
-                                />
-                            <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus" data-input-name="amount">&nbsp;</div>
+                            </div>
+                            <div class="catalog-item-gallery-pagination swiper-pagination"></div>
                         </div>
+                    </div>
 
-                        <div class="catalog-item-detail__price">607 р/м2</div>
-
-                        {% with id=product.pk|unlocalize %}
-                            <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
-                               class="catalog-item-detail__button catalog-item__button button
-                                      {% if product in cart %}
-                                        button_border_orange
-                                      {% else %}
-                                        button_color_blue
-                                      {% endif %}"
-                                data-add-url="{% url 'itcase_cart:cart_add' %}"
-                                data-product="{{ id }}"
-                                data-amount-{{ id }}="1">
-                                <div class="button button_type_primary">
-                                    <div class="button__text">
-                                        {% if product in cart %}
-                                            В заказе
-                                        {% else %}
-                                            Заказать
-                                        {% endif %}
+                    <div class="catalog-item-detail__right">
+                        <div class="catalog-item-detail__param">
+                            {% with prices_parametres=product.get_prices_parametres %}
+                                {% regroup prices_parametres by parametr as product_parametres %}
+                                {% for group in product_parametres %}
+                                    <div class="catalog-item-detail__param-group">
+                                        <div class="catalog-item-detail__param-title">{{ group.grouper }}</div>
+                                        {% for product_parametr in group.list %}
+                                            <label class="catalog-item-detail__param-item">
+                                                <input
+                                                    type="radio"
+                                                    class="catalog-item-detail__param-item-input"
+                                                    id="product_parametr-{{ forloop.counter0 }}"
+                                                    name="product_parametr-{{ group.grouper.pk }}"
+                                                    value="{{ product_parametr.pk }}"
+                                                />
+                                                <div class="catalog-item-detail__param-item-text">
+                                                    {{ product_parametr.value }}
+                                                </div>
+                                            </label>
+                                        {% endfor %}
                                     </div>
-                                </div>
-                            </a>
-                        {% endwith %}
+                                {% endfor %}
+                            {% endwith %}
 
+                            {% comment %}
+                                {% for price in product.prices.all %}
+                                    {% for parametr in price.get_parametres_struct %}
+                                        <div class="catalog-item-detail__param-group">
+                                            <div class="catalog-item-detail__param-title">{{ parametr.name }}</div>
+                                            {% for value in parametr.values %}
+                                                <label class="catalog-item-detail__param-item">
+                                                    <input type="radio" id="radioButton" class="catalog-item-detail__param-item-input" />
+                                                    <div class="catalog-item-detail__param-item-text">{{ value }}<</div>
+                                                </label>
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                                    {{ price.product }}
+                                    {{ price.product_article }}
+                                    {{ price.price }}
+                                    {% if price.old_price %}
+                                        {{ price.old_price }}
+                                    {% endif %}
+                                    {{ price.amount }}
+                                {% endfor %}
+                            {% endcomment %}
+
+                            <div class="catalog-item-detail__info">
+                                <div class="catalog-item-detail__count">
+                                    <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus" data-input-name="amount">&nbsp;</div>
+                                        <input
+                                            class="catalog-item-detail__count-input"
+                                            name="amount"
+                                            value="0"
+                                            maxlength="3"
+                                            type="text"
+                                        />
+                                    <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus" data-input-name="amount">&nbsp;</div>
+                                </div>
+
+                                <div class="catalog-item-detail__price">607 р/м2</div>
+
+                                {% with id=product.pk|unlocalize %}
+                                    <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                                       class="catalog-item-detail__button catalog-item__button button
+                                              {% if product in cart %}
+                                                button_border_orange
+                                              {% else %}
+                                                button_color_blue
+                                              {% endif %}"
+                                        data-add-url="{% url 'itcase_cart:cart_add' %}"
+                                        data-product="{{ id }}"
+                                        data-amount-{{ id }}="1">
+                                        <div class="button button_type_primary">
+                                            <div class="button__text">
+                                                {% if product in cart %}
+                                                    В заказе
+                                                {% else %}
+                                                    Заказать
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </a>
+                                {% endwith %}
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        {% if product.has_sections %}
-            <div class="catalog-item-detail__tabs">
-                <div class="catalog-item-detail__tabs-list">
-                    {% for section in product.sections.all %}
-                        {% if section.show %}
-                            <div data-product-tab-menu="{{ section.pk }}" class="catalog-item-detail__tabs-list-item{% if forloop.counter == 1 %} catalog-item-detail__tabs-list-item_state_active{% endif %}">
-                                {{ section.section_name }}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-
-                {% for section in product.sections.all %}
-                    {% if section.show %}
-                        <div data-product-tab-content="{{ section.pk }}" class="catalog-item-detail__tabs-content content{% if forloop.counter == 1 %} catalog-item-detail__tabs-content_state_active{% endif %}">
-                            {{ section.section_content|safe }}
+                {% if product.has_sections %}
+                    <div class="catalog-item-detail__tabs">
+                        <div class="catalog-item-detail__tabs-list">
+                            {% for section in product.sections.all %}
+                                {% if section.show %}
+                                    <div data-product-tab-menu="{{ section.pk }}" class="catalog-item-detail__tabs-list-item{% if forloop.counter == 1 %} catalog-item-detail__tabs-list-item_state_active{% endif %}">
+                                        {{ section.section_name }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endif %}
-    </div>
 
-    {% include './include/catalog_related.html' %}
+                        {% for section in product.sections.all %}
+                            {% if section.show %}
+                                <div data-product-tab-content="{{ section.pk }}" class="catalog-item-detail__tabs-content content{% if forloop.counter == 1 %} catalog-item-detail__tabs-content_state_active{% endif %}">
+                                    {{ section.section_content|safe }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            {% include './include/catalog_related.html' %}
+        </div>
+    </div>
 {% endblock %}

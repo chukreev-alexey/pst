@@ -25,68 +25,72 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="nav">
-        {% if year or month %}
-            {% if page_feed %}
-                <div class="nav__item">
-                    <a href="{% url 'page' url=cur_page.url %}" class="nav__item-link">{{ cur_page.name }}</a>
-                </div>
-            {% else %}
-                <div class="nav__item">
-                    <a href="{% url 'feed_list' %}" class="nav__item-link">{{ page_parent.title|default:"Новости" }}</a>
-                </div>
-                {% if feedline %}
-                    <div class="nav__item">
-                        <a href="{% get_feed_url url_name='feed_list' feedline=feedline.slug %}" class="nav__item-link">{{ feedline.name }}</a>
-                    </div>
-                {% endif %}
-            {% endif %}
-        {% else %}
-            <div class="nav__item nav__item_state_current">
-                {% if page_feed %}
-                    <div class="nav__item-text">{{ cur_page.name }}</div>
-                {% elif feedline %}
-                    <a href="{% url 'feed_list' %}" class="nav__item-link">{{ page_parent.title|default:"Новости" }}</a>
-                    <div class="nav__item-text">{{ feedline.name }}</div>
-                {% else %}
-                    <div class="nav__item-text">
-                        {{ page_parent.title|default:"Новости" }}
-                    </div>
-                {% endif %}
-            </div>
-        {% endif %}
-        {% include 'itcase_feed/include/feed_breadcrumbs.html' %}
-    </div>
-
-    <div class="feed">
-        <ul class="feed-list">
-            {% for item in feed_list %}
-                <li class="feed-list__item {% if item.image %}feed-list__item_type_image{% endif %}">
-                    {% if item.image %}
-                        <div class="feed-list__item-image">
-                            <img src="{% version item.image 'feed_thumb' %}" alt="{{ item.name }}" class="feed-list__item-image-image">
-                        </div>
-                    {% endif %}
-                    <div class="feed-list__item-date">{{ item.date|date:"d E Y" }}</div>
-                    {% if item.content %}
-                        <div class="feed-list__item-title">
-                            <a href="{% get_feed_url url_name=feed_detail_url|default:'feed_detail' slug=item.slug day=item.date|date:'d' month=item.date|date:'m' year=item.date|date:'Y' feedline=item.feedline.slug %}"
-                               class="feed-list__item-title-link">{{ item.name }}</a>
+    <div class="wrapper">
+        <div class="wrapper__inner">
+            <div class="nav">
+                {% if year or month %}
+                    {% if page_feed %}
+                        <div class="nav__item">
+                            <a href="{% url 'page' url=cur_page.url %}" class="nav__item-link">{{ cur_page.name }}</a>
                         </div>
                     {% else %}
-                        <div class="feed-list__item-title">{{ item.name }}</div>
+                        <div class="nav__item">
+                            <a href="{% url 'feed_list' %}" class="nav__item-link">{{ page_parent.title|default:"Новости" }}</a>
+                        </div>
+                        {% if feedline %}
+                            <div class="nav__item">
+                                <a href="{% get_feed_url url_name='feed_list' feedline=feedline.slug %}" class="nav__item-link">{{ feedline.name }}</a>
+                            </div>
+                        {% endif %}
                     {% endif %}
-                    <div class="feed-list__item-desc content">
-                        {{ item.description|safe }}
+                {% else %}
+                    <div class="nav__item nav__item_state_current">
+                        {% if page_feed %}
+                            <div class="nav__item-text">{{ cur_page.name }}</div>
+                        {% elif feedline %}
+                            <a href="{% url 'feed_list' %}" class="nav__item-link">{{ page_parent.title|default:"Новости" }}</a>
+                            <div class="nav__item-text">{{ feedline.name }}</div>
+                        {% else %}
+                            <div class="nav__item-text">
+                                {{ page_parent.title|default:"Новости" }}
+                            </div>
+                        {% endif %}
                     </div>
-                </li>
-            {% endfor %}
-        </ul>
+                {% endif %}
+                {% include 'itcase_feed/include/feed_breadcrumbs.html' %}
+            </div>
 
-        {% include 'itcase_paginator/include/paginator.html' %}
+            <div class="feed">
+                <ul class="feed-list">
+                    {% for item in feed_list %}
+                        <li class="feed-list__item {% if item.image %}feed-list__item_type_image{% endif %}">
+                            {% if item.image %}
+                                <div class="feed-list__item-image">
+                                    <img src="{% version item.image 'feed_thumb' %}" alt="{{ item.name }}" class="feed-list__item-image-image">
+                                </div>
+                            {% endif %}
+                            <div class="feed-list__item-date">{{ item.date|date:"d E Y" }}</div>
+                            {% if item.content %}
+                                <div class="feed-list__item-title">
+                                    <a href="{% get_feed_url url_name=feed_detail_url|default:'feed_detail' slug=item.slug day=item.date|date:'d' month=item.date|date:'m' year=item.date|date:'Y' feedline=item.feedline.slug %}"
+                                       class="feed-list__item-title-link">{{ item.name }}</a>
+                                </div>
+                            {% else %}
+                                <div class="feed-list__item-title">{{ item.name }}</div>
+                            {% endif %}
+                            <div class="feed-list__item-desc content">
+                                {{ item.description|safe }}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
 
-        <div class="content">
-            {{ request.page.content|default:""|safe }}
+                {% include 'itcase_paginator/include/paginator.html' %}
+
+                <div class="content">
+                    {{ request.page.content|default:""|safe }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}

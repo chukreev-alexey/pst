@@ -4,18 +4,22 @@
 {% block content %}
     {% page_menu as menu %}
 
-    <div class="nav">
-        {% with hide_site_menu=True hide_current=True %}
-            {% include 'itcase_pages/include/nav.html' %}
-        {% endwith %}
-    </div>
+    <div class="wrapper">
+        <div class="wrapper__inner">
+            <div class="nav">
+                {% with hide_site_menu=True hide_current=True %}
+                    {% include 'itcase_pages/include/nav.html' %}
+                {% endwith %}
+            </div>
 
-    <div class="page">
-        <div class="page-title">{{ request.page.title }}</div>
-        {% if menu %}
-            {{ menu }}
-        {% endif %}
-        {% include 'itcase_pages/include/page_content.html' %}
-        {% include 'itcase_files/include/files-group.html' %}
+            <div class="page">
+                <div class="page-title">{{ request.page.title }}</div>
+                {% if menu %}
+                    {{ menu }}
+                {% endif %}
+                {% include 'itcase_pages/include/page_content.html' %}
+                {% include 'itcase_files/include/files-group.html' %}
+            </div>
+        </div>
     </div>
 {% endblock content %}

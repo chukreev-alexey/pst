@@ -12,40 +12,48 @@
 
 {% block content %}
     {% if not view.hide_products %}
-        <div class="nav">
-            {% for crumb in catalog_breadcrumbs %}
-                <div class="nav__item">
-                    <a href="{{ crumb.get_absolute_url }}"
-                       class="nav__item-link">{{ crumb.name }}</a>
+        <div class="wrapper">
+            <div class="wrapper__inner">
+                <div class="nav">
+                    {% for crumb in catalog_breadcrumbs %}
+                        <div class="nav__item">
+                            <a href="{{ crumb.get_absolute_url }}"
+                               class="nav__item-link">{{ crumb.name }}</a>
+                        </div>
+                    {% endfor %}
+                    {% if category %}
+                        <div class="nav__item nav__item_state_current">
+                            <div class="nav__item-text">{{ category }}</div>
+                        </div>
+                    {% endif %}
                 </div>
-            {% endfor %}
-            {% if category %}
-                <div class="nav__item nav__item_state_current">
-                    <div class="nav__item-text">{{ category }}</div>
-                </div>
-            {% endif %}
+            </div>
         </div>
     {% endif %}
 
     {% category_rotator category %}
 
-    {% include './include/catalog_group_second.html' %}
+    <div class="wrapper">
+        <div class="wrapper__inner">
+            {% include './include/catalog_group_second.html' %}
 
-    {% if category.content %}
-        <div class="content">
-            {% render_content category.content %}
-        </div>
-    {% endif %}
+            {% if category.content %}
+                <div class="content">
+                    {% render_content category.content %}
+                </div>
+            {% endif %}
 
-    {% if category.sections.exists %}
-        <div class="content">
-            {% for section in category.sections.all %}
-                {% if section.show %}
-                    {{ section.name }}
-                    {% render_content section.content %}
-                {% endif %}
-            {% endfor %}
+            {% if category.sections.exists %}
+                <div class="content">
+                    {% for section in category.sections.all %}
+                        {% if section.show %}
+                            {{ section.name }}
+                            {% render_content section.content %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-    {% endif %}
+    </div>
 
 {% endblock content %}
