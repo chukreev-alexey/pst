@@ -226,7 +226,8 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
         for image in self.get_images():
             return image
         # if object product does not have images then get image from prices
-        for image in self.get_prices_images():
+        # use "_" because here is not need image description
+        for image, _ in self.get_prices_images():
             return image
 
     def get_images(self):
@@ -237,20 +238,21 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
             yield image.image
 
     def get_prices_images(self):
-        for price in self.prices.exclude(image__exact=''):
+        for price in self.prices.exclude(image__exact='').exclude(show=False):
             if not price.image.exists:
                 continue
-            yield price.image
+            yield (price.image, price.image_description)
 
+    # TODO: separate model ProductImage
+    # to model Image with fields image and description
+    # and link it with other models
     def get_all_images(self):
-        used = set()
         images = []
         for image in self.get_images():
-            if image.path not in used and (used.add(image.path) or True):
-                images.append(image)
-        for image in self.get_prices_images():
-            if image.path not in used and (used.add(image.path) or True):
-                images.append(image)
+            # to avoid these awkward things
+            images.append((image, None))
+        for image, description in self.get_prices_images():
+            images.append((image, description))
         return images
 
     def get_parametres_dict(self):

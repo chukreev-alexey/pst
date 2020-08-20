@@ -30,10 +30,10 @@
                         <div class="catalog-item-detail__gallery">
                             <div class="catalog-item-gallery">
                                 <div class="catalog-item-gallery__wrapper">
-                                    {% for product_image in product.get_all_images %}
+                                    {% for product_image, image_description in product.get_all_images %}
                                         <div class="catalog-item-gallery__image">
                                             <img src="{% version product_image 'catalog_detail' %}"
-                                                 class="catalog-item-gallery__image-image" alt="" title="" />
+                                                 class="catalog-item-gallery__image-image" alt="{{ image_description }}" title="" />
                                         </div>
                                     {% endfor %}
                                 </div>
