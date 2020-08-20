@@ -202,7 +202,7 @@
     flex-flow: row wrap;
     &-group {
       background: var(--color-neutral);
-      padding: 16px 32px 16px 16px;
+      padding: 16px 32px 8px 16px;
       margin: 0 24px 0 0;
       box-sizing: border-box;
       @media (--mobile) {
@@ -220,16 +220,68 @@
         }
       }
       ^&-item {
+        min-width: 180px;
+        margin: 0 0 8px 0;
+        position: relative;
         display: flex;
+        cursor: pointer;
         @media (--mobile) {
           padding: 8px 16px;
         }
+        &:hover {
+          & .catalog-item-detail__param-item-text {
+            &::before {
+              background: #ccc;
+              display: block;
+            }
+          }
+        }
         &-input {
-          color: var(--color-surface-text);
+          position: absolute;
+          visibility: hidden;
+          left: 0;
+          top: 0;
+          z-index: 2;
+          &:checked {
+            & + .catalog-item-detail__param-item-text {
+              &::before {
+                display: block;
+              }
+            }
+          }
         }
         &-text {
           color: var(--color-surface-text);
+          padding: 0 0 0 24px;
           @mixin font normal, 16px, 16px, 18px, 24px, var(--font-title-secondary);
+          &::before {
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 100px;
+            position: absolute;
+            content: '';
+            display: none;
+            left: 4px;
+            top: 50%;
+            z-index: 2;
+            transform: translate(0, -50%);
+          }
+          &::after {
+            width: 16px;
+            height: 16px;
+            background: var(--color-surface);
+            border: solid 1px var(--color-surface-border);
+            border-radius: 50px;
+            position: absolute;
+            content: '';
+            display: block;
+            box-sizing: border-box;
+            left: 0;
+            top: 50%;
+            z-index: 1;
+            transform: translate(0, -50%);
+          }
         }
       }
     }

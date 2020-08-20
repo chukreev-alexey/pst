@@ -1468,7 +1468,7 @@ sans-serif;
 
 .catalog-item-detail__param-group {
       background: #f9f9fa;
-      padding: 16px 32px 16px 16px;
+      padding: 16px 32px 8px 16px;
       margin: 0 24px 0 0;
       box-sizing: border-box;
     }
@@ -1532,7 +1532,11 @@ sans-serif;
         }
 
 .catalog-item-detail__param-group .catalog-item-detail__param-item {
+        min-width: 180px;
         display: flex;
+        position: relative;
+        margin: 0 0 8px 0;
+        cursor: pointer;
       }
 
 @media (min-width: 15em)
@@ -1543,11 +1547,25 @@ sans-serif;
       }
         }
 
+.catalog-item-detail__param-group .catalog-item-detail__param-item:hover .catalog-item-detail__param-item-text::before {
+               background: #ccc;
+              display: block;
+            }
+
 .catalog-item-detail__param-group .catalog-item-detail__param-item-input {
-          color: #000;
+          position: absolute;
+          left: 0;
+          top: 0;
+          visibility: hidden;
+          z-index: 2;
         }
 
+.catalog-item-detail__param-group .catalog-item-detail__param-item-input:checked + .catalog-item-detail__param-item-text::before {
+                display: block;
+              }
+
 .catalog-item-detail__param-group .catalog-item-detail__param-item-text {
+          padding: 0 0 0 24px;
           color: #000;
           font-size: calc(1rem + 0 * ((100vw - 20rem) / 140));
           font-weight: normal;
@@ -1584,6 +1602,36 @@ sans-serif;
     font-size: 1rem;
   }
 }
+
+.catalog-item-detail__param-group .catalog-item-detail__param-item-text::before {
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 100px;
+            position: absolute;
+            content: '';
+            display: none;
+            left: 4px;
+            top: 50%;
+            transform: translate(0, -50%);
+            z-index: 2;
+          }
+
+.catalog-item-detail__param-group .catalog-item-detail__param-item-text::after {
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border: solid 1px #333;
+            border-radius: 50px;
+            position: absolute;
+            content: '';
+            display: block;
+            box-sizing: border-box;
+            left: 0;
+            top: 50%;
+            transform: translate(0, -50%);
+            z-index: 1;
+          }
 
 .catalog-item-detail__tabs {
     width: 100%;
