@@ -1,22 +1,27 @@
 .catalog-group-second {
   width: 100%;
-  margin: 0 0 20px 0;
-  position: relative;
   background: var(--color-neutral);
   padding: 24px;
+  margin: 0 0 24px 0;
+  position: relative;
+  &__wrapper {
+    max-width: var(--max);
+    padding: 0 32px;
+    margin: 0 auto;
+  }
   &__list {
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-flow: row wrap;
     list-style-type: none;
-    padding: 0;
-    margin: 0;
     &-item {
       width: 30%;
       margin: 0 0 12px 0;
       &-link {
+        color: var(--color-neutral-text);
         text-decoration: none;
         @mixin font normal, 16px, 20px, 20px, 24px, var(--font-title-secondary);
-        color: var(--color-neutral-text);
         &:hover {
           color: var(--color-neutral-text-hover);
         }

@@ -798,18 +798,24 @@ sans-serif;
 
 .catalog-group-second {
   width: 100%;
-  margin: 0 0 20px 0;
-  position: relative;
   background: #f9f9fa;
   padding: 24px;
+  margin: 0 0 24px 0;
+  position: relative;
 }
 
+.catalog-group-second__wrapper {
+    max-width: 1366px;
+    padding: 0 32px;
+    margin: 0 auto;
+  }
+
 .catalog-group-second__list {
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-flow: row wrap;
     list-style-type: none;
-    padding: 0;
-    margin: 0;
   }
 
 .catalog-group-second__list-item {
@@ -818,6 +824,7 @@ sans-serif;
     }
 
 .catalog-group-second__list-item-link {
+        color: #000;
         text-decoration: none;
         font-size: calc(1rem + 0.25 * ((100vw - 20rem) / 140));
         font-weight: normal;
@@ -825,7 +832,6 @@ sans-serif;
 ,
 sans-serif;
         line-height: calc(1.25rem + 0.25 * ((100vw - 20rem) / 140));
-        color: #000;
       }
 
 @media screen and (min-width: 2560px) {

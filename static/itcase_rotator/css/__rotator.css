@@ -1,5 +1,11 @@
 /* stylelint-disable custom-property-empty-line-before */
 
+.rotator.rotator_type_catalog {
+    margin: 0 0 48px 0;
+  }
+
+/* stylelint-disable custom-property-empty-line-before */
+
 div.rotator-container {
   height: 100%;
 }
