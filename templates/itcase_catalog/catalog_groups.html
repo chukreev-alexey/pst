@@ -41,7 +41,9 @@
         </div>
     {% endif %}
 
-    {% category_rotator category %}
+    {% with additional_class='rotator_type_catalog' %}
+        {% category_rotator category %}
+    {% endwith %}
 
     <div class="wrapper">
         <div class="wrapper__inner">
