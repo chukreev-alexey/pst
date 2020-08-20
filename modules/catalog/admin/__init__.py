@@ -197,7 +197,7 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
 
     prepopulated_fields = {'slug': ['name']}
 
-    search_fields = ('name', 'prices__price', 'prices__article')
+    search_fields = ('name', 'prices__price', 'prices__product_article')
 
     readonly_fields = ['product_actions']
 
