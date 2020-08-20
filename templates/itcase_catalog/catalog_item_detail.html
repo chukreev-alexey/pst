@@ -57,6 +57,7 @@
                                                     id="product_parametr-{{ forloop.counter0 }}"
                                                     name="product_parametr-{{ group.grouper.pk }}"
                                                     value="{{ product_parametr.pk }}"
+                                                    autocomplete="off"
                                                     {% if group.list|length == 1 %}checked="checked"{% endif %}
                                                 />
                                                 <div class="catalog-item-detail__param-item-text">
