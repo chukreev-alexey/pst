@@ -1,5 +1,5 @@
 .catalog-sort-dropdown {
-  min-width: 250px;
+  min-width: 310px;
   position: relative;
   &::after {
     padding: 3px;
