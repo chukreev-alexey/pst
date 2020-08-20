@@ -289,13 +289,14 @@
   &__tabs {
     width: 100%;
     &-list {
+      width: 100%;
       background: var(--color-neutral);
       display: flex;
       @media (--mobile) {
         display: block;
       }
       &-item {
-        width: 25%;
+        min-width: 25%;
         background: var(--color-neutral);
         padding: 16px;
         box-sizing: border-box;
