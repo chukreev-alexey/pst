@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "55ea4998a7a9cc614cf3";
+/******/ 	var hotCurrentHash = "8e99cc5b78936bb5930d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11097,7 +11097,7 @@ $(document).on('input', '.catalog-item-detail__count-input', function (event) {
   const intValue = parseInt(this.value);
 
   if (this.value !== '' && (isNaN(this.value) || isNaN(intValue))) {
-    this.value = this.dataset.prevValue || 0;
+    this.value = this.dataset.prevValue || 1;
     return event;
   }
 
@@ -11105,14 +11105,24 @@ $(document).on('input', '.catalog-item-detail__count-input', function (event) {
   this.dataset.prevValue = this.value;
 });
 $(document).on('change', '.catalog-item-detail__count-input', function (event) {
-  const intValue = parseInt(this.value);
+  let intValue = parseInt(this.value);
+  const min = parseInt(this.dataset.min || this.min || 1) || 1;
+  const max = parseInt(this.dataset.max || this.max) || null;
 
-  if (isNaN(this.value) || isNaN(intValue) || intValue < 0) {
-    this.value = this.dataset.prevValue || 0;
+  if (isNaN(this.value) || isNaN(intValue)) {
+    this.value = this.dataset.prevValue || min;
     return event;
   }
 
-  this.value = this.value !== '' ? intValue : '';
+  if (intValue < min) {
+    intValue = min;
+  }
+
+  if (max !== null && intValue > max) {
+    intValue = max;
+  }
+
+  this.value = intValue;
   this.dataset.prevValue = this.value;
 });
 
@@ -11126,10 +11136,14 @@ $(document).on('change', '.catalog-item-detail__count-input', function (event) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+ // Event for unchecking radio input.
+// Handle mousedown event on checked radio inputs for groups of product paramentrs.
+// eg: "Фактура", "Цвет", "Покрытие" and etc.
 
 $(document).on('mousedown', '.catalog-item-detail__param-item:has(input[id^="product_parametr-"]:checked)', function (event) {
-  const radioButton = this.querySelector('input');
+  const radioButton = this.querySelector('input'); // Save indicator to accept change checked state of radio input in "change" event
+  // and set "checked" attr to "false".
+
   radioButton.dataset._blockChange = true;
   radioButton.checked = false;
 });
@@ -11137,14 +11151,18 @@ $(document).on('change', 'input[id^="product_parametr-"]', function (event) {
   let blockChange;
 
   try {
+    // "blockChange" in dataset as string. Convert string to boolean.
     blockChange = JSON.parse(this.dataset._blockChange);
   } catch (e) {
     blockChange = false;
-  }
+  } // If input is "checked" and user click on it, we check indicator "blockChange"
+  // and set "checked" attr to "false" for unchecking radio input.
+
 
   if (this.checked && blockChange) {
     this.checked = false;
-  }
+  } // Clean "blockChange" for next event handling.
+
 
   this.dataset._blockChange = false;
 });
