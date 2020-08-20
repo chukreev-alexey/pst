@@ -33,12 +33,13 @@
                                     {% for product_image, image_description in product.get_all_images %}
                                         <div class="catalog-item-gallery__image">
                                             <img src="{% version product_image 'catalog_detail' %}"
-                                                 class="catalog-item-gallery__image-image" alt="{{ image_description }}" title="" />
+                                                 class="catalog-item-gallery__image-image"
+                                                 alt="{{ image_description|default:product.name }}" title="{{ image_description|default:product.name }}" />
                                         </div>
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div class="catalog-item-gallery-pagination swiper-pagination"></div>
+                            <div class="catalog-item-gallery-pagination {% if product.get_all_images|length != 1 %} catalog-item-gallery-pagination_state_hidden {% endif %} swiper-pagination"></div>
                         </div>
                     </div>
 
@@ -49,22 +50,24 @@
                                 {% for group in product_parametres %}
                                     <div class="catalog-item-detail__param-group">
                                         <div class="catalog-item-detail__param-title">{{ group.grouper }}</div>
-                                        {% for product_parametr in group.list %}
-                                            <label class="catalog-item-detail__param-item">
-                                                <input
-                                                    type="radio"
-                                                    class="catalog-item-detail__param-item-input"
-                                                    id="product_parametr-{{ forloop.counter0 }}"
-                                                    name="product_parametr-{{ group.grouper.pk }}"
-                                                    value="{{ product_parametr.pk }}"
-                                                    autocomplete="off"
-                                                    {% if group.list|length == 1 %}checked="checked"{% endif %}
-                                                />
-                                                <div class="catalog-item-detail__param-item-text">
-                                                    {{ product_parametr.value }}
-                                                </div>
-                                            </label>
-                                        {% endfor %}
+                                        <div class="catalog-item-detail__param-wrapper {% if group.list|length > 10 %} catalog-item-detail__param-wrapper_type_column {% endif %}">
+                                            {% for product_parametr in group.list %}
+                                                <label class="catalog-item-detail__param-item">
+                                                    <input
+                                                        type="radio"
+                                                        class="catalog-item-detail__param-item-input"
+                                                        id="product_parametr-{{ forloop.counter0 }}"
+                                                        name="product_parametr-{{ group.grouper.pk }}"
+                                                        value="{{ product_parametr.pk }}"
+                                                        autocomplete="off"
+                                                        {% if group.list|length == 1 %}checked="checked"{% endif %}
+                                                    />
+                                                    <div class="catalog-item-detail__param-item-text">
+                                                        {{ product_parametr.value }}
+                                                    </div>
+                                                </label>
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 {% endfor %}
                             {% endwith %}
