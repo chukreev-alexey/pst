@@ -21,14 +21,6 @@
     ^&__item {
       position: relative;
       flex: 1 1 auto;
-      &_type_search {
-        background: url('./../img/icon/search.svg') no-repeat 50% 50%;
-        padding: 16px;
-        cursor: pointer;
-        &:hover {
-          background-color: var(--color-primary-hover);
-        }
-      }
       &_state_current {
         & .catalog-menu__item-link {
           background: var(--color-primary-hover);
