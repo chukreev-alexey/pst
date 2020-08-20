@@ -185,10 +185,13 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
             data.append(brand)
         return data
 
+    def get_category_children(self):
+        return self.object.children.all()
+
     def get_filter_category(self):
-        if (not hasattr(self, 'object')
-                or getattr(self.object, 'level', 0) != 1):
-            return
+        # if (not hasattr(self, 'object')
+        #         or getattr(self.object, 'level', 0) != 1):
+        #     return
 
         _filter = self._filter.get('filter') or {}
         filtered = _filter.get('category') or []
@@ -199,12 +202,13 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         queryset = self.get_queryset()
 
         data = []
-        for category in self.object.children.all():
+        for category in self.get_category_children():
 
             if not category.get_products().exists():
                 continue
-
-            checked = str(category.pk) in filtered
+            checked = False
+            if str(category.pk) in filtered or category.pk == self.object.pk:
+                checked = True
             if checked:
                 self._checked.add(category.pk)
 
@@ -397,6 +401,17 @@ class SubCategoryDetail(CategoryDetail):
         queryset = Category.objects.filter(level__gte=1)
         self.object = self.get_object(queryset=queryset)
         return super(ListView, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        if self.hide_products:
+            return self.object.parent.children.all()
+        self.queryset = self.object.parent.get_products()
+        queryset = self.get_filtered_queryset(self.queryset, self.request)
+        queryset = self.get_sorted_queryset(queryset, self.request)
+        return queryset
+
+    def get_category_children(self):
+        return self.object.parent.children.all()
 
 
 class ProductDetail(ProductDetailBase):
