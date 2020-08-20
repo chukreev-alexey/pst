@@ -218,6 +218,9 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
     class Meta(ProductBase.Meta):
         ordering = ('sort', 'name', 'price')
 
+    def get_absolute_url(self):
+        return reverse_lazy('product-detail', args=[self.slug])
+
     def get_first_image(self):
         """Return first image."""
         if self.image and self.image.exists:
