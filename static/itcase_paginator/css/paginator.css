@@ -1,0 +1,46 @@
+.paginator {
+  width: 100%;
+  margin: 40px 0 0 0;
+  clear: both;
+  @media (--mobile) {
+    margin: 0 0 30px 0;
+  }
+  &-inner {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    @media (--mobile) {
+      flex-flow: wrap row;
+    }
+    ^&__title {
+      display: none;
+    }
+    ^&__item {
+      text-decoration: none;
+      &-link {
+        color: var(--color-surface-text);
+        text-decoration: none;
+        padding: 11px 16px 10px 16px;
+        margin: 0 8px;
+        display: block;
+        @mixin font normal, 18px, 26px, 18px, 26px, var(--font);
+        &:hover {
+          background: var(--color-surface-hover);
+        }
+        &:visited {
+          &:hover {
+            background: var(--color-surface-hover);
+          }
+        }
+        &_state_current {
+          color: var(--color-primary-text);
+          background: var(--color-primary);
+          &:hover {
+            background: var(--color-primary-hover);
+          }
+        }
+      }
+    }
+  }
+}
