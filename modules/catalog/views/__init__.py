@@ -201,6 +201,9 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
         data = []
         for category in self.object.children.all():
 
+            if not category.get_products().exists():
+                continue
+
             checked = str(category.pk) in filtered
             if checked:
                 self._checked.add(category.pk)
