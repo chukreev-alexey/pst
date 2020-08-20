@@ -5,8 +5,10 @@
     margin: 0;
   }
   &__wrapper {
+    padding: 0 0 48px 0;
     display: flex;
     @media (--mobile) {
+      padding: 0;
       display: block;
     }
   }

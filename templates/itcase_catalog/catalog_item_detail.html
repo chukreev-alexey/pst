@@ -39,7 +39,8 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div class="catalog-item-gallery-pagination {% if product.get_all_images|length != 1 %} catalog-item-gallery-pagination_state_hidden {% endif %} swiper-pagination"></div>
+
+                            <div class="catalog-item-gallery-pagination {% if product.get_all_images|length == 1 %} catalog-item-gallery-pagination_state_hidden {% endif %} swiper-pagination"></div>
                         </div>
                     </div>
 

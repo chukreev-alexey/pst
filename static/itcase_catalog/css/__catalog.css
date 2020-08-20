@@ -1127,6 +1127,7 @@ sans-serif;
   }
 
 .catalog-item-detail__wrapper {
+    padding: 0 0 48px 0;
     display: flex;
   }
 
@@ -1134,6 +1135,7 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .catalog-item-detail__wrapper {
+      padding: 0;
       display: block
   }
     }
