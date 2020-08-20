@@ -2,9 +2,9 @@
   min-height: 144px;
   background: var(--color-neutral);
   padding: 0 32px 24px 156px;
+  margin: 0 0 32px 0;
   position: relative;
   display: flex;
-  flex: 0 0 32%;
   flex-flow: row wrap;
   align-items: flex-start;
   box-sizing: border-box;

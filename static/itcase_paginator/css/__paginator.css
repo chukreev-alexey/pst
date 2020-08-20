@@ -38,17 +38,17 @@
     }
 
 .paginator-inner .paginator__item-link {
+        color: #000;
+        text-decoration: none;
+        padding: 11px 16px 10px 16px;
+        margin: 0 8px;
+        display: block;
         font-size: calc(1.125rem + 0.5 * ((100vw - 20rem) / 140));
         font-weight: normal;
         font-family: 'Fact'
 ,
 sans-serif;
         line-height: calc(1.125rem + 0.5 * ((100vw - 20rem) / 140));
-        color: #000;
-        text-decoration: none;
-        padding: 11px 16px 10px 16px;
-        margin: 0 8px;
-        display: block;
       }
 
 @media screen and (min-width: 2560px) {

@@ -55,6 +55,7 @@ sans-serif;
         }
 
 .feed.feed_type_main-page .feed-list {
+        display: flex;
         justify-content: space-between;
       }
 
@@ -74,6 +75,7 @@ sans-serif;
           position: relative;
           display: flex;
           flex: 0 0 32%;
+          margin: 0;
           flex-flow: row wrap;
           align-items: flex-start;
           box-sizing: border-box;
@@ -342,7 +344,7 @@ sans-serif;
   padding: 0 32px 24px 156px;
   position: relative;
   display: flex;
-  flex: 0 0 32%;
+  margin: 0 0 32px 0;
   flex-flow: row wrap;
   align-items: flex-start;
   box-sizing: border-box;
@@ -520,8 +522,6 @@ sans-serif;
   padding: 0;
   margin: 0;
   position: relative;
-  display: flex;
-  justify-content: space-between;
   list-style: none;
 }
 

@@ -13,6 +13,7 @@
         }
       }
       &-list {
+        display: flex;
         justify-content: space-between;
         @media (--mobile) {
           position: relative;
@@ -22,6 +23,7 @@
           min-height: 144px;
           background: var(--color-neutral);
           padding: 0 32px 0 156px;
+          margin: 0;
           position: relative;
           display: flex;
           flex: 0 0 32%;
