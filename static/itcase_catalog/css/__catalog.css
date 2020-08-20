@@ -1175,7 +1175,7 @@ sans-serif;
 
 .catalog-item-detail__info {
     width: 100%;
-    margin: 32px 0 0 0;
+    margin: 16px 0 0 0;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -1469,7 +1469,7 @@ sans-serif;
 .catalog-item-detail__param-group {
       background: #f9f9fa;
       padding: 16px 32px 8px 16px;
-      margin: 0 24px 0 0;
+      margin: 0 24px 24px 0;
       box-sizing: border-box;
     }
 
@@ -1531,9 +1531,14 @@ sans-serif;
       }
         }
 
+.catalog-item-detail__param-group .catalog-item-detail__param-wrapper_type_column {
+          -moz-columns: 2 180px;
+          columns: 2 180px;
+        }
+
 .catalog-item-detail__param-group .catalog-item-detail__param-item {
         min-width: 180px;
-        margin: 0 0 8px 0;
+        margin: 0 12px 12px 0;
         position: relative;
         display: flex;
         cursor: pointer;
@@ -1750,28 +1755,26 @@ sans-serif;
     }
       }
 
-.catalog-item-gallery-pagination {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -32px;
+.catalog-item-gallery-pagination.swiper-pagination {
+    margin: 20px 0 0 0;
+    position: relative;
   }
 
-.catalog-item-gallery-pagination_state_hidden {
+.catalog-item-gallery-pagination.swiper-pagination_state_hidden {
       display: none;
     }
 
-.catalog-item-gallery-pagination .swiper-pagination-bullet {
-        width: 12px;
-        height: 12px;
+.catalog-item-gallery-pagination.swiper-pagination .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
         background: #eee;
-        margin: 0 16px;
+        margin: 0 12px;
         outline: 0;
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
         opacity: 1;
       }
 
-.catalog-item-gallery-pagination .swiper-pagination-bullet-active {
+.catalog-item-gallery-pagination.swiper-pagination .swiper-pagination-bullet-active {
           background: #069;
         }
 

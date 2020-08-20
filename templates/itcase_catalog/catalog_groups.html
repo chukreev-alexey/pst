@@ -21,9 +21,9 @@
 {% endblock %}
 
 {% block content %}
-    <div class="wrapper">
-        <div class="wrapper__inner">
-            {% if not view.hide_products %}
+    {% if not view.hide_products %}
+        <div class="wrapper">
+            <div class="wrapper__inner">
                 <div class="nav">
                     {% for crumb in catalog_breadcrumbs %}
                         <div class="nav__item">
@@ -37,9 +37,9 @@
                         </div>
                     {% endif %}
                 </div>
-            {% endif %}
+            </div>
         </div>
-    </div>
+    {% endif %}
 
     {% category_rotator category %}
 
