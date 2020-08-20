@@ -266,7 +266,10 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
         for field_query_name in self.get_filter_fields():
 
-            field = Parametr.objects.get(query_name=field_query_name)
+            field = Parametr.objects.filter(
+                query_name=field_query_name).first()
+            if field is None:
+                continue
             picked_parametres = _filter.get(field.query_name, False)
 
             if type(picked_parametres) is not list:
