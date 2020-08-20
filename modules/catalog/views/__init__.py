@@ -206,9 +206,9 @@ class ProductListView(FilterMixin, SortMixin, SlicePaginatorMixin, ListView):
 
             if not category.get_products().exists():
                 continue
-            checked = False
-            if str(category.pk) in filtered or category.pk == self.object.pk:
-                checked = True
+
+            checked = str(category.pk) in filtered
+
             if checked:
                 self._checked.add(category.pk)
 

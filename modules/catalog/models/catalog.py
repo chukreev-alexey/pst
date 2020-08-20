@@ -136,9 +136,13 @@ class Category(MPTTModel, CategoryBase, SEOModel):
 
     def get_absolute_url(self):
         if self.level == 2:
-            return reverse_lazy('subcategory-detail',
-                                args=[str(self.parent.slug),
-                                      str(self.slug)])
+            url = '{}?filter-category={}'.format(
+                reverse_lazy(
+                    'subcategory-detail',
+                    args=[str(self.parent.slug), str(self.slug)]
+                ),
+                self.pk)
+            return url
 
         return reverse_lazy('category-detail', args=[str(self.slug)])
 
