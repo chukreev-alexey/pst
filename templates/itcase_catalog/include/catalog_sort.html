@@ -1,41 +1,5 @@
-<div class="catalog-sort">
-    {% if sort_group %}
-        <div class="catalog-sort__group">
-            {% if sort_group.in_hit %}
-                {% with value=sort.in_hit|default:'0' %}
-                    <a href="?sort-in_hit={{ value }}"
-                       data-sort-field="sort-in_hit"
-                       data-sort-value="{{ value }}"
-                       class="catalog-sort__group-item
-                              {% if 'in_hit' in sort %}catalog-sort__group-item_sort{% if value == '0' %}_asc{% else %}_desc{% endif %}{% endif %}">
-                        Хит продаж
-                    </a>
-                {% endwith %}
-            {% endif %}
-            {% if sort_group.in_action %}
-                {% with value=sort.in_action|default:'0' %}
-                    <a href="?sort-in_action={{ value }}"
-                       data-sort-field="sort-in_action"
-                       data-sort-value="{{ value }}"
-                       class="catalog-sort__group-item
-                             {% if 'in_action' in sort %}catalog-sort__group-item_sort{% if value == '0' %}_asc{% else %}_desc{% endif %}{% endif %}">
-                        Распродажа
-                    </a>
-                {% endwith %}
-            {% endif %}
-            {% if sort_group.in_recommended %}
-                {% with value=sort.in_recommended|default:'0' %}
-                    <a href="?sort-in_recommended={{ value }}"
-                       data-sort-field="sort-in_recommended"
-                       data-sort-value="{{ value }}"
-                       class="catalog-sort__group-item
-                              {% if 'in_recommended' in sort %}catalog-sort__group-item_sort{% if value == '0' %}_asc{% else %}_desc{% endif %}{% endif %}">
-                        Рекомендуем
-                    </a>
-                {% endwith %}
-            {% endif %}
-        </div>
-
+{% if sort_group %}
+    <div class="catalog-sort">
         <div data-sort-dropdown class="catalog-sort-dropdown">
             {% comment %}
                 Value for "sort"(price/name) is a reverse of the active one.
@@ -85,5 +49,5 @@
                 {% endwith %}
             </div>
         </div>
-    {% endif %}
-</div>
+    </div>
+{% endif %}

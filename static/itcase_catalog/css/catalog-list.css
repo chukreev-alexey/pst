@@ -1,14 +1,9 @@
-
 .catalog-list {
-  width: calc(100% + 20px);
+  width: 100%;
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  @media (--mobile) {
-    width: 100%;
-    justify-content: space-between;
-  }
+  justify-content: space-between;
   &__title {
     width: 100%;
   }
