@@ -17,7 +17,6 @@
   "dependencies": {
     "cleave.js": "^1.6.0",
     "pdfjs-dist": "^2.4.456",
-    "stylelint-no-unsupported-browser-features": "^4.0.0",
     "suggestions-jquery": "^20.3.0"
   },
   "devDependencies": {
@@ -145,6 +144,7 @@
     "style-loader": "^1.2.1",
     "stylelint": "^13.6.1",
     "stylelint-config-standard": "^20.0.0",
+    "stylelint-no-unsupported-browser-features": "^4.0.0",
     "stylelint-order": "^4.1.0",
     "terser-webpack-plugin": "^4.1.0",
     "ts-loader": "^8.0.2",
