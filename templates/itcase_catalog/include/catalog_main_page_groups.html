@@ -1,5 +1,5 @@
-<div class="catalog-list catalog-list_type_scroll">
-    {% for group, products in products_groups.items %}
+{% for group, products in products_groups.items %}
+    <div class="catalog-list catalog-list_type_scroll">
         <div class="catalog-group" data-category="{{ group }}">
             <div class="catalog-group__title">
                 {% if group == 'recommended' %}Рекомендуем{% endif %}
@@ -18,5 +18,5 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
-</div>
+    </div>
+{% endfor %}

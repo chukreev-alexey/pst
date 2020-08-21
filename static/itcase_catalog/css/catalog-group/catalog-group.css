@@ -1,6 +1,6 @@
 .catalog-group {
   width: 100%;
-  margin: 0 0 20px 0;
+  margin: 32px 0 20px 0;
   position: relative;
   &-page {
     width: 100%;
@@ -18,9 +18,8 @@
         width: calc(25% - 32px);
         flex: 0 0 auto;
         @media (--mobile), (--tablet) {
-          width: auto;
-          margin: 0 15px 20px 15px;
-          flex: 0 0 200px;
+          width: 100%;
+          margin: 0 16px 20px 16px;
         }
       }
     }
@@ -52,12 +51,16 @@
     flex-flow: row wrap;
     &-left {
       width: 300px;
+      position: relative;
+      z-index: 2;
       &-inner {
         margin: 0 32px 0 0;
       }
     }
     &-right {
       flex: 1;
+      z-index: 1;
+      position: relative;
       &-inner {
         position: relative;
       }

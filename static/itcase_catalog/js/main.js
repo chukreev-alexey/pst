@@ -4,6 +4,7 @@
 
 require('./catalogGroups')
 require('./catalogSort')
+require('./catalogFilterPopup')
 require('./itemGallery')
 require('./popupMenu')
 require('./productDetail/contentTabs')

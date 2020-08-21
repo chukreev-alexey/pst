@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "12ddeb9ff37e52fe3b60";
+/******/ 	var hotCurrentHash = "58685ef2e41b16b18188";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10713,6 +10713,78 @@ module.exports.formatError = function(err) {
 
 /***/ }),
 
+/***/ "./static/itcase_catalog/js/catalogFilterPopup.js":
+/*!********************************************************!*\
+  !*** ./static/itcase_catalog/js/catalogFilterPopup.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* globals SantehCatalogFilter */
+
+/* eslint indent: 0 */
+
+
+function CatalogFilterFactory() {
+  const animationEvents = 'webkitAnimationEnd oanimationend msAnimationEnd animationend';
+  const filterPopupActiveClass = 'catalog-filter-popup_state_active';
+  const catalogFilterVisible = 'catalog-filter_state_visible';
+  const catalogFilterHidden = 'catalog-filter_state_hidden';
+  let _isOpen = false;
+
+  const openCatalogFilter = cb => {
+    $('.catalog-filter-popup').addClass(filterPopupActiveClass);
+    const $catalogFilter = $('.catalog-filter');
+    $catalogFilter.addClass(catalogFilterVisible).on(animationEvents, () => {
+      $catalogFilter.off(animationEvents);
+    });
+    _isOpen = true;
+  };
+
+  const closeCatalogFilter = () => {
+    $('.catalog-filter-popup').removeClass(filterPopupActiveClass);
+    const $catalogFilter = $('.catalog-filter');
+    $catalogFilter.addClass(catalogFilterHidden).on(animationEvents, () => {
+      $catalogFilter.css({
+        transform: ''
+      }).removeClass([catalogFilterVisible, catalogFilterHidden].join(' ')).off(animationEvents);
+    });
+    _isOpen = false;
+  };
+
+  return Object.freeze({
+    get isOpen() {
+      return _isOpen;
+    },
+
+    openCatalogFilter,
+    closeCatalogFilter
+  });
+}
+
+global.SantehCatalogFilter = new CatalogFilterFactory();
+$(document).on('click', '.catalog-filter-popup__button', event => {
+  event.stopPropagation();
+  event.preventDefault();
+
+  if (SantehCatalogFilter.isOpen) {
+    SantehCatalogFilter.closeCatalogFilter();
+  } else {
+    SantehCatalogFilter.openCatalogFilter();
+  }
+});
+$(document).on('click', event => {
+  const $catalogFilter = $(event.target).closest('.catalog-filter, .catalog-filter-popup');
+
+  if (!$catalogFilter.length && SantehCatalogFilter.isOpen) {
+    SantehCatalogFilter.closeCatalogFilter();
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./static/itcase_catalog/js/catalogGroups.js":
 /*!***************************************************!*\
   !*** ./static/itcase_catalog/js/catalogGroups.js ***!
@@ -10818,6 +10890,8 @@ if (document.querySelector('.catalog-item-gallery')) {
 __webpack_require__(/*! ./catalogGroups */ "./static/itcase_catalog/js/catalogGroups.js");
 
 __webpack_require__(/*! ./catalogSort */ "./static/itcase_catalog/js/catalogSort.js");
+
+__webpack_require__(/*! ./catalogFilterPopup */ "./static/itcase_catalog/js/catalogFilterPopup.js");
 
 __webpack_require__(/*! ./itemGallery */ "./static/itcase_catalog/js/itemGallery.js");
 

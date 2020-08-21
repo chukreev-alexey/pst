@@ -1,0 +1,15 @@
+.catalog-item {
+  &&_type_placeholder {
+    margin: 0;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+    padding: 0 16px;
+    border: none;
+    box-shadow: none;
+    &:hover {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
