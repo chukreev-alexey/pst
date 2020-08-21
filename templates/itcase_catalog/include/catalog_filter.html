@@ -1,48 +1,62 @@
 {% load l10n %}
 
 {% localize off %}
-    <form method="post" accept-charset="utf-8" class="catalog-filter"
-        {% if site_version == 'mobile' %} id="catalogFilter" {% endif %}>
-
+    <form method="post" accept-charset="utf-8" class="catalog-filter" {% if site_version == 'mobile' %} id="catalogFilter" {% endif %}>
         {% csrf_token %}
 
         {% if sort_group %}
-            <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open">
-                <div class="catalog-filter-group__list">
-                    {% if sort_group.in_hit %}
-                        {% with value=sort.in_hit|default:'0' %}
-                            <a href="?sort-in_hit={{ value }}"
-                               data-sort-field="sort-in_hit"
-                               data-sort-value="{{ value }}"
-                               class="catalog-sort__group-item
-                                      {% if 'in_hit' in sort %}catalog-sort__group-item_sort{% if value == '0' %}_asc{% else %}_desc{% endif %}{% endif %}">
-                                Хит продаж
-                            </a>
-                        {% endwith %}
-                    {% endif %}
-                    {% if sort_group.in_action %}
-                        {% with value=sort.in_action|default:'0' %}
-                            <a href="?sort-in_action={{ value }}"
-                               data-sort-field="sort-in_action"
-                               data-sort-value="{{ value }}"
-                               class="catalog-sort__group-item
-                                     {% if 'in_action' in sort %}catalog-sort__group-item_sort{% if value == '0' %}_asc{% else %}_desc{% endif %}{% endif %}">
-                                Распродажа
-                            </a>
-                        {% endwith %}
-                    {% endif %}
-                    {% if sort_group.in_recommended %}
-                        {% with value=sort.in_recommended|default:'0' %}
-                            <a href="?sort-in_recommended={{ value }}"
-                               data-sort-field="sort-in_recommended"
-                               data-sort-value="{{ value }}"
-                               class="catalog-sort__group-item
-                                      {% if 'in_recommended' in sort %}catalog-sort__group-item_sort{% if value == '0' %}_asc{% else %}_desc{% endif %}{% endif %}">
-                                Рекомендуем
-                            </a>
-                        {% endwith %}
-                    {% endif %}
-                </div>
+            <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open" >
+                {% with hit_key='filter-in_hit' action_key='filter-in_action' recommended_key='filter-in_recommended' %}
+                    <div class="catalog-filter-group__list">
+                        <div class="catalog-filter-group__list-item
+                                    {% if hit_key in query %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if in_hit_disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                            <label class="catalog-filter-group__list-item-label">
+                                <input class="catalog-filter-group__list-item-checkbox"
+                                       type="checkbox"
+                                       name="{{ hit_key }}"
+                                       value="1"
+                                       {% if in_hit_disabled %}disabled="disabled"{% endif %}
+                                       {% if hit_key in query %}checked="checked"{% endif %} />
+                                <span class="catalog-filter-group__list-item-text">
+                                    Хит продаж
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="catalog-filter-group__list-item
+                                    {% if action_key in query %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if in_action_disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                            <label class="catalog-filter-group__list-item-label">
+                                <input class="catalog-filter-group__list-item-checkbox"
+                                       type="checkbox"
+                                       name="{{ action_key }}"
+                                       value="1"
+                                       {% if in_action_disabled %}disabled="disabled"{% endif %}
+                                       {% if action_key in query %}checked="checked"{% endif %} />
+                                <span class="catalog-filter-group__list-item-text">
+                                    Распродажа
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="catalog-filter-group__list-item
+                                    {% if recommended_key in query %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if in_recommended_disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                            <label class="catalog-filter-group__list-item-label">
+                                <input class="catalog-filter-group__list-item-checkbox"
+                                       type="checkbox"
+                                       name="{{ recommended_key }}"
+                                       value="1"
+                                       {% if in_recommended_disabled %}disabled="disabled"{% endif %}
+                                       {% if recommended_key in query %}checked="checked"{% endif %} />
+                                <span class="catalog-filter-group__list-item-text">
+                                    Рекомендуем
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                {% endwith %}
             </div>
         {% endif %}
 
@@ -95,7 +109,7 @@
         {% endif %}
 
         {% if 'search' in request.get_full_path %}
-            <input type="hidden" name="search" value="{{ search }}">
+            <input type="hidden" name="search" value="{{ search }}" />
         {% endif %}
 
         {% if filter_brand %}
