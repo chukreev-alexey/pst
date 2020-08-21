@@ -401,6 +401,7 @@ sans-serif;
   width: 100%;
   counter-reset: list1;
   padding: 0 0 15px 15px;
+  box-sizing: border-box;
 }
 
 .content ol li {
@@ -466,6 +467,7 @@ sans-serif;
   padding: 0 0 0 32px;
   list-style-type: none;
   text-indent: -1.5em;
+  box-sizing: border-box;
 }
 
 .content ul li {
@@ -1366,18 +1368,18 @@ sans-serif;
 .content {
   width: 100%;
   position: relative;
-  z-index: 1;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 .content__wrapper {
     width: 100%;
     max-width: 1366px;
+    padding: 0 72px 0 56px;
     margin: 0 auto;
-    box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
-    padding: 0 72px 0 56px;
+    box-sizing: border-box;
   }
 
 /* stylelint-disable custom-property-empty-line-before */

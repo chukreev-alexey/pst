@@ -110,33 +110,24 @@
                                         />
                                     <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus" data-input-name="amount">&nbsp;</div>
                                 </div>
-
                                 <div class="catalog-item-detail__price">607 р/м2</div>
-
-                                {% with id=product.pk|unlocalize %}
-                                    <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
-                                       class="catalog-item-detail__button catalog-item__button button
-                                              {% if product in cart %}
-                                                button_border_orange
-                                              {% else %}
-                                                button_color_blue
-                                              {% endif %}"
-                                        data-add-url="{% url 'itcase_cart:cart_add' %}"
-                                        data-product="{{ id }}"
-                                        data-amount-{{ id }}="1">
-                                        <div class="button button_type_primary">
-                                            <div class="button__text">
-                                                {% if product in cart %}
-                                                    В заказе
-                                                {% else %}
-                                                    Заказать
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </a>
-                                {% endwith %}
-
                             </div>
+
+                            {% with id=product.pk|unlocalize %}
+                                <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                                   class="catalog-item-detail__button catalog-item__button button button_type_primary {% if product in cart %} catalog-item-detail__button_state_in-cart {% endif %}"
+                                    data-add-url="{% url 'itcase_cart:cart_add' %}"
+                                    data-product="{{ id }}"
+                                    data-amount-{{ id }}="1">
+                                    <span class="button__text">
+                                        {% if product in cart %}
+                                            В заказе
+                                        {% else %}
+                                            Заказать
+                                        {% endif %}
+                                    </span>
+                                </a>
+                            {% endwith %}
                         </div>
                     </div>
                 </div>

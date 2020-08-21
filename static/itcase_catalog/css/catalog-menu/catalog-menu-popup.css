@@ -12,8 +12,12 @@
   z-index: 10;
   transform: translate(0, 10px);
   animation: all 0.4s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
+  @media (--mobile) {
+    padding: 0;
+  }
   &_state_visible {
     height: auto;
+    margin: 0;
     visibility: visible;
     animation-name: catalogMenuFadeIn;
   }
