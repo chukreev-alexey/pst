@@ -35,10 +35,7 @@
         @mixin font bold, 16px, 16px, 24px, 24px, var(--font);
         @media (--mobile), (--tablet) {
           min-width: 250px;
-          padding: 6px 32px 6px 0;
-        }
-        &:first-child {
-          padding: 6px 12px 12px 0;
+          padding: 6px 32px 6px 16px;
         }
         & p {
           padding: 0;
@@ -52,18 +49,7 @@
         @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
         @media (--mobile), (--tablet) {
           min-width: 250px;
-          padding: 6px 32px 6px 0;
-        }
-        &:first-child {
-          padding: 6px 12px 6px 0;
-          @media (--mobile) {
-            padding: 6px 32px 6px 0;
-          }
-        }
-        & p {
-          color: var(--color-surface-text);
-          padding: 0;
-          @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
+          padding: 6px 32px 6px 16px;
         }
       }
     }

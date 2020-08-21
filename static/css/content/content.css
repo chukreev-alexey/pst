@@ -1,14 +1,15 @@
 .content {
   width: 100%;
   position: relative;
+  box-sizing: border-box;
   z-index: 1;
   &__wrapper {
     width: 100%;
     max-width: var(--max);
+    padding: 0 72px 0 56px;
     margin: 0 auto;
-    box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
-    padding: 0 72px 0 56px;
+    box-sizing: border-box;
   }
 }

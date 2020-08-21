@@ -59,13 +59,25 @@
     }
   }
   & p {
-    width: 100%;
     color: var(--color-surface-text);
     padding: 0 0 24px 0;
     margin: 0;
-    @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
+    box-sizing: border-box;
+    @mixin font normal, 16px, 18px, 24px, 28px, var(--font);
+    @media (--mobile) {
+      position: relative;
+      overflow: hidden;
+    }
     & img {
       box-sizing: border-box;
+    }
+    & iframe {
+      @media (--mobile) {
+        width: 100% !important;
+      }
+    }
+    & a {
+      display: inline-block;
     }
   }
   & em {

@@ -77,6 +77,21 @@
 
 /* stylelint-disable custom-property-empty-line-before */
 
+.catalog-content {
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-content {
+    padding: 0 20px
+}
+  }
+
+/* stylelint-disable custom-property-empty-line-before */
+
 .catalog-filter-group__list {
   margin: 0 0 20px 0;
 }
@@ -928,7 +943,8 @@ sans-serif;
 
 .catalog-group-page_type_second .catalog-item {
           width: 100%;
-          margin: 0 16px 20px 16px
+          margin: 0 16px 20px 16px;
+          flex: initial
       }
         }
 
@@ -1903,7 +1919,7 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .catalog-item {
-    width: 100%;
+    width: auto;
     margin: 0 8px 16px 8px
 }
   }
@@ -2206,6 +2222,14 @@ sans-serif;
   }
 }
 
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-item__title-link {
+        font-weight: bold
+    }
+      }
+
 .catalog-item__title-link:hover {
         color: #f4a404;
       }
@@ -2218,7 +2242,7 @@ sans-serif;
     font-family: 'Fact'
 ,
 sans-serif;
-    line-height: calc(0.875rem + 0.625 * ((100vw - 20rem) / 140));
+    line-height: calc(1.125rem + 0.375 * ((100vw - 20rem) / 140));
   }
 
 @media screen and (min-width: 2560px) {
@@ -2231,7 +2255,7 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
   .catalog-item__desc {
-    line-height: 0.875rem;
+    line-height: 1.125rem;
   }
 }
 
@@ -2259,7 +2283,7 @@ sans-serif;
       color: #fe0201;
       margin: 0 10px 10px 0;
       display: inline-block;
-      font-size: calc(0.875rem + 0.625 * ((100vw - 20rem) / 140));
+      font-size: calc(1.125rem + 0.375 * ((100vw - 20rem) / 140));
       font-weight: bold;
       font-family: 'Fact-Semi-Expanded'
 ,
@@ -2291,7 +2315,7 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
   .catalog-item__price-text {
-    font-size: 0.875rem;
+    font-size: 1.125rem;
   }
 }
 
@@ -2391,6 +2415,16 @@ sans-serif;
       content: '';
       display: inline-block;
     }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-item__button::after {
+        width: 42px;
+        height: 42px;
+        background-size: auto 20px
+    }
+      }
 
 .catalog-item__button_state_added {
       -webkit-animation-name: catalogItemButtonAdded;

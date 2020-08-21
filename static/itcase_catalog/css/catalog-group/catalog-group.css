@@ -2,28 +2,6 @@
   width: 100%;
   margin: 32px 0 20px 0;
   position: relative;
-  &-page {
-    width: 100%;
-    padding: 0 0 60px 0;
-    &_type_second {
-      & .catalog-group__inner {
-        &-left {
-          width: 100%;
-        }
-        &-right {
-          width: 100%;
-        }
-      }
-      & .catalog-item {
-        width: calc(25% - 32px);
-        flex: 0 0 auto;
-        @media (--mobile), (--tablet) {
-          width: 100%;
-          margin: 0 16px 20px 16px;
-        }
-      }
-    }
-  }
   &__wrapper {
     width: 100%;
     max-width: var(--max);
@@ -58,11 +36,34 @@
       }
     }
     &-right {
+      position: relative;
       flex: 1;
       z-index: 1;
-      position: relative;
       &-inner {
         position: relative;
+      }
+    }
+  }
+  &-page {
+    width: 100%;
+    padding: 0 0 60px 0;
+    &_type_second {
+      & .catalog-group__inner {
+        &-left {
+          width: 100%;
+        }
+        &-right {
+          width: 100%;
+        }
+      }
+      & .catalog-item {
+        width: calc(25% - 32px);
+        flex: 0 0 auto;
+        @media (--mobile), (--tablet) {
+          width: 100%;
+          margin: 0 16px 20px 16px;
+          flex: initial;
+        }
       }
     }
   }
