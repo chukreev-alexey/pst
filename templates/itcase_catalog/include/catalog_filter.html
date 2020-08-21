@@ -1,7 +1,7 @@
 {% load l10n %}
 
 {% localize off %}
-    <form {% if site_version %}{% endif %}></form>
+    <form method="post" accept-charset="utf-8" class="catalog-filter" {% if site_version == 'mobile' %} id="catalogFilter" {% endif %}>
         {% csrf_token %}
 
         {% if sort_group %}
@@ -185,6 +185,6 @@
         <div class="catalog-filter__clear button button_type_neutral">
             <div class="button__text">Очистить фильтры</div>
         </div>
-
+    </form>
 
 {% endlocalize %}
