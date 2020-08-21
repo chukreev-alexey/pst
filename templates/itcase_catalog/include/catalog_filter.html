@@ -1,7 +1,7 @@
 {% load l10n %}
 
 {% localize off %}
-    <form method="post" accept-charset="utf-8" class="catalog-filter"></form>
+    <form {% if site_version %}{% endif %}></form>
         {% csrf_token %}
 
         {% if sort_group %}
