@@ -23,7 +23,7 @@ register = template.Library()
 __all__ = ['catalog_menu']
 
 
-@register.inclusion_tag('itcase_catalog/include/catalog_nav.html',
+@register.inclusion_tag('itcase_catalog/include/catalog_menu.html',
                         takes_context=True)
 def catalog_menu(context, additional_class=None, title_additional_class=None,
                  queryset=None):

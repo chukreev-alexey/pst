@@ -18,6 +18,11 @@
     @media (--mobile) {
       display: none;
     }
+    &::after {
+      width: 48px;
+      content: '';
+      display: block;
+    }
     ^&__item {
       position: relative;
       flex: 1 1 auto;
