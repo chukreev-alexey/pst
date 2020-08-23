@@ -17,6 +17,7 @@
 from django.urls import include, path
 
 from . import views
+from .views import foo  # noqa
 
 urlpatterns = [
     path('catalog/', views.CatalogIndexView.as_view(), name='catalog-index'),
@@ -27,50 +28,24 @@ urlpatterns = [
                 '<slug>/',
                 include([
                     path('',
-                         views.CategoryDetail.as_view(),
+                         foo.CategoryDetail.as_view(),
                          name='category-detail'),
                     path('page<int:page>/',
-                         views.CategoryDetail.as_view(),
+                         foo.CategoryDetail.as_view(),
                          name='category-detail'),
                 ])),
             path(
                 '<parent_slug>/<slug>/',
                 include([
                     path('',
-                         views.SubCategoryDetail.as_view(),
+                         foo.SubCategoryDetail.as_view(),
                          name='subcategory-detail'),
                     path('page<int:page>/',
-                         views.SubCategoryDetail.as_view(),
+                         foo.SubCategoryDetail.as_view(),
                          name='subcategory-detail'),
                 ])),
         ])),
     path('product/<slug>/',
          views.ProductDetail.as_view(),
          name='product-detail'),
-]
-
-from .views import foo  # noqa
-urlpatterns += [
-    path(
-        'foo/',
-        include([
-            path(
-                '<slug>/',
-                include([
-                    path('', foo.FilterView.as_view(), name='foo-category'),
-                    path('page<int:page>/',
-                         foo.FilterView.as_view(),
-                         name='foo-category'),
-                ])),
-            path(
-                '<parent_slug>/<slug>/',
-                include([
-                    path('',
-                         foo.SubCategoryView.as_view(),
-                         name='foo-sub-category'),
-                    path('page<int:page>/',
-                         foo.SubCategoryView.as_view(),
-                         name='foo-sub-category'),
-                ])),
-        ])),
 ]

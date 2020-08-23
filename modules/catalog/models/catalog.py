@@ -128,21 +128,21 @@ class Category(MPTTModel, CategoryBase, SEOModel):
     class Meta(CategoryBase.Meta):
         pass
 
+    def get_absolute_url(self):
+        if self.level == 2:
+            return reverse_lazy('subcategory-detail',
+                                args=[self.parent.slug, self.slug])
+        return reverse_lazy('category-detail', args=[self.slug])
+
+    def get_children_not_empty(self):
+        return self.children.filter(pk__in=Product.categories.through.objects.
+                                    values_list('category_id', flat=True))
+
     def get_products(self):
         """Return products from all nested categories."""
         descendants = self.get_descendants(include_self=True)
 
         return Product.objects.filter(categories__in=descendants)
-
-    def get_absolute_url(self):
-        if self.level == 2:
-            url = '{}?filter-category={}'.format(
-                reverse_lazy(
-                    'subcategory-detail',
-                    args=[str(self.parent.slug), str(self.slug)]
-                ),
-                self.pk)
-            return url
 
         return reverse_lazy('category-detail', args=[str(self.slug)])
 
@@ -217,7 +217,8 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
     content = TinyMCEModelField('Описание', blank=True)
     sort = models.PositiveSmallIntegerField('Порядок', default=0)
     short_description = models.TextField('Краткое описание',
-                                         blank=True, null=True)
+                                         blank=True,
+                                         null=True)
 
     class Meta(ProductBase.Meta):
         ordering = ('sort', 'name', 'price')

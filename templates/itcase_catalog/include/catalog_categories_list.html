@@ -11,7 +11,7 @@
                         <img src="{{ category.image.url }}" class="catalog-group__inner-list-link-image" />
                         <span class="catalog-group__inner-list-link-text">{{ category }}</span>
                     </a>
-                    {% with subcategories=category.children.all %}
+                    {% with subcategories=category.get_children_not_empty %}
                         {% if subcategories.exists %}
                             <ul class="catalog-group__inner-nested-list">
                                 {% for subcategory in subcategories %}
