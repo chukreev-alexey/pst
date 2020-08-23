@@ -5,6 +5,9 @@
   @media (--warning) {
     padding: 0 !important;
   }
+  @media (--mobile) {
+    flex: initial;
+  }
   &__inner {
     max-width: var(--max);
     padding: 0 32px;

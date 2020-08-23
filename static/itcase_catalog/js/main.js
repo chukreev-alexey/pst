@@ -4,6 +4,7 @@
 
 require('./catalogGroups')
 require('./catalogSort')
+require('./catalogFilterPopup')
 require('./itemGallery')
 require('./popupMenu')
 require('./productDetail/contentTabs')
@@ -130,6 +131,7 @@ if (typeof ItcaseFilterClass !== 'undefined') {
     dropPagination: true,
     productListClass: 'catalog-list',
     sortBlockClass: 'catalog-sort',
+    filterClearButtonClass: 'catalog-filter__clear',
     sortItemClass: ['catalog-sort__group-item', 'catalog-sort-dropdown__item'],
     contentRequestCB: initializeRangeSliders,
   })

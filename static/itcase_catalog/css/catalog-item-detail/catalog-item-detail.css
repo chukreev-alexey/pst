@@ -1,4 +1,5 @@
 .catalog-item-detail {
+  width: 100%;
   margin: 0 30px 70px 0;
   box-sizing: border-box;
   @media (--mobile), (--tablet) {
@@ -15,14 +16,12 @@
   &__left {
     width: 400px;
     @media (--mobile) {
-      width: 100%;
+      width: auto;
     }
     ^&__gallery {
       width: 100%;
       position: relative;
-      @media (--mobile) {
-        margin: 0 20px;
-      }
+      box-sizing: border-box;
     }
   }
   &__right {
@@ -42,38 +41,35 @@
     flex-flow: row wrap;
     align-items: center;
     @media (--mobile) {
-      background: var(--color-primary);
       margin: 0;
-      justify-content: center;
+      display: block;
     }
   }
   &__price {
     margin: 0 24px;
     @mixin font bold, 24px, 32px, 24px, 32px, var(--font-title-secondary);
     @media (--mobile) {
+      width: 100%;
       color: var(--color-primary-text);
+      text-align: center;
+      background: var(--color-primary);
+      padding: 12px 0;
+      margin: 0;
     }
   }
   &__button {
     width: 100%;
-    & .button {
+    &.button {
       max-width: 180px;
       background: none;
       margin: 24px 0 0 0;
-      &::after {
-        @media (--mobile) {
-          width: 52px;
-          height: 52px;
-          background: url('./../img/icon/add_to_cart_white.svg') no-repeat 50% 50%;
-          border-radius: 50%;
-          content: '';
-          display: inline-block;
-        }
+      @media (--mobile) {
+        max-width: none;
+        margin: 0;
+        border-radius: 0;
       }
-      &__text {
-        @media (--mobile) {
-          display: none;
-        }
+      &::after {
+        display: none;
       }
     }
   }
@@ -222,6 +218,9 @@
         }
       }
       ^&-wrapper {
+        @media (--mobile) {
+          padding: 0 0 0 16px;
+        }
         &_type_column {
           columns: 2 180px;
         }
@@ -261,6 +260,9 @@
           color: var(--color-surface-text);
           padding: 0 0 0 24px;
           @mixin font normal, 16px, 16px, 18px, 24px, var(--font-title-secondary);
+          @media (--mobile) {
+            padding: 0 0 0 16px;
+          }
           &::before {
             width: 8px;
             height: 8px;
@@ -319,8 +321,13 @@
     }
     &-content {
       padding: 16px 0 0 16px;
+      position: relative;
+      overflow: hidden;
       display: none;
       box-sizing: border-box;
+      @media (--mobile) {
+        padding: 24px 16px 0 16px;
+      }
       &_state_active {
         display: block;
       }

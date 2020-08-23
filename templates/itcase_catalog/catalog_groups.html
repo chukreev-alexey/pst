@@ -55,13 +55,13 @@
             {% endif %}
 
             {% if category.content %}
-                <div class="content">
+                <div class="content catalog-content">
                     {% render_content category.content %}
                 </div>
             {% endif %}
 
             {% if category.sections.exists %}
-                <div class="content">
+                <div class="content catalog-content">
                     {% for section in category.sections.all %}
                         {% if section.show %}
                             {{ section.name }}

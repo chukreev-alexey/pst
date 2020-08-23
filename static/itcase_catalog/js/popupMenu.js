@@ -1,5 +1,7 @@
 'use strict'
 
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+
 class CatalogPopupMenu {
   constructor() {
     this.$menu = $('.catalog-menu-popup')
@@ -28,6 +30,9 @@ class CatalogPopupMenu {
 
     this.state.locked = true
 
+    disableBodyScroll(document.querySelector('.catalog-menu-popup'))
+    this.$menu.css({ height: $(window).height() - $('.header__wrapper').height() }).scrollTop(0)
+
     if (this.$menu.hasClass(this.showClass) && this.$menu.hasClass(this.hideClass)) {
       this.$menu.removeClass([this.hideClass, this.showClass].join(' ')).off(this.animationEvents)
     }
@@ -48,8 +53,10 @@ class CatalogPopupMenu {
     if (this.state.open) {
       this.timerHide = setTimeout(() => {
         this.$menu.addClass(this.hideClass).on(this.animationEvents, () => {
+          enableBodyScroll(document.querySelector('.catalog-menu-popup'))
           this.$menu
             .removeClass([this.hideClass, this.showClass].join(' '))
+            .removeAttr('style')
             .off(this.animationEvents)
 
           this.state.open = false
@@ -78,9 +85,10 @@ const $menuPopup = $('.catalog-menu__item_type_popup')
 if ($menuPopup.length) {
   $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide)
 
-  // prettier-ignore
   menu.$menu
-    .on('mouseenter', () => { clearTimeout(menu.timerHide) })
+    .on('mouseenter', () => {
+      clearTimeout(menu.timerHide)
+    })
     .on('mouseleave', menu.hide)
 }
 

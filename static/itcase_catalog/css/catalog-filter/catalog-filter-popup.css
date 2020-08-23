@@ -5,12 +5,19 @@
   margin: 25px 0 20px 0;
   position: relative;
   display: none;
-  z-index: 10;
+  z-index: 3;
   @media (--mobile), (--tablet) {
     margin: 0 0 20px 0;
     position: fixed;
     display: block;
     left: 0;
     bottom: 15px;
+  }
+  &_state_active {
+  }
+  &__button.button {
+    min-width: 180px;
+    max-width: 240px;
+    display: inline-block;
   }
 }

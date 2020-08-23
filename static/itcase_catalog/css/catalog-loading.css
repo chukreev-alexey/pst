@@ -1,19 +1,35 @@
 
 .catalog-loading {
   width: 100%;
+  height: 100vh;
+  min-height: 400px;
   text-align: center;
-  margin: 20px 0 0 0;
   position: absolute;
   display: none;
   left: 0;
   top: 0;
   animation-duration: 0.5s;
   animation-fill-mode: both;
+  z-index: 4;
+  &::after {
+    width: 100%;
+    height: 100%;
+    background: var(--color-surface);
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    content: '';
+    opacity: 0.5;
+    z-index: -1;
+  }
   & .sk-three-bounce .sk-child {
     background-color: var(--color-primary);
   }
   &_state_visible {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     animation-name: catalogLoadingFadeIn;
   }
   &_state_hidden {

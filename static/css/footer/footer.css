@@ -2,6 +2,7 @@
   width: 100%;
   background: var(--color-neutral);
   position: relative;
+  z-index: 1;
   &__wrapper {
     max-width: var(--max);
     padding: 32px 32px 48px 32px;

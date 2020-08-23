@@ -6,7 +6,7 @@
   box-sizing: border-box;
   transition: box-shadow 0.15s ease-in-out;
   @media (--mobile) {
-    width: 100%;
+    width: auto;
     margin: 0 8px 16px 8px;
   }
   &:hover {
@@ -173,6 +173,9 @@
       display: block;
       transition: all 0.15s ease-out;
       @mixin font normal, 14px, 24px, 18px, 28px, var(--font-title);
+      @media (--mobile) {
+        font-weight: bold;
+      }
       &:hover {
         color: var(--color-surface-text-hover);
       }
@@ -181,7 +184,7 @@
   &__desc {
     color: var(--color-surface-text);
     padding: 8px 0 0 0;
-    @mixin font normal, 14px, 16px, 14px, 24px, var(--font);
+    @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
   }
   &__price {
     width: 100%;
@@ -191,7 +194,7 @@
       color: var(--color-accent);
       margin: 0 10px 10px 0;
       display: inline-block;
-      @mixin font bold, 14px, 24px, 18px, 24px, var(--font-title-secondary);
+      @mixin font bold, 18px, 24px, 18px, 24px, var(--font-title-secondary);
     }
     &-old {
       color: var(--color-surface-text);
@@ -231,6 +234,15 @@
     @media (--mobile) {
       margin: -48px 0 0 0;
     }
+    &:hover {
+      &::after {
+        border: solid 1px var(--color-primary-border);
+        background: url('./../img/icon/add_to_cart_red.svg') no-repeat 50% 50%;
+      }
+      ^&-text {
+        opacity: 1;
+      }
+    }
     &::after {
       width: 52px;
       height: 52px;
@@ -239,6 +251,12 @@
       border-radius: 50%;
       content: '';
       display: inline-block;
+      transition: all 0.15s ease-out;
+      @media (--mobile) {
+        width: 42px;
+        height: 42px;
+        background-size: auto 20px;
+      }
     }
     &_state_added {
       animation-name: catalogItemButtonAdded;
@@ -249,7 +267,7 @@
     &-loader {
       width: 100%;
       height: 100%;
-      background: var(--color-blue);
+      background: red;
       border-radius: 30px;
       position: absolute;
       visibility: hidden;
@@ -280,7 +298,15 @@
       }
     }
     &-text {
-      display: none;
+      opacity: 0;
+      position: absolute;
+      right: 64px;
+      top: 50%;
+      transition: all 0.15s ease-out;
+      transform: translate(0, -50%);
+      color: var(--color-primary);
+      @mixin font normal, 16px, 20px, 20px, 24px, var(--font-title-secondary);
+      z-index: 2;
     }
   }
 }
@@ -290,13 +316,13 @@
     transform: translate(0, 0);
   }
   to {
-    transform: translate(50px, 0);
+    transform: translate(20px, 0);
   }
 }
 
 @keyframes catalogItemButtonRemoved {
   from {
-    transform: translate(50px, 0);
+    transform: translate(20px, 0);
   }
   to {
     transform: translate(0, 0);

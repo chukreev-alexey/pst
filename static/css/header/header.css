@@ -9,13 +9,16 @@
     position: relative;
     box-sizing: border-box;
     z-index: 1000;
-    transition: all 0.2s cubic-bezier(0.21, 1.03, 0.7, 1);
     &_state_show,
     &_state_hide {
       position: fixed;
       left: 0;
       top: 0;
       right: 0;
+      box-shadow: 0 8px 12px rgba(0,0,0,.15);
+      @media (--mobile) {
+        border-bottom: solid 1px var(--color-neutral-border);
+      }
     }
     ^&__inner {
       width: 100%;

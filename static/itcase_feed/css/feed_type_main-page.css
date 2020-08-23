@@ -1,6 +1,6 @@
 .feed {
   &&_type_main-page {
-    margin: 24px 0 40px 0;
+    margin: 24px 0 0 0;
     & .feed {
       &-title {
         color: var(--color-neutral-text);

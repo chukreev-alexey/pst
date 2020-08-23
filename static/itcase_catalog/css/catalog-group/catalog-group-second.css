@@ -4,10 +4,16 @@
   padding: 24px;
   margin: 0 0 24px 0;
   position: relative;
+  @media (--mobile) {
+    padding: 0;
+  }
   &__wrapper {
     max-width: var(--max);
     padding: 0 32px;
     margin: 0 auto;
+    @media (--mobile) {
+      padding: 16px 20px;
+    }
   }
   &__list {
     padding: 0;
@@ -18,6 +24,9 @@
     &-item {
       width: 30%;
       margin: 0 0 12px 0;
+      @media (--mobile) {
+        width: 50%;
+      }
       &-link {
         color: var(--color-neutral-text);
         text-decoration: none;
