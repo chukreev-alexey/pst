@@ -4,78 +4,49 @@
     <form method="post" accept-charset="utf-8" class="catalog-filter" {% if site_version == 'mobile' %} id="catalogFilter" {% endif %}>
         {% csrf_token %}
 
-        {% if sort_group %}
+        {% if filter_data_misc %}
             <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open" >
-                {% with hit_key='filter-in_hit' action_key='filter-in_action' recommended_key='filter-in_recommended' %}
-                    <div class="catalog-filter-group__list">
+                <div class="catalog-filter-group__list">
+                    {% for pk, item in filter_data_misc.items %}
                         <div class="catalog-filter-group__list-item
-                                    {% if hit_key in query %} catalog-filter-group__list-item_state_checked{% endif %}
-                                    {% if in_hit_disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                                    {% if item.selected %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if not item.available %} catalog-filter-group__list-item_state_disabled{% endif %}">
                             <label class="catalog-filter-group__list-item-label">
                                 <input class="catalog-filter-group__list-item-checkbox"
                                        type="checkbox"
-                                       name="{{ hit_key }}"
-                                       value="1"
-                                       {% if in_hit_disabled %}disabled="disabled"{% endif %}
-                                       {% if hit_key in query %}checked="checked"{% endif %} />
+                                       name="{{ filter_key_misc }}"
+                                       value="{{ pk }}"
+                                       {% if item.selected %}checked="checked"{% endif %}
+                                       {% if not item.available %}disabled="disabled"{% endif %} />
                                 <span class="catalog-filter-group__list-item-text">
-                                    Хит продаж
+                                    {% if pk == 'in_hit' %}Хит продаж{% endif %}
+                                    {% if pk == 'in_action' %}Распродажа{% endif %}
+                                    {% if pk == 'in_recommended' %}Рекомендуем{% endif %}
+                                    ({{ item.products|length }})
                                 </span>
                             </label>
                         </div>
-
-                        <div class="catalog-filter-group__list-item
-                                    {% if action_key in query %} catalog-filter-group__list-item_state_checked{% endif %}
-                                    {% if in_action_disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
-                            <label class="catalog-filter-group__list-item-label">
-                                <input class="catalog-filter-group__list-item-checkbox"
-                                       type="checkbox"
-                                       name="{{ action_key }}"
-                                       value="1"
-                                       {% if in_action_disabled %}disabled="disabled"{% endif %}
-                                       {% if action_key in query %}checked="checked"{% endif %} />
-                                <span class="catalog-filter-group__list-item-text">
-                                    Распродажа
-                                </span>
-                            </label>
-                        </div>
-
-                        <div class="catalog-filter-group__list-item
-                                    {% if recommended_key in query %} catalog-filter-group__list-item_state_checked{% endif %}
-                                    {% if in_recommended_disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
-                            <label class="catalog-filter-group__list-item-label">
-                                <input class="catalog-filter-group__list-item-checkbox"
-                                       type="checkbox"
-                                       name="{{ recommended_key }}"
-                                       value="1"
-                                       {% if in_recommended_disabled %}disabled="disabled"{% endif %}
-                                       {% if recommended_key in query %}checked="checked"{% endif %} />
-                                <span class="catalog-filter-group__list-item-text">
-                                    Рекомендуем
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                {% endwith %}
+                    {% endfor %}
+                </div>
             </div>
         {% endif %}
 
-        {% if filter_category %}
+        {% if filter_data_category %}
             <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open" data-group-key="category">
                 <div class="catalog-filter-group__list">
-                    {% for category in filter_category %}
+                    {% for pk, categ in filter_data_category.items %}
                         <div class="catalog-filter-group__list-item
-                                    {% if category.checked %} catalog-filter-group__list-item_state_checked{% endif %}
-                                    {% if category.disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                                    {% if categ.selected %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if not categ.available %} catalog-filter-group__list-item_state_disabled{% endif %}">
                             <label class="catalog-filter-group__list-item-label">
                                 <input class="catalog-filter-group__list-item-checkbox"
                                        type="checkbox"
-                                       name="filter-category"
-                                       value="{{ category.pk }}"
-                                       {% if category.disabled %}disabled="disabled"{% endif %}
-                                       {% if category.checked %}checked="checked"{% endif %} />
+                                       name="{{ filter_key_category }}"
+                                       value="{{ pk }}"
+                                       {% if categ.selected %}checked="checked"{% endif %}
+                                       {% if not categ.available %}disabled="disabled"{% endif %} />
                                 <span class="catalog-filter-group__list-item-text">
-                                    {{ category.name }} ({{ category.items_count }})
+                                    {{ categ.name }} ({{ categ.products|length }})
                                 </span>
                             </label>
                         </div>
@@ -112,27 +83,39 @@
             <input type="hidden" name="search" value="{{ search }}" />
         {% endif %}
 
-        {% if filter_brand %}
+        {% if filter_data_brand %}
             <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="brand">
                 <div class="catalog-filter-group__title">Бренды</div>
                 <div class="catalog-filter-group__list">
-                    {% for brand in filter_brand %}
+                    {% for pk, brand in filter_data_brand.items %}
                         <div class="catalog-filter-group__list-item
-                                    {% if brand.checked %} catalog-filter-group__list-item_state_checked{% endif %}
-                                    {% if brand.disabled %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                                    {% if brand.selected %} catalog-filter-group__list-item_state_checked{% endif %}
+                                    {% if not brand.available %} catalog-filter-group__list-item_state_disabled{% endif %}">
                             <label class="catalog-filter-group__list-item-label">
                                 <input class="catalog-filter-group__list-item-checkbox"
                                        type="checkbox"
-                                       name="filter-brand"
-                                       value="{{ brand.pk }}"
-                                       {% if brand.disabled %}disabled="disabled"{% endif %}
-                                       {% if brand.checked %}checked="checked"{% endif %} />
+                                       name="{{ filter_key_brand }}"
+                                       value="{{ pk }}"
+                                       {% if brand.selected %}checked="checked"{% endif %}
+                                       {% if not brand.available %}disabled="disabled"{% endif %} />
                                 <span class="catalog-filter-group__list-item-text">
-                                    {{ brand.name }} ({{ brand.items_count }})
+                                    {{ brand.name }} ({{ brand.products|length }})
                                 </span>
                             </label>
                         </div>
                     {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if filter_data_price %}
+            <div class="catalog-filter-group">
+                <div class="catalog-filter-group__title">Стоимость</div>
+                <div class="catalog-filter-group__range">
+                    <input class="catalog-filter-group__range-item" type="text" name="{{ filter_key_price }}_min" value="{{ filter_data_price.min }}" data-price-min="true" />
+                    <div class="catalog-filter-group__range-separator">&nbsp;</div>
+                    <input class="catalog-filter-group__range-item" type="text" name="{{ filter_key_price }}_max" value="{{ filter_data_price.max }}" data-price-max="true" />
+                    <div data-range-slider="true"></div>
                 </div>
             </div>
         {% endif %}
@@ -149,24 +132,24 @@
             </div>
         {% endif %}
 
-        {% if other_fields %}
-            {% for field, parametres in other_fields.items %}
-                <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="{{ field.query_name }}">
-                    <div class="catalog-filter-group__title">{{ field.name }}</div>
+        {% if filter_data_param %}
+            {% for group in filter_data_param.values %}
+                <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="param">
+                    <div class="catalog-filter-group__title">{{ group.name }}</div>
                     <div class="catalog-filter-group__list">
-                        {% for parametr, parametr_data in parametres.items %}
+                        {% for pk, param in group.values.items %}
                             <div class="catalog-filter-group__list-item
-                                        {% if parametr_data.checked %} catalog-filter-group__list-item_state_checked{% endif %}
-                                        {% if not parametr_data.items_count %} catalog-filter-group__list-item_state_disabled{% endif %}">
+                                        {% if param.selected %} catalog-filter-group__list-item_state_checked{% endif %}
+                                        {% if not param.available %} catalog-filter-group__list-item_state_disabled{% endif %}">
                                 <label class="catalog-filter-group__list-item-label">
                                     <input class="catalog-filter-group__list-item-checkbox"
                                            type="checkbox"
-                                           name="filter-{{ field.query_name }}"
-                                           value="{{ parametr.pk }}"
-                                           {% if not parametr_data.items_count %}disabled="disabled"{% endif %}
-                                           {% if parametr_data.checked %}checked="checked"{% endif %} />
+                                           name="{{ filter_key_param }}"
+                                           value="{{ pk }}"
+                                           {% if param.selected %}checked="checked"{% endif %}
+                                           {% if not param.available %}disabled="disabled"{% endif %} />
                                     <span class="catalog-filter-group__list-item-text">
-                                        {{ parametr.value }}({{ parametr_data.items_count }})
+                                        {{ param.name }} ({{ param.products|length }})
                                     </span>
                                 </label>
                             </div>

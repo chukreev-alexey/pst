@@ -17,6 +17,7 @@
 from django.urls import include, path
 
 from . import views
+from .views import foo  # noqa
 
 urlpatterns = [
     path('catalog/', views.CatalogIndexView.as_view(), name='catalog-index'),
@@ -27,20 +28,20 @@ urlpatterns = [
                 '<slug>/',
                 include([
                     path('',
-                         views.CategoryDetail.as_view(),
+                         foo.CategoryDetail.as_view(),
                          name='category-detail'),
                     path('page<int:page>/',
-                         views.CategoryDetail.as_view(),
+                         foo.CategoryDetail.as_view(),
                          name='category-detail'),
                 ])),
             path(
                 '<parent_slug>/<slug>/',
                 include([
                     path('',
-                         views.SubCategoryDetail.as_view(),
+                         foo.SubCategoryDetail.as_view(),
                          name='subcategory-detail'),
                     path('page<int:page>/',
-                         views.SubCategoryDetail.as_view(),
+                         foo.SubCategoryDetail.as_view(),
                          name='subcategory-detail'),
                 ])),
         ])),

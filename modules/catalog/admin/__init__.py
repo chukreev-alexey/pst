@@ -192,7 +192,7 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
 
     list_display = ('name', 'get_categories', 'sort')
     list_editable = ['sort']
-    list_filter = ('border', 'categories', 'in_action', 'in_hit',
+    list_filter = ('border', 'brand', 'categories', 'in_action', 'in_hit',
                    'in_recommended')
 
     prepopulated_fields = {'slug': ['name']}
