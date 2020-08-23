@@ -54,9 +54,23 @@ urlpatterns += [
     path(
         'foo/',
         include([
-            path('filter/<category>/', foo.FilterView.as_view()),
-            path('products/page<int:page>/',
-                 foo.ProductsListView.as_view(),
-                 name='foo-products'),
+            path(
+                '<slug>/',
+                include([
+                    path('', foo.FilterView.as_view(), name='foo-category'),
+                    path('page<int:page>/',
+                         foo.FilterView.as_view(),
+                         name='foo-category'),
+                ])),
+            path(
+                '<parent_slug>/<slug>/',
+                include([
+                    path('',
+                         foo.SubCategoryView.as_view(),
+                         name='foo-sub-category'),
+                    path('page<int:page>/',
+                         foo.SubCategoryView.as_view(),
+                         name='foo-sub-category'),
+                ])),
         ])),
 ]
