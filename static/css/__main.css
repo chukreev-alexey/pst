@@ -1481,7 +1481,7 @@ sans-serif;
       }
 
 .cookies-warning__inner .cookies-warning__text a:hover {
-          color: #f4a404;
+          color: #d82318;
         }
 
 .cookies-warning__inner .cookies-warning__button {
@@ -1791,7 +1791,7 @@ sans-serif;
 }
 
 .footer-menu__item-link:hover {
-        color: #f4a404;
+        color: #d82318;
       }
 
 /* stylelint-disable custom-property-empty-line-before */
@@ -2022,6 +2022,7 @@ sans-serif;
       left: 0;
       top: 0;
       right: 0;
+      box-shadow: 0 8px 12px rgba(0,0,0,.15);
     }
 
 @media (min-width: 15em)
@@ -2423,7 +2424,7 @@ sans-serif;
 }
 
 .main-menu-list__item-link:hover {
-          color: #f4a404;
+          color: #d82318;
         }
 
 /* stylelint-disable custom-property-empty-line-before */

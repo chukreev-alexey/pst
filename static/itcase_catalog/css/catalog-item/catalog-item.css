@@ -234,6 +234,15 @@
     @media (--mobile) {
       margin: -48px 0 0 0;
     }
+    &:hover {
+      &::after {
+        border: solid 1px var(--color-primary-border);
+        background: url('./../img/icon/add_to_cart_red.svg') no-repeat 50% 50%;
+      }
+      ^&-text {
+        opacity: 1;
+      }
+    }
     &::after {
       width: 52px;
       height: 52px;
@@ -242,6 +251,7 @@
       border-radius: 50%;
       content: '';
       display: inline-block;
+      transition: all 0.15s ease-out;
       @media (--mobile) {
         width: 42px;
         height: 42px;
@@ -257,7 +267,7 @@
     &-loader {
       width: 100%;
       height: 100%;
-      background: var(--color-blue);
+      background: red;
       border-radius: 30px;
       position: absolute;
       visibility: hidden;
@@ -288,7 +298,15 @@
       }
     }
     &-text {
-      display: none;
+      opacity: 0;
+      position: absolute;
+      right: 64px;
+      top: 50%;
+      transition: all 0.15s ease-out;
+      transform: translate(0, -50%);
+      color: var(--color-primary);
+      @mixin font normal, 16px, 20px, 20px, 24px, var(--font-title-secondary);
+      z-index: 2;
     }
   }
 }
@@ -298,13 +316,13 @@
     transform: translate(0, 0);
   }
   to {
-    transform: translate(50px, 0);
+    transform: translate(20px, 0);
   }
 }
 
 @keyframes catalogItemButtonRemoved {
   from {
-    transform: translate(50px, 0);
+    transform: translate(20px, 0);
   }
   to {
     transform: translate(0, 0);
