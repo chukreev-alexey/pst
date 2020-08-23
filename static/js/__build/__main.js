@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d518a4973c1480434fa4";
+/******/ 	var hotCurrentHash = "dc9db5341924e68caa7b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11567,7 +11567,12 @@ const getProductParametrsData = () => {
 
 
 if (typeof SearchClass !== 'undefined') {
-  global.ItcaseSearch = new SearchClass();
+  global.ItcaseSearch = new SearchClass({
+    quickSearchOpenClass: 'search__wrapper',
+    quickSearchPopupClass: 'search_type_quick',
+    quickSearchVisibleClass: 'search_type_quick_state_visible',
+    quickSearchHideClass: 'search_type_quick_state_hidden'
+  });
 }
 
 if (true) {
