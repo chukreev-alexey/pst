@@ -338,6 +338,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         self.queryset = self.queryset.select_related('brand').prefetch_related(
             'categories')
 
+        self.queryset = self.get_sorted_queryset(self.queryset, self.request)
+
         if self.object.other_template:
             return self.queryset
 
@@ -371,7 +373,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                                        product_pks)
                 else:
                     count_products(list(_filter.values()), product_pks)
-        queryset = self.get_sorted_queryset(queryset, self.request)
+
         return queryset
 
     def get_sort_data(self, queryset):
