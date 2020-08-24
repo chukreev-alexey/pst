@@ -23,7 +23,7 @@ from itcase_catalog.conf import get_template_name
 from itcase_common.mixins import SortMixin
 from itcase_paginator.pagination import SlicePaginatorMixin
 
-from ..models import Category, Price, Product, ProductParametr
+from ..models import Category, Price, Product
 
 
 class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
@@ -154,7 +154,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         data = {}
         filtered_products = []
 
-        for product in self.queryset.select_related('brand'):
+        for product in self.queryset:
             brand = product.brand
             if brand is None:
                 continue
@@ -251,32 +251,30 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         filtered_products = []
         scopes = {}
 
-        # фильтр по параметрам из комплектаций
-        price_qs = Price.objects.filter(product__in=queryset, show=True)
-        for price in price_qs.prefetch_related('price_parametres').iterator():
-            scope_pks = list(
-                price.price_parametres.values_list('parametr_value',
-                                                   flat=True))
-            scope_pks += list(
-                price.product.parametres.values_list('pk', flat=True))
-            scope_pks = list(map(str, scope_pks))
+        price_qs = Price.objects.filter(
+            product__in=queryset,
+            show=True).select_related('product').prefetch_related(
+                'price_parametres__parametr_value__parametr',
+                'product__parametres__parametr')
+        for price in price_qs:
+            params_qs = []
+            scope_pks = []
+            # параметры из комплектаций
+            for price_parametr in price.price_parametres.all():
+                params_qs.append(price_parametr.parametr_value)
+                scope_pks.append(str(price_parametr.parametr_value.pk))
+
+            # параметры из поля "Параметры" у товара
+            for parametr in price.product.parametres.all():
+                params_qs.append(parametr)
+                scope_pks.append(str(parametr.pk))
+
             product_id = price.product_id
             scopes[product_id] = scope_pks
             if all(item in scope_pks for item in query):
                 filtered_products.append(price.product.pk)
 
-            params_qs = ProductParametr.objects.filter(pk__in=scope_pks)
             data = get_data(data, params_qs, scope_pks, query, product_id)
-
-        # фильтр по параметрам из поля "Параметры"
-        for product in queryset.prefetch_related('parametres'):
-            params_qs = product.parametres.all()
-            scope_pks = scopes.get(
-                product.pk, list(params_qs.values_list('pk', flat=True)))
-            scope_pks = list(map(str, scope_pks))
-            if all(item in scope_pks for item in query):
-                filtered_products.append(product.pk)
-            data = get_data(data, params_qs, scope_pks, query, product.pk)
 
         data = {
             k: v
@@ -336,6 +334,12 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         if not self.queryset:
             self.queryset = self.object.products.all()
+
+        self.queryset = self.queryset.select_related('brand').prefetch_related(
+            'categories')
+
+        if self.object.other_template:
+            return self.queryset
 
         queryset = self.queryset
 
@@ -474,7 +478,7 @@ class SubCategoryDetail(CategoryDetail):
         data = {}
         filtered_products = []
 
-        for product in self.queryset.prefetch_related('categories'):
+        for product in self.queryset:
             categories_qs = product.categories.filter(
                 level__gte=self.object.level)
             for category in categories_qs:
