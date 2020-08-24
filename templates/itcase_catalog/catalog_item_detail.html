@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load fb_versions l10n static %}
+{% load fb_versions l10n static catalog_tags %}
 
 {% block title %}
     {{ product.name }}
@@ -11,6 +11,9 @@
     <div class="wrapper">
         <div class="wrapper__inner">
             <div class="nav">
+                <div class="nav__item">
+                    <a href="{% url 'catalog-index' %}" class="nav__item-link">Каталог</a>
+                </div>
                 {% for crumb in catalog_breadcrumbs %}
                     <div class="nav__item">
                         <a href="{{ crumb.get_absolute_url }}"

@@ -46,7 +46,8 @@
                                        {% if categ.selected %}checked="checked"{% endif %}
                                        {% if not categ.available %}disabled="disabled"{% endif %} />
                                 <span class="catalog-filter-group__list-item-text">
-                                    {{ categ.name }} ({{ categ.products|length }})
+                                    {{ categ.name }}
+                                    <span class="catalog-filter-group__list-item-count">{{ categ.products|length }}</span>
                                 </span>
                             </label>
                         </div>
@@ -70,7 +71,8 @@
                                        {% if category.disabled %}disabled="disabled"{% endif %}
                                        {% if category.checked %}checked="checked"{% endif %} />
                                 <span class="catalog-filter-group__list-item-text">
-                                    {{ category.name }} ({{ category.items_count }})
+                                    {{ category.name }}
+                                    <span class="catalog-filter-group__list-item-count">{{ category.items_count }}</span>
                                 </span>
                             </label>
                         </div>
@@ -99,7 +101,8 @@
                                        {% if brand.selected %}checked="checked"{% endif %}
                                        {% if not brand.available %}disabled="disabled"{% endif %} />
                                 <span class="catalog-filter-group__list-item-text">
-                                    {{ brand.name }} ({{ brand.products|length }})
+                                    {{ brand.name }}
+                                    <span class="catalog-filter-group__list-item-count">{{ brand.products|length }}</span>
                                 </span>
                             </label>
                         </div>
@@ -149,7 +152,8 @@
                                            {% if param.selected %}checked="checked"{% endif %}
                                            {% if not param.available %}disabled="disabled"{% endif %} />
                                     <span class="catalog-filter-group__list-item-text">
-                                        {{ param.name }} ({{ param.products|length }})
+                                        {{ param.name }}
+                                        <span class="catalog-filter-group__list-item-count">{{ param.products|length }}</span>
                                     </span>
                                 </label>
                             </div>

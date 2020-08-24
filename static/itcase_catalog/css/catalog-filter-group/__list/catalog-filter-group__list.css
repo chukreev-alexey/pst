@@ -81,5 +81,10 @@
       display: block;
       @mixin font normal, 16px, 16px, 22px, 22px, var(--font);
     }
+    &-count {
+      color: var(--color-neutral-text);
+      opacity: 0.2;
+      padding: 0 0 0 4px;
+    }
   }
 }

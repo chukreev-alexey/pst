@@ -23,6 +23,7 @@
     width: 100%;
     position: relative;
     @mixin font 500, 18px, 42px, 24px, 48px, var(--font-title-secondary);
+    margin: 0 0 24px 0;
     @media (--mobile) {
       padding: 0 20px;
     }
@@ -30,6 +31,7 @@
   &__item {
     width: calc(25% - 32px);
     flex: 0 0 auto;
+    margin: 0 32px 32px 0;
     @media (--mobile), (--tablet) {
       width: auto;
       margin: 0 15px 20px 15px;

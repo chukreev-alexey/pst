@@ -1,7 +1,9 @@
 {% load static %}
 
 <div class="catalog-group">
-    <div class="catalog-group__title">{{ category.name }}</div>
+    {% comment %}
+        <div class="catalog-group__title">{{ category.name }}</div>
+    {% endcomment %}
     <div class="catalog-group__inner">
         {% include './catalog_loading.html' %}
         <ul class="catalog-group__inner-list">

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load itcase_common l10n rotator_tags %}
+{% load itcase_common l10n rotator_tags catalog_tags %}
 
 {% block title %}
     {% for crumb in catalog_breadcrumbs %}
@@ -13,6 +13,9 @@
         <div class="wrapper">
             <div class="wrapper__inner">
                 <div class="nav">
+                   <div class="nav__item">
+                        <a href="{% url 'catalog-index' %}" class="nav__item-link">Каталог</a>
+                    </div>
                     {% for crumb in catalog_breadcrumbs %}
                         <div class="nav__item">
                             <a href="{{ crumb.get_absolute_url }}"

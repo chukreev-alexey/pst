@@ -1,7 +1,8 @@
 .catalog-filter-group__range {
+  margin: 0 16px;
   &-item {
-    width: 70px;
-    font: 14px/14px var(--font);
+    width: 84px;
+    @mixin font 500, 14px, 18px, 14px, 18px, var(--font-title-secondary);
     color: var(--color-neutral-text);
     text-align: center;
     padding: 6px 0 4px 0;
@@ -9,10 +10,10 @@
     display: inline-block;
   }
   &-separator {
-    width: 14px;
+    width: 18px;
     height: 2px;
+    margin: 0 8px;
     background: var(--color-neutral-text);
-    margin: 0 5px;
     position: relative;
     display: inline-block;
     top: 9px;

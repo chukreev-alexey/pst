@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load itcase_common l10n rotator_tags %}
+{% load itcase_common l10n rotator_tags catalog_tags %}
 
 {% block title %}
     {% if category.seo_title %}
@@ -21,25 +21,27 @@
 {% endblock %}
 
 {% block content %}
-    {% if not view.hide_products %}
-        <div class="wrapper">
-            <div class="wrapper__inner">
-                <div class="nav">
-                    {% for crumb in catalog_breadcrumbs %}
-                        <div class="nav__item">
-                            <a href="{{ crumb.get_absolute_url }}"
-                               class="nav__item-link">{{ crumb.name }}</a>
-                        </div>
-                    {% endfor %}
-                    {% if category %}
-                        <div class="nav__item nav__item_state_current">
-                            <div class="nav__item-text">{{ category }}</div>
-                        </div>
-                    {% endif %}
+    <div class="wrapper">
+        <div class="wrapper__inner">
+            <div class="nav">
+                <div class="nav__item">
+                    <a href="{% url 'catalog-index' %}" class="nav__item-link">Каталог</a>
                 </div>
+                {% for crumb in catalog_breadcrumbs %}
+                    <div class="nav__item {% if forloop.last %} nav__item_state_hidden {% endif %}">
+                        <a href="{{ crumb.get_absolute_url }}"
+                           class="nav__item-link">{{ crumb.name }}</a>
+                    </div>
+                {% endfor %}
+
+                {% if category %}
+                    <div class="nav__item nav__item_state_current">
+                        <div class="nav__item-text">{{ category }}</div>
+                    </div>
+                {% endif %}
             </div>
         </div>
-    {% endif %}
+    </div>
 
     {% with additional_class='rotator_type_catalog' %}
         {% category_rotator category %}

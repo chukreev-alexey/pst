@@ -63,6 +63,10 @@ sans-serif;
   }
 }
 
+.nav__item_state_hidden {
+      display: none;
+    }
+
 .nav__item-link {
       color: #000;
       font-size: calc(0.875rem + 0.125 * ((100vw - 20rem) / 140));
@@ -357,7 +361,7 @@ sans-serif;
 }
 
 .site-menu-list__item-group-link:hover {
-          color: #f4a404;
+          color: #d82318;
         }
 
 .site-menu-list__item-group-link_state_active {
@@ -424,7 +428,7 @@ sans-serif;
         }
 
 .site-menu-list__item-link-text:hover {
-          color: #f4a404;
+          color: #d82318;
         }
 
 .site-menu-list__item-link-text_state_active {
@@ -904,7 +908,7 @@ sans-serif;
       }
 
 .page-menu-list__item-link:hover {
-          color: #f4a404;
+          color: #d82318;
         }
 
 .page-menu-list__item-link_state_current {
