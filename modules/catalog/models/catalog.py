@@ -278,7 +278,7 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
 
     def get_prices_parametres(self):
         prices_qs = self.prices.filter(
-            price_parametres__isnull=False).distinct()
+            price_parametres__isnull=False, show=True).distinct()
 
         parametres = ProductParametr.objects.filter(
             separated_product_parametres__price__in=prices_qs).order_by(
