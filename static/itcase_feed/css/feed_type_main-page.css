@@ -5,7 +5,7 @@
       &-title {
         color: var(--color-neutral-text);
         @mixin font 500, 18px, 42px, 24px, 48px, var(--font-title-secondary);
-        @media (--mobile) {
+        @media (--mobile), (--tablet) {
           padding: 0 20px;
         }
         &-link {
@@ -15,7 +15,7 @@
       &-list {
         display: flex;
         justify-content: space-between;
-        @media (--mobile) {
+        @media (--mobile), (--tablet) {
           position: relative;
           overflow: scroll;
         }

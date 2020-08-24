@@ -19,6 +19,9 @@
     @media (--mobile) {
       padding: 0;
     }
+    @media (--tablet) {
+      padding: 0 24px;
+    }
     @media (--warning) {
       min-width: 180px;
       &::after {

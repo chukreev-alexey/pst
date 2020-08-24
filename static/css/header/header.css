@@ -32,6 +32,9 @@
       @media (--mobile) {
         padding: 6px 0 0 0;
       }
+      @media (--tablet) {
+        padding: 16px 24px;
+      }
     }
     ^&__hamburger {
       width: 40px;
@@ -41,6 +44,12 @@
       @media (--mobile) {
         margin: 0 16px 0 8px;
         display: block;
+      }
+      @media (--tablet) {
+        position: absolute;
+        display: block;
+        top: 16px;
+        right: 24px;
       }
     }
     ^&__search {
@@ -61,6 +70,9 @@
         margin: -2px 0 0 0;
         order: -3;
         flex-grow: 1;
+      }
+      @media (--tablet) {
+        margin: 0 24px 0 0;
       }
     }
     ^&__menu {
@@ -87,6 +99,9 @@
         padding: 0 16px;
         justify-content: space-between;
         flex-grow: 1;
+      }
+      @media (--tablet) {
+        margin: 14px 0 0 0;
       }
       & p {
         color: var(--color-neutral-text);
@@ -153,6 +168,12 @@
         position: relative;
         overflow: hidden;
         order: -1;
+      }
+      @media (--tablet) {
+        position: absolute;
+        display: block;
+        top: 16px;
+        right: 48px;
       }
     }
   }

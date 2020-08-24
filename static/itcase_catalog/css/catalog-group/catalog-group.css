@@ -31,6 +31,9 @@
       width: 300px;
       position: relative;
       z-index: 2;
+      @media (--tablet) {
+        width: 240px;
+      }
       &-inner {
         margin: 0 32px 0 0;
       }

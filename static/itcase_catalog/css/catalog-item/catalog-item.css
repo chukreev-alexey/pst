@@ -9,6 +9,9 @@
     width: auto;
     margin: 0 8px 16px 8px;
   }
+  @media (--tablet) {
+    width: 100%;
+  }
   &:hover {
     box-shadow: 0 5px 40px -20px var(--color-neutral-shadow);
     @media (--mobile), (--tablet) {
@@ -24,11 +27,18 @@
     @media (--mobile) {
       flex-flow: row nowrap;
     }
+    @media (--tablet) {
+      flex-flow: row nowrap;
+    }
     &-left {
       margin: 0 0 24px 0;
       position: relative;
       @media (--mobile) {
         width: 120px;
+        margin: 0;
+      }
+      @media (--tablet) {
+        width: 160px;
         margin: 0;
       }
     }
@@ -41,6 +51,9 @@
       align-self: flex-start;
       @media (--mobile) {
         margin: 0 0 0 16px;
+      }
+      @media (--tablet) {
+        padding: 0 0 0 40px;
       }
     }
   }
@@ -117,6 +130,9 @@
       justify-content: center;
       align-items: center;
       @media (--mobile) {
+        height: auto;
+      }
+      @media (--tablet) {
         height: auto;
       }
     }
@@ -234,15 +250,6 @@
     @media (--mobile) {
       margin: -48px 0 0 0;
     }
-    &:hover {
-      &::after {
-        border: solid 1px var(--color-primary-border);
-        background: url('./../img/icon/add_to_cart_red.svg') no-repeat 50% 50%;
-      }
-      ^&-text {
-        opacity: 1;
-      }
-    }
     &::after {
       width: 52px;
       height: 52px;
@@ -256,6 +263,15 @@
         width: 42px;
         height: 42px;
         background-size: auto 20px;
+      }
+    }
+    &:hover {
+      &::after {
+        background: url('./../img/icon/add_to_cart_red.svg') no-repeat 50% 50%;
+        border: solid 1px var(--color-primary-border);
+      }
+      ^&-text {
+        opacity: 1;
       }
     }
     &_state_added {
@@ -298,15 +314,15 @@
       }
     }
     &-text {
-      opacity: 0;
-      position: absolute;
-      right: 64px;
-      top: 50%;
-      transition: all 0.15s ease-out;
-      transform: translate(0, -50%);
       color: var(--color-primary);
-      @mixin font normal, 16px, 20px, 20px, 24px, var(--font-title-secondary);
+      position: absolute;
+      top: 50%;
+      right: 64px;
       z-index: 2;
+      transform: translate(0, -50%);
+      transition: all 0.15s ease-out;
+      opacity: 0;
+      @mixin font normal, 16px, 20px, 20px, 24px, var(--font-title-secondary);
     }
   }
 }

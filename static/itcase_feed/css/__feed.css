@@ -43,7 +43,8 @@ sans-serif;
 }
 
 @media (min-width: 15em)
-  and (max-width: 47.999em) {
+  and (max-width: 47.999em), (min-width: 48em)
+  and (max-width: 59.999em) {
 
 .feed.feed_type_main-page .feed-title {
           padding: 0 20px
@@ -60,7 +61,8 @@ sans-serif;
       }
 
 @media (min-width: 15em)
-  and (max-width: 47.999em) {
+  and (max-width: 47.999em), (min-width: 48em)
+  and (max-width: 59.999em) {
 
 .feed.feed_type_main-page .feed-list {
           position: relative;

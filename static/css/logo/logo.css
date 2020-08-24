@@ -6,6 +6,10 @@
     margin: 0 auto;
     overflow: hidden;
   }
+  @media (--tablet) {
+    width: 66px;
+    overflow: hidden;
+  }
   &__link {
     display: block;
     &-image {

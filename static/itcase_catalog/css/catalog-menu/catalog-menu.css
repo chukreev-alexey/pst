@@ -18,6 +18,9 @@
     @media (--mobile) {
       display: none;
     }
+    @media (--tablet) {
+      overflow-y: scroll;
+    }
     &::after {
       width: 48px;
       content: '';

@@ -3,6 +3,9 @@
   @media (--mobile) {
     display: none;
   }
+  @media (--tablet) {
+    display: none;
+  }
   &-list {
     position: relative;
     display: flex;

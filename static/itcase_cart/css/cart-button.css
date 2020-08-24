@@ -9,7 +9,7 @@
   display: block;
   transition: all 0.15s ease-in-out;
   cursor: pointer;
-  @media (--mobile) {
+  @media (--mobile), (--tablet) {
     min-width: 0;
     padding: 0;
     margin: 0;
@@ -23,7 +23,7 @@
     position: relative;
     display: flex;
     @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
-    @media (--mobile) {
+    @media (--mobile), (--tablet) {
       color: var(--color-neutral);
       background: var(--color-neutral);
       display: block;
@@ -36,16 +36,17 @@
       margin: 0 0 0 8px;
       content: '';
       display: block;
-      @media (--mobile) {
+      @media (--mobile), (--tablet) {
         display: none;
       }
     }
     &::before {
-      @media (--mobile) {
+      @media (--mobile), (--tablet) {
         width: 40px;
         height: 40px;
         background: var(--color-neutral) url('./../img/icon/add_to_cart.svg') no-repeat 50% 50%;
         background-size: 16px 16px;
+        border-radius: 50%;
         position: absolute;
         content: '';
         display: block;
@@ -66,6 +67,11 @@
       box-sizing: border-box;
       top: -24px;
       right: -36px;
+      @media (--tablet) {
+        top: -8px;
+        right: 8px;
+        transform: scale(0.8);
+      }
       &-text {
         display: none;
       }
