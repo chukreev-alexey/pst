@@ -310,6 +310,26 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
     def get_filter_reset_url(self):
         return reverse(self.paginator_url_name, args=[self.object.slug])
 
+    def get_sorted_queryset(self, queryset, request, **kwargs):
+
+        params = getattr(request, request.method, {})
+        _sort = self.handle_query_sort(queryset.model, params, **kwargs)
+
+        if _sort:
+            if 'price' in _sort or '-price' in _sort:
+                # сортировка по минимальному значению в m2m поле prices
+                if 'price' in _sort:
+                    _sort.remove('price')
+                    _sort += ['lowest_price']
+                if '-price' in _sort:
+                    _sort.remove('-price')
+                    _sort += ['-lowest_price']
+                return queryset.annotate(
+                    lowest_price=Min('prices__price')).order_by(*_sort)
+            return queryset.order_by(*_sort)
+
+        return queryset
+
     def get_queryset(self):
         if self.hide_products:
             return self.object.get_children_not_empty()
@@ -347,7 +367,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                                        product_pks)
                 else:
                     count_products(list(_filter.values()), product_pks)
-
+        queryset = self.get_sorted_queryset(queryset, self.request)
         return queryset
 
     def get_sort_data(self, queryset):
