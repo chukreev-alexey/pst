@@ -43,11 +43,6 @@
       }
       & .search {
         &-input {
-          &__icon {
-            &:hover {
-              transform: scale(1);
-            }
-          }
           &__input {
             animation-name: quickSearchInputFadeOut;
             @media (--mobile) {
@@ -78,14 +73,13 @@
         &__icon {
           min-width: 48px;
           background: url('./../img/icon/search.svg') no-repeat 50% 50%;
-
           &:hover {
             background: var(--color-primary-hover) url('./../img/icon/search.svg') no-repeat 50% 50%;
           }
         }
         &__input {
-          margin: 0;
-          padding: 0;
+          padding: 0 16px;
+          margin: 6px 0;
           visibility: hidden;
         }
       }

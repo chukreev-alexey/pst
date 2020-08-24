@@ -1,5 +1,6 @@
 .header {
   width: 100%;
+  position: relative;
   @media (--warning) {
     padding: 0 0 20px 0;
   }
@@ -12,10 +13,10 @@
     &_state_show,
     &_state_hide {
       position: fixed;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
       left: 0;
       top: 0;
       right: 0;
-      box-shadow: 0 8px 12px rgba(0,0,0,.15);
       @media (--mobile) {
         border-bottom: solid 1px var(--color-neutral-border);
       }

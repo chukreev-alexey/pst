@@ -1997,8 +1997,15 @@ sans-serif;
 
 /* stylelint-disable custom-property-empty-line-before */
 
+.header.header_state_active {
+  z-index: 1000000;
+ }
+
+/* stylelint-disable custom-property-empty-line-before */
+
 .header {
   width: 100%;
+  position: relative;
 }
 
 @media (max-width: 15em) {

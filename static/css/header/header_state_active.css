@@ -1,0 +1,5 @@
+.header {
+  &&_state_active {
+    z-index: 1000000;
+  }
+}

@@ -1,0 +1,37 @@
+.search-input {
+  width: 100%;
+  background: var(--color-primary);
+  position: relative;
+  &__close {
+    position: absolute !important;
+    top: -60px;
+    right: 0;
+    transform: rotate(0deg);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    &::before,
+    &::after {
+      background: #777 !important;
+    }
+    &:hover {
+      transform: rotate(-180deg);
+      &::before,
+      &::after {
+        background: #d0021b !important;
+      }
+    }
+  }
+  &__input {
+    width: 100%;
+    color: var(--color-surface-text);
+    background: var(--color-surface);
+    border: none;
+    border-radius: 4px;
+    display: block;
+    box-sizing: border-box;
+    @mixin font normal, 16px, 16px, 22px, 22px, var(--font-title-secondary);
+    &:focus {
+      outline: 0;
+    }
+  }
+}
