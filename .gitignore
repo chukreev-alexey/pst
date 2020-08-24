@@ -90,6 +90,7 @@ coverage.xml
 !/media/uploads/.gitkeep
 /static/geo_resources/
 /settings/local.py
+urls_debug.py
 
 # Sphinx documentation
 docs/_build/
