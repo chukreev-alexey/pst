@@ -153,7 +153,7 @@ class SeparateParametrPickingInline(nested_admin.NestedTabularInline):
     sortable_field_name = 'sort'
 
 
-class PickingPriceInline(nested_admin.NestedTabularInline):
+class PickingPriceInline(nested_admin.NestedStackedInline):
 
     model = Price
     extra = 1
@@ -171,11 +171,11 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'sort', 'measuring',
-                       ('in_hit', 'border'), ('in_recommended', 'in_action'),
-                       'brand', 'categories', 'recommend_categories',
-                       'parametres', 'product_actions', 'short_description',
-                       'content')
+            'fields': ('name', 'slug', 'sort', 'measuring', ('in_hit',
+                                                             'border'),
+                       ('in_recommended', 'in_action'), 'brand', 'categories',
+                       'recommend_categories', 'parametres', 'product_actions',
+                       'short_description', 'content')
         }),
         ('SEO-информация', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords',
@@ -197,7 +197,8 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
 
     prepopulated_fields = {'slug': ['name']}
 
-    search_fields = ('name', 'prices__price', 'prices__product_article')
+    search_fields = ('name', 'slug', 'prices__price',
+                     'prices__product_article')
 
     readonly_fields = ['product_actions']
 

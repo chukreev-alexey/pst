@@ -251,11 +251,9 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         filtered_products = []
         scopes = {}
 
-        price_qs = Price.objects.filter(
-            product__in=queryset).prefetch_related('price_parametres')
-
         # фильтр по параметрам из комплектаций
-        for price in price_qs.iterator():
+        price_qs = Price.objects.filter(product__in=queryset, show=True)
+        for price in price_qs.prefetch_related('price_parametres').iterator():
             scope_pks = list(
                 price.price_parametres.values_list('parametr_value',
                                                    flat=True))
@@ -279,6 +277,17 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             if all(item in scope_pks for item in query):
                 filtered_products.append(product.pk)
             data = get_data(data, params_qs, scope_pks, query, product.pk)
+
+        data = {
+            k: v
+            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
+        }
+        for value in data.values():
+            value['values'] = {
+                k: v
+                for k, v in sorted(list(value['values'].items()),
+                                   key=lambda i: i[1]['name'])
+            }
 
         return data, filtered_products
 
