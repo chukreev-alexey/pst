@@ -278,6 +278,17 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 filtered_products.append(product.pk)
             data = get_data(data, params_qs, scope_pks, query, product.pk)
 
+        data = {
+            k: v
+            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
+        }
+        for value in data.values():
+            value['values'] = {
+                k: v
+                for k, v in sorted(list(value['values'].items()),
+                                   key=lambda i: i[1]['name'])
+            }
+
         return data, filtered_products
 
     def get_filter_data_price(self, queryset, query):
