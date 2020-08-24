@@ -80,8 +80,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
             context['filter_reset_url'] = self.get_filter_reset_url()
 
-        context.update(self.get_sort_data(self.queryset))
-        context.update(self._sort)
+            context.update(self.get_sort_data(self.queryset))
+            context.update(self._sort)
 
         return context
 
