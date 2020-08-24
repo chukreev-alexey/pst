@@ -1998,8 +1998,8 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .header.header_state_active {
-  z-index: 1000000;
- }
+    z-index: 1000000;
+  }
 
 /* stylelint-disable custom-property-empty-line-before */
 
@@ -2026,10 +2026,10 @@ sans-serif;
 .header__wrapper_state_show,
     .header__wrapper_state_hide {
       position: fixed;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
       left: 0;
       top: 0;
       right: 0;
-      box-shadow: 0 8px 12px rgba(0,0,0,.15);
     }
 
 @media (min-width: 15em)

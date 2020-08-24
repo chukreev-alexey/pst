@@ -5,7 +5,7 @@
         {% csrf_token %}
 
         {% if filter_data_misc %}
-            <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open" >
+            <div class="catalog-filter-group catalog-filter-group_type_special catalog-filter-group_state_open">
                 <div class="catalog-filter-group__list">
                     {% for pk, item in filter_data_misc.items %}
                         <div class="catalog-filter-group__list-item
@@ -32,7 +32,7 @@
         {% endif %}
 
         {% if filter_data_category %}
-            <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open" data-group-key="category">
+            <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="category">
                 <div class="catalog-filter-group__list">
                     {% for pk, categ in filter_data_category.items %}
                         <div class="catalog-filter-group__list-item
@@ -56,7 +56,7 @@
         {% endif %}
 
         {% if filter_special %}
-            <div class="catalog-filter-group catalog-filter-group_state_level catalog-filter-group_state_open" data-group-key="category">
+            <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="category">
                 <div class="catalog-filter-group__list">
                     {% for category in filter_special %}
                         <div class="catalog-filter-group__list-item

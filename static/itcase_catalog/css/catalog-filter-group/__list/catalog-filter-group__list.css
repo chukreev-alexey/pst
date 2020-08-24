@@ -1,5 +1,5 @@
 .catalog-filter-group__list {
-  margin: 0 0 20px 0;
+  margin: 4px 0 20px 16px;
   &-item {
     margin: 0 0 10px 0;
     &&_state_checked {

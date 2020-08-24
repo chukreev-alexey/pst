@@ -1,6 +1,7 @@
 .catalog-sort-dropdown {
   min-width: 310px;
   position: relative;
+  z-index: 2;
   &::after {
     padding: 3px;
     border: solid var(--color-surface-item);
@@ -28,6 +29,7 @@
     color: var(--color-surface-text);
     border: solid 1px var(--color-neutral-border);
     display: flex;
+    cursor: pointer;
     align-items: center;
     &::before {
       min-width: 24px;

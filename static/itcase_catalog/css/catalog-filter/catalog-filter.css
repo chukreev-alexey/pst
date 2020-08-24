@@ -1,7 +1,7 @@
 .catalog-filter {
   width: 100%;
   background: var(--color-neutral);
-  padding: 24px;
+  padding: 24px 8px;
   box-sizing: border-box;
   @media (--mobile) {
     height: 100%;
