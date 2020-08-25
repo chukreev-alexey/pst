@@ -752,6 +752,7 @@ class ProductDetail(ProductDetailBase):
                 # данные параметра
                 filter_key = parametr.pk
                 filter_data = data.get(filter_key, {})
+                filter_data['pk'] = filter_key
                 filter_data['name'] = parametr.name
 
                 # данные значений параметра

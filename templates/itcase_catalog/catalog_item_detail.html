@@ -61,11 +61,10 @@
                                                     type="radio"
                                                     class="catalog-item-detail__param-item-input"
                                                     id="param-{{ pk }}"
-                                                    name="param-{{ pk }}"
+                                                    name="param-{{ group.pk }}"
                                                     value="{{ pk }}"
                                                     autocomplete="off"
                                                     data-prices="{{ param.prices }}"
-                                                    {% if group.values|length == 1 %}checked="checked"{% endif %}
                                                 />
                                                 <div class="catalog-item-detail__param-item-text">
                                                     {{ param.name }}
