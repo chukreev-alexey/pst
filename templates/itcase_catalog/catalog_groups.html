@@ -52,7 +52,7 @@
 
             {% if view.hide_products %}
                 {% include './include/catalog_categories_list.html' %}
-            {% else %}
+            {% elif products %}
                 {% include './include/catalog_group.html' %}
             {% endif %}
 

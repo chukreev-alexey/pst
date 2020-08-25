@@ -134,10 +134,6 @@ class Category(MPTTModel, CategoryBase, SEOModel):
                                 args=[self.parent.slug, self.slug])
         return reverse_lazy('category-detail', args=[self.slug])
 
-    def get_children_not_empty(self):
-        return self.children.filter(pk__in=Product.categories.through.objects.
-                                    values_list('category_id', flat=True))
-
     def get_products(self):
         """Return products from all nested categories."""
         descendants = self.get_descendants(include_self=True)

@@ -467,7 +467,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
     def get_queryset(self):
         if self.hide_products:
-            return self.object.get_children_not_empty()
+            return self.object.children.all()
 
         if not self.queryset:
             self.queryset = self.object.products.all()
