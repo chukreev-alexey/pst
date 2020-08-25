@@ -362,6 +362,9 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 'price_parametres__parametr_value__parametr',
                 'product__parametres__parametr')
 
+        category_params = list(
+            self.object.filter_parametres.values_list('pk', flat=True))
+
         for price in price_qs:
             params_qs = []
             scope_pks = []
@@ -370,12 +373,18 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 param = price_parametr.parametr_value
                 if not param.parametr.filter_by:
                     continue
+                if (category_params
+                        and param.parametr_id not in category_params):
+                    continue
                 params_qs.append(param)
                 scope_pks.append(str(param.pk))
 
             # параметры из поля "Параметры" у товара
             for param in price.product.parametres.all():
                 if not param.parametr.filter_by:
+                    continue
+                if (category_params
+                        and param.parametr_id not in category_params):
                     continue
                 params_qs.append(param)
                 scope_pks.append(str(param.pk))
