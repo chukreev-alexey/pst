@@ -336,15 +336,16 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         filtered_products = []
 
         for key in ('in_hit', 'in_action', 'in_recommended'):
-            if not self.queryset.filter(**{key: True}).exists():
+            if not any(getattr(item, key, False) for item in self.queryset):
                 continue
-            products = queryset.filter(**{key: True})
-            product_pks = list(products.values_list('pk', flat=True))
+            product_pks = [
+                item.pk for item in queryset if getattr(item, key, False)
+            ]
             selected = key in query
             data[key] = {
+                'available': len(product_pks) > 0,
                 'products': product_pks,
-                'available': products.exists(),
-                'selected': selected
+                'selected': selected,
             }
             if selected:
                 filtered_products += product_pks
