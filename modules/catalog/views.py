@@ -723,4 +723,65 @@ class ProductDetail(ProductDetailBase):
             context['catalog_breadcrumbs'] = category.get_ancestors(
                 include_self=True)
 
+        context['params_data'] = self.get_params_data()
+
         return context
+
+    def get_params_data(self):
+        data = {}
+
+        for price in self.object.prices.all():
+            params_qs = []
+            scope_pks = []
+
+            # параметры из комплектаций
+            for price_parametr in price.price_parametres.all():
+                param = price_parametr.parametr_value
+                params_qs.append(param)
+                scope_pks.append(param.pk)
+
+            # параметры из поля "Параметры" у товара
+            for param in self.object.parametres.all():
+                params_qs.append(param)
+                scope_pks.append(param.pk)
+
+            for param in params_qs:
+                parametr = param.parametr
+
+                # данные параметра
+                filter_key = parametr.pk
+                filter_data = data.get(filter_key, {})
+                filter_data['name'] = parametr.name
+
+                # данные значений параметра
+                values = filter_data.get('values', {})
+                values_key = param.pk
+                values_data = values.get(values_key, {})
+                values_data['name'] = param.value
+
+                # цены со связанными товарами
+                prices = values_data.get('prices', {})
+                _scope = [pk for pk in scope_pks if pk != values_key]
+                if not _scope:
+                    _scope = [values_key]
+                for pk in _scope:
+                    prices[pk] = price.price
+                values_data['prices'] = prices
+
+                values[values_key] = values_data
+                filter_data['values'] = values
+
+                data[filter_key] = filter_data
+
+        data = {
+            k: v
+            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
+        }
+        for value in data.values():
+            value['values'] = {
+                k: v
+                for k, v in sorted(list(value['values'].items()),
+                                   key=lambda i: i[1]['name'])
+            }
+
+        return data
