@@ -762,11 +762,8 @@ class ProductDetail(ProductDetailBase):
                 # цены со связанными товарами
                 prices = values_data.get('prices', {})
                 _price = prices.get(price.pk, {})
-                _scope = [pk for pk in scope_pks if pk != values_key]
-                if not _scope:
-                    _scope = [values_key]
-                for pk in _scope:
-                    _price[pk] = price.price
+                _price['scope'] = scope_pks
+                _price['price'] = price.price
                 prices[price.pk] = _price
                 values_data['prices'] = prices
 
