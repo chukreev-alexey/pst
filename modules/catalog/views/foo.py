@@ -37,17 +37,35 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
     filter_data = {}
     filter_key_brand = 'filter-brand'
     filter_key_misc = 'filter-misc'
-    filter_key_param = 'filter-param'
-    filter_key_price = 'filter-price'
+    filter_key_param = 'filter-param-'
+    filter_key_price = 'filter-price-'
+    filter_query_dict = {}
 
-    def get(self, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         self.object = self.get_object(queryset=Category.objects.filter(
             level__lte=1))
 
         if self.object.other_template:
             self.template_name = get_template_name('other_catalog_groups.html')
 
-        return super().get(*args, **kwargs)
+        self.filter_query_dict[self.filter_key_brand] = request.GET.getlist(
+            self.filter_key_brand)
+        self.filter_query_dict[self.filter_key_misc] = request.GET.getlist(
+            self.filter_key_misc)
+
+        self.filter_query_dict[self.filter_key_param] = {
+            k.replace(self.filter_key_param, ''): v
+            for k, v in request.GET.lists()
+            if k.startswith(self.filter_key_param)
+        }
+
+        self.filter_query_dict[self.filter_key_price] = {
+            k.replace(self.filter_key_price, ''): v
+            for k, v in request.GET.items()
+            if k.startswith(self.filter_key_price) and v
+        }
+
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -87,66 +105,64 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
     def get_filter_data(self, queryset):
         data = {}
-        filtered_products = []
+        filtered_products = {}
 
         _data = {}
-        _data, filtered_products = self.get_filter_data_brand(
-            queryset, self.request.GET.getlist(self.filter_key_brand))
+        products = []
+        _data, products = self.get_filter_data_brand(
+            queryset, self.filter_query_dict.get(self.filter_key_brand))
         if _data:
             data[self.filter_key_brand] = _data
+        if products:
+            filtered_products[self.filter_key_brand] = products
+            filtered_products['final'] = products
 
         _data = {}
         products = []
         _data, products = self.get_filter_data_misc(
-            queryset, self.request.GET.getlist(self.filter_key_misc))
+            queryset, self.filter_query_dict.get(self.filter_key_misc))
         if _data:
             data[self.filter_key_misc] = _data
         if products:
-            if filtered_products:
-                # если применяли предыдущие фильтры,
-                # то берём только то, что совпало у всех фильтров
-                filtered_products = [
-                    pk for pk in products if pk in filtered_products
-                ]
+            filtered_products[self.filter_key_misc] = products
+            if 'final' not in filtered_products:
+                filtered_products['final'] = products
             else:
-                filtered_products = products
+                filtered_products['final'] = [
+                    pk for pk in products if pk in filtered_products['final']
+                ]
 
         _data = {}
         products = []
         _data, products = self.get_filter_data_param(
-            queryset, self.request.GET.getlist(self.filter_key_param))
+            queryset, self.filter_query_dict.get(self.filter_key_param))
         if _data:
             data[self.filter_key_param] = _data
         if products:
-            if filtered_products:
-                # если применяли предыдущие фильтры,
-                # то берём только то, что совпало у всех фильтров
-                filtered_products = [
-                    pk for pk in products if pk in filtered_products
-                ]
+            filtered_products[self.filter_key_param] = products
+
+            products = [pk for value in products.values() for pk in value]
+            if 'final' not in filtered_products:
+                filtered_products['final'] = products
             else:
-                filtered_products = products
+                filtered_products['final'] = [
+                    pk for pk in products if pk in filtered_products['final']
+                ]
 
         _data = {}
         products = []
-
-        query = {}
-        for key in ('max', 'min'):
-            value = self.request.GET.get(f'{self.filter_key_price}_{key}')
-            if value:
-                query[key] = value
-        _data, products = self.get_filter_data_price(queryset, query)
+        _data, products = self.get_filter_data_price(
+            queryset, self.filter_query_dict.get(self.filter_key_price))
         if _data:
             data[self.filter_key_price] = _data
         if products:
-            if filtered_products:
-                # если применяли предыдущие фильтры,
-                # то берём только то, что совпало у всех фильтров
-                filtered_products = [
-                    pk for pk in products if pk in filtered_products
-                ]
+            filtered_products[self.filter_key_price] = products
+            if 'final' not in filtered_products:
+                filtered_products['final'] = products
             else:
-                filtered_products = products
+                filtered_products['final'] = [
+                    pk for pk in products if pk in filtered_products['final']
+                ]
 
         return data, filtered_products
 
@@ -203,8 +219,37 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         return data, filtered_products
 
     def get_filter_data_param(self, queryset, query):
+        data = {}
+        filtered_products = {}
+        scopes = {}
 
-        def get_data(data, params_qs, scope_pks, query, product_id):
+        price_qs = Price.objects.filter(
+            product__in=queryset,
+            show=True).select_related('product').prefetch_related(
+                'price_parametres__parametr_value__parametr',
+                'product__parametres__parametr')
+
+        for price in price_qs:
+            params_qs = []
+            scope_pks = []
+            # параметры из комплектаций
+            for price_parametr in price.price_parametres.all():
+                param = price_parametr.parametr_value
+                if not param.parametr.filter_by:
+                    continue
+                params_qs.append(param)
+                scope_pks.append(str(param.pk))
+
+            # параметры из поля "Параметры" у товара
+            for param in price.product.parametres.all():
+                if not param.parametr.filter_by:
+                    continue
+                params_qs.append(param)
+                scope_pks.append(str(param.pk))
+
+            product_id = price.product_id
+            scopes[product_id] = scope_pks
+
             for param in params_qs:
                 parametr = param.parametr
 
@@ -212,6 +257,9 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 filter_key = parametr.pk
                 filter_data = data.get(filter_key, {})
                 filter_data['name'] = parametr.name
+
+                query_name = parametr.query_name
+                filter_data['query_name'] = query_name
 
                 # данные значений параметра
                 values = filter_data.get('values', {})
@@ -230,51 +278,28 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 scope += _scope
                 values_data['scope'] = set(scope)
 
+                _query = query.get(query_name, [])
+
                 # выбран ли пункт
-                values_data['selected'] = values_key in query
+                selected = values_key in _query
+                values_data['selected'] = selected
+                if selected:
+                    _filtered_products = filtered_products.get(query_name, [])
+                    _filtered_products.append(product_id)
+                    filtered_products[query_name] = _filtered_products
 
                 # доступен ли пункт при выбранном фильтре
                 available = True
-                if query:
+                if not _query:
                     _scope = scope.copy()
                     _scope.append(values_key)
-                    available = all(item in _scope for item in query)
+                    available = all(item in _scope for item in _query)
                 values_data['available'] = available
 
                 values[values_key] = values_data
                 filter_data['values'] = values
 
                 data[filter_key] = filter_data
-            return data
-
-        data = {}
-        filtered_products = []
-        scopes = {}
-
-        price_qs = Price.objects.filter(
-            product__in=queryset,
-            show=True).select_related('product').prefetch_related(
-                'price_parametres__parametr_value__parametr',
-                'product__parametres__parametr')
-        for price in price_qs:
-            params_qs = []
-            scope_pks = []
-            # параметры из комплектаций
-            for price_parametr in price.price_parametres.all():
-                params_qs.append(price_parametr.parametr_value)
-                scope_pks.append(str(price_parametr.parametr_value.pk))
-
-            # параметры из поля "Параметры" у товара
-            for parametr in price.product.parametres.all():
-                params_qs.append(parametr)
-                scope_pks.append(str(parametr.pk))
-
-            product_id = price.product_id
-            scopes[product_id] = scope_pks
-            if all(item in scope_pks for item in query):
-                filtered_products.append(price.product.pk)
-
-            data = get_data(data, params_qs, scope_pks, query, product_id)
 
         data = {
             k: v
@@ -290,7 +315,6 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         return data, filtered_products
 
     def get_filter_data_price(self, queryset, query):
-
         price_qs = Price.objects.filter(product__in=queryset)
 
         _data = price_qs.aggregate(Max('price'), Min('price'))
@@ -307,26 +331,6 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
     def get_filter_reset_url(self):
         return reverse(self.paginator_url_name, args=[self.object.slug])
-
-    def get_sorted_queryset(self, queryset, request, **kwargs):
-
-        params = getattr(request, request.method, {})
-        _sort = self.handle_query_sort(queryset.model, params, **kwargs)
-
-        if _sort:
-            if 'price' in _sort or '-price' in _sort:
-                # сортировка по минимальному значению в m2m поле prices
-                if 'price' in _sort:
-                    _sort.remove('price')
-                    _sort += ['lowest_price']
-                if '-price' in _sort:
-                    _sort.remove('-price')
-                    _sort += ['-lowest_price']
-                return queryset.annotate(
-                    lowest_price=Min('prices__price')).order_by(*_sort)
-            return queryset.order_by(*_sort)
-
-        return queryset
 
     def get_queryset(self):
         if self.hide_products:
@@ -347,34 +351,57 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         self.filter_data, filtered_products = self.get_filter_data(queryset)
 
-        if filtered_products:
-            queryset = queryset.filter(pk__in=filtered_products).distinct()
+        if 'final' not in filtered_products:
+            return queryset
 
-            def count_products(iterable, product_pks):
-                for item in iterable:
-                    if not item['available']:
-                        item['products'] = []
-                        continue
-                    item['products'] = [
-                        pk for pk in item['products'] if pk in product_pks
-                    ]
-                    if len(item['products']) < 1:
-                        item['available'] = False
-                        item['selected'] = False
+        queryset = queryset.filter(pk__in=filtered_products['final'])
 
-            product_pks = queryset.values_list('pk', flat=True)
-            for key, _filter in list(self.filter_data.items()):
-                if key == self.filter_key_price:
+        def count_products(iterable, product_pks):
+            for item in iterable:
+                if not item['available']:
+                    item['products'] = []
                     continue
+                item['products'] = [
+                    pk for pk in item['products'] if pk in product_pks
+                ]
+                if len(item['products']) < 1:
+                    item['available'] = False
+                    item['selected'] = False
 
-                if key == self.filter_key_param:
-                    for group in list(_filter.values()):
-                        count_products(list(group['values'].values()),
-                                       product_pks)
-                else:
-                    count_products(list(_filter.values()), product_pks)
+        final = filtered_products.pop('final', None)
 
-        return queryset
+        for key, _filter in list(self.filter_data.items()):
+            product_pks = []
+            if final:
+                for k, v in filtered_products.items():
+                    if k in (key, 'final'):
+                        continue
+                    if k == self.filter_key_param:
+                        v = [pk for value in v.values() for pk in value]
+                    if not product_pks:
+                        product_pks = v
+                    else:
+                        product_pks = [pk for pk in v if pk in product_pks]
+
+            if key.startswith(self.filter_key_param):
+                for group in list(_filter.values()):
+                    _filtered_products = filtered_products.get(key, {})
+                    for k, v in _filtered_products.items():
+                        if k == group['query_name']:
+                            continue
+                        product_pks = [pk for pk in v if pk in product_pks]
+                    count_products(list(group['values'].values()), product_pks)
+                continue
+
+            if key.startswith(self.filter_key_price):
+                continue
+
+            if len(filtered_products) == 1 and key in filtered_products:
+                product_pks = self.queryset.values_list('pk', flat=True)
+
+            count_products(list(_filter.values()), product_pks)
+
+        return queryset.distinct()
 
     def get_sort_data(self, queryset):
         initial = {}
@@ -386,6 +413,26 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             return {'sort_group': initial}
 
         return {}
+
+    def get_sorted_queryset(self, queryset, request, **kwargs):
+
+        params = getattr(request, request.method, {})
+        _sort = self.handle_query_sort(queryset.model, params, **kwargs)
+
+        if _sort:
+            if 'price' in _sort or '-price' in _sort:
+                # сортировка по минимальному значению в m2m поле prices
+                if 'price' in _sort:
+                    _sort.remove('price')
+                    _sort += ['lowest_price']
+                if '-price' in _sort:
+                    _sort.remove('-price')
+                    _sort += ['-lowest_price']
+                return queryset.annotate(
+                    lowest_price=Min('prices__price')).order_by(*_sort)
+            return queryset.order_by(*_sort)
+
+        return queryset
 
     @property
     def hide_products(self):
@@ -442,6 +489,11 @@ class SubCategoryDetail(CategoryDetail):
 
     filter_key_category = 'filter-category'
 
+    def get(self, request, *args, **kwargs):
+        self.filter_query_dict[self.filter_key_category] = request.GET.getlist(
+            self.filter_key_category)
+        return super().get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -457,22 +509,23 @@ class SubCategoryDetail(CategoryDetail):
 
         _data = {}
         products = []
-        query = self.request.GET.getlist(self.filter_key_category)
-        if not any(
-                key.startswith('filter') for key in self.request.GET.keys()):
+        query = self.filter_query_dict.get(self.filter_key_category)
+        if not any(value for value in self.filter_query_dict.values()):
             query.append(str(self.object.pk))
+            self.filter_query_dict[self.filter_key_category] = query
         _data, products = self.get_filter_data_category(queryset, query)
         if _data:
             data[self.filter_key_category] = _data
         if products:
-            if filtered_products:
+            filtered_products[self.filter_key_category] = products
+            if 'final' not in filtered_products:
+                filtered_products['final'] = products
+            else:
                 # если применяли предыдущие фильтры,
                 # то берём только то, что совпало у всех фильтров
-                filtered_products = [
-                    pk for pk in products if pk in filtered_products
+                filtered_products['final'] = [
+                    pk for pk in products if pk in filtered_products['final']
                 ]
-            else:
-                filtered_products = products
 
         return data, filtered_products
 
@@ -481,9 +534,9 @@ class SubCategoryDetail(CategoryDetail):
         filtered_products = []
 
         for product in self.queryset:
-            categories_qs = product.categories.filter(
-                level__gte=self.object.level)
-            for category in categories_qs:
+            for category in product.categories.all():
+                if category.level < self.object.level:
+                    continue
 
                 # данные категории
                 filter_key = str(category.pk)
