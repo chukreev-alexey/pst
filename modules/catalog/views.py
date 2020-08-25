@@ -1,4 +1,6 @@
-# Copyright 2020 Petr Zelenin (po.zelenin@itcase.pro)
+# -*- coding: utf-8 -*-
+#
+# Copyright 2020 ItCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,18 +14,139 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from itertools import permutations
+
 from django.db.models import Max, Min
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.urls import reverse
-from django.views.generic import ListView
+from django.views.generic.base import TemplateView
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.list import ListView
 
 from itcase_catalog.conf import get_template_name
+from itcase_catalog.views import ProductDetail as ProductDetailBase
 from itcase_common.mixins import SortMixin
 from itcase_paginator.pagination import SlicePaginatorMixin
 
-from ..models import Category, Price, Product
+from .conf import get_settings
+from .models import Category, Price, Product
+
+__all__ = ('CatalogIndexView', 'CategoryDetail', 'ProductDetail')
+
+
+class CatalogIndexView(TemplateView):
+
+    template_name = get_template_name('catalog.html')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        groups = {
+            'recommended': Product.objects.filter(in_recommended=True),
+            'hit': Product.objects.filter(in_hit=True),
+            'action': Product.objects.filter(in_action=True),
+        }
+
+        for name, queryset in groups.items():
+            if not queryset.exists():
+                continue
+            groups[name] = self.get_pretty_object_list(queryset)
+
+        context['products_groups'] = groups
+
+        return context
+
+    @staticmethod
+    def get_pretty_object_list(queryset, b_size=2, box_size=4):
+
+        class Box(object):
+
+            def __init__(self, index):
+                super().__init__()
+
+                self._items = []
+                self._size = box_size
+
+            @property
+            def size(self):
+                if not self._items:
+                    return 0
+                return sum(self.item_size(item) for item in self._items)
+
+            @staticmethod
+            def item_size(item):
+                return b_size if item.border else 1
+
+            def add(self, item):
+                if self.size + self.item_size(item) <= self._size:
+                    self._items.append(item)
+                    return
+
+                items = self._items.copy()
+                items.append(item)
+                for comb in permutations(items, len(self._items)):
+
+                    _sum = sum(self.item_size(item) for item in comb)
+                    if not _sum == self._size:
+                        continue
+
+                    diff = set(self._items).difference(set(comb))
+
+                    self._items = list(comb)
+
+                    try:
+                        return diff.pop()
+                    except KeyError:
+                        return
+
+                return item
+
+            def complete(self):
+                return self.size == self._size
+
+        box = None
+        count = get_settings('SPECIAL_PRODUCTS_COUNT')
+        iteration = 0
+        objs = list(queryset.order_by('?')[:count])
+        result = []
+        while iteration < (count * b_size / box_size):
+
+            if box is None:
+                box = Box(iteration)
+                box.add(objs.pop(0))
+
+            empty = set()
+            for index, item in enumerate(objs):
+
+                obj = box.add(item)
+                objs[index] = obj
+
+                if obj is None:
+                    empty.add(index)
+
+                if box.complete():
+                    break
+
+            for index, pos in enumerate(empty):
+                del objs[pos - index]
+
+            if box.complete() or not objs:
+                result.append(box._items)
+                box = None
+
+            if not objs:
+                break
+
+            iteration += 1
+
+        if objs:
+            box = box or Box(len(result))
+            for orphan in objs:
+                box._items.append(orphan)
+            result.append(box._items)
+
+        return result
 
 
 class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
@@ -98,7 +221,6 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
             context['filter_reset_url'] = self.get_filter_reset_url()
 
-            context.update(self.get_sort_data(self.queryset))
             context.update(self._sort)
 
         return context
@@ -128,6 +250,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             if 'final' not in filtered_products:
                 filtered_products['final'] = products
             else:
+                # если применяли предыдущие фильтры,
+                # то берём только то, что совпало у всех фильтров
                 filtered_products['final'] = [
                     pk for pk in products if pk in filtered_products['final']
                 ]
@@ -145,6 +269,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             if 'final' not in filtered_products:
                 filtered_products['final'] = products
             else:
+                # если применяли предыдущие фильтры,
+                # то берём только то, что совпало у всех фильтров
                 filtered_products['final'] = [
                     pk for pk in products if pk in filtered_products['final']
                 ]
@@ -160,6 +286,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             if 'final' not in filtered_products:
                 filtered_products['final'] = products
             else:
+                # если применяли предыдущие фильтры,
+                # то берём только то, что совпало у всех фильтров
                 filtered_products['final'] = [
                     pk for pk in products if pk in filtered_products['final']
                 ]
@@ -195,6 +323,11 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             filter_data['selected'] = selected
 
             data[filter_key] = filter_data
+
+        data = {
+            k: v
+            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
+        }
 
         return data, filtered_products
 
@@ -403,17 +536,6 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         return queryset.distinct()
 
-    def get_sort_data(self, queryset):
-        initial = {}
-
-        for key in ('in_hit', 'in_action', 'in_recommended'):
-            initial[key] = queryset.filter(**{key: True}).exists()
-
-        if any(initial.values()):
-            return {'sort_group': initial}
-
-        return {}
-
     def get_sorted_queryset(self, queryset, request, **kwargs):
 
         params = getattr(request, request.method, {})
@@ -559,6 +681,11 @@ class SubCategoryDetail(CategoryDetail):
 
                 data[filter_key] = filter_data
 
+        data = {
+            k: v
+            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
+        }
+
         return data, filtered_products
 
     def get_filter_reset_url(self):
@@ -572,3 +699,18 @@ class SubCategoryDetail(CategoryDetail):
         self.queryset = Product.objects.filter(
             categories__in=self.object.parent.children.all())
         return super().get_queryset()
+
+
+class ProductDetail(ProductDetailBase):
+
+    slug_field = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        category = self.object.categories.first()
+        if category is not None:
+            context['catalog_breadcrumbs'] = category.get_ancestors(
+                include_self=True)
+
+        return context
