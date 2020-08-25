@@ -2111,10 +2111,10 @@ sans-serif;
   and (max-width: 59.999em) {
 
 .header__wrapper .header__hamburger {
-        top: 16px;
-        right: 24px;
         position: absolute;
-        display: block
+        display: block;
+        top: 16px;
+        right: 24px
     }
       }
 
@@ -2377,10 +2377,10 @@ sans-serif;
   and (max-width: 59.999em) {
 
 .header__wrapper .header__cart {
-        top: 16px;
-        right: 48px;
         position: absolute;
-        display: block
+        display: block;
+        top: 16px;
+        right: 48px
     }
       }
 

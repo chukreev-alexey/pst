@@ -292,6 +292,10 @@
             transform: translate(0, -50%);
           }
         }
+        &__state_disabled {
+          border: solid 1px gray;
+          background-color: gray;
+        }
       }
     }
   }

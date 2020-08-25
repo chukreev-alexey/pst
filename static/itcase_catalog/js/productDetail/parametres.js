@@ -87,5 +87,10 @@ function activateRelatedParams(targetInput) {
     if (input.disabled) {
       input.checked = false
     }
+
+    const paramItem = input.closest('.catalog-item-detail__param-item')
+    if (paramItem) {
+      paramItem.classList.toggle('catalog-item-detail__param-item__state_disabled', input.disabled)
+    }
   }
 }
