@@ -15,10 +15,12 @@
 # limitations under the License.
 
 from itertools import permutations
+import json
 
 from django.db.models import Max, Min
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.template.defaultfilters import floatformat
 from django.urls import reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import SingleObjectMixin
@@ -762,7 +764,7 @@ class ProductDetail(ProductDetailBase):
                 prices = values_data.get('prices', {})
                 _price = prices.get(price.pk, {})
                 _price['scope'] = scope_pks
-                _price['price'] = price.price
+                _price['price'] = floatformat(price.price, -2)
                 prices[price.pk] = _price
                 values_data['prices'] = prices
 
@@ -781,5 +783,7 @@ class ProductDetail(ProductDetailBase):
                 for k, v in sorted(list(value['values'].items()),
                                    key=lambda i: i[1]['name'])
             }
+            for param in list(value['values'].values()):
+                param['prices'] = json.dumps(param['prices'])
 
         return data
