@@ -730,18 +730,17 @@ class ProductDetail(ProductDetailBase):
     def get_params_data(self):
         data = {}
 
-        for price in self.object.prices.all():
-            params_qs = []
-            scope_pks = []
+        # параметры из поля "Параметры" у товара
+        obj_parametres = self.object.parametres.all()
+
+        for price in self.object.prices.prefetch_related(
+                'price_parametres__parametr_value__parametr').all():
+            params_qs = [param for param in obj_parametres]
+            scope_pks = [param.pk for param in obj_parametres]
 
             # параметры из комплектаций
             for price_parametr in price.price_parametres.all():
                 param = price_parametr.parametr_value
-                params_qs.append(param)
-                scope_pks.append(param.pk)
-
-            # параметры из поля "Параметры" у товара
-            for param in self.object.parametres.all():
                 params_qs.append(param)
                 scope_pks.append(param.pk)
 
