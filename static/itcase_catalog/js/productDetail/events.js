@@ -41,4 +41,16 @@ $(document).on('change', '.catalog-item-detail__count-input', function (event) {
 
   this.value = intValue
   this.dataset.prevValue = this.value
+
+  const productId = this.dataset.product
+
+  // prettier-ignore
+  const addButton = document.querySelector(
+    `*[data-add-url][data-product="${productId}"]`
+  )
+
+  const addUrl = addButton.dataset.addUrl
+
+  addButton.dataset[`amount-${productId}`] = this.value
+  addButton.href = `${addUrl}?product=${productId}&amount-${productId}=${this.value}`
 })

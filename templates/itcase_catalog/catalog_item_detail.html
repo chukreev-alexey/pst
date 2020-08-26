@@ -52,7 +52,7 @@
                         <div class="catalog-item-detail__param">
 
                             {% for group in params_data.values %}
-                                <div class="catalog-item-detail__param-group">
+                                <div class="catalog-item-detail__param-group" data-group-pk="{{ group.pk }}">
                                     <div class="catalog-item-detail__param-title">{{ group.name }}</div>
                                     <div class="catalog-item-detail__param-wrapper{% if group.values|length > 10 %} catalog-item-detail__param-wrapper_type_column{% endif %}">
                                         {% for pk, param in group.values.items %}
@@ -75,29 +75,32 @@
                                 </div>
                             {% endfor %}
 
-                            <div class="catalog-item-detail__info">
-                                <div class="catalog-item-detail__count">
-                                    <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus" data-input-name="amount">&nbsp;</div>
-                                        <input
-                                            class="catalog-item-detail__count-input"
-                                            name="amount"
-                                            value="1"
-                                            min="1"
-                                            max="15"
-                                            maxlength="3"
-                                            type="text"
-                                        />
-                                    <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus" data-input-name="amount">&nbsp;</div>
+                            {% with product_id=product.pk|unlocalize %}
+                                <div class="catalog-item-detail__info">
+                                    <div class="catalog-item-detail__count">
+                                        <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus" data-input-name="amount">&nbsp;</div>
+                                            <input
+                                                class="catalog-item-detail__count-input"
+                                                name="amount"
+                                                value="1"
+                                                min="1"
+                                                max="15"
+                                                maxlength="3"
+                                                type="text"
+                                                data-product="{{ product_id }}"
+                                            />
+                                        <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus" data-input-name="amount">&nbsp;</div>
+                                    </div>
+                                    <div class="catalog-item-detail__price" data-measuring="{{ product.measuring|default:'' }}">
+                                        0 р{% if product.measuring %}/{{ product.measuring }}{% endif %}
+                                    </div>
                                 </div>
-                                <div class="catalog-item-detail__price">607 р/м2</div>
-                            </div>
 
-                            {% with id=product.pk|unlocalize %}
-                                <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                                <a href="{% url 'itcase_cart:cart_add' %}?product={{ product_id }}&amount-{{ product_id }}=1"
                                    class="catalog-item-detail__button catalog-item__button button button_type_primary {% if product in cart %} catalog-item-detail__button_state_in-cart {% endif %}"
                                     data-add-url="{% url 'itcase_cart:cart_add' %}"
-                                    data-product="{{ id }}"
-                                    data-amount-{{ id }}="1">
+                                    data-product="{{ product_id }}"
+                                    data-amount-{{ product_id }}="1">
                                     <span class="button__text">
                                         {% if product in cart %}
                                             В заказе
