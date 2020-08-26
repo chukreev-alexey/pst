@@ -199,13 +199,12 @@
   }
   &__desc {
     color: var(--color-surface-text);
-    padding: 8px 0 0 0;
+    padding: 8px 0 12px 0;
+    flex-grow: 1;
     @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
   }
   &__price {
     width: 100%;
-    margin: 12px 0;
-    flex: 1;
     &-text {
       color: var(--color-accent);
       margin: 0 10px 10px 0;
