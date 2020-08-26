@@ -155,6 +155,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                      ListView):
 
     context_object_name = 'category'
+    paginate_by = 15
     template_name = get_template_name('catalog_groups.html')
 
     paginator_url_name = 'category-detail'
