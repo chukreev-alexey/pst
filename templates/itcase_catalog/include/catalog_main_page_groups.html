@@ -1,4 +1,4 @@
-{% if products_groups.items %}
+{% if products_groups.items|length != 0 %}
     {% for group, products in products_groups.items %}
         <div class="catalog-list catalog-list_type_scroll">
             <div class="catalog-group" data-category="{{ group }}">
