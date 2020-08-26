@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "801ea3c34ebe391ce921";
+/******/ 	var hotCurrentHash = "9208414fa38083961952";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -16946,10 +16946,10 @@ class ParametresClass {
         }
       }
     });
-    this.showInfoForSelectedParams();
+    this.showInfoForSelectedParams(targetInput);
   }
 
-  showInfoForSelectedParams() {
+  showInfoForSelectedParams(targetInput) {
     const checkedInputs = document.querySelectorAll('input[id^="param-"]:checked');
     const firstInput = checkedInputs[0];
 
@@ -16988,6 +16988,18 @@ class ParametresClass {
       addButton.dataset.product = priceID;
       addButton.dataset[`amount-${priceID}`] = amount;
       addButton.href = `${addUrl}?product=${priceID}&amount-${priceID}=${amount}`;
+      this.slideToActualImage(targetInput, priceID);
+    }
+  }
+
+  slideToActualImage(targetInput, priceID) {
+    const galleryBlock = document.querySelector('.catalog-item-gallery');
+
+    if (galleryBlock) {
+      const swiper = galleryBlock.swiper;
+      const iamge = document.querySelector(`img[data-price-pk="${priceID}"]`);
+      const slide = iamge.closest('*[data-swiper-slide-index]');
+      swiper.slideTo(slide.dataset.swiperSlideIndex);
     }
   }
 

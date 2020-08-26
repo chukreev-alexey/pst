@@ -36,6 +36,7 @@
                                     {% for product_image, image_description in product.get_all_images %}
                                         <div class="catalog-item-gallery__image">
                                             <img src="{% version product_image 'catalog_detail' %}"
+                                                 data-price-pk="{{ product_image.price_pk|unlocalize }}"
                                                  class="catalog-item-gallery__image-image"
                                                  alt="{{ image_description|default:product.name }}" title="{{ image_description|default:product.name }}" />
                                         </div>

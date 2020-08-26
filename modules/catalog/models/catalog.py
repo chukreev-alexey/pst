@@ -245,6 +245,7 @@ class Product(ProductBase, FieldExistsMixin, SEOModel):
         for price in self.prices.exclude(image__exact='').exclude(show=False):
             if not price.image.exists:
                 continue
+            price.image.price_pk = price.pk
             yield (price.image, price.image_description)
 
     # TODO: separate model ProductImage
