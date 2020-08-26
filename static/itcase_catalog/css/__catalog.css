@@ -1762,6 +1762,11 @@ sans-serif;
             transform: translate(0, -50%);
           }
 
+.catalog-item-detail__param-group .catalog-item-detail__param-item__state_disabled {
+          border: solid 2px gray;
+          background-color: gray;
+        }
+
 .catalog-item-detail__tabs {
     width: 100%;
   }

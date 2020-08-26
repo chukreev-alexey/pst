@@ -15,10 +15,12 @@
 # limitations under the License.
 
 from itertools import permutations
+import json
 
 from django.db.models import Max, Min
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.template.defaultfilters import floatformat
 from django.urls import reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import SingleObjectMixin
@@ -153,6 +155,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                      ListView):
 
     context_object_name = 'category'
+    paginate_by = 15
     template_name = get_template_name('catalog_groups.html')
 
     paginator_url_name = 'category-detail'
@@ -336,15 +339,16 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         filtered_products = []
 
         for key in ('in_hit', 'in_action', 'in_recommended'):
-            if not self.queryset.filter(**{key: True}).exists():
+            if not any(getattr(item, key, False) for item in self.queryset):
                 continue
-            products = queryset.filter(**{key: True})
-            product_pks = list(products.values_list('pk', flat=True))
+            product_pks = [
+                item.pk for item in queryset if getattr(item, key, False)
+            ]
             selected = key in query
             data[key] = {
+                'available': len(product_pks) > 0,
                 'products': product_pks,
-                'available': products.exists(),
-                'selected': selected
+                'selected': selected,
             }
             if selected:
                 filtered_products += product_pks
@@ -362,6 +366,9 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 'price_parametres__parametr_value__parametr',
                 'product__parametres__parametr')
 
+        category_params = list(
+            self.object.filter_parametres.values_list('pk', flat=True))
+
         for price in price_qs:
             params_qs = []
             scope_pks = []
@@ -370,12 +377,18 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 param = price_parametr.parametr_value
                 if not param.parametr.filter_by:
                     continue
+                if (category_params
+                        and param.parametr_id not in category_params):
+                    continue
                 params_qs.append(param)
                 scope_pks.append(str(param.pk))
 
             # параметры из поля "Параметры" у товара
             for param in price.product.parametres.all():
                 if not param.parametr.filter_by:
+                    continue
+                if (category_params
+                        and param.parametr_id not in category_params):
                     continue
                 params_qs.append(param)
                 scope_pks.append(str(param.pk))
@@ -467,7 +480,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
     def get_queryset(self):
         if self.hide_products:
-            return self.object.get_children_not_empty()
+            return self.object.children.all()
 
         if not self.queryset:
             self.queryset = self.object.products.all()
@@ -713,4 +726,66 @@ class ProductDetail(ProductDetailBase):
             context['catalog_breadcrumbs'] = category.get_ancestors(
                 include_self=True)
 
+        context['params_data'] = self.get_params_data()
+
         return context
+
+    def get_params_data(self):
+        data = {}
+
+        # параметры из поля "Параметры" у товара
+        obj_parametres = self.object.parametres.all()
+
+        for price in self.object.prices.prefetch_related(
+                'price_parametres__parametr_value__parametr').all():
+            params_qs = [param for param in obj_parametres]
+            scope_pks = [param.pk for param in obj_parametres]
+
+            # параметры из комплектаций
+            for price_parametr in price.price_parametres.all():
+                param = price_parametr.parametr_value
+                params_qs.append(param)
+                scope_pks.append(param.pk)
+
+            for param in params_qs:
+                parametr = param.parametr
+
+                # данные параметра
+                filter_key = parametr.pk
+                filter_data = data.get(filter_key, {})
+                filter_data['pk'] = filter_key
+                filter_data['name'] = parametr.name
+
+                # данные значений параметра
+                values = filter_data.get('values', {})
+                values_key = param.pk
+                values_data = values.get(values_key, {})
+                values_data['name'] = param.value
+
+                # цены со связанными товарами
+                prices = values_data.get('prices', {})
+                _price = prices.get(price.pk, {})
+                _price['scope'] = scope_pks
+                _price['price'] = floatformat(price.price, -2)
+                prices[price.pk] = _price
+                values_data['prices'] = prices
+
+                values[values_key] = values_data
+                filter_data['values'] = values
+
+                data[filter_key] = filter_data
+
+        data = {
+            k: v
+            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
+        }
+        for value in data.values():
+            value['values'] = {
+                k: v
+                for k, v in sorted(list(value['values'].items()),
+                                   key=lambda i: i[1]['name'])
+            }
+            for param in list(value['values'].values()):
+                param['prices'] = json.dumps(param['prices'])
+
+        return data

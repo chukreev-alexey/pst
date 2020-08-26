@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4b86879f2644ed58f41b";
+/******/ 	var hotCurrentHash = "876e73483c9a00417abe";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11476,14 +11476,14 @@ $(document).on('change', '.catalog-item-detail__count-input', function (event) {
 // Handle mousedown event on checked radio inputs for groups of product paramentrs.
 // eg: "Фактура", "Цвет", "Покрытие" and etc.
 
-$(document).on('mousedown', '.catalog-item-detail__param-item:has(input[id^="product_parametr-"]:checked)', function (event) {
+$(document).on('mousedown', '.catalog-item-detail__param-item:has(input[id^="param-"]:checked)', function (event) {
   const radioButton = this.querySelector('input'); // Save indicator to accept change checked state of radio input in "change" event
   // and set "checked" attr to "false".
 
   radioButton.dataset._blockChange = true;
   radioButton.checked = false;
 });
-$(document).on('change', 'input[id^="product_parametr-"]', function (event) {
+$(document).on('change', 'input[id^="param-"]', function (event) {
   let blockChange;
 
   try {
@@ -11500,60 +11500,65 @@ $(document).on('change', 'input[id^="product_parametr-"]', function (event) {
   } // Clean "blockChange" for next event handling.
 
 
-  this.dataset._blockChange = false; // if (this.checked) {
+  this.dataset._blockChange = false; // Disable unrelated params-inputs and enable related. Current input maybe unchecked.
 
-  /* getProductParametrsData() */
-  //   {
-  //     parametrID: this.name.replace('product_parametr-', ''),
-  //     productParametrID: this.value,
-  //   }
-  // }
+  activateRelatedParams(this); // Disable unrelated params-inputs and enable related for another checked radio.
+  // TODO: do it on unchecking current input? (or always?)
+
+  const anotherCheckedInputs = document.querySelectorAll(`input[id^="param-"]:checked:not(#${this.id})`);
+
+  for (let input of anotherCheckedInputs) {
+    activateRelatedParams(input);
+  }
 });
-/*
-// { parametrID, productParametrID }
-const getProductParametrsData = () => {
-  const checkedParams = document.querySelectorAll('input[id^="product_parametr-"]:checked')
-  Array.from(checkedParams).forEach((input) => {
-    const parametrID = input.name.replace('product_parametr-', '')
-    const productParametrID = input.value
-  })
 
-  const requestProps = {
-    method: 'POST',
-    body: JSON.stringify({ parametr: 1, productParametr: 1 }),
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
-      'X-Requested-With': 'XMLHttpRequest',
-      'X-CSRFToken': document.querySelector('*[name="csrfmiddlewaretoken"]')?.value,
-    },
+function activateRelatedParams(targetInput) {
+  /*
+  "ID комплектации": {
+    "scope": [ "ID связанного товара", "ID связанного товара", ... ],
+    "price": "цена комплектации"
+  }
+  */
+  let prices = {};
+
+  try {
+    prices = JSON.parse(targetInput.dataset.prices);
+  } catch (err) {
+    console.error('Parsing prices for product parameters error: ', err);
+    return null;
   }
 
-  fetch('/', requestProps)
-    .then((response) => {
-      if (response.status === 204) {
-        // The server has successfully fulfilled the request and that there is
-        // no additional content to send in the response payload body.
-        return response.text()
-      }
+  const relatedParams = new Set();
+  Object.entries(prices).forEach(([priceID, valuesObj]) => {
+    valuesObj.scope.forEach(paramID => {
+      const _paramID = paramID.toString();
 
-      if (response.status >= 200 && response.status < 300) {
-        // Success response. Get JSON.
-        return response.json()
+      if (_paramID !== targetInput.value.toString()) {
+        relatedParams.add(_paramID);
       }
+    });
+  });
+  const paramsInputs = document.querySelectorAll('input[id^="param-"]');
 
-      // Something wrong. Lets throw error.
-      const error = new Error(response.statusText)
-      error.response = response
-      throw error
-    })
-    .then((json) => {
-      console.info('==== response ====')
-      console.log('json: ', json)
-    })
-    .catch((err) => console.error('Product parametrs request error: ', err))
+  for (let input of paramsInputs) {
+    if (input.name === targetInput.name) {
+      continue;
+    } // prettier-ignore
+
+
+    input.disabled = targetInput.checked ? !relatedParams.has(input.value.toString()) : false;
+
+    if (input.disabled) {
+      input.checked = false;
+    }
+
+    const paramItem = input.closest('.catalog-item-detail__param-item');
+
+    if (paramItem) {
+      paramItem.classList.toggle('catalog-item-detail__param-item__state_disabled', input.disabled);
+    }
+  }
 }
-*/
 
 /***/ }),
 

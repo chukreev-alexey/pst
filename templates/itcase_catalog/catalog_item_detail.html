@@ -50,55 +50,30 @@
 
                     <div class="catalog-item-detail__right">
                         <div class="catalog-item-detail__param">
-                            {% with prices_parametres=product.get_prices_parametres %}
-                                {% regroup prices_parametres by parametr as product_parametres %}
-                                {% for group in product_parametres %}
-                                    <div class="catalog-item-detail__param-group">
-                                        <div class="catalog-item-detail__param-title">{{ group.grouper }}</div>
-                                        <div class="catalog-item-detail__param-wrapper {% if group.list|length > 10 %} catalog-item-detail__param-wrapper_type_column {% endif %}">
-                                            {% for product_parametr in group.list %}
-                                                <label class="catalog-item-detail__param-item">
-                                                    <input
-                                                        type="radio"
-                                                        class="catalog-item-detail__param-item-input"
-                                                        id="product_parametr-{{ forloop.counter0 }}"
-                                                        name="product_parametr-{{ group.grouper.pk }}"
-                                                        value="{{ product_parametr.pk }}"
-                                                        autocomplete="off"
-                                                        {% if group.list|length == 1 %}checked="checked"{% endif %}
-                                                    />
-                                                    <div class="catalog-item-detail__param-item-text">
-                                                        {{ product_parametr.value }}
-                                                    </div>
-                                                </label>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            {% endwith %}
 
-                            {% comment %}
-                                {% for price in product.prices.all %}
-                                    {% for parametr in price.get_parametres_struct %}
-                                        <div class="catalog-item-detail__param-group">
-                                            <div class="catalog-item-detail__param-title">{{ parametr.name }}</div>
-                                            {% for value in parametr.values %}
-                                                <label class="catalog-item-detail__param-item">
-                                                    <input type="radio" id="radioButton" class="catalog-item-detail__param-item-input" />
-                                                    <div class="catalog-item-detail__param-item-text">{{ value }}<</div>
-                                                </label>
-                                            {% endfor %}
-                                        </div>
-                                    {% endfor %}
-                                    {{ price.product }}
-                                    {{ price.product_article }}
-                                    {{ price.price }}
-                                    {% if price.old_price %}
-                                        {{ price.old_price }}
-                                    {% endif %}
-                                    {{ price.amount }}
-                                {% endfor %}
-                            {% endcomment %}
+                            {% for group in params_data.values %}
+                                <div class="catalog-item-detail__param-group">
+                                    <div class="catalog-item-detail__param-title">{{ group.name }}</div>
+                                    <div class="catalog-item-detail__param-wrapper{% if group.values|length > 10 %} catalog-item-detail__param-wrapper_type_column{% endif %}">
+                                        {% for pk, param in group.values.items %}
+                                            <label class="catalog-item-detail__param-item">
+                                                <input
+                                                    type="radio"
+                                                    class="catalog-item-detail__param-item-input"
+                                                    id="param-{{ pk }}"
+                                                    name="param-{{ group.pk }}"
+                                                    value="{{ pk }}"
+                                                    autocomplete="off"
+                                                    data-prices="{{ param.prices }}"
+                                                />
+                                                <div class="catalog-item-detail__param-item-text">
+                                                    {{ param.name }}
+                                                </div>
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endfor %}
 
                             <div class="catalog-item-detail__info">
                                 <div class="catalog-item-detail__count">
@@ -132,6 +107,7 @@
                                     </span>
                                 </a>
                             {% endwith %}
+
                         </div>
                     </div>
                 </div>
