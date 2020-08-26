@@ -1021,9 +1021,9 @@ sans-serif;
       transform: rotate(45deg);
     }
 
-.popup-content__link:hover:hover {
-        transform: scale(1.3);
-      }
+.popup-content__link:hover {
+      transform: scale(1.3);
+    }
 
 .popup-content__inner {
     width: 100%;

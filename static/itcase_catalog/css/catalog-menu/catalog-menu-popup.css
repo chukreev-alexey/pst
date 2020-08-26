@@ -34,6 +34,7 @@
   }
   & .catalog-group {
     &__inner-list {
+      justify-content: flex-start;
       &-link {
         &-text {
           margin: 0;
@@ -41,7 +42,7 @@
       }
       &-item {
         margin: 0;
-        flex: 0 0 25%;
+        flex: 0 0 24%;
       }
     }
   }

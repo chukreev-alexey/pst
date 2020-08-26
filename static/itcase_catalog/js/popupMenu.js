@@ -81,9 +81,11 @@ class CatalogPopupMenu {
 
 const menu = new CatalogPopupMenu()
 const $menuPopup = $('.catalog-menu__item_type_popup')
+const $menuPopupClose = $('.catalog-group__close')
 
 if ($menuPopup.length) {
   $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide)
+  $menuPopupClose.on('click', () => menu.toggle())
 
   menu.$menu
     .on('mouseenter', () => {

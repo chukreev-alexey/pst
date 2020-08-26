@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "dc9db5341924e68caa7b";
+/******/ 	var hotCurrentHash = "78ef92f0c9d33e934504";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11369,9 +11369,11 @@ class CatalogPopupMenu {
 
 const menu = new CatalogPopupMenu();
 const $menuPopup = $('.catalog-menu__item_type_popup');
+const $menuPopupClose = $('.catalog-group__close');
 
 if ($menuPopup.length) {
   $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide);
+  $menuPopupClose.on('click', () => menu.toggle());
   menu.$menu.on('mouseenter', () => {
     clearTimeout(menu.timerHide);
   }).on('mouseleave', menu.hide);
