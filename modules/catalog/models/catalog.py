@@ -32,9 +32,11 @@ from ..conf import get_settings
 
 
 class Measurement(models.Model):
+
     name = models.CharField('Обозначение', max_length=255)
 
-    class Meta(object):
+    class Meta:
+        ordering = ['name']
         verbose_name = 'Единица измерения'
         verbose_name_plural = 'Единицы измерения'
 
@@ -47,10 +49,8 @@ class Brand(models.Model):
     name = models.CharField('Название', max_length=255)
     sort = models.PositiveSmallIntegerField('Порядок сортировки', default=0)
 
-    class Meta(object):
-        ordering = [
-            'sort',
-        ]
+    class Meta:
+        ordering = ('sort', 'name')
         verbose_name = 'Бренд'
         verbose_name_plural = verbose_name + 'ы'
 
@@ -59,12 +59,14 @@ class Brand(models.Model):
 
 
 class Parametr(models.Model):
+
     name = models.CharField('Название', max_length=255)
     query_name = models.SlugField('Query name')
     is_affects_price = models.BooleanField('Влияет на цену?', default=False)
     filter_by = models.BooleanField('Фильтровать по параметру?', default=False)
 
-    class Meta(object):
+    class Meta:
+        ordering = ['name']
         verbose_name = 'Параметр'
         verbose_name_plural = 'Параметры товаров'
 
@@ -73,13 +75,15 @@ class Parametr(models.Model):
 
 
 class ProductParametr(models.Model):
+
     parametr = models.ForeignKey(Parametr,
                                  related_name='product_parametres',
                                  verbose_name='Параметры продуктов',
                                  on_delete=models.CASCADE)
     value = models.CharField('Значение параметра', max_length=255)
 
-    class Meta(object):
+    class Meta:
+        ordering = ('parametr', 'value')
         unique_together = ('parametr', 'value')
         verbose_name = 'Вариант параметра'
         verbose_name_plural = 'Варианты параметра товара'

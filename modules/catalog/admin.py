@@ -7,11 +7,9 @@ import nested_admin
 from itcase_catalog.admin import CategoryAdmin as CategoryAdminBase
 from itcase_catalog.shortcuts import get_product_model, get_category_model
 
-from ..models.catalog import (Brand, Parametr, ProductParametr, Measurement,
-                              SectionAtribute, OptionalProduct,
-                              CategorySectionAtribute)
-from ..models.parametres import (ProductImage, Price, PriceCombinations,
-                                 SeparateParametrPicking)
+from .models import (Brand, CategorySectionAtribute, Measurement,
+                     OptionalProduct, Parametr, Price, ProductImage,
+                     ProductParametr, SectionAtribute, SeparateParametrPicking)
 
 Product = get_product_model()
 Category = get_category_model()
@@ -19,45 +17,15 @@ Category = get_category_model()
 admin.site.unregister(Category)
 admin.site.unregister(Product)
 
-admin.site.register(Brand)
 admin.site.register(Measurement)
-admin.site.register(ProductParametr)
 
 
-@admin.register(PriceCombinations)
-class PriceCombinationsAdmin(admin.ModelAdmin):
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
 
-    filter_horizontal = [
-        'data',
-    ]
-
-    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
-        field = super().formfield_for_manytomany(db_field, request, **kwargs)
-        if db_field.name == 'data':
-            field.queryset = ProductParametr.objects.filter(
-                parametr__in=Parametr.objects.filter(is_affects_price=True))
-        return field
-
-
-class ProductParametrAdminInline(admin.TabularInline):
-
-    model = ProductParametr
-    extra = 0
-
-
-@admin.register(Parametr)
-class ParametrAdmin(admin.ModelAdmin):
-
-    fieldsets = ((None, {
-        'fields': ('name', 'query_name', 'is_affects_price', 'filter_by')
-    }), )
-
-    prepopulated_fields = {'query_name': ('name', )}
-
-    list_display = ('name', 'query_name', 'filter_by', 'is_affects_price')
-    list_editable = ['is_affects_price', 'filter_by']
-
-    inlines = [ProductParametrAdminInline]
+    list_display = ('name', 'sort')
+    list_editable = ['sort']
+    search_fields = ['name']
 
 
 class CategorySectionAtributeInline(admin.TabularInline):
@@ -67,7 +35,7 @@ class CategorySectionAtributeInline(admin.TabularInline):
 
     sortable_field_name = 'sort'
 
-    fieldsets = ((None, {'fields': (('name', 'sort', 'show'), 'content')}), )
+    fieldsets = [(None, {'fields': (('name', 'sort', 'show'), 'content')})]
 
 
 @admin.register(Category)
@@ -102,17 +70,25 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
     use_context_menu = True
 
 
-class SectionAtributeInline(admin.TabularInline):
+class ProductParametrAdminInline(admin.TabularInline):
 
-    model = SectionAtribute
     extra = 0
-    classes = ('grp_inline_tinymce', )
+    model = ProductParametr
 
-    sortable_field_name = 'sort'
+
+@admin.register(Parametr)
+class ParametrAdmin(admin.ModelAdmin):
 
     fieldsets = ((None, {
-        'fields': (('section_name', 'sort', 'show'), 'section_content')
+        'fields': ('name', 'query_name', 'is_affects_price', 'filter_by')
     }), )
+
+    prepopulated_fields = {'query_name': ('name', )}
+
+    list_display = ('name', 'query_name', 'filter_by', 'is_affects_price')
+    list_editable = ['is_affects_price', 'filter_by']
+
+    inlines = [ProductParametrAdminInline]
 
 
 class OptionalProductInline(admin.TabularInline):
@@ -143,6 +119,19 @@ class ProductImageInline(admin.TabularInline):
             else:
                 field.queryset = ProductParametr.objects.none()
         return field
+
+
+class SectionAtributeInline(admin.TabularInline):
+
+    model = SectionAtribute
+    extra = 0
+    classes = ('grp_inline_tinymce', )
+
+    sortable_field_name = 'sort'
+
+    fieldsets = ((None, {
+        'fields': (('section_name', 'sort', 'show'), 'section_content')
+    }), )
 
 
 class SeparateParametrPickingInline(nested_admin.NestedTabularInline):
@@ -213,4 +202,12 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
     def product_actions(self, obj):
         return ', '.join(action.name for action in obj.action_set.all())
 
-    product_actions.short_description = "Действующие акции"
+    product_actions.short_description = 'Действующие акции'
+
+
+@admin.register(ProductParametr)
+class ProductParametrAdmin(admin.ModelAdmin):
+
+    list_display = ('parametr', 'value')
+    list_filter = ['parametr']
+    search_fields = list_display

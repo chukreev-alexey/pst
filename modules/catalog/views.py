@@ -310,6 +310,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             filter_key = str(brand.pk)
             filter_data = data.get(filter_key, {})
             filter_data['name'] = brand.name
+            filter_data['sort'] = brand.sort
 
             # товары в которых есть этот бренд
             products = filter_data.get('products', set())
@@ -329,7 +330,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         data = {
             k: v
-            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
+            for k, v in sorted(list(data.items()),
+                               key=lambda i: (i[1]['sort'], i[1]['name']))
         }
 
         return data, filtered_products
