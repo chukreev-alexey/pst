@@ -25,7 +25,7 @@ class CategorySitemap(BaseSitemap):
     """Sitemap class for Categories."""
 
     def items(self):
-        """Return active pages for SiteMap."""
+        """Return categories for SiteMap."""
         from itcase_catalog.shortcuts import get_category_model
 
         return get_category_model().objects.all()
@@ -39,7 +39,7 @@ class ProductSitemap(BaseSitemap):
     """Sitemap class for Products."""
 
     def items(self):
-        """Return active pages for SiteMap."""
+        """Return products for SiteMap."""
         from itcase_catalog.shortcuts import get_product_model
 
         return get_product_model().objects.annotate(
