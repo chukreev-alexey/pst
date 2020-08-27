@@ -87,18 +87,29 @@ const initializeRangeSliders = () => {
   const $priceMin = $('input[data-price-min]')
   const $priceMax = $('input[data-price-max]')
 
+  const filterData = ItcaseFilter.getCurrentFiltersFromUrl()
+  if ('price-max' in filterData) {
+    $priceMax.val(filterData['price-max'])
+  }
+  if ('price-min' in filterData) {
+    $priceMin.val(filterData['price-min'])
+  }
+
   if ($priceMin.length && $priceMax.length) {
+    // prettier-ignore
     const valFrom = parseInt($priceMin.val(), 10) || 0
+
+    // prettier-ignore
     const valTo = parseInt($priceMax.val(), 10) || 100000
 
     // Save first min price value in catalog object for replacement filter block
     if (!ItcaseFilter.rangeFirstMinVal || valFrom < ItcaseFilter.rangeFirstMinVal) {
-      ItcaseFilter.rangeFirstMinVal = valFrom
+      ItcaseFilter.rangeFirstMinVal = parseInt($priceMin.data('price-min'), 10) || valFrom
     }
 
     // Save first max price value in catalog object for replacement filter block
     if (!ItcaseFilter.rangeFirstMaxVal || valTo > ItcaseFilter.rangeFirstMaxVal) {
-      ItcaseFilter.rangeFirstMaxVal = valTo
+      ItcaseFilter.rangeFirstMaxVal = parseInt($priceMax.data('price-max'), 10) || valTo
     }
 
     // Create range slider from empty div (no "input" is important)

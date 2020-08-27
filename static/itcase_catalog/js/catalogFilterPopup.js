@@ -1,4 +1,4 @@
-/* globals SantehCatalogFilter */
+/* globals PSTCatalogFilter */
 /* eslint indent: 0 */
 
 'use strict'
@@ -45,27 +45,27 @@ function CatalogFilterFactory() {
       return _isOpen
     },
     openCatalogFilter,
-    closeCatalogFilter
+    closeCatalogFilter,
   })
 }
 
-global.SantehCatalogFilter = new CatalogFilterFactory()
+global.PSTCatalogFilter = new CatalogFilterFactory()
 
 $(document).on('click', '.catalog-filter-popup__button', (event) => {
   event.stopPropagation()
   event.preventDefault()
 
-  if (SantehCatalogFilter.isOpen) {
-    SantehCatalogFilter.closeCatalogFilter()
+  if (PSTCatalogFilter.isOpen) {
+    PSTCatalogFilter.closeCatalogFilter()
   } else {
-    SantehCatalogFilter.openCatalogFilter()
+    PSTCatalogFilter.openCatalogFilter()
   }
 })
 
 $(document).on('click', (event) => {
   const $catalogFilter = $(event.target).closest('.catalog-filter, .catalog-filter-popup')
 
-  if (!$catalogFilter.length && SantehCatalogFilter.isOpen) {
-    SantehCatalogFilter.closeCatalogFilter()
+  if (!$catalogFilter.length && PSTCatalogFilter.isOpen) {
+    PSTCatalogFilter.closeCatalogFilter()
   }
 })
