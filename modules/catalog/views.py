@@ -162,6 +162,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
     filter_data = {}
     filter_key_brand = 'filter-brand'
+    filter_key_category = 'filter-category'
     filter_key_misc = 'filter-misc'
     filter_key_param = 'filter-param-'
     filter_key_price = 'filter-price-'
@@ -176,6 +177,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         self.filter_query_dict[self.filter_key_brand] = request.GET.getlist(
             self.filter_key_brand)
+        self.filter_query_dict[self.filter_key_category] = request.GET.getlist(
+            self.filter_key_category)
         self.filter_query_dict[self.filter_key_misc] = request.GET.getlist(
             self.filter_key_misc)
 
@@ -210,6 +213,10 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 self.filter_key_brand)
             context['filter_key_brand'] = self.filter_key_brand
 
+            context['filter_data_category'] = self.filter_data.get(
+                self.filter_key_category)
+            context['filter_key_category'] = self.filter_key_category
+
             context['filter_data_misc'] = self.filter_data.get(
                 self.filter_key_misc)
             context['filter_key_misc'] = self.filter_key_misc
@@ -241,6 +248,23 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         if products:
             filtered_products[self.filter_key_brand] = products
             filtered_products['final'] = products
+
+        _data = {}
+        products = []
+        _data, products = self.get_filter_data_category(
+            queryset, self.filter_query_dict.get(self.filter_key_category))
+        if _data:
+            data[self.filter_key_category] = _data
+        if products:
+            filtered_products[self.filter_key_category] = products
+            if 'final' not in filtered_products:
+                filtered_products['final'] = products
+            else:
+                # если применяли предыдущие фильтры,
+                # то берём только то, что совпало у всех фильтров
+                filtered_products['final'] = [
+                    pk for pk in products if pk in filtered_products['final']
+                ]
 
         _data = {}
         products = []
@@ -332,6 +356,43 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             k: v
             for k, v in sorted(list(data.items()),
                                key=lambda i: (i[1]['sort'], i[1]['name']))
+        }
+
+        return data, filtered_products
+
+    def get_filter_data_category(self, queryset, query):
+        data = {}
+        filtered_products = []
+
+        for product in self.queryset:
+            for category in product.categories.all():
+                if category.level < self.object.level:
+                    continue
+
+                # данные категории
+                filter_key = str(category.pk)
+                filter_data = data.get(filter_key, {})
+                filter_data['name'] = category.name
+
+                # товары в которых есть эта категория
+                products = filter_data.get('products', set())
+                products.add(product.pk)
+                filter_data['products'] = products
+
+                # доступен ли пункт при выбранном фильтре
+                filter_data['available'] = product in queryset
+
+                # выбран ли пункт
+                selected = filter_key in query
+                if selected:
+                    filtered_products.append(product.pk)
+                filter_data['selected'] = selected
+
+                data[filter_key] = filter_data
+
+        data = {
+            k: v
+            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
         }
 
         return data, filtered_products
@@ -624,84 +685,11 @@ class SubCategoryDetail(CategoryDetail):
 
     paginator_url_name = 'subcategory-detail'
 
-    filter_key_category = 'filter-category'
-
-    def get(self, request, *args, **kwargs):
-        self.filter_query_dict[self.filter_key_category] = request.GET.getlist(
-            self.filter_key_category)
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        if not self.hide_products:
-            context['filter_data_category'] = self.filter_data.get(
-                self.filter_key_category)
-            context['filter_key_category'] = self.filter_key_category
-
-        return context
-
     def get_filter_data(self, queryset):
-        data, filtered_products = super().get_filter_data(queryset)
-
-        _data = {}
-        products = []
-        query = self.filter_query_dict.get(self.filter_key_category)
         if not any(value for value in self.filter_query_dict.values()):
-            query.append(str(self.object.pk))
-            self.filter_query_dict[self.filter_key_category] = query
-        _data, products = self.get_filter_data_category(queryset, query)
-        if _data:
-            data[self.filter_key_category] = _data
-        if products:
-            filtered_products[self.filter_key_category] = products
-            if 'final' not in filtered_products:
-                filtered_products['final'] = products
-            else:
-                # если применяли предыдущие фильтры,
-                # то берём только то, что совпало у всех фильтров
-                filtered_products['final'] = [
-                    pk for pk in products if pk in filtered_products['final']
-                ]
-
-        return data, filtered_products
-
-    def get_filter_data_category(self, queryset, query):
-        data = {}
-        filtered_products = []
-
-        for product in self.queryset:
-            for category in product.categories.all():
-                if category.level < self.object.level:
-                    continue
-
-                # данные категории
-                filter_key = str(category.pk)
-                filter_data = data.get(filter_key, {})
-                filter_data['name'] = category.name
-
-                # товары в которых есть эта категория
-                products = filter_data.get('products', set())
-                products.add(product.pk)
-                filter_data['products'] = products
-
-                # доступен ли пункт при выбранном фильтре
-                filter_data['available'] = product in queryset
-
-                # выбран ли пункт
-                selected = filter_key in query
-                if selected:
-                    filtered_products.append(product.pk)
-                filter_data['selected'] = selected
-
-                data[filter_key] = filter_data
-
-        data = {
-            k: v
-            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
-        }
-
-        return data, filtered_products
+            self.filter_query_dict[self.filter_key_category].append(
+                str(self.object.pk))
+        return super().get_filter_data(queryset)
 
     def get_filter_reset_url(self):
         return reverse(self.paginator_url_name,
