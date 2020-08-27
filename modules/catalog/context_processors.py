@@ -14,12 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from django.urls import reverse
 
-
 from itcase_catalog.shortcuts import get_category_model
-
 
 Category = get_category_model()
 
@@ -29,8 +26,9 @@ def base_categories(request):
         Возвращает QuerySet с категориями, которые будут отображаться
         на всех страницах сайта
     '''
-
     if not request.path.startswith(reverse('admin:index')):
-        return {'catalog_menu': Category.objects.filter(in_menu=True),
-                'footer_categories': Category.objects.filter(level=0)}
+        return {
+            'catalog_menu': Category.objects.filter(active=True, in_menu=True),
+            'footer_categories': Category.objects.filter(active=True, level=0)
+        }
     return {}

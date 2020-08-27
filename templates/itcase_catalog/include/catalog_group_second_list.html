@@ -1,7 +1,7 @@
 <div class="catalog-group-second">
     <div class="catalog-group-second__wrapper">
         <ul class="catalog-group-second__list">
-            {% for subcategory in category.children.all %}
+            {% for subcategory in category.get_children_active %}
                 <li class="catalog-group-second__list-item">
                     <a href="{{ subcategory.get_absolute_url }}" class="catalog-group-second__list-item-link">
                         {{ subcategory.name }}

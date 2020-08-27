@@ -17,9 +17,7 @@
 from modules.catalog.views import CatalogIndexView
 from itcase_catalog.shortcuts import get_category_model
 
-
 Category = get_category_model()
-
 
 __all__ = ['IndexView']
 
@@ -29,7 +27,7 @@ class IndexView(CatalogIndexView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        categories = Category.objects.filter(on_main_page=True)
-        context['categories_on_main_page'] = categories
+        context['categories_on_main_page'] = Category.objects.filter(
+            active=True, on_main_page=True)
 
         return context

@@ -25,7 +25,9 @@ __all__ = ['catalog_menu']
 
 @register.inclusion_tag('itcase_catalog/include/catalog_menu.html',
                         takes_context=True)
-def catalog_menu(context, additional_class=None, title_additional_class=None,
+def catalog_menu(context,
+                 additional_class=None,
+                 title_additional_class=None,
                  queryset=None):
     '''
         catalog_menu поставляется из
@@ -60,24 +62,23 @@ def footer_categories_tag(context, queryset=None):
 
 @register.inclusion_tag('itcase_catalog/include/get_categories_by.html',
                         takes_context=True)
-def get_categories_by(context, queryset=None, **kwargs):
-    categories = ()
-    if queryset is not None:
-        categories = queryset
-    elif 'level' in kwargs:
-        categories = Category.objects.filter(level=kwargs['level'])
-    context['categories_list'] = categories
+def get_categories_by(context, level):
+    context['categories_list'] = Category.objects.filter(active=True,
+                                                         level=level)
     return context
 
 
 @register.inclusion_tag('itcase_catalog/include/catalog_group_hidden.html')
 def catalog_group_hidden(category=None, limit=5):
-    if category:
-        subcategories = category.children.all()
-        count = subcategories.count()
-        hidden_categories_count = count - limit
-        if hidden_categories_count <= 0:
-            hidden_categories_count = 0
-        return {'subcategories': subcategories,
-                'limit': str(limit),
-                'hidden_categories_count': hidden_categories_count}
+    if not category:
+        return {}
+    subcategories = category.get_children_active()
+    count = subcategories.count()
+    hidden_categories_count = count - limit
+    if hidden_categories_count <= 0:
+        hidden_categories_count = 0
+    return {
+        'subcategories': subcategories,
+        'limit': str(limit),
+        'hidden_categories_count': hidden_categories_count
+    }

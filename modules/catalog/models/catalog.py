@@ -129,6 +129,8 @@ class Category(MPTTModel, CategoryBase, SEOModel):
         verbose_name='Элементы ротатора',
         blank=True)
 
+    active = models.BooleanField('Показывать', default=True)
+
     class Meta(CategoryBase.Meta):
         pass
 
@@ -137,6 +139,9 @@ class Category(MPTTModel, CategoryBase, SEOModel):
             return reverse_lazy('subcategory-detail',
                                 args=[self.parent.slug, self.slug])
         return reverse_lazy('category-detail', args=[self.slug])
+
+    def get_children_active(self):
+        return self.children.filter(active=True)
 
     def get_products(self):
         """Return products from all nested categories."""

@@ -43,9 +43,9 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
     fieldsets = (
         (None, {
-            'fields': (('on_main_page', 'in_menu',
-                        'other_template'), 'name', 'slug', 'parent', 'image',
-                       'filter_parametres', 'rotator_units')
+            'fields': ('active', ('on_main_page', 'in_menu'), 'other_template',
+                       'name', 'slug', 'parent', 'image', 'filter_parametres',
+                       'rotator_units')
         }),
         ('Контент', {
             'fields': ['content'],
@@ -60,7 +60,7 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
     inlines = [CategorySectionAtributeInline]
 
-    prepopulated_fields = {'slug': ('name', )}
+    prepopulated_fields = {'slug': ['name']}
 
     filter_horizontal = ['filter_parametres', 'rotator_units']
 

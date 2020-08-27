@@ -169,8 +169,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
     filter_query_dict = {}
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=Category.objects.filter(
-            level__lte=1))
+        self.object = self.get_object(
+            queryset=Category.objects.filter(active=True, level__lte=1))
 
         if self.object.other_template:
             self.template_name = get_template_name('other_catalog_groups.html')
@@ -366,7 +366,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         for product in self.queryset:
             for category in product.categories.all():
-                if category.level < 2:
+                if not category.active or category.level < 2:
                     continue
 
                 # данные категории
@@ -546,7 +546,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
     def get_queryset(self):
         if self.hide_products:
-            return self.object.children.all()
+            return self.object.get_children_active()
 
         if not self.queryset:
             self.queryset = self.object.products.all()
@@ -638,7 +638,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
     @property
     def hide_products(self):
         if self.object:
-            return self.object.level == 0 and self.object.children.exists()
+            return (self.object.level == 0
+                    and self.object.get_children_active().exists())
         return False
 
     def render_to_response(self, context, **response_kwargs):
@@ -699,11 +700,12 @@ class SubCategoryDetail(CategoryDetail):
                        args=[self.object.parent.slug, self.object.slug])
 
     def get_object(self, queryset):
-        return super().get_object(Category.objects.filter(level__gte=1))
+        return super().get_object(
+            Category.objects.filter(active=True, level__gte=1))
 
     def get_queryset(self):
         self.queryset = Product.objects.filter(
-            categories__in=self.object.parent.children.all())
+            categories__in=self.object.parent.get_children_active())
         return super().get_queryset()
 
 
