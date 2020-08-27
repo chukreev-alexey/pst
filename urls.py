@@ -29,6 +29,7 @@ urlpatterns = [
         path('django-rq/', include('django_rq.urls')),
         path('filebrowser/', fb_site.urls),
         path('grappelli/', include('grappelli.urls')),
+        path('', include('itcase_redirect.admin.urls')),
         path('', include('nested_admin.urls')),
         path('', admin.site.urls),
         path('chaining/', include('smart_selects.urls')),
