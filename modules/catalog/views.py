@@ -366,13 +366,15 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         for product in self.queryset:
             for category in product.categories.all():
-                if category.level < self.object.level:
+                if category.level < 2:
                     continue
 
                 # данные категории
                 filter_key = str(category.pk)
                 filter_data = data.get(filter_key, {})
                 filter_data['name'] = category.name
+                filter_data['lft'] = category.lft
+                filter_data['tree_id'] = category.tree_id
 
                 # товары в которых есть эта категория
                 products = filter_data.get('products', set())
@@ -392,7 +394,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         data = {
             k: v
-            for k, v in sorted(list(data.items()), key=lambda i: i[1]['name'])
+            for k, v in sorted(list(data.items()),
+                               key=lambda i: (i[1]['tree_id'], i[1]['lft']))
         }
 
         return data, filtered_products
