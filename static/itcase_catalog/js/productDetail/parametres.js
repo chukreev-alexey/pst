@@ -54,8 +54,9 @@ class ParametresClass {
       return null
     }
 
+    const pricesList = Object.entries(prices)
     const relatedParams = new Set()
-    Object.entries(prices).forEach(([priceID, valuesObj]) => {
+    pricesList.forEach(([priceID, valuesObj]) => {
       valuesObj.scope.forEach((paramID) => {
         const _paramID = paramID.toString()
         if (_paramID !== targetInput.value.toString()) {
@@ -71,6 +72,7 @@ class ParametresClass {
       const groupBlock = groupBlocks.find((div) => div.dataset.groupPk === groupPk)
       const inputs = groupBlock.querySelectorAll('input[id^="param-"]')
 
+      let needSetNewParam = false
       for (let input of inputs) {
         // prettier-ignore
         input.disabled = (targetInput.checked)
@@ -79,12 +81,22 @@ class ParametresClass {
 
         if (input.disabled) {
           input.checked = false
+          needSetNewParam = true
         }
 
         const paramItem = input.closest('.catalog-item-detail__param-item')
         if (paramItem) {
           paramItem.classList.toggle('catalog-item-detail__param-item_state_disabled', input.disabled)
         }
+      }
+
+      if (needSetNewParam) {
+        const firstPrice = pricesList[0][1]
+        firstPrice.scope.forEach((paramID) => {
+          if (paramID.toString() !== targetInput.value.toString()) {
+            $(`input[id="param-${paramID}"]`).click()
+          }
+        })
       }
     })
 
