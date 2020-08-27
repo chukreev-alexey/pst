@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'itcase_logos',
     'itcase_pages',
     'itcase_paginator',
+    'itcase_redirect',
     'itcase_rotator',
     'itcase_search',
 
@@ -87,6 +88,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'itcase_pages.middleware.PageMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware',
+    'itcase_redirect.middleware.RedirectMiddleware',
 ]
 
 # A string representing the full Python import path to your root URLconf.
