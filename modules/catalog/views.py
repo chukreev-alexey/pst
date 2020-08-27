@@ -727,6 +727,7 @@ class ProductDetail(ProductDetailBase):
                 include_self=True)
 
         context['params_data'] = self.get_params_data()
+        context['params_initial'] = self.get_params_initial()
 
         return context
 
@@ -788,4 +789,13 @@ class ProductDetail(ProductDetailBase):
             for param in list(value['values'].values()):
                 param['prices'] = json.dumps(param['prices'])
 
+        return data
+
+    def get_params_initial(self):
+        data = {}
+        price = self.object.get_lowest_price()
+        if price:
+            data['scope'] = price.price_parametres.values_list(
+                'parametr_value_id', flat=True)
+            data['price'] = price.price
         return data

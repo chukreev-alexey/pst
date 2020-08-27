@@ -22,8 +22,8 @@
                 <a href="{{ product.get_absolute_url }}" class="catalog-item__title-link">{{ product.name }}</a>
             </div>
             <div class="catalog-item__desc">{{ product.short_description }}</div>
-            {% if product.get_lowest_price %}
-                {% with price=product.get_lowest_price %}
+            {% with price=product.get_lowest_price %}
+                {% if product.get_lowest_price %}
                     <div class="catalog-item__price">
                         <div class="catalog-item__price-text">
                             {% if price.price != 0 %}
@@ -59,9 +59,8 @@
                             {% endif %}
                         </div>
                     </a>
-                {% endwith %}
-
-            {% endif %}
+                {% endif %}
+            {% endwith %}
         </div>
     </div>
 </div>
