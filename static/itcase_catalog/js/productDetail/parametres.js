@@ -91,7 +91,7 @@ function activateRelatedParams(targetInput) {
 
     const paramItem = input.closest('.catalog-item-detail__param-item')
     if (paramItem) {
-      paramItem.classList.toggle('catalog-item-detail__param-item__state_disabled', input.disabled)
+      paramItem.classList.toggle('catalog-item-detail__param-item_state_disabled', input.disabled)
     }
   }
 
@@ -192,7 +192,7 @@ class ParametresClass {
 
         const paramItem = input.closest('.catalog-item-detail__param-item')
         if (paramItem) {
-          paramItem.classList.toggle('catalog-item-detail__param-item__state_disabled', input.disabled)
+          paramItem.classList.toggle('catalog-item-detail__param-item_state_disabled', input.disabled)
         }
       }
     })

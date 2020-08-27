@@ -87,7 +87,7 @@
         {% endif %}
 
         {% if filter_data_price %}
-            <div class="catalog-filter-group">
+            <div class="catalog-filter-group catalog-filter-group_state_open">
                 <div class="catalog-filter-group__title">Стоимость</div>
                 <div class="catalog-filter-group__range">
                     <input class="catalog-filter-group__range-item" type="text" name="{{ filter_key_price }}min" value="{{ filter_data_price.min }}" data-price-min="true" />
@@ -100,7 +100,7 @@
 
         {% if filter_data_param %}
             {% for group in filter_data_param.values %}
-                <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="param">
+                <div class="catalog-filter-group" data-group-key="param">
                     <div class="catalog-filter-group__title">{{ group.name }}</div>
                     <div class="catalog-filter-group__list">
                         {% for pk, param in group.values.items %}

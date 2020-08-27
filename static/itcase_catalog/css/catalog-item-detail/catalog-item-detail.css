@@ -259,6 +259,7 @@
         &-text {
           color: var(--color-surface-text);
           padding: 0 0 0 24px;
+          position: relative;
           @mixin font normal, 16px, 16px, 18px, 24px, var(--font-title-secondary);
           @media (--mobile) {
             padding: 0 0 0 16px;
@@ -274,6 +275,7 @@
             left: 4px;
             top: 50%;
             z-index: 2;
+            margin: -1px 0 0 0;
             transform: translate(0, -50%);
           }
           &::after {
@@ -289,12 +291,22 @@
             left: 0;
             top: 50%;
             z-index: 1;
+            margin: -1px 0 0 0;
             transform: translate(0, -50%);
           }
         }
-        &__state_disabled {
-          border: solid 1px gray;
-          background-color: gray;
+        &_state_disabled {
+          & .catalog-item-detail__param-item-text {
+            text-decoration: line-through;
+            color: var(--color-surface-text-disabled);
+            &::before {
+              background: var(--color-surface);
+              display: none !important;
+            }
+            &::after {
+              border: solid 1px var(--color-surface-border-disabled);
+            }
+          }
         }
       }
     }

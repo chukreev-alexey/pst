@@ -42,6 +42,7 @@
   --color-surface-border: #333;
   --color-surface-border-hover: #000;
   --color-surface-border-focus: #000;
+  --color-surface-border-disabled: #999;
 
   --color-accent: #fe0201;
   --color-accent-hover: color(rgba(#fe0201, 1) l(30%));

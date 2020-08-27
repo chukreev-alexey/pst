@@ -1,24 +1,22 @@
-{% if products_groups.items|length != 0 %}
-    {% for group, products in products_groups.items %}
-        <div class="catalog-list catalog-list_type_scroll">
-            <div class="catalog-group" data-category="{{ group }}">
-                <div class="catalog-group__title">
-                    {% if group == 'recommended' %}Рекомендуем{% endif %}
-                    {% if group == 'hit' %}Хиты продаж{% endif %}
-                    {% if group == 'action' %}Акции и распродажи{% endif %}
-                </div>
-                <div class="catalog-group__inner">
-                    <div class="catalog-list catalog-list_type_scroll">
-                        {% for row in products %}
-                            {% for product in row %}
-                                {% with item_class='catalog-item_type_main-page' %}
-                                    {% include 'itcase_catalog/include/catalog_item.html' %}
-                                {% endwith %}
-                            {% endfor %}
+{% for group, products in products_groups.items %}
+    <div class="catalog-list catalog-list_type_scroll">
+        <div class="catalog-group" data-category="{{ group }}">
+            <div class="catalog-group__title">
+                {% if group == 'recommended' %}Рекомендуем{% endif %}
+                {% if group == 'hit' %}Хиты продаж{% endif %}
+                {% if group == 'action' %}Акции и распродажи{% endif %}
+            </div>
+            <div class="catalog-group__inner">
+                <div class="catalog-list catalog-list_type_scroll">
+                    {% for row in products %}
+                        {% for product in row %}
+                            {% with item_class='catalog-item_type_main-page' %}
+                                {% include 'itcase_catalog/include/catalog_item.html' %}
+                            {% endwith %}
                         {% endfor %}
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    {% endfor %}
-{% endif %}
+    </div>
+{% endfor %}

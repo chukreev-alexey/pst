@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9208414fa38083961952";
+/******/ 	var hotCurrentHash = "6f94f9dda5b60e45386b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -16842,7 +16842,7 @@ function activateRelatedParams(targetInput) {
 
     const paramItem = input.closest('.catalog-item-detail__param-item')
     if (paramItem) {
-      paramItem.classList.toggle('catalog-item-detail__param-item__state_disabled', input.disabled)
+      paramItem.classList.toggle('catalog-item-detail__param-item_state_disabled', input.disabled)
     }
   }
 
@@ -16942,7 +16942,7 @@ class ParametresClass {
         const paramItem = input.closest('.catalog-item-detail__param-item');
 
         if (paramItem) {
-          paramItem.classList.toggle('catalog-item-detail__param-item__state_disabled', input.disabled);
+          paramItem.classList.toggle('catalog-item-detail__param-item_state_disabled', input.disabled);
         }
       }
     });
