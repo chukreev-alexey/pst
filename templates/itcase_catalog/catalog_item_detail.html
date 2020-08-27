@@ -3,9 +3,18 @@
 {% load fb_versions l10n static catalog_tags %}
 
 {% block title %}
-    {{ product.name }}
+    {{ product.seo_title|default:product.name }}
     {% for crumb in catalog_breadcrumbs %} | {{ crumb.name }} {% endfor %}
 {% endblock title %}
+
+{% block meta %}
+    <meta name="description" content="{{ product.seo_description|default:'' }}" />
+    <meta name="keywords" content="{{ product.seo_keywords|default:'' }}" />
+    {% if product.seo_other %}
+        {{ product.seo_other|safe }}
+    {% endif %}
+{% endblock %}
+
 
 {% block content %}
     <div class="wrapper">
