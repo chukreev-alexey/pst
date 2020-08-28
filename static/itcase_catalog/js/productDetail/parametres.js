@@ -2,122 +2,6 @@
 
 'use strict'
 
-/*
-// Event for unchecking radio input.
-// Handle mousedown event on checked radio inputs for groups of product paramentrs.
-// eg: "Фактура", "Цвет", "Покрытие" and etc.
-$(document).on(
-  'mousedown',
-  '.catalog-item-detail__param-item:has(input[id^="param-"]:checked)',
-  function (event) {
-    const radioButton = this.querySelector('input')
-    // Save indicator to accept change checked state of radio input in "change" event
-    // and set "checked" attr to "false".
-    radioButton.dataset._blockChange = true
-    radioButton.checked = false
-  }
-)
-
-$(document).on('change', 'input[id^="param-"]', function (event) {
-  let blockChange
-  try {
-    // "blockChange" in dataset as string. Convert string to boolean.
-    blockChange = JSON.parse(this.dataset._blockChange)
-  } catch (e) {
-    blockChange = false
-  }
-
-  // If input is "checked" and user click on it, we check indicator "blockChange"
-  // and set "checked" attr to "false" for unchecking radio input.
-  if (this.checked && blockChange) {
-    this.checked = false
-  }
-
-  // Clean "blockChange" for next event handling.
-  this.dataset._blockChange = false
-
-  // Disable unrelated params-inputs and enable related. Current input maybe unchecked.
-  activateRelatedParams(this)
-
-  // Disable unrelated params-inputs and enable related for another checked radio.
-  // TODO: do it on unchecking current input? (or always?)
-  const anotherCheckedInputs = document.querySelectorAll(
-    `input[id^="param-"]:checked:not(#${this.id})`
-  )
-  for (let input of anotherCheckedInputs) {
-    activateRelatedParams(input)
-  }
-})
-
-function activateRelatedParams(targetInput) {
-  // "ID комплектации": {
-  //   "scope": [ "ID связанного товара", "ID связанного товара", ... ],
-  //   "price": "цена комплектации"
-  // }
-
-  let prices = {}
-  try {
-    prices = JSON.parse(targetInput.dataset.prices)
-  } catch (err) {
-    console.error('Parsing prices for product parameters error: ', err)
-    return null
-  }
-
-  const relatedParams = new Set()
-  Object.entries(prices).forEach(([priceID, valuesObj]) => {
-    valuesObj.scope.forEach((paramID) => {
-      const _paramID = paramID.toString()
-      if (_paramID !== targetInput.value.toString()) {
-        relatedParams.add(_paramID)
-      }
-    })
-  })
-
-  const paramsInputs = document.querySelectorAll('input[id^="param-"]')
-
-  for (let input of paramsInputs) {
-    if (input.name === targetInput.name) {
-      continue
-    }
-
-    // prettier-ignore
-    input.disabled = (targetInput.checked)
-      ? !relatedParams.has(input.value.toString())
-      : false
-
-    if (input.disabled) {
-      input.checked = false
-    }
-
-    const paramItem = input.closest('.catalog-item-detail__param-item')
-    if (paramItem) {
-      paramItem.classList.toggle('catalog-item-detail__param-item_state_disabled', input.disabled)
-    }
-  }
-
-  showInfoForSelectedParams()
-}
-
-function showInfoForSelectedParams() {
-  const checkedInputs = document.querySelectorAll('input[id^="param-"]:checked')
-  const firstInput = checkedInputs[0]
-
-  if (!firstInput) {
-    return null
-  }
-
-  let prices = {}
-  try {
-    prices = JSON.parse(firstInput.dataset.prices)
-  } catch (err) {
-    console.error('Parsing prices for product parameters error: ', err)
-    return null
-  }
-
-  const activeParams = Array.from(checkedInputs).map((input) => input.value)
-}
-*/
-
 import maxBy from 'lodash/maxBy'
 import isEqual from 'lodash/isEqual'
 import sortBy from 'lodash/sortBy'
@@ -145,9 +29,16 @@ class ParametresClass {
     this.groupBloks.forEach((div, i) => {
       this.priorityList.add(div.dataset.groupPk)
     })
+
+    if (firstDiv) {
+      const checkedParam = firstDiv.querySelector('input[id^="param-"]:checked')
+      if (checkedParam) {
+        this.activateRelatedParams(checkedParam, 1)
+      }
+    }
   }
 
-  activateRelatedParams(targetInput) {
+  activateRelatedParams(targetInput, slideSpeed) {
     const targetGroupPk = targetInput.closest('*[data-group-pk]').dataset.groupPk
     const groupBlocks = Array.from(this.groupBloks)
 
@@ -163,8 +54,9 @@ class ParametresClass {
       return null
     }
 
+    const pricesList = Object.entries(prices)
     const relatedParams = new Set()
-    Object.entries(prices).forEach(([priceID, valuesObj]) => {
+    pricesList.forEach(([priceID, valuesObj]) => {
       valuesObj.scope.forEach((paramID) => {
         const _paramID = paramID.toString()
         if (_paramID !== targetInput.value.toString()) {
@@ -180,6 +72,7 @@ class ParametresClass {
       const groupBlock = groupBlocks.find((div) => div.dataset.groupPk === groupPk)
       const inputs = groupBlock.querySelectorAll('input[id^="param-"]')
 
+      let needSetNewParam = false
       for (let input of inputs) {
         // prettier-ignore
         input.disabled = (targetInput.checked)
@@ -188,6 +81,7 @@ class ParametresClass {
 
         if (input.disabled) {
           input.checked = false
+          needSetNewParam = true
         }
 
         const paramItem = input.closest('.catalog-item-detail__param-item')
@@ -195,12 +89,21 @@ class ParametresClass {
           paramItem.classList.toggle('catalog-item-detail__param-item_state_disabled', input.disabled)
         }
       }
+
+      if (needSetNewParam) {
+        const firstPrice = pricesList[0][1]
+        firstPrice.scope.forEach((paramID) => {
+          if (paramID.toString() !== targetInput.value.toString()) {
+            $(`input[id="param-${paramID}"]`).click()
+          }
+        })
+      }
     })
 
-    this.showInfoForSelectedParams(targetInput)
+    this.showInfoForSelectedParams(targetInput, slideSpeed)
   }
 
-  showInfoForSelectedParams(targetInput) {
+  showInfoForSelectedParams(targetInput, slideSpeed) {
     const checkedInputs = document.querySelectorAll('input[id^="param-"]:checked')
     const firstInput = checkedInputs[0]
 
@@ -250,25 +153,142 @@ class ParametresClass {
       addButton.dataset[`amount-${priceID}`] = amount
       addButton.href = `${addUrl}?product=${priceID}&amount-${priceID}=${amount}`
 
-      this.slideToActualImage(targetInput, priceID)
+      this.slideToActualImage(targetInput, priceID, slideSpeed)
     }
   }
 
-  slideToActualImage(targetInput, priceID) {
+  slideToActualImage(targetInput, priceID, slideSpeed) {
     const galleryBlock = document.querySelector('.catalog-item-gallery')
     if (galleryBlock) {
       const swiper = galleryBlock.swiper
       const iamge = document.querySelector(`img[data-price-pk="${priceID}"]`)
       const slide = iamge.closest('*[data-swiper-slide-index]')
-      swiper.slideTo(slide.dataset.swiperSlideIndex)
+      swiper.slideTo(slide.dataset.swiperSlideIndex, slideSpeed)
     }
   }
 }
 
-$(document).ready(function () {
-  global.Parametres = new ParametresClass()
+global.Parametres = new ParametresClass()
 
-  $(document).on('change', 'input[id^="param-"]', (event) => {
-    Parametres.activateRelatedParams(event.target)
-  })
+$(document).on('change', 'input[id^="param-"]', (event) => {
+  Parametres.activateRelatedParams(event.target)
 })
+
+// $(document).ready(function () {
+// })
+
+/*
+  // Event for unchecking radio input.
+  // Handle mousedown event on checked radio inputs for groups of product paramentrs.
+  // eg: "Фактура", "Цвет", "Покрытие" and etc.
+  $(document).on(
+    'mousedown',
+    '.catalog-item-detail__param-item:has(input[id^="param-"]:checked)',
+    function (event) {
+      const radioButton = this.querySelector('input')
+      // Save indicator to accept change checked state of radio input in "change" event
+      // and set "checked" attr to "false".
+      radioButton.dataset._blockChange = true
+      radioButton.checked = false
+    }
+  )
+
+  $(document).on('change', 'input[id^="param-"]', function (event) {
+    let blockChange
+    try {
+      // "blockChange" in dataset as string. Convert string to boolean.
+      blockChange = JSON.parse(this.dataset._blockChange)
+    } catch (e) {
+      blockChange = false
+    }
+
+    // If input is "checked" and user click on it, we check indicator "blockChange"
+    // and set "checked" attr to "false" for unchecking radio input.
+    if (this.checked && blockChange) {
+      this.checked = false
+    }
+
+    // Clean "blockChange" for next event handling.
+    this.dataset._blockChange = false
+
+    // Disable unrelated params-inputs and enable related. Current input maybe unchecked.
+    activateRelatedParams(this)
+
+    // Disable unrelated params-inputs and enable related for another checked radio.
+    // TODO: do it on unchecking current input? (or always?)
+    const anotherCheckedInputs = document.querySelectorAll(
+      `input[id^="param-"]:checked:not(#${this.id})`
+    )
+    for (let input of anotherCheckedInputs) {
+      activateRelatedParams(input)
+    }
+  })
+
+  function activateRelatedParams(targetInput) {
+    // "ID комплектации": {
+    //   "scope": [ "ID связанного товара", "ID связанного товара", ... ],
+    //   "price": "цена комплектации"
+    // }
+
+    let prices = {}
+    try {
+      prices = JSON.parse(targetInput.dataset.prices)
+    } catch (err) {
+      console.error('Parsing prices for product parameters error: ', err)
+      return null
+    }
+
+    const relatedParams = new Set()
+    Object.entries(prices).forEach(([priceID, valuesObj]) => {
+      valuesObj.scope.forEach((paramID) => {
+        const _paramID = paramID.toString()
+        if (_paramID !== targetInput.value.toString()) {
+          relatedParams.add(_paramID)
+        }
+      })
+    })
+
+    const paramsInputs = document.querySelectorAll('input[id^="param-"]')
+
+    for (let input of paramsInputs) {
+      if (input.name === targetInput.name) {
+        continue
+      }
+
+      // prettier-ignore
+      input.disabled = (targetInput.checked)
+        ? !relatedParams.has(input.value.toString())
+        : false
+
+      if (input.disabled) {
+        input.checked = false
+      }
+
+      const paramItem = input.closest('.catalog-item-detail__param-item')
+      if (paramItem) {
+        paramItem.classList.toggle('catalog-item-detail__param-item_state_disabled', input.disabled)
+      }
+    }
+
+    showInfoForSelectedParams()
+  }
+
+  function showInfoForSelectedParams() {
+    const checkedInputs = document.querySelectorAll('input[id^="param-"]:checked')
+    const firstInput = checkedInputs[0]
+
+    if (!firstInput) {
+      return null
+    }
+
+    let prices = {}
+    try {
+      prices = JSON.parse(firstInput.dataset.prices)
+    } catch (err) {
+      console.error('Parsing prices for product parameters error: ', err)
+      return null
+    }
+
+    const activeParams = Array.from(checkedInputs).map((input) => input.value)
+  }
+*/

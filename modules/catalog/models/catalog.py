@@ -25,7 +25,7 @@ from mptt.models import MPTTModel
 from tinymce_4.fields import TinyMCEModelField
 
 from itcase_catalog.models import ProductBase, CategoryBase
-from itcase_common.models import SEOModel
+from itcase_common.models import SEOModel, ChangeCreateModel
 from itcase_common.models.mixins import FieldExistsMixin
 
 from ..conf import get_settings
@@ -92,7 +92,7 @@ class ProductParametr(models.Model):
         return f'{self.parametr.name}: {self.value}'
 
 
-class Category(MPTTModel, CategoryBase, SEOModel):
+class Category(MPTTModel, CategoryBase, SEOModel, ChangeCreateModel):
 
     slug = models.SlugField('Slug',
                             max_length=255,
@@ -171,7 +171,7 @@ class CategorySectionAtribute(models.Model):
         return self.name
 
 
-class Product(ProductBase, FieldExistsMixin, SEOModel):
+class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
 
     brand = models.ForeignKey(Brand,
                               related_name='products',

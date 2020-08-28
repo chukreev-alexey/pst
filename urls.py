@@ -15,13 +15,24 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 
 from filebrowser.sites import site as fb_site
 from rest_framework.authtoken import views as rest_token_views
+from itcase_pages.sitemap import sitemaps as itcase_pages_sitemaps
+from itcase_feed.sitemap import sitemaps as itcase_feed_sitemaps
+from modules.catalog.sitemap import sitemaps as catalog_sitemaps
 
 admin.autodiscover()
+
+
+sitemaps = {}
+sitemaps.update(itcase_pages_sitemaps)
+sitemaps.update(itcase_feed_sitemaps)
+sitemaps.update(catalog_sitemaps)
+
 
 urlpatterns = [
 
@@ -34,6 +45,9 @@ urlpatterns = [
         path('', admin.site.urls),
         path('chaining/', include('smart_selects.urls')),
     ])),
+
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
 
     path('rest/', include([
         path('token/', rest_token_views.obtain_auth_token),
