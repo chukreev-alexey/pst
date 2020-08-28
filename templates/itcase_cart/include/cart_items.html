@@ -1,32 +1,46 @@
-{% load itcase_common l10n %}
+{% load itcase_common l10n fb_versions %}
 
 <div class="cart-list">
     {% for item in cart_items %}
-        {% with product=item.product.product price=item.price|floatformat:'-2' %}
+        {% with complectation=item.product product=item.product.product price=item.price|floatformat:'-2' %}
             <div class="cart-list__item">
                 <div class="cart-list__item-image">
-                    {% if product.image.exists %}
-                        <img src="{{ product.image.url }}" class="catalog-item__image-image" />
+                    {% if complectation.image.exists %}
+                        <img src="{% version complectation.image 'catalog_detail' %}" class="catalog-item__image-image" />
                     {% endif %}
                 </div>
                 <div class="cart-list__item-info">
-                    <a href="{{ product.get_absolute_url }}" class="cart-list__item-info-title">{{ product.name }}</a>
+                    <a href="{{ product.get_absolute_url }}" class="cart-list__item-info-title">
+                      {{ product.name }}
+                    </a>
+                    <div>
+                      {% for parameter in complectation.price_parametres.all %}
+                        {{ parameter.parametr_value }} <br />
+                      {% endfor %}
+                    </div>
                     <div class="cart-list__item-info-state">
                         <div class="cart-list__item-info-state-text">Под заказ</div>
                     </div>
                 </div>
+
                 <div class="cart-list__item-count">
+                    <div class="cart-list__item-count-button cart-list__item-count-button_action_minus" data-input-name="amount-{{ complectation.pk|unlocalize }}">&nbsp;</div>
+
                     <input class="cart-list__item-count-input"
-                           name="amount-{{ product.pk|unlocalize }}"
+                           name="amount-{{ complectation.pk|unlocalize }}"
                            value="{{ item.amount|unlocalize }}"
-                           data-product="{{ product.pk|unlocalize }}"
+                           data-product="{{ complectation.pk|unlocalize }}"
                            data-step="{{ product.get_allowed_size }}"
                            data-price="{{ price|unlocalize }}"
                            data-item-amount="{{ product.remains }}"
                            data-action="{{ view.ACTION_PRODUCT_AMOUNT }}"
                            maxlength="3"
                            type="text" />
+
+                    <div class="cart-list__item-count-button cart-list__item-count-button_action_plus" data-input-name="amount-{{ complectation.pk|unlocalize }}">&nbsp;</div>
                 </div>
+
+
                 <div class="cart-list__item-cost">
                     {{ price }} рубл{{ price|pytils_choose_plural:'ь,я,ей' }}
                     {% with subtotal=item.total|floatformat:'-2' %}
@@ -34,10 +48,10 @@
                     {% endwith %}
                 </div>
                 <div class="cart-list__item-action">
-                    <a href="{% url 'itcase_cart:cart_remove' %}?product={{ product.pk }}"
+                    <a href="{% url 'itcase_cart:cart_remove' %}?product={{ complectation.pk }}"
                        class="cart-list__item-action-link"
-                       data-product="{{ product.pk }}"
-                       data-amount-{{ product.pk }}="{{ product.get_allowed_size|unlocalize }}">&nbsp;</a>
+                       data-product="{{ complectation.pk }}"
+                       data-amount-{{ complectation.pk }}="{{ product.get_allowed_size|unlocalize }}">&nbsp;</a>
                 </div>
             </div>
         {% endwith %}
