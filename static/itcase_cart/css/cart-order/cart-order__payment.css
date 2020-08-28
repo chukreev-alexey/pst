@@ -12,7 +12,7 @@
     position: relative;
     &:hover {
       &::after {
-        border: solid 1px var(--color-blue);
+        border: solid 1px var(--color-surface-border-hover);
       }
     }
     &::before {

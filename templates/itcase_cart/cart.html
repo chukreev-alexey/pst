@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Заказ{% endblock title %}
+
+{% block content %}
+    {% with title="Заказ" empty_message="Ваш заказ пуст" %}
+        {% include 'itcase_cart/include/cart_detail.html' %}
+    {% endwith %}
+{% endblock content %}

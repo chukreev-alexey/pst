@@ -37,7 +37,7 @@
                     <a href="{% url 'itcase_cart:cart_remove' %}?product={{ product.pk }}"
                        class="cart-list__item-action-link"
                        data-product="{{ product.pk }}"
-                       data-amount-{{ product.pk }}="{{ product.get_allowed_size|unlocalize }}">убрать</a>
+                       data-amount-{{ product.pk }}="{{ product.get_allowed_size|unlocalize }}">&nbsp;</a>
                 </div>
             </div>
         {% endwith %}
