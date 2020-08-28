@@ -42,13 +42,10 @@ class ProductSitemap(BaseSitemap):
         """Return products for SiteMap."""
         from itcase_catalog.shortcuts import get_product_model
 
-        return get_product_model().objects.annotate(
-            category_max_level=Max('categories__level'))
+        return get_product_model().objects.all()
 
     def priority(self, obj):
-        """Set max priority for root nodes."""
-        level = obj.category_max_level if obj.category_max_level else 2
-        return float(pow(0.9, level + 1))
+        return 0.81
 
 
 sitemaps = {}
