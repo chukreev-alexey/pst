@@ -164,7 +164,8 @@ class ParametresClass {
       const iamge = document.querySelector(`img[data-price-pk="${priceID}"]`)
       if (iamge) {
         const slide = iamge.closest('*[data-swiper-slide-index]')
-        swiper.slideTo(slide.dataset.swiperSlideIndex, slideSpeed)
+        const index = parseInt(slide.dataset.swiperSlideIndex) || 0
+        swiper.slideToLoop(index, slideSpeed)
       }
     }
   }
