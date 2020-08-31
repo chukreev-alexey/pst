@@ -205,6 +205,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         context['products'] = context['page_obj']
 
+        context['filter_data_price'] = {}  # need for actual price
+
         if self.hide_products:
             context['categories'] = context['page_obj']
         else:
@@ -732,6 +734,8 @@ class ProductDetail(ProductDetailBase):
 
         context['params_data'] = self.get_params_data()
         context['params_initial'] = self.get_params_initial()
+
+        context['filter_data_price'] = {}  # need for actual price
 
         return context
 
