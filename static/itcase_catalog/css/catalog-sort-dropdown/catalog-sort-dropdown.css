@@ -65,29 +65,32 @@
       }
       &_sort_default {
         &::before {
-          min-width: 24px;
-          min-height: 24px;
-          content: '-';
+          min-width: 32px;
+          min-height: 32px;
+          content: '';
           display: block;
-          margin: 0 12px 0 0;
+          background: url('./../../img/icon/default.svg') no-repeat 0 50%;
+          background-size: 50%;
         }
       }
       &_sort_asc {
         &::before {
-          min-width: 24px;
-          min-height: 24px;
-          content: '>';
+          min-width: 32px;
+          min-height: 32px;
+          content: ' ';
           display: block;
-          margin: 0 12px 0 0;
+          background: url('./../../img/icon/asc.svg') no-repeat 0 50%;
+          background-size: 50%;
         }
       }
       &_sort_desc {
         &::before {
-          min-width: 24px;
-          min-height: 24px;
-          content: '<';
+          min-width: 32px;
+          min-height: 32px;
+          content: '';
           display: block;
-          margin: 0 12px 0 0;
+          background: url('./../../img/icon/desc.svg') no-repeat 0 50%;
+          background-size: 50%;
         }
       }
     }

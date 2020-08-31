@@ -13,14 +13,16 @@
                     <a href="{{ product.get_absolute_url }}" class="cart-list__item-info-title">
                       {{ product.name }}
                     </a>
-                    <div>
-                      {% for parameter in complectation.price_parametres.all %}
-                        {{ parameter.parametr_value }} <br />
-                      {% endfor %}
+                    <div class="cart-list__item-info-param">
+                        {% for parameter in complectation.price_parametres.all %}
+                            <div class="cart-list__item-info-param-item">{{ parameter.parametr_value }}</div>
+                        {% endfor %}
                     </div>
-                    <div class="cart-list__item-info-state">
-                        <div class="cart-list__item-info-state-text">Под заказ</div>
-                    </div>
+                    {% if price == '0' %}
+                      <div class="cart-list__item-info-state">
+                          <div class="cart-list__item-info-state-text">Под заказ</div>
+                      </div>
+                    {% endif %}
                 </div>
 
                 <div class="cart-list__item-count">
@@ -40,13 +42,12 @@
                     <div class="cart-list__item-count-button cart-list__item-count-button_action_plus" data-input-name="amount-{{ complectation.pk|unlocalize }}">&nbsp;</div>
                 </div>
 
-
                 <div class="cart-list__item-cost">
-                    {{ price }} рубл{{ price|pytils_choose_plural:'ь,я,ей' }}
-                    {% with subtotal=item.total|floatformat:'-2' %}
-                        {{ subtotal }} рубл{{ subtotal|pytils_choose_plural:'ь,я,ей' }}
-                    {% endwith %}
+                  {% if price != '0' %}
+                      {{ price }} р
+                  {% endif %}
                 </div>
+
                 <div class="cart-list__item-action">
                     <a href="{% url 'itcase_cart:cart_remove' %}?product={{ complectation.pk }}"
                        class="cart-list__item-action-link"
@@ -57,5 +58,7 @@
         {% endwith %}
     {% endfor %}
 
-    {% include 'itcase_cart/include/cart_items_sum.html' %}
+    {% with simple_ruble=True %}
+      {% include 'itcase_cart/include/cart_items_sum.html' %}
+    {% endwith %}
 </div>

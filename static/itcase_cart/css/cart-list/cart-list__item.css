@@ -12,9 +12,6 @@
     padding: 0 30px 0 0;
     margin: 0 0 20px 0;
   }
-  @media (--mobile-large), (--mobile-huge) {
-    padding: 0 60px 0 0;
-  }
   &_state_deleted {
     min-height: 0;
     max-height: 200px;
@@ -67,20 +64,27 @@
       width: 35%;
     }
     &-title {
-      font: 14px/18px var(--font);
-      color: var(--color-blue);
+      @mixin font bold, 14px, 18px, 24px, 18px, var(--font-title-secondary);
+      color: var(--color-neutral-text);
       display: inline-block;
       &:hover {
-        color: var(--color-orange);
+        color: var(--color-neutral-text-hover);
+      }
+    }
+    &-param {
+      &-item {
+        padding: 4px 0;
+        @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
+        color: var(--color-neutral-text);
       }
     }
     &-state {
       &-text {
         @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
-        color: #fff;
-        background: var(--color-blue);
-        padding: 4px 13px 2px 13px;
-        margin: 7px 0 0 0;
+        color: var(--color-primary-text);
+        background: var(--color-primary);
+        padding: 6px 16px;
+        margin: 12px 0 0 0;
         display: inline-block;
       }
       &_exist {
@@ -95,7 +99,7 @@
   }
   &-count {
     width: 180px;
-    margin: 0 30px;
+    margin: -8px 30px 0 30px;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -134,12 +138,12 @@
       }
       &_action {
         &_minus {
-          background: var(--color-orange);
+          background: var(--color-primary);
           margin: 0 10px 0 0;
           &::before {
             width: 13px;
             height: 2px;
-            background: #fff;
+            background: var(--color-primary-text);
             position: absolute;
             content: '';
             display: block;
@@ -147,19 +151,19 @@
             top: 11px;
           }
           &:hover {
-            background: #000;
+            background: var(--color-primary-hover);
           }
         }
         &_plus {
-          background: var(--color-blue);
+          background: var(--color-primary);
           margin: 0 0 0 10px;
           &:hover {
-            background: #000;
+            background: var(--color-primary-hover);
           }
           &::before {
             width: 13px;
             height: 2px;
-            background: #fff;
+            background: var(--color-primary-text);
             position: absolute;
             content: '';
             display: block;
@@ -169,7 +173,7 @@
           &::after {
             width: 13px;
             height: 2px;
-            background: #fff;
+            background: var(--color-primary-text);
             position: absolute;
             content: '';
             display: block;
@@ -181,7 +185,7 @@
       }
     }
     &-value {
-      @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
+      @mixin font normal, 14px, 18px, 4px, 18px, var(--font-title-secondary);
       color: var(--color-surface-text);
       text-align: right;
       padding: 5px 0 0 0;
@@ -219,9 +223,11 @@
   }
   &-cost {
     width: 250px;
-    @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
+    @mixin font bold, 14px, 18px, 24px, 18px, var(--font-title-secondary);
     color: var(--color-surface-text);
     position: relative;
+    padding: 0 0 0 40px;
+    box-sizing: border-box;
     @media print {
       display: table-cell;
     }
@@ -261,13 +267,14 @@
       position: relative;
       display: inline-block;
       transition: transform 0.1s ease-in-out;
+      text-decoration: none;
       &:hover {
-        transform: scale(1.3);
+        transform: scale(1.6);
       }
       &::before {
         width: 15px;
         height: 2px;
-        background: #000;
+        background: var(--color-surface-text);
         position: absolute;
         content: '';
         display: block;
@@ -278,7 +285,7 @@
       &::after {
         width: 15px;
         height: 2px;
-        background: #000;
+        background: var(--color-surface-text);
         position: absolute;
         content: '';
         display: block;
