@@ -231,6 +231,18 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
     def get_absolute_url(self):
         return reverse_lazy('product-detail', args=[self.slug])
 
+    # TODO: separate model ProductImage
+    # to model Image with fields image and description
+    # and link it with other models
+    def get_all_images(self):
+        images = []
+        for image in self.get_images():
+            # to avoid these awkward things
+            images.append((image, None))
+        for image, description in self.get_prices_images():
+            images.append((image, description))
+        return images
+
     def get_first_image(self):
         """Return first image."""
         if self.image and self.image.exists:
@@ -250,37 +262,19 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
                 continue
             yield image.image
 
+    def get_optional_products(self):
+        return self.optional_products.filter(show=True)
+
+    def get_parametres_dict(self):
+        parametres = set(p.parametr for p in self.parametres.all())
+        return {p: self.parametres.filter(parametr=p) for p in parametres}
+
     def get_prices_images(self):
         for price in self.prices.exclude(image__exact='').exclude(show=False):
             if not price.image.exists:
                 continue
             price.image.price_pk = price.pk
             yield (price.image, price.image_description)
-
-    # TODO: separate model ProductImage
-    # to model Image with fields image and description
-    # and link it with other models
-    def get_all_images(self):
-        images = []
-        for image in self.get_images():
-            # to avoid these awkward things
-            images.append((image, None))
-        for image, description in self.get_prices_images():
-            images.append((image, description))
-        return images
-
-    def get_parametres_dict(self):
-        parametres = set(p.parametr for p in self.parametres.all())
-        return {p: self.parametres.filter(parametr=p) for p in parametres}
-
-    def get_lowest_price(self):
-        return self.prices.order_by('price').first()
-
-    def has_sections(self):
-        return self.sections.exists()
-
-    def get_optional_products(self):
-        return self.optional_products.filter(show=True)
 
     def get_prices_parametres(self):
         prices_qs = self.prices.filter(
@@ -291,6 +285,9 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
                 'parametr__id').distinct()
 
         return parametres
+
+    def has_sections(self):
+        return self.sections.exists()
 
 
 class SectionAtribute(models.Model):

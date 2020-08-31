@@ -14,13 +14,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from decimal import Decimal
+
 from django import template
+from django.template.defaultfilters import stringfilter
 
 from ..models import Category
 
 register = template.Library()
 
 __all__ = ['catalog_menu']
+
+
+@register.inclusion_tag('itcase_catalog/include/catalog_group_hidden.html')
+def catalog_group_hidden(category=None, limit=5):
+    if not category:
+        return {}
+
+    subcategories = category.get_children_active()
+    hidden_categories_count = subcategories.count() - limit
+    if hidden_categories_count <= 0:
+        hidden_categories_count = 0
+
+    return {
+        'subcategories': subcategories,
+        'limit': str(limit),
+        'hidden_categories_count': hidden_categories_count
+    }
 
 
 @register.inclusion_tag('itcase_catalog/include/catalog_menu.html',
@@ -68,17 +88,25 @@ def get_categories_by(context, level):
     return context
 
 
-@register.inclusion_tag('itcase_catalog/include/catalog_group_hidden.html')
-def catalog_group_hidden(category=None, limit=5):
-    if not category:
-        return {}
-    subcategories = category.get_children_active()
-    count = subcategories.count()
-    hidden_categories_count = count - limit
-    if hidden_categories_count <= 0:
-        hidden_categories_count = 0
-    return {
-        'subcategories': subcategories,
-        'limit': str(limit),
-        'hidden_categories_count': hidden_categories_count
-    }
+@register.filter
+def get_product_actual_price(product, price_query):
+    try:
+        _max = Decimal(price_query['max'])
+        _min = Decimal(price_query['min'])
+    except (KeyError, TypeError, ValueError):
+        _max = _min = None
+
+    result = None
+    for price in product.prices.all():
+        _price = price.price
+        if _max is not None and _min is not None:
+            if _price > _max or _price < _min:
+                continue
+
+        if not result:
+            result = price
+
+        if _price < result.price:
+            result = price
+
+    return result or None

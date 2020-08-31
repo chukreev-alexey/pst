@@ -90,9 +90,13 @@
             <div class="catalog-filter-group catalog-filter-group_state_open" data-group-key="price">
                 <div class="catalog-filter-group__title">Стоимость</div>
                 <div class="catalog-filter-group__range">
-                    <input class="catalog-filter-group__range-item" type="text" name="{{ filter_key_price }}min" value="{{ filter_data_price.min }}" data-price-min="{{ filter_data_price.min }}" />
+                    {% with value=filter_data_price.min|stringformat:'g' %}
+                        <input class="catalog-filter-group__range-item" type="text" name="{{ filter_key_price }}min" value="{{ value }}" data-price-min="{{ value }}" />
+                    {% endwith %}
                     <div class="catalog-filter-group__range-separator">&nbsp;</div>
-                    <input class="catalog-filter-group__range-item" type="text" name="{{ filter_key_price }}max" value="{{ filter_data_price.max }}" data-price-max="{{ filter_data_price.max }}" />
+                    {% with value=filter_data_price.max|stringformat:'g' %}
+                        <input class="catalog-filter-group__range-item" type="text" name="{{ filter_key_price }}max" value="{{ value }}" data-price-max="{{ value }}" />
+                    {% endwith %}
                     <div data-range-slider="true"></div>
                 </div>
             </div>

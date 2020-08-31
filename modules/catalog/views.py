@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from decimal import Decimal
 from itertools import permutations
 import json
 
@@ -529,15 +530,23 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
     def get_filter_data_price(self, queryset, query):
         price_qs = Price.objects.filter(product__in=queryset)
 
-        _data = price_qs.aggregate(Max('price'), Min('price'))
+        _data = price_qs.filter(price__gt=0).aggregate(Max('price'),
+                                                       Min('price'))
         data = dict((key, _data[f'price__{key}']) for key in ('max', 'min'))
 
         filtered_products = []
         if query:
+            try:
+                _max = Decimal(query['max'])
+                _min = Decimal(query['min'])
+            except (TypeError, ValueError):
+                _max = _min = 0
             filtered_products = list(
-                price_qs.filter(price__lte=query['max'],
-                                price__gte=query['min']).values_list(
-                                    'product_id', flat=True))
+                price_qs.filter(price__lte=_max,
+                                price__gte=_min).values_list('product_id',
+                                                             flat=True))
+            data['max'] = _max
+            data['min'] = _min
 
         return data, filtered_products
 
@@ -552,7 +561,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             self.queryset = self.object.products.all()
 
         self.queryset = self.queryset.select_related('brand').prefetch_related(
-            'categories')
+            'categories', 'prices')
 
         self.queryset = self.get_sorted_queryset(self.queryset, self.request)
 
@@ -788,7 +797,7 @@ class ProductDetail(ProductDetailBase):
 
     def get_params_initial(self):
         data = {}
-        price = self.object.get_lowest_price()
+        price = self.object.prices.order_by('price').first()
         if price:
             data['scope'] = price.price_parametres.values_list(
                 'parametr_value_id', flat=True)

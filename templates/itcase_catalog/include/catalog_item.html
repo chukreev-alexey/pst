@@ -1,4 +1,4 @@
-{% load fb_versions l10n %}
+{% load l10n fb_versions catalog_tags %}
 
 <div class="catalog-item {{ item_class }} {% if product.border %} catalog-item_type_big {% endif %}">
     <div class="catalog-item__inner">
@@ -22,8 +22,8 @@
                 <a href="{{ product.get_absolute_url }}" class="catalog-item__title-link">{{ product.name }}</a>
             </div>
             <div class="catalog-item__desc">{{ product.short_description }}</div>
-            {% with price=product.get_lowest_price %}
-                {% if product.get_lowest_price %}
+            {% with price=product|get_product_actual_price:filter_data_price %}
+                {% if price %}
                     <div class="catalog-item__price">
                         <div class="catalog-item__price-text">
                             {% if price.price != 0 %}
@@ -59,6 +59,10 @@
                             {% endif %}
                         </div>
                     </a>
+                {% else %}
+                    <div class="catalog-item__price">
+                        <div class="catalog-item__price-text">Предзаказ</div>
+                    </div>
                 {% endif %}
             {% endwith %}
         </div>
