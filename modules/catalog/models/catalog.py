@@ -265,26 +265,12 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
     def get_optional_products(self):
         return self.optional_products.filter(show=True)
 
-    def get_parametres_dict(self):
-        parametres = set(p.parametr for p in self.parametres.all())
-        return {p: self.parametres.filter(parametr=p) for p in parametres}
-
     def get_prices_images(self):
         for price in self.prices.exclude(image__exact='').exclude(show=False):
             if not price.image.exists:
                 continue
             price.image.price_pk = price.pk
             yield (price.image, price.image_description)
-
-    def get_prices_parametres(self):
-        prices_qs = self.prices.filter(
-            price_parametres__isnull=False, show=True).distinct()
-
-        parametres = ProductParametr.objects.filter(
-            separated_product_parametres__price__in=prices_qs).order_by(
-                'parametr__id').distinct()
-
-        return parametres
 
     def has_sections(self):
         return self.sections.exists()

@@ -17,7 +17,6 @@
 from decimal import Decimal
 
 from django import template
-from django.template.defaultfilters import stringfilter
 
 from ..models import Category
 
