@@ -108,4 +108,4 @@ def get_product_actual_price(product, price_query):
         if _price < result.price:
             result = price
 
-    return result or None
+    return result

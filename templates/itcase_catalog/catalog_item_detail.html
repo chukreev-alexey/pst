@@ -86,7 +86,7 @@
                                 </div>
                             {% endfor %}
 
-                            {% with product_id=product.pk|unlocalize %}
+                            {% with product_id=params_initial.price.pk|unlocalize %}
                                 <div class="catalog-item-detail__info">
                                     <div class="catalog-item-detail__count">
                                         <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_minus" data-input-name="amount">&nbsp;</div>
@@ -103,7 +103,7 @@
                                         <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus" data-input-name="amount">&nbsp;</div>
                                     </div>
                                     <div class="catalog-item-detail__price" data-measuring="{{ product.measuring|default:'' }}">
-                                        {{ params_initial.price|floatformat:-2 }} Р{% if product.measuring %}/{{ product.measuring }}{% endif %}
+                                        {{ params_initial.price.price|floatformat:-2 }} Р{% if product.measuring %}/{{ product.measuring }}{% endif %}
                                     </div>
                                 </div>
 
