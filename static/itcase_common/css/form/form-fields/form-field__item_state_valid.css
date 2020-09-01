@@ -20,10 +20,10 @@
         position: absolute;
         content: '';
         display: block;
-        top: 11px;
-        right: 20px;
+        top: calc(50% - 4px);
+        right: 24px;
         z-index: 1;
-        transform: rotate(45deg);
+        transform: rotate(45deg) translate(0, -50%);
       }
     }
   }

@@ -44,7 +44,7 @@ class CatalogPopupMenu {
     }, 0)
   }
 
-  hide() {
+  hide(timer = 200) {
     clearTimeout(this.timerHide)
     clearTimeout(this.timerShow)
 
@@ -62,7 +62,7 @@ class CatalogPopupMenu {
           this.state.open = false
           this.state.locked = false
         })
-      }, 200)
+      }, timer)
     }
   }
 
@@ -84,14 +84,15 @@ const $menuPopup = $('.catalog-menu__item_type_popup')
 const $menuPopupClose = $('.catalog-group__close')
 
 if ($menuPopup.length) {
-  $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide)
-  $menuPopupClose.on('click', () => menu.toggle())
+  $menuPopup.on('mouseenter', () => menu.show()).on('mouseleave', () => menu.hide())
+  $menuPopupClose.on('click', () => menu.hide(0))
 
   menu.$menu
     .on('mouseenter', () => {
       clearTimeout(menu.timerHide)
+      menu.state.locked = false
     })
-    .on('mouseleave', menu.hide)
+    .on('mouseleave', () => menu.hide())
 }
 
 const $menuPopupMobile = $('.header__catalog')

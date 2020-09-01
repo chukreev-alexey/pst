@@ -2,27 +2,9 @@
 .form-response {
   text-align: center;
   &__item {
-    font: 18px/24px var(--font);
+    @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
     color: var(--color-black);
     padding: 10px 40px;
     margin: 0 0 30px 0;
-    &_type_success {
-      color: var(--color-white);
-      background: var(--color-green);
-    }
-    &_type_error {
-      color: var(--color-white);
-      background: var(--color-red);
-    }
-    &_type_debug {
-      background: #d2d2d2;
-    }
-    &_type_info {
-      color: var(--color-white);
-      background: #00aedb;
-    }
-    &_type_warning {
-      background: #ffc425;
-    }
   }
 }

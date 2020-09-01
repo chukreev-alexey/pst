@@ -26,8 +26,6 @@
     top: 0;
     right: 16px;
     z-index: 20;
-    transform: scale(1);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     cursor: pointer;
     &::before,
     &::after {
@@ -47,9 +45,6 @@
     &::after {
       background: var(--color-surface-item);
       transform: rotate(45deg);
-    }
-    &:hover {
-      transform: scale(1.3);
     }
   }
   &__title {

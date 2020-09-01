@@ -27,7 +27,8 @@
         position: absolute;
         content: '';
         display: block;
-        top: 22px;
+        top: 50%;
+        transform: translate(0, -50%);
         right: 21px;
         z-index: 2;
         opacity: 0.9;
@@ -40,7 +41,8 @@
         position: absolute;
         content: '';
         display: block;
-        top: 12px;
+        top: 50%;
+        transform: translate(0, -50%);
         right: 16px;
         z-index: 1;
       }

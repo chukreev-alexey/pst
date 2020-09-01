@@ -58,7 +58,6 @@
   &__inner {
     width: 100%;
     min-height: 500px;
-    margin: 40px 0 0 0;
     display: table;
     box-sizing: border-box;
     @media (--mobile) {

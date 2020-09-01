@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5d4fb74d1d6d6095eb5f";
+/******/ 	var hotCurrentHash = "b74a64e69fc92b027cf3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -16226,6 +16226,49 @@ module.exports.formatError = function(err) {
 
 /***/ }),
 
+/***/ "./static/itcase_cart/js/main.js":
+/*!***************************************!*\
+  !*** ./static/itcase_cart/js/main.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).on('click', '.cart-order__delivery-method-item', function () {
+  const self = $(this);
+  const $form = self.closest('form');
+  const $address = $form.find('input[name="address"]');
+  const $groupTitle = $address.closest('.cart-order__group').find('.cart-order__group-title');
+  console.warn('==== delivery ====');
+  console.log('self: ', self);
+  console.log('form: ', $form);
+  console.log('address: ', $address);
+  console.log('groupTitle: ', $groupTitle); // 0 - 'Самовывоз'
+  // 1 - 'Доставка'
+
+  const delivery = self.data('delivery');
+  console.log('delivery: ', delivery);
+
+  if (delivery === 0) {
+    $address.val('').closest('.cart-order__group').hide();
+  } else {
+    $address.closest('.cart-order__group').show();
+  } // Move swicher
+
+
+  $('.cart-order__delivery-method-state').css({
+    left: delivery === 1 ? '118px' : '0'
+  }).text(self.text());
+  $('input[name="delivery"]').val(delivery);
+}); // $(document).ready(() => {})
+
+const delivery = $('input[name="delivery"]').val();
+
+if (delivery || delivery === 0) {
+  $(`.cart-order__delivery-method-item[data-delivery="${delivery}"]`).click();
+}
+
+/***/ }),
+
 /***/ "./static/itcase_catalog/js/catalogFilterPopup.js":
 /*!********************************************************!*\
   !*** ./static/itcase_catalog/js/catalogFilterPopup.js ***!
@@ -16613,7 +16656,7 @@ class CatalogPopupMenu {
     }, 0);
   }
 
-  hide() {
+  hide(timer = 200) {
     clearTimeout(this.timerHide);
     clearTimeout(this.timerShow);
     this.state.locked = true;
@@ -16626,7 +16669,7 @@ class CatalogPopupMenu {
           this.state.open = false;
           this.state.locked = false;
         });
-      }, 200);
+      }, timer);
     }
   }
 
@@ -16649,11 +16692,12 @@ const $menuPopup = $('.catalog-menu__item_type_popup');
 const $menuPopupClose = $('.catalog-group__close');
 
 if ($menuPopup.length) {
-  $menuPopup.on('mouseenter', menu.show).on('mouseleave', menu.hide);
-  $menuPopupClose.on('click', () => menu.toggle());
+  $menuPopup.on('mouseenter', () => menu.show()).on('mouseleave', () => menu.hide());
+  $menuPopupClose.on('click', () => menu.hide(0));
   menu.$menu.on('mouseenter', () => {
     clearTimeout(menu.timerHide);
-  }).on('mouseleave', menu.hide);
+    menu.state.locked = false;
+  }).on('mouseleave', () => menu.hide());
 }
 
 const $menuPopupMobile = $('.header__catalog');
@@ -16917,7 +16961,8 @@ class ParametresClass {
 
       if (iamge) {
         const slide = iamge.closest('*[data-swiper-slide-index]');
-        swiper.slideTo(slide.dataset.swiperSlideIndex, slideSpeed);
+        const index = parseInt(slide.dataset.swiperSlideIndex) || 0;
+        swiper.slideToLoop(index, slideSpeed);
       }
     }
   }
@@ -16960,15 +17005,16 @@ if (true) {
 /***/ }),
 
 /***/ 0:
-/*!*****************************************************************************************************************************************!*\
-  !*** multi webpack-dev-server/client?http://localhost:2000/ webpack/hot/dev-server ./static/js/main ./static/itcase_catalog/js/main.js ***!
-  \*****************************************************************************************************************************************/
+/*!*************************************************************************************************************************************************************************!*\
+  !*** multi webpack-dev-server/client?http://localhost:2000/ webpack/hot/dev-server ./static/js/main ./static/itcase_cart/js/main.js ./static/itcase_catalog/js/main.js ***!
+  \*************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! webpack-dev-server/client?http://localhost:2000/ */"./node_modules/webpack-dev-server/client/index.js?http://localhost:2000/");
 __webpack_require__(/*! webpack/hot/dev-server */"./node_modules/webpack/hot/dev-server.js");
 __webpack_require__(/*! ./static/js/main */"./static/js/main.js");
+__webpack_require__(/*! ./static/itcase_cart/js/main.js */"./static/itcase_cart/js/main.js");
 module.exports = __webpack_require__(/*! ./static/itcase_catalog/js/main.js */"./static/itcase_catalog/js/main.js");
 
 

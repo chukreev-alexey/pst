@@ -15,11 +15,10 @@
   }
   &-c1 {
     width: 100%;
-    padding: 8px 0 4px 0;
     position: relative;
     vertical-align: top;
+    box-sizing: border-box;
     @media (--mobile), (--tablet) {
-      width: 100%;
       padding: 0 0 10px 0;
       display: block;
     }
@@ -43,10 +42,10 @@
   }
   &-c2 {
     width: 100%;
-    padding: 8px 24px 8px 0;
+    margin: 8px 0 24px 0;
     position: relative;
+    box-sizing: border-box;
     @media (--mobile), (--tablet) {
-      width: 100%;
       padding: 0;
       display: block;
     }

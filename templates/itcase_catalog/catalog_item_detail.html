@@ -62,7 +62,7 @@
                         <div class="catalog-item-detail__param">
 
                             {% for group in params_data.values %}
-                                <div class="catalog-item-detail__param-group" data-group-pk="{{ group.pk }}">
+                                <div class="catalog-item-detail__param-group" data-group-pk="{{ group.pk|unlocalize }}">
                                     <div class="catalog-item-detail__param-title">{{ group.name }}</div>
                                     <div class="catalog-item-detail__param-wrapper{% if group.values|length > 10 %} catalog-item-detail__param-wrapper_type_column{% endif %}">
                                         {% for pk, param in group.values.items %}
@@ -71,7 +71,7 @@
                                                     type="radio"
                                                     class="catalog-item-detail__param-item-input"
                                                     id="param-{{ pk }}"
-                                                    name="param-{{ group.pk }}"
+                                                    name="param-{{ group.pk|unlocalize }}"
                                                     value="{{ pk }}"
                                                     autocomplete="off"
                                                     data-prices="{{ param.prices }}"
@@ -131,7 +131,7 @@
                         <div class="catalog-item-detail__tabs-list">
                             {% for section in product.sections.all %}
                                 {% if section.show %}
-                                    <div data-product-tab-menu="{{ section.pk }}" class="catalog-item-detail__tabs-list-item{% if forloop.counter == 1 %} catalog-item-detail__tabs-list-item_state_active{% endif %}">
+                                    <div data-product-tab-menu="{{ section.pk|unlocalize }}" class="catalog-item-detail__tabs-list-item{% if forloop.counter == 1 %} catalog-item-detail__tabs-list-item_state_active{% endif %}">
                                         {{ section.section_name }}
                                     </div>
                                 {% endif %}
@@ -140,7 +140,7 @@
 
                         {% for section in product.sections.all %}
                             {% if section.show %}
-                                <div data-product-tab-content="{{ section.pk }}" class="catalog-item-detail__tabs-content content{% if forloop.counter == 1 %} catalog-item-detail__tabs-content_state_active{% endif %}">
+                                <div data-product-tab-content="{{ section.pk|unlocalize }}" class="catalog-item-detail__tabs-content content{% if forloop.counter == 1 %} catalog-item-detail__tabs-content_state_active{% endif %}">
                                     {{ section.section_content|safe }}
                                 </div>
                             {% endif %}

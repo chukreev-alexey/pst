@@ -1,0 +1,9 @@
+.entry-popup {
+  & .popup-content {
+    width: 600px;
+    background: var(--color-surface);
+    & .form {
+      margin: 40px 0 0 0;
+    }
+  }
+}
