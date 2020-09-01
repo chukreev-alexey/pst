@@ -1,0 +1,11 @@
+.cart-list {
+  &&_type_complete {
+    & .cart-list {
+      &__item {
+        &-count {
+          margin: 4px 30px 0 30px;
+        }
+      }
+    }
+  }
+}

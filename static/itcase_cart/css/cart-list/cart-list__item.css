@@ -124,6 +124,9 @@
       order: 0;
       top: -5px;
     }
+    &-text {
+      @mixin font normal, 14px, 18px, 4px, 18px, var(--font-title-secondary);
+    }
     &-button {
       width: 24px;
       height: 24px;
@@ -194,7 +197,6 @@
         padding: 0 50px 0 0;
       }
       &::after {
-        font: 300 24px/22px var(--font);
         color: #757575;
         position: absolute;
         content: 'x';

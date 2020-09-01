@@ -5,4 +5,8 @@
   &-link {
     color: var(--color-neutral-text);
   }
+  &-second {
+    @mixin font normal, 14px, 36px, 18px, 36px, var(--font-title-secondary);
+    margin: 0 0 24px 0;
+  }
 }

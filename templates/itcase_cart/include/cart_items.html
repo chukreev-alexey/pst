@@ -1,6 +1,6 @@
 {% load itcase_common l10n fb_versions %}
 
-<div class="cart-list">
+<div class="cart-list {% if complete %} cart-list_type_complete {% endif %}">
     {% for item in cart_items %}
         {% with complectation=item.product product=item.product.product price=item.price|floatformat:'-2' %}
             <div class="cart-list__item">
@@ -9,6 +9,7 @@
                         <img src="{% version complectation.image 'catalog_detail' %}" class="catalog-item__image-image" />
                     {% endif %}
                 </div>
+
                 <div class="cart-list__item-info">
                     <a href="{{ product.get_absolute_url }}" class="cart-list__item-info-title">
                       {{ product.name }}
@@ -26,35 +27,38 @@
                 </div>
 
                 {% with complectation_pk=complectation.pk|unlocalize %}
-                  <div class="cart-list__item-count">
-                      <div class="cart-list__item-count-button cart-list__item-count-button_action_minus" data-input-name="amount-{{ complectation_pk }}">&nbsp;</div>
+                    <div class="cart-list__item-count">
+                        {% if complete %}
+                            <div class="cart-list__item-count-text">{{ item.amount|unlocalize }}</div>
+                        {% else %}
+                            <div class="cart-list__item-count-button cart-list__item-count-button_action_minus" data-input-name="amount-{{ complectation_pk }}">&nbsp;</div>
+                                <input class="cart-list__item-count-input"
+                                     name="amount-{{ complectation_pk }}"
+                                     value="{{ item.amount|unlocalize }}"
+                                     data-product="{{ complectation_pk }}"
+                                     data-step="{{ product.get_allowed_size }}"
+                                     data-price="{{ price|unlocalize }}"
+                                     data-item-amount="{{ product.remains }}"
+                                     data-action="{{ view.ACTION_PRODUCT_AMOUNT }}"
+                                     maxlength="3"
+                                     type="text" />
+                            <div class="cart-list__item-count-button cart-list__item-count-button_action_plus" data-input-name="amount-{{ complectation_pk }}">&nbsp;</div>
+                        {% endif %}
+                    </div>
+                    <div class="cart-list__item-cost">
+                        {% if price != '0' %}
+                            {{ price }} р
+                        {% endif %}
+                    </div>
 
-                      <input class="cart-list__item-count-input"
-                             name="amount-{{ complectation_pk }}"
-                             value="{{ item.amount|unlocalize }}"
-                             data-product="{{ complectation_pk }}"
-                             data-step="{{ product.get_allowed_size }}"
-                             data-price="{{ price|unlocalize }}"
-                             data-item-amount="{{ product.remains }}"
-                             data-action="{{ view.ACTION_PRODUCT_AMOUNT }}"
-                             maxlength="3"
-                             type="text" />
-
-                      <div class="cart-list__item-count-button cart-list__item-count-button_action_plus" data-input-name="amount-{{ complectation_pk }}">&nbsp;</div>
-                  </div>
-
-                  <div class="cart-list__item-cost">
-                    {% if price != '0' %}
-                        {{ price }} р
+                    {% if not complete %}
+                        <div class="cart-list__item-action">
+                            <a href="{% url 'itcase_cart:cart_remove' %}?product={{ complectation_pk }}"
+                               class="cart-list__item-action-link"
+                               data-product="{{ complectation_pk }}"
+                               data-amount-{{ complectation_pk }}="{{ product.get_allowed_size|unlocalize }}">&nbsp;</a>
+                        </div>
                     {% endif %}
-                  </div>
-
-                  <div class="cart-list__item-action">
-                      <a href="{% url 'itcase_cart:cart_remove' %}?product={{ complectation_pk }}"
-                         class="cart-list__item-action-link"
-                         data-product="{{ complectation_pk }}"
-                         data-amount-{{ complectation_pk }}="{{ product.get_allowed_size|unlocalize }}">&nbsp;</a>
-                  </div>
                 {% endwith %}
             </div>
         {% endwith %}
