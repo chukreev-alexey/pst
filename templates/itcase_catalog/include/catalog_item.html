@@ -22,7 +22,7 @@
                 <a href="{{ product.get_absolute_url }}" class="catalog-item__title-link">{{ product.name }}</a>
             </div>
             <div class="catalog-item__desc">{{ product.short_description }}</div>
-            {% with price=product|get_product_actual_price:filter_data_price %}
+            {% with price=product|get_product_actual_price:filter_data_price_query %}
                 {% if price %}
                     <div class="catalog-item__price">
                         <div class="catalog-item__price-text">

@@ -205,7 +205,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         context['products'] = context['page_obj']
 
-        context['filter_data_price'] = {}  # need for actual price
+        context['filter_data_price_query'] = None  # need for actual price
 
         if self.hide_products:
             context['categories'] = context['page_obj']
@@ -228,8 +228,11 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                 self.filter_key_param)
             context['filter_key_param'] = self.filter_key_param
 
-            context['filter_data_price'] = self.filter_data.get(
-                self.filter_key_price)
+            filter_data_price = (self.filter_data.get(self.filter_key_price)
+                                 or {})
+            context['filter_data_price_query'] = filter_data_price.pop(
+                'query', None)
+            context['filter_data_price'] = filter_data_price
             context['filter_key_price'] = self.filter_key_price
 
             context['filter_reset_url'] = self.get_filter_reset_url()
@@ -554,6 +557,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
                                                              flat=True))
             data['max'] = _max
             data['min'] = _min
+        data['query'] = query
 
         return data, filtered_products
 
@@ -740,7 +744,7 @@ class ProductDetail(ProductDetailBase):
         context['params_data'] = self.get_params_data()
         context['params_initial'] = self.get_params_initial()
 
-        context['filter_data_price'] = {}  # need for actual price
+        context['filter_data_price_query'] = None  # need for actual price
 
         return context
 
