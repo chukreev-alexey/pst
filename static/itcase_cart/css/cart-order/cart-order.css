@@ -7,16 +7,17 @@
     }
   }
   &__title {
-    font: 500 24px/20px var(--font);
     color: #000;
+    @mixin font 500, 14px, 32px, 14px, 32px, var(--font-title-secondary);
     @media (--mobile) {
       text-align: center;
     }
   }
   &-button {
-    @media (--mobile) {
-      margin: 0 auto !important;
-      display: block !important;
+    &.button {
+      padding: 16px 42px;
+      margin: 24px 0 0 0;
+      @mixin font 500, 14px, 32px, 14px, 32px, var(--font-title-secondary);
     }
     &&_state_disabled {
       color: #777;

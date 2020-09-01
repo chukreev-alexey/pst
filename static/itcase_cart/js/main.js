@@ -23,8 +23,12 @@ $(document).on('click', '.cart-order__delivery-method-item', function () {
   }
 
   // Move swicher
+  const swidthPosition =
+    document.querySelector('.cart-order__delivery-method-inner').offsetWidth -
+    document.querySelector('[data-delivery="0"]').offsetWidth
+
   $('.cart-order__delivery-method-state')
-    .css({ left: delivery === 1 ? '118px' : '0' })
+    .css({ left: delivery === 1 ? swidthPosition : '0' })
     .text(self.text())
 
   $('input[name="delivery"]').val(delivery)

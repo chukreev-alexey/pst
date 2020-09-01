@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b74a64e69fc92b027cf3";
+/******/ 	var hotCurrentHash = "59f94f4d1a75af07f720";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -16255,8 +16255,9 @@ $(document).on('click', '.cart-order__delivery-method-item', function () {
   } // Move swicher
 
 
+  const swidthPosition = document.querySelector('.cart-order__delivery-method-inner').offsetWidth - document.querySelector('[data-delivery="0"]').offsetWidth;
   $('.cart-order__delivery-method-state').css({
-    left: delivery === 1 ? '118px' : '0'
+    left: delivery === 1 ? swidthPosition : '0'
   }).text(self.text());
   $('input[name="delivery"]').val(delivery);
 }); // $(document).ready(() => {})
