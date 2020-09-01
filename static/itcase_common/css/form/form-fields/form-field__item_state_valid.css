@@ -4,23 +4,23 @@
     .form-checkbox {
       &__label {
         &::after {
-          border: solid 1px var(--color-green);
+          border: solid 1px var(--color-success-border);
         }
       }
     }
     & .selectize-input {
-      border: solid 1px var(--color-green);
+      border: solid 1px var(--color-success-border);
     }
     & .form-field__item-c2 {
       &::before {
         width: 8px;
         height: 16px;
-        border: solid var(--color-green);
+        border: solid var(--color-success-border);
         border-width: 0 4px 4px 0;
         position: absolute;
         content: '';
         display: block;
-        top: 12px;
+        top: 11px;
         right: 20px;
         z-index: 1;
         transform: rotate(45deg);

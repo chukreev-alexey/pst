@@ -1,0 +1,29 @@
+.email-order {
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+  padding: 10px 40px 30px 40px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-color: var(--color-surface);
+  &__title {
+    font: 14px/20px var(--font-email);
+    color: var(--color-surface-text);
+    text-align: left;
+  }
+  &__detail {
+    width: 100%;
+    &-title {
+      width: 50%;
+      font: 16px/20px var(--font-email);
+      text-align: left;
+      padding: 15px 30px 15px 0;
+    }
+    &-text {
+      width: 50%;
+      color: var(--color-surface-text);
+      text-align: left;
+      padding: 15px 30px 15px 10px;
+    }
+  }
+}

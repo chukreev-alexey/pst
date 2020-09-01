@@ -1,0 +1,12 @@
+/* Dirty hack for do inline body styles */
+
+.email-body {}
+/* Dirty hack for do inline body styles */
+
+.email-body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}

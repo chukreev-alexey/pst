@@ -1,0 +1,25 @@
+{% load itcase_common %}
+
+{% if not manager %}
+    Здравствуйте, {{ order.name }}!
+{% else %}
+    Новый заказ с сайта
+{% endif %}
+
+Данные заказа:
+  * Email: {{ order.email }}
+  * Телефон: {{ order.phone }}
+{% with total=order.total|floatformat:'-2' %}
+  * Сумма: {{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}
+{% endwith %}
+  * Оплата: {{ order.get_payment_display }}
+  * Доставка: {{ order.get_delivery_display }}
+  * Адрес: {{ order.address }}
+  * Дополнительная информация: {{ order.comment }}
+
+Позиции ({{ order.items.count }}):
+{% for item in order.items.all %}
+{% with total=item.total|floatformat:'-2' %}
+  * {{ item.product }}: {{ item.price|floatformat:'-2' }} * {{ item.amount }} = {{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}
+{% endwith %}
+{% endfor %}

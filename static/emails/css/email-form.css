@@ -1,0 +1,33 @@
+.email-form {
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+  padding: 0 30px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-color: var(--color-surface);
+  @media (--mobile) {
+    padding: 0 20px;
+  }
+  &__inner {
+    width: 100%;
+    position: relative;
+  }
+  &__title {
+    font: 14px/20px var(--font-email);
+    color: var(--color-surface-text);
+    text-align: left;
+    padding: 0 0 8px 0;
+  }
+  &__name {
+    font: 16px/22px var(--font-email);
+    color: var(--color-surface-text);
+    text-align: left;
+  }
+  &__value {
+    font: 18px/24px var(--font-email);
+    color: var(--color-surface-text);
+    text-align: left;
+    padding: 0 0 20px 0;
+  }
+}

@@ -1,0 +1,87 @@
+{% extends "emails/__mail_templates/base.html" %}
+{% load itcase_common %}
+
+<link rel="stylesheet" href="./../__mail_templates/__email.css" />
+
+ {% block content %}
+    <div class="email-content">
+        {% if not manager %}
+            <h1 class="email-content__title">Здравствуйте, {{ order.name }}!</h1>
+        {% else %}
+            <h1 class="email-content__title">Заказ с сайта</h1>
+        {% endif %}
+    </div>
+
+    <div class="email-form">
+        <table class="email-form__inner" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td class="email-form__name" valign="top">Электронный адрес:</td>
+                <td class="email-form__value" valign="top">{{ order.email }}</td>
+            </tr>
+            <tr>
+                <td class="email-form__name" valign="top">Контактный телефон:</td>
+                <td class="email-form__value" valign="top">{{ order.phone }}</td>
+            </tr>
+
+            {% with total=order.total|floatformat:'-2' %}
+                <tr>
+                    <td class="email-form__name" valign="top">Сумма:</td>
+                    <td class="email-form__value" valign="top">{{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}</td>
+                </tr>
+            {% endwith %}
+
+            <tr>
+                <td class="email-form__name" valign="top">Способ оплаты:</td>
+                <td class="email-form__value" valign="top">{{ order.get_payment_display }}</td>
+            </tr>
+            <tr>
+                <td class="email-form__name" valign="top">Способ доставки:</td>
+                <td class="email-form__value" valign="top">{{ order.get_delivery_display }}</td>
+            </tr>
+
+            {% if order.address %}
+                <tr>
+                    <td class="email-form__name" valign="top">Адрес:</td>
+                    <td class="email-form__value" valign="top">{{ order.address }}</td>
+                </tr>
+            {% endif %}
+
+            {% if order.points %}
+                <tr>
+                    <td class="email-form__name" valign="top">Магазин:</td>
+                    <td class="email-form__value" valign="top">{{ order.points }}</td>
+                </tr>
+            {% endif %}
+
+            {% if order.comment %}
+                <tr>
+                    <td class="email-form__name" valign="top">Дополнительная информация:</td>
+                    <td class="email-form__value" valign="top">{{ order.comment }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+
+    <div class="email-order">
+        <h2 class="email-order__title">Позиции ({{ order.items.count }}):</h2>
+        <table class="email-order__detail" cellpadding="0" cellspacing="0" border="0">
+            {% for item in order.items.all %}
+                {% with total=item.total|floatformat:'-2' %}
+                    <tr>
+                        <td class="email-order__detail-title" valign="top">
+                            <a href="{{ request|get_host }}{{ item.product.get_absolute_url }}" class="email-order__detail-title-link">{{ item.product }}</a>:
+                        </td>
+                        <td class="email-order__detail-text" valign="top">
+                            {{ item.price|floatformat:'-2' }} * {{ item.amount }} = {{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}
+                        </td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+        </table>
+
+        <div class="email-button">
+            <a href="{{ request|get_host }}{{ order.get_admin_url }}" class="email-button__text">Перейти на страницу заказа</a>
+        </div>
+    </div>
+
+{% endblock content %}

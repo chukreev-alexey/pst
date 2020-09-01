@@ -1,0 +1,66 @@
+{% load static itcase_common %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Title</title>
+
+    <link rel="stylesheet" href="./__mail_templates/__email.css" />
+
+    <style type="text/css" media="screen">
+    <!-- inject:css -->
+    <!-- endinject -->
+    </style>
+</head>
+
+<body>
+    <table class="email-wrapper" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td valign="top" align="center">
+                <div class="email-wrapper__inner">
+                    <div class="email-header">
+                        <table class="email-header__inner" cellpadding="0" cellspacing="0" border="0">
+                            <tr class="email-header__column">
+                                <td valign="top" class="email-header__logo">
+                                    <div class="email-logo">
+                                        <img src="{% if DEBUG %}https://uralsertif.itcase.pro/static/emails/img/logo.png{% else %}{{ request|get_host }}{% static 'emails/img/logo.png' %}{% endif %}"
+                                             class="email-logo__image" title="{{ current_site.name }}" alt="{{ current_site.name }}" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="email-header__column">
+                                <td valign="top" class="email-header__contact">
+                                    <div class="header__contact-item">
+                                        <span class="email-header__contact-phone">{{ request.infoblock.email_header_phone|default:""|safe }}</span>
+                                        <span class="email-header__contact-address">{{ request.infoblock.email_header_address|default:""|safe }}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    {% block content %}
+                    {% endblock content %}
+
+                    <div class="email-footer">
+                        <p class="email-footer__warning">
+                            Это письмо отправлено автоматически. Пожалуйста, не отвечайте на него.<br/>
+                            Вы получили это сообщение, потому что данный адрес электронной почты был указан в качестве контактного на сайте <a href="{{ request|get_host }}" class="email-footer__warning-link" target="_blank">{{ request|get_host }}</a>.
+                        </p>
+                        <div class="email-footer__contact">
+                            <div class="email-footer__contact-text">
+                                <a href="mailto:{{ request.infoblock.email_footer_phone|default:''|safe |cut:' ' }}" class="email-footer__contact-text-link" target="_blank">{{ request.infoblock.email_footer_phone|default:""|safe }},</a>
+                                <a href="mailto:{{ request.infoblock.email_footer_email|default:''|safe }}" class="email-footer__contact-text-link" target="_blank">{{ request.infoblock.email_footer_email|default:""|safe }}</a>
+                            </div>
+                            <div class="email-footer__contact-text">{{ request.infoblock.email_footer_copyright|default:""|safe }}</div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

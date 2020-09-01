@@ -21,14 +21,14 @@
     }
     & .form-field__item-c2 {
       &::after {
-        width: 16px;
-        height: 16px;
-        background: url('./../img/icon/close_white.svg');
+        width: 14px;
+        height: 4px;
+        background: var(--color-accent-item);
         position: absolute;
         content: '';
         display: block;
-        top: 17px;
-        right: 20px;
+        top: 22px;
+        right: 21px;
         z-index: 2;
         opacity: 0.9;
       }
@@ -40,7 +40,7 @@
         position: absolute;
         content: '';
         display: block;
-        top: 13px;
+        top: 12px;
         right: 16px;
         z-index: 1;
       }

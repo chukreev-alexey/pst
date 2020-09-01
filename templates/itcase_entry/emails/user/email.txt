@@ -1,0 +1,8 @@
+{% load itcase_common %}
+
+{{ current_site.name }}
+{{ instance.form_entry.form.title }}
+
+{% for field in instance.get_form_fields %}
+  * {{ field.name }}: {{ field.value|default:'—' }}
+{% endfor %}

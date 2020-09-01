@@ -374,11 +374,11 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .form-fields .form-field__item_state_empty .form-checkbox__label::after, .content .form-fields .form-field__item_state_empty .form-checkbox__label::after {
-          border: solid 1px var(--color-gray);
+          border: solid 1px #333;
         }
 
 .form-fields .form-field__item_state_empty .selectize-input, .content .form-fields .form-field__item_state_empty .selectize-input {
-      border: solid 1px var(--color-gray);
+      border: solid 1px #333;
     }
 
 .form-fields .form-field__item_state_empty.form-field__item_state_valid .form-field__item-c2::before, .content .form-fields .form-field__item_state_empty.form-field__item_state_valid .form-field__item-c2::before {
@@ -386,7 +386,7 @@
         }
 
 .form-fields .form-field__item_state_empty.form-field__item_state_valid .form-checkbox__label::after, .content .form-fields .form-field__item_state_empty.form-field__item_state_valid .form-checkbox__label::after {
-            border: solid 1px var(--color-gray);
+            border: solid 1px #333;
           }
 
 /* stylelint-disable custom-property-empty-line-before */
@@ -404,14 +404,14 @@
     }
 
 .form-fields .form-field__item_state_error .form-field__item-c2::after, .content .form-fields .form-field__item_state_error .form-field__item-c2::after {
-        width: 16px;
-        height: 16px;
-        background: url('./../img/icon/close_white.svg');
+        width: 14px;
+        height: 4px;
+        background: #fff;
         position: absolute;
         content: '';
         display: block;
-        top: 17px;
-        right: 20px;
+        top: 22px;
+        right: 21px;
         z-index: 2;
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
         opacity: 0.9;
@@ -425,7 +425,7 @@
         position: absolute;
         content: '';
         display: block;
-        top: 13px;
+        top: 12px;
         right: 16px;
         z-index: 1;
       }
@@ -433,22 +433,22 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .form-fields .form-field__item_state_valid .form-checkbox__label::after, .content .form-fields .form-field__item_state_valid .form-checkbox__label::after {
-          border: solid 1px var(--color-green);
+          border: solid 1px #00b159;
         }
 
 .form-fields .form-field__item_state_valid .selectize-input, .content .form-fields .form-field__item_state_valid .selectize-input {
-      border: solid 1px var(--color-green);
+      border: solid 1px #00b159;
     }
 
 .form-fields .form-field__item_state_valid .form-field__item-c2::before, .content .form-fields .form-field__item_state_valid .form-field__item-c2::before {
         width: 8px;
         height: 16px;
-        border: solid var(--color-green);
+        border: solid #00b159;
         border-width: 0 4px 4px 0;
         position: absolute;
         content: '';
         display: block;
-        top: 12px;
+        top: 11px;
         right: 20px;
         z-index: 1;
         transform: rotate(45deg);
@@ -595,7 +595,7 @@ sans-serif;
 
 input.form-field-valid,
 textarea.form-field-valid {
-  border: solid 1px var(--color-green) !important;
+  border: solid 1px #00b159 !important;
 }
 
 /* stylelint-disable custom-property-empty-line-before */

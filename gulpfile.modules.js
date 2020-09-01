@@ -3,7 +3,11 @@
 const reactModules = {}
 const jsModules = {}
 const jsAdditionalFiles = ['./static/itcase_catalog/js/main.js']
-const emailTemplates = ['./templates/emails/**/*', './templates/entry/emails/**/*']
+const emailTemplates = [
+  './templates/emails/**/*',
+  './templates/itcase_cart/emails/**/*',
+  './templates/itcase_entry/emails/**/*'
+]
 
 export default {
   reactModules: reactModules,

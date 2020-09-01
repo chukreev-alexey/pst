@@ -1,0 +1,18 @@
+.email-button {
+  width: 100%;
+  min-width: 90px;
+  max-width: 700px;
+  background: var(--color-surface);
+  padding: 24px 0;
+  &__text {
+    font: 16px/16px var(--font-email);
+    color: var(--color-primary-text);
+    text-decoration: none;
+    background: var(--color-primary);
+    padding: 12px 24px 14px 24px;
+    display: inline-block;
+    @media (--mobile) {
+      font: 16px/16px var(--font-email);
+    }
+  }
+}

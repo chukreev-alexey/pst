@@ -1,0 +1,40 @@
+.email-header {
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+  padding: 32px 30px 16px 30px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-color: var(--color-surface);
+  @media (--mobile) {
+    padding: 20px;
+  }
+  &__inner {
+    position: relative;
+  }
+  &__logo {
+    width: 300px;
+    height: 69px;
+    position: relative;
+  }
+  &__contact {
+    padding: 20px 0 0 0;
+    &-item {
+      display: inline-block;
+      vertical-align: top;
+      background-color: red;
+    }
+    &-phone {
+      font: 16px/16px var(--font-email);
+      color: var(--color-surface-text);
+      padding: 0 0 5px 0;
+      display: block;
+    }
+    &-address {
+      font: 16px/16px var(--font-email);
+      color: var(--color-surface-text);
+      padding: 0 0 5px 0;
+      display: block;
+    }
+  }
+}

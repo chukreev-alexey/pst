@@ -33,10 +33,9 @@ loadrc:
 	git archive --remote=git@bitbucket.org:itcase-dev/gulp-tasks.git master .babelrc .browserslistrc .eslintignore .eslintrc .htmlhintrc .huskyrc .lintstagedrc .lintstagedrc .prettierignore .prettierrc .stylelintrc | tar -xv
 
 email:
-	gulp email-templates --path templates/emails/ $(ARGV)
-	gulp email-templates --path templates/itcase_entry/emails/ $(ARGV)
-	gulp email-templates --path modules/certification/templates/certification/emails/ $(ARGV)
-	gulp email-templates --path modules/test_center/templates/test_center/emails/ $(ARGV)
+	gulp emailTemplates --path templates/emails/ $(ARGV)
+	gulp emailTemplates --path templates/itcase_cart/emails/ $(ARGV)
+	gulp emailTemplates --path templates/itcase_entry/emails/ $(ARGV)
 
 font:
 	gulp font -F Fact-Regular -N 'Fact' -W normal
@@ -47,7 +46,6 @@ font:
 	gulp font -F Fact-SemiExpanded -N 'Fact-Semi-Expanded' -W normal
 	gulp font -F Fact-SemiExpandedMedium -N 'Fact-Semi-Expanded' -W 500
 	gulp font -F Fact-SemiExpandedBold -N 'Fact-Semi-Expanded' -W bold
-
 
 MEDIA_PATH=media/uploads/
 

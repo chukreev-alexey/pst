@@ -5,12 +5,12 @@
     & .form-checkbox {
       &__label {
         &::after {
-          border: solid 1px var(--color-gray);
+          border: solid 1px var(--color-surface-border);
         }
       }
     }
     & .selectize-input {
-      border: solid 1px var(--color-gray);
+      border: solid 1px var(--color-surface-border);
     }
     &.form-field__item_state_valid {
       & .form-field__item-c2 {
@@ -21,7 +21,7 @@
       & .form-checkbox {
         &__label {
           &::after {
-            border: solid 1px var(--color-gray);
+            border: solid 1px var(--color-surface-border);
           }
         }
       }

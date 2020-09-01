@@ -4,7 +4,7 @@
 {% block content %}
     <div class="wrapper">
         <div class="wrapper__inner">
-            {% with feed_title='Скидки и акции' hide_feed_button=True %}
+            {% with hide_feed_button=True %}
                 {% feed_list_main_page limit=3 %}
             {% endwith %}
 

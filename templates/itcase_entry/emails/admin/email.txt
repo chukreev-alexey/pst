@@ -1,0 +1,19 @@
+{% load itcase_common %}
+
+{{ current_site.name }}
+{{ instance.form_entry.form.title }}
+
+{% if field.field_type == 103 %}
+  {% with userdata=field.value %}
+    {{ field.name }}
+    * имя {{ userdata.0 }}
+    * логин {{ userdata.1 }}
+    * электронный адрес {{ userdata.2 }}
+  {% endwith %}
+{% else %}
+  {% for field in instance.get_form_fields %}
+    * {{ field.name }}: {{ field.value|default:'—' }}
+  {% endfor %}
+{% endif %}
+
+Сcылка на страницу сообщения: {{ request|get_host }}/admin/itcase_entry/entry/{{ instance.pk }}/
