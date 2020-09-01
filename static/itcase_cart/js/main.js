@@ -2,19 +2,10 @@ $(document).on('click', '.cart-order__delivery-method-item', function () {
   const self = $(this)
   const $form = self.closest('form')
   const $address = $form.find('input[name="address"]')
-  const $groupTitle = $address.closest('.cart-order__group').find('.cart-order__group-title')
-
-  console.warn('==== delivery ====')
-  console.log('self: ', self)
-  console.log('form: ', $form)
-  console.log('address: ', $address)
-  console.log('groupTitle: ', $groupTitle)
 
   // 0 - 'Самовывоз'
   // 1 - 'Доставка'
   const delivery = self.data('delivery')
-
-  console.log('delivery: ', delivery)
 
   if (delivery === 0) {
     $address.val('').closest('.cart-order__group').hide()

@@ -71,7 +71,7 @@ if (typeof UserCartClass !== 'undefined') {
     orderAgreeCheckboxChecked: 'cart-order__agree_state_checked',
 
     // Count of numbers after decimal point in prices
-    priceFractionDigits: 0,
+    priceFractionDigits: 2,
     // productCountVariants: ['позиция', 'позиции', 'позиций'],
 
     // Cart page container and items in product list
@@ -80,6 +80,27 @@ if (typeof UserCartClass !== 'undefined') {
     cartListProductSum: 'cart-list__item-cost-second',
     cartListOrderSum: 'cart-list-sum__amount',
   })
+
+  UserCart.getCartPriceText = function (price, currency) {
+    if (currency) {
+      currency = currency.toUpperCase()
+    } else {
+      currency = this.getNumEnding(price, ['рубль', 'рубля', 'рублей'])
+    }
+
+    const numberPrice = parseFloat(price)
+
+    const isInteger = isFinite(numberPrice) && Math.floor(numberPrice) === numberPrice
+
+    const priceFractionDigits = isInteger ? 0 : this.props.priceFractionDigits
+
+    const cleanPrice = numberPrice.toLocaleString('ru-RU', {
+      minimumFractionDigits: priceFractionDigits,
+      maximumFractionDigits: priceFractionDigits,
+    })
+
+    return `${cleanPrice} ${currency}`
+  }
 }
 
 // initialize ionRangeSlider for "price" fields in filter form.
