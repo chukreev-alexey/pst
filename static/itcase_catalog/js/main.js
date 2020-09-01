@@ -101,6 +101,50 @@ if (typeof UserCartClass !== 'undefined') {
 
     return `${cleanPrice} ${currency}`
   }
+
+  UserCart.calculateOrderSum = function () {
+    const { productAmountInput, cartListOrderSum } = this.props
+
+    // Change sum for order
+    const $orderSum = $(`.${cartListOrderSum}`)
+
+    if (!$orderSum.length) {
+      return null
+    }
+
+    let allSum = 0
+
+    $(`.${productAmountInput}`).each((i, input) => {
+      const cleanPrice = input.dataset.price.toString().replace(/\s/g, '')
+      allSum += input.value * parseFloat(cleanPrice.replace(',', '.'))
+    })
+
+    const orderSumParts = $orderSum
+      .text()
+      .replace(/\r?\n|\r/g, '')
+      .trim()
+      .split(' ')
+      .filter(Boolean)
+
+    // prettier-ignore
+    const orderCurrency = (orderSumParts.length > 1)
+      ? orderSumParts[1] || ''
+      : orderSumParts[0] || ''
+
+    if (orderCurrency.toLowerCase() === 'р' || orderCurrency.toLowerCase().startsWith('руб')) {
+      const isInteger = isFinite(allSum) && Math.floor(allSum) === allSum
+      const priceFractionDigits = isInteger ? 0 : this.props.priceFractionDigits
+      const priceFormat = {
+        minimumFractionDigits: priceFractionDigits,
+        maximumFractionDigits: priceFractionDigits,
+      }
+      allSum = allSum.toLocaleString('ru-RU', priceFormat)
+    } else {
+      allSum = allSum.toFixed(2)
+    }
+
+    $orderSum.text(`${allSum} ${orderCurrency}`)
+  }
 }
 
 // initialize ionRangeSlider for "price" fields in filter form.
