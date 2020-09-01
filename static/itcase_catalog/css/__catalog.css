@@ -996,6 +996,14 @@ sans-serif;
     cursor: pointer;
   }
 
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-group__close {
+      display: none
+  }
+    }
+
 .catalog-group__close::before,
     .catalog-group__close::after {
       width: 20px;
@@ -2196,7 +2204,7 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .catalog-item {
-    width: auto;
+    width: 100%;
     padding: 24px 16px 16px 16px;
     margin: 0 8px 16px 8px
 }
@@ -3208,6 +3216,14 @@ sans-serif;
         margin: 0;
         flex: 0 0 24%;
       }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-menu-popup .catalog-group__inner-list-item {
+          margin: 0 0 8px 0
+      }
+        }
 
 @-webkit-keyframes catalogMenuFadeIn {
   from {

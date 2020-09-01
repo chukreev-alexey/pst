@@ -27,6 +27,9 @@
     right: 16px;
     z-index: 20;
     cursor: pointer;
+    @media (--mobile) {
+      display: none;
+    }
     &::before,
     &::after {
       width: 20px;
