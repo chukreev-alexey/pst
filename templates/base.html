@@ -39,7 +39,8 @@
 
     {% if site_domain in request.get_host %}
         <meta name="robots" content="index,follow" />
-        <meta name="yandex-verification" content="5de2550ce59811d4" />
+        <meta name="yandex-verification" content="5f5e6a08bb112b5a" />
+        <meta name="google-site-verification" content="7EE5hPqbsFQvY8PzFQpExdW12fBzHS1iFq7pSOgrU7I" />
         {{ request.infoblock.additional_meta|default:""|safe }}
     {% else %}
         <meta name="robots" content="none" />
@@ -162,11 +163,9 @@
                     <div class="header__catalog">Каталог</div>
                     <div class="header__phone">
                         {% if site_version == 'mobile' %}
-                            <p><a href="tel:+79086307947">908-630-79-47</a></p>
-                            <p><a href="tel:+79221277725">922-127-77-25</a></p>
+                            {{ request.infoblock.header_phone_mobile|default:""|safe }}
                         {% else %}
-                            <p><a href="tel:+79086307947">+7 908-630-79-47</a></p>
-                            <p><a href="tel:+79221277725">+7 922-127-77-25</a></p>
+                            {{ request.infoblock.header_phone|default:""|safe }}
                         {% endif %}
                     </div>
                 </div>
@@ -189,15 +188,10 @@
                 <div class="footer__form"></div>
                 <div class="footer__contact">
                     <div class="footer__contact-phone">
-                        <p><a href="+79221277725">+7 922-127-77-25</a></p>
-                        <p><a href="+79086307947">+7 908-630-79-47</a></p>
-                        <p><a href="+73433800842">+7 (343) 380-08-42</a></p>
-                        <p><a href="+73433190530">+7 (343) 319-05-30</a></p>
+                        {{ request.infoblock.footer_phone|default:""|safe }}
                     </div>
                     <div class="footer__contact-address">
-                        <p><a href="mailto:profstroitorg@bk.ru">profstroitorg@bk.ru</a></p>
-                        <p>Екатеринбург</p>
-                        <p>ул. Завокзальная - 4А, офис 216</p>
+                         {{ request.infoblock.footer_address|default:""|safe }}
                     </div>
                 </div>
                 <div class="footer__copyright">&copy; 2010-2020 ПрофСтройТорг</div>
