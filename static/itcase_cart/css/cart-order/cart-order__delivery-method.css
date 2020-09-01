@@ -6,9 +6,12 @@
     border-radius: 20px;
     position: relative;
     display: inline-block;
+    @media (--mobile) {
+      width: 100%;
+      display: flex;
+    }
   }
   &-state {
-    @mixin font 500, 14px, 24px, 14px, 24px, var(--font-title-secondary);
     color: var(--color-surface-text);
     background: var(--color-surface);
     padding: 15px 48px 13px 48px;
@@ -16,21 +19,34 @@
     border-radius: 20px;
     position: absolute;
     display: block;
+    box-sizing: border-box;
     left: 0;
     top: 0;
     z-index: 1;
     transition: all 0.4s linear;
+    @mixin font 500, 14px, 24px, 14px, 24px, var(--font-title-secondary);
+    @media (--mobile) {
+      width: 50%;
+      text-align: center;
+      padding: 15px 24px 13px 24px;
+    }
   }
   &-item {
-    @mixin font 500, 14px, 24px, 14px, 24px, var(--font-title-secondary);
-    background: var(--color-neutral);
     color: var(--color-neutral-text);
+    background: var(--color-neutral);
     padding: 15px 48px 13px 48px;
     float: left;
     position: relative;
+    box-sizing: border-box;
     cursor: pointer;
-    &:last-child {
-      padding: 15px 28px 13px 18px;
+    @mixin font 500, 14px, 24px, 14px, 24px, var(--font-title-secondary);
+    @media (--mobile) {
+      width: 50%;
+      text-align: center;
+      padding: 15px 24px 13px 24px;
+    }
+    @media (--mobile) {
+      float: none;
     }
     &:hover {
       color: var(--color-neutral-text-hover);

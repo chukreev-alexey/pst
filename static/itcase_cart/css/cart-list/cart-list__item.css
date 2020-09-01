@@ -64,29 +64,21 @@
       width: 35%;
     }
     &-title {
-      @mixin font bold, 14px, 18px, 24px, 18px, var(--font-title-secondary);
       color: var(--color-neutral-text);
       display: inline-block;
+      @mixin font bold, 14px, 18px, 24px, 18px, var(--font-title-secondary);
       &:hover {
         color: var(--color-neutral-text-hover);
       }
     }
     &-param {
       &-item {
+        color: var(--color-neutral-text);
         padding: 4px 0;
         @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
-        color: var(--color-neutral-text);
       }
     }
     &-state {
-      &-text {
-        @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
-        color: var(--color-primary-text);
-        background: var(--color-primary);
-        padding: 6px 16px;
-        margin: 12px 0 0 0;
-        display: inline-block;
-      }
       &_exist {
         @media (--mobile) {
           display: none;
@@ -94,6 +86,14 @@
         & .cart-list__item-info-state-text {
           background: var(--color-orange);
         }
+      }
+      &-text {
+        color: var(--color-primary-text);
+        background: var(--color-primary);
+        padding: 6px 16px;
+        margin: 12px 0 0 0;
+        display: inline-block;
+        @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
       }
     }
   }
@@ -160,9 +160,6 @@
         &_plus {
           background: var(--color-primary);
           margin: 0 0 0 10px;
-          &:hover {
-            background: var(--color-primary-hover);
-          }
           &::before {
             width: 13px;
             height: 2px;
@@ -184,15 +181,18 @@
             top: 11px;
             transform: rotate(90deg);
           }
+          &:hover {
+            background: var(--color-primary-hover);
+          }
         }
       }
     }
     &-value {
-      @mixin font normal, 14px, 18px, 4px, 18px, var(--font-title-secondary);
       color: var(--color-surface-text);
       text-align: right;
       padding: 5px 0 0 0;
       position: relative;
+      @mixin font normal, 14px, 18px, 4px, 18px, var(--font-title-secondary);
       @media print {
         padding: 0 50px 0 0;
       }
@@ -225,20 +225,17 @@
   }
   &-cost {
     width: 250px;
-    @mixin font bold, 14px, 18px, 24px, 18px, var(--font-title-secondary);
     color: var(--color-surface-text);
-    position: relative;
     padding: 0 0 0 40px;
+    position: relative;
     box-sizing: border-box;
+    @mixin font bold, 16px, 18px,16px, 18px, var(--font-title-secondary);
     @media print {
       display: table-cell;
     }
     @media (--mobile) {
-      margin: 5px 0 10px 30px;
+      margin: 5px 0 10px 40px;
       order: 1;
-    }
-    @media (--mobile-large), (--mobile-huge) {
-      margin: 0 0 10px 30px;
     }
     &-second {
       font: 14px/12px var(--font);
@@ -266,13 +263,10 @@
       height: 20px;
       font: 14px var(--font);
       color: var(--color-surface-text);
+      text-decoration: none;
       position: relative;
       display: inline-block;
       transition: transform 0.1s ease-in-out;
-      text-decoration: none;
-      &:hover {
-        transform: scale(1.6);
-      }
       &::before {
         width: 15px;
         height: 2px;
@@ -294,6 +288,9 @@
         top: 10px;
         right: 0;
         transform: rotate(45deg);
+      }
+      &:hover {
+        transform: scale(1.6);
       }
     }
   }

@@ -1,23 +1,17 @@
 .cart-order {
   margin: 0 0 60px 0;
-  &__wrapper {
-    @media (--mobile-large), (--mobile-huge) {
-      display: flex;
-      justify-content: space-around;
-    }
-  }
   &__title {
-    color: #000;
-    @mixin font 500, 14px, 32px, 14px, 32px, var(--font-title-secondary);
-    @media (--mobile) {
-      text-align: center;
-    }
+    color: var(--color-surface-text);
+    @mixin font 500, 18px, 32px, 18px, 32px, var(--font-title-secondary);
   }
   &-button {
     &.button {
       padding: 16px 42px;
       margin: 24px 0 0 0;
       @mixin font 500, 14px, 32px, 14px, 32px, var(--font-title-secondary);
+      @media (--mobile) {
+        width: 100%;
+      }
     }
     &&_state_disabled {
       color: #777;

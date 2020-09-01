@@ -1,27 +1,30 @@
 .cart-order__group {
+  width: 100%;
   margin: 0 0 24px 0;
   &-title {
-    @mixin font 500, 14px, 32px, 18px, 36px, var(--font-title-secondary);
     color: var(--color-surface-text);
     margin: 0 0 14px 0;
+    @mixin font 500, 14px, 32px, 18px, 36px, var(--font-title-secondary);
   }
   &-input {
     margin: 0 0 24px 0;
-    @media (--mobile) {
-      width: 100%;
-    }
+    display: flex;
+    flex-flow: row wrap;
     &-input {
-      min-width: 400px;
+      max-width: 400px;
       padding: 8px 16px;
-      @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
       border: solid 1px var(--color-surface-border);
+      @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
+      @media (--mobile) {
+        width: 100%;
+      }
     }
     &-textarea {
       height: 80px;
-      min-width: 400px;
+      max-width: 400px;
       padding: 8px 16px;
-      @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
       border: solid 1px var(--color-surface-border);
+      @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
     }
   }
 }

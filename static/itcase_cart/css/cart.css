@@ -6,5 +6,8 @@
     margin: 0 auto;
     position: relative;
     box-sizing: border-box;
+    @media (--mobile) {
+      padding: 0 24px;
+    }
   }
 }
