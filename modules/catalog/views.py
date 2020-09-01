@@ -532,9 +532,14 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
     def get_filter_data_price(self, queryset, query):
         price_qs = Price.objects.filter(product__in=queryset)
 
+        data = {}
         _data = price_qs.filter(price__gt=0).aggregate(Max('price'),
                                                        Min('price'))
-        data = dict((key, _data[f'price__{key}']) for key in ('max', 'min'))
+        for key in ('max', 'min'):
+            value = _data[f'price__{key}']
+            if value is None:
+                continue
+            data[key] = value
 
         filtered_products = []
         if query:
@@ -805,5 +810,5 @@ class ProductDetail(ProductDetailBase):
         if price:
             data['scope'] = price.price_parametres.values_list(
                 'parametr_value_id', flat=True)
-            data['price'] = price.price
+            data['price'] = price
         return data
