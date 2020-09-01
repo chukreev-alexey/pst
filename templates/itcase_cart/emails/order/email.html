@@ -78,10 +78,10 @@
                 {% endwith %}
             {% endfor %}
         </table>
+    </div>
 
-        <div class="email-button">
-            <a href="{{ request|get_host }}{{ order.get_admin_url }}" class="email-button__text">Перейти на страницу заказа</a>
-        </div>
+    <div class="email-button">
+        <a href="{{ request|get_host }}{{ order.get_admin_url }}" class="email-button__text">Перейти на страницу заказа</a>
     </div>
 
 {% endblock content %}

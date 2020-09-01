@@ -78,10 +78,10 @@
                 {% endwith %}
             {% endfor %}
         </table>
+    </div>
 
-        <div style="background: #fff; max-width: 700px; min-width: 90px; padding: 24px 0; width: 100%;">
-            <a href="{{ request|get_host }}{{ order.get_admin_url }}" style="background: #d82318; color: #fff; display: inline-block; font: 1rem/1rem 'Arial' , sans-serif; padding: 12px 24px 14px 24px; text-decoration: none;">Перейти на страницу заказа</a>
-        </div>
+    <div style="background: #fff; max-width: 700px; min-width: 90px; padding: 24px 0; width: 100%;">
+        <a href="{{ request|get_host }}{{ order.get_admin_url }}" style="background: #d82318; color: #fff; display: inline-block; font: 1rem/1rem 'Arial' , sans-serif; padding: 12px 24px 14px 24px; text-decoration: none;">Перейти на страницу заказа</a>
     </div>
 
 {% endblock content %}
