@@ -16,8 +16,8 @@
   &-c1 {
     width: 100%;
     position: relative;
-    vertical-align: top;
     box-sizing: border-box;
+    vertical-align: top;
     @media (--mobile), (--tablet) {
       padding: 0 0 10px 0;
       display: block;
@@ -27,7 +27,7 @@
     color: var(--color-surface-text);
     padding: 8px 0 0 0;
     display: block;
-    @mixin font normal, 14px, 16px, 18px, 24px, var(--font);
+    @mixin font normal, 16px, 16px, 18px, 24px, var(--font);
   }
   &-required {
     font: 16px var(--font);
@@ -46,7 +46,7 @@
     position: relative;
     box-sizing: border-box;
     @media (--mobile), (--tablet) {
-      padding: 0;
+      margin: 0;
       display: block;
     }
     &_state_full {

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load forms_builder_tags itcase_common %}
+
+{% block title %}
+    {% if request.page %}
+        {{ request.page.seo_title|default:request.page.name }}
+    {% else %}
+        {{ form.title }}
+    {% endif %}
+{% endblock title %}
+
+{% block content %}
+    <div class="page page_type_form">
+        <div class="page__wrapper">
+            {% if request.page.name %}
+                <div class="page-title">{{ request.page.name }}</div>
+            {% endif %}
+        </div>
+
+        {% with form_additional_class='form_type_page form_type_hide_messages' %}
+            {% render_built_form form %}
+        {% endwith %}
+
+        {% if request.page.content %}
+            <div class="page-content">
+                {% render_content request.page.content %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

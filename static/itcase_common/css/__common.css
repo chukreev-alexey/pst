@@ -91,7 +91,7 @@
   and (max-width: 47.999em) {
 
 .form_type_page.form {
-    padding: 0 16px
+    padding: 24px 16px 16px 16px
 }
   }
 
@@ -279,7 +279,7 @@
 
 .form-buttons__item {
       text-align: center;
-      margin: 0 0 15px 0
+      margin: 32px 0 0 0
   }
     }
 
@@ -515,7 +515,7 @@
     color: #000;
     padding: 8px 0 0 0;
     display: block;
-    font-size: calc(0.875rem + 0.125 * ((100vw - 20rem) / 140));
+    font-size: calc(1rem + 0 * ((100vw - 20rem) / 140));
     font-weight: normal;
     font-family: 'Fact'
 ,
@@ -547,7 +547,7 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
   .form-fields .form-field__item-name {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 }
 
@@ -577,7 +577,7 @@ sans-serif;
   and (max-width: 59.999em) {
 
 .form-fields .form-field__item-c2 {
-      padding: 0;
+      margin: 0;
       display: block
   }
     }

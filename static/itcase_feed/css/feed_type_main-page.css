@@ -6,7 +6,7 @@
         color: var(--color-neutral-text);
         @mixin font 500, 18px, 42px, 24px, 48px, var(--font-title-secondary);
         @media (--mobile), (--tablet) {
-          padding: 0 20px;
+          padding: 8px 20px;
         }
         &-link {
           color: var(--color-neutral-text);
@@ -19,7 +19,7 @@
           position: relative;
           overflow: scroll;
         }
-        & .feed-list__item {
+        &__item {
           min-height: 144px;
           background: var(--color-neutral);
           padding: 0 32px 0 156px;
@@ -30,12 +30,22 @@
           flex-flow: row wrap;
           align-items: flex-start;
           box-sizing: border-box;
+          @media (--mobile) {
+            min-width: 300px;
+            padding: 0 32px 20px 112px;
+            margin: 0 24px 0 0;
+          }
           &-image {
             padding: 16px 16px 16px 24px;
             margin: 0;
             position: absolute;
             left: 0;
             top: 0;
+            &-image {
+              @media (--mobile) {
+                width: 72px;
+              }
+            }
           }
           &-title {
             color: var(--color-neutral-text);
@@ -43,6 +53,9 @@
             padding: 24px 0 0 0;
             order: -1;
             @mixin font bold, 14px, 16px, 18px, 22px, var(--font);
+            @media (--mobile) {
+              padding: 16px 0 0 0;
+            }
             &-link {
               color: var(--color-neutral-text);
               text-decoration: none;
