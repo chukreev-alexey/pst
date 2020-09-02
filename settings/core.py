@@ -112,6 +112,8 @@ TEMPLATES = [
                 'itcase_pages.context_processors.page',
 
                 'modules.catalog.context_processors.base_categories',
+
+                'website.context_processors.global_context',
             ],
         },
     },
