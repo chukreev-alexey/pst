@@ -59,9 +59,7 @@
     }
   }
   &__sort {
-    @media (--mobile) {
-      display: none;
-    }
+    position: relative;
   }
   &__inner {
     width: 100%;

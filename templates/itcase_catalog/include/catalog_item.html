@@ -23,47 +23,41 @@
             </div>
             <div class="catalog-item__desc">{{ product.short_description }}</div>
             {% with price=product|get_product_actual_price:filter_data_price_query %}
-                {% if price %}
-                    <div class="catalog-item__price">
-                        <div class="catalog-item__price-text">
-                            {% if price.price != 0 %}
-                                {{ price.price|floatformat:'-2' }} Р {{ product.measuring|default:'' }}
-                            {% else %}
-                                Предзаказ
-                            {% endif %}
-                        </div>
-                        {% if price.old_price %}
-                            <div class="catalog-item__price-old">
-                                {{ price.old_price|floatformat:'-2' }} Р
-                            </div>
+                <div class="catalog-item__price">
+                    <div class="catalog-item__price-text">
+                        {% if price.price %}
+                            {{ price.price|floatformat:'-2' }} Р
+                        {% else %}
+                            Предзаказ
                         {% endif %}
                     </div>
+                    {% if price.old_price %}
+                        <div class="catalog-item__price-old">
+                            {{ price.old_price|floatformat:'-2' }} Р
+                        </div>
+                    {% endif %}
+                </div>
 
-                    <a href="{% url 'itcase_cart:cart_add' %}?product={{ price.id }}&amount-{{ price.id }}=1"
-                       class="catalog-item__button {% if product in cart %} catalog-item__button_state_in-cart {% endif %}"
-                        data-add-url="{% url 'itcase_cart:cart_add' %}"
-                        data-product="{{ price.id }}"
-                        data-amount-{{ price.id }}="1">
-                        <div class="catalog-item__button-loader">
-                            <div class="sk-three-bounce">
-                                <div class="sk-child sk-bounce1"></div>
-                                <div class="sk-child sk-bounce2"></div>
-                                <div class="sk-child sk-bounce3"></div>
-                            </div>
+                <a href="{% url 'itcase_cart:cart_add' %}?product={{ price.id }}&amount-{{ price.id }}=1"
+                   class="catalog-item__button {% if product in cart %} catalog-item__button_state_in-cart {% endif %}"
+                    data-add-url="{% url 'itcase_cart:cart_add' %}"
+                    data-product="{{ price.id }}"
+                    data-amount-{{ price.id }}="1">
+                    <div class="catalog-item__button-loader">
+                        <div class="sk-three-bounce">
+                            <div class="sk-child sk-bounce1"></div>
+                            <div class="sk-child sk-bounce2"></div>
+                            <div class="sk-child sk-bounce3"></div>
                         </div>
-                        <div class="catalog-item__button-text">
-                            {% if price in cart %}
-                                В заказе
-                            {% else %}
-                                Заказать
-                            {% endif %}
-                        </div>
-                    </a>
-                {% else %}
-                    <div class="catalog-item__price">
-                        <div class="catalog-item__price-text">Предзаказ</div>
                     </div>
-                {% endif %}
+                    <div class="catalog-item__button-text">
+                        {% if price in cart %}
+                            В заказе
+                        {% else %}
+                            Заказать
+                        {% endif %}
+                    </div>
+                </a>
             {% endwith %}
         </div>
     </div>

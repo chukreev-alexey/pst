@@ -497,8 +497,8 @@
 .form-fields .form-field__item-c1 {
     width: 100%;
     position: relative;
-    vertical-align: top;
     box-sizing: border-box;
+    vertical-align: top;
   }
 
 @media (min-width: 15em)

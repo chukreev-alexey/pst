@@ -1,9 +1,12 @@
 .catalog-sort {
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
   margin: -56px 0 24px 0;
   position: relative;
+  display: flex;
+  justify-content: flex-end;
+  @media (--mobile) {
+    margin: 0 0 24px 0;
+  }
   &__group {
     margin: 0 40px 24px 0;
     display: flex;
@@ -15,13 +18,13 @@
       margin: 0 0 16px 0;
     }
     &-item {
-      @mixin font normal, 14px, 16px, 14px, 16px, var(--font-title-secondary);
       color: var(--color-black);
       text-decoration: none;
       margin: 0 20px 0 0;
       position: relative;
       display: block;
       transition: all 0.15s ease-out;
+      @mixin font normal, 14px, 16px, 14px, 16px, var(--font-title-secondary);
       &:hover {
         color: var(--color-orange);
       }

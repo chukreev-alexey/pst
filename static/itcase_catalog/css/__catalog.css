@@ -1073,13 +1073,9 @@ sans-serif;
   }
     }
 
-@media (min-width: 15em)
-  and (max-width: 47.999em) {
-
 .catalog-group__sort {
-      display: none
+    position: relative;
   }
-    }
 
 .catalog-group__inner {
     width: 100%;
@@ -3680,7 +3676,18 @@ sans-serif;
   min-width: 310px;
   position: relative;
   z-index: 2;
+  box-sizing: border-box;
 }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-sort-dropdown {
+    min-width: 0;
+    max-width: 280px;
+    margin: 0 8px
+}
+  }
 
 .catalog-sort-dropdown::after {
     padding: 3px;
@@ -3688,11 +3695,15 @@ sans-serif;
     border-width: 0 2px 2px 0;
     position: absolute;
     content: '';
-    top: 19px;
     right: 24px;
+    top: calc(50% - 6px);
     transform: rotate(45deg);
     display: inline-block;
   }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+    }
 
 .catalog-sort-dropdown_state_open .catalog-sort-dropdown__list {
       display: block;
@@ -3704,19 +3715,20 @@ sans-serif;
     }
 
 .catalog-sort-dropdown__current {
-    padding: 12px 48px 12px 20px;
-    font-size: calc(1.125rem + 0.125 * ((100vw - 20rem) / 140));
+    padding: 16px 48px 16px 20px;
+    font-size: calc(0.875rem + 0.375 * ((100vw - 20rem) / 140));
     font-weight: normal;
     font-family: 'Fact'
 ,
 sans-serif;
-    line-height: calc(1.125rem + 0.125 * ((100vw - 20rem) / 140));
+    line-height: calc(0.875rem + 0.375 * ((100vw - 20rem) / 140));
     background: #fafafa;
     color: #000;
     border: solid 1px #eee;
     display: flex;
     cursor: pointer;
     align-items: center;
+    position: relative;
   }
 
 @media screen and (min-width: 2560px) {
@@ -3729,7 +3741,7 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
   .catalog-sort-dropdown__current {
-    line-height: 1.125rem;
+    line-height: 0.875rem;
   }
 }
 
@@ -3743,13 +3755,21 @@ sans-serif;
 @media screen and (max-width: 320px) {
 
   .catalog-sort-dropdown__current {
-    font-size: 1.125rem;
+    font-size: 0.875rem;
   }
 }
 
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-sort-dropdown__current {
+      padding: 12px 48px 12px 20px
+  }
+    }
+
 .catalog-sort-dropdown__current::before {
       min-width: 24px;
-      min-height: 24px;
+      min-height: 100%;
       content: '—';
       display: block;
       margin: 0 12px 0 0;
@@ -3853,6 +3873,14 @@ sans-serif;
   margin: -56px 0 24px 0;
   position: relative;
 }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-sort {
+    margin: 0 0 24px 0
+}
+  }
 
 .catalog-sort__group {
     margin: 0 40px 24px 0;

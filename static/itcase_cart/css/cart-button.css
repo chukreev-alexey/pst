@@ -11,6 +11,7 @@
   cursor: pointer;
   @media (--mobile), (--tablet) {
     min-width: 0;
+    background: none;
     padding: 0;
     margin: 0;
   }
@@ -25,7 +26,6 @@
     @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
     @media (--mobile), (--tablet) {
       color: var(--color-neutral);
-      background: var(--color-neutral);
       display: block;
     }
     &::after {
@@ -44,7 +44,7 @@
       @media (--mobile), (--tablet) {
         width: 40px;
         height: 40px;
-        background: var(--color-neutral) url('./../img/icon/add_to_cart.svg') no-repeat 50% 50%;
+        background: url('./../img/icon/add_to_cart.svg') no-repeat 50% 50%;
         background-size: 16px 16px;
         border-radius: 50%;
         position: absolute;
@@ -67,6 +67,11 @@
       box-sizing: border-box;
       top: -24px;
       right: -36px;
+      @media (--mobile) {
+        top: -6px;
+        right: -12px;
+        transform: scale(0.6);
+      }
       @media (--tablet) {
         top: -8px;
         right: 8px;

@@ -55,11 +55,13 @@
     ^&__search {
       width: 40px;
       height: 40px;
+      position: relative;
       display: none;
       order: -4;
       @media (--mobile) {
         background: url('./../img/icon/search_black.svg') no-repeat 50% 50%;
         display: block;
+        top: -3px;
       }
     }
     ^&__logo {
@@ -164,9 +166,7 @@
         width: 40px;
         height: 40px;
         margin: 0 12px 0 0;
-        border-radius: 50%;
         position: relative;
-        overflow: hidden;
         order: -1;
       }
       @media (--tablet) {

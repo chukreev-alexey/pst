@@ -1,0 +1,7 @@
+.button {
+  &&_action_cost {
+    @media (--mobile) {
+      background: none !important;
+    }
+  }
+}

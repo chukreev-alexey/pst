@@ -1,6 +1,10 @@
 .page {
   width: 100%;
   background: var(--color-surface);
+  box-sizing: border-box;
+  @media (--mobile) {
+    padding: 0 16px;
+  }
   &__inner {
     width: 100%;
   }
