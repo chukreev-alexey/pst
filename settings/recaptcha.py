@@ -20,6 +20,6 @@ See official repo: https://github.com/praekelt/django-recaptcha
 
 """
 
-RECAPTCHA_PUBLIC_KEY = '6LfmvMYZAAAAAF4TZEAx6St6mQDR1MXu8muddeGi'
-RECAPTCHA_PRIVATE_KEY = '6LfmvMYZAAAAAI-8lXYFkl4s-6IMeBA7lot7lLun'
+RECAPTCHA_PUBLIC_KEY = '6LcavcYZAAAAAHkVfayLupduTJQ-KBx-X57hbgjn'
+RECAPTCHA_PRIVATE_KEY = '6LcavcYZAAAAAKpbF646cBzTUuvtM1IdFONSdKnw'
 NOCAPTCHA = True
