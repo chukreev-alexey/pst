@@ -26,7 +26,7 @@
                             <tr class="email-header__column">
                                 <td valign="top" class="email-header__logo">
                                     <div class="email-logo">
-                                        <img src="{% if DEBUG %}https://pst.itcase.pro/static/emails/img/logo.png{% else %}{{ request|get_host }}{% static 'emails/img/logo.png' %}{% endif %}"
+                                        <img src="{% if DEBUG %}https://pst.itcase.pro/static/emails/img/logo.png{% else %}{{ request|get_host }}{% static 'emails/img/_logo.png' %}{% endif %}"
                                              class="email-logo__image" title="{{ current_site.name }}" alt="{{ current_site.name }}" />
                                     </div>
                                 </td>
