@@ -31,8 +31,8 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .search.search_type_quick.search.search_type_quick_state_hidden {
-        -webkit-animation-duration: 0.5s;
-        animation-duration: 0.5s;
+      -webkit-animation-duration: 0.5s;
+      animation-duration: 0.5s;
       -webkit-animation-fill-mode: both;
       animation-fill-mode: both;
       -webkit-animation-name: quickSearchFadeOut !important;
@@ -83,12 +83,12 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .search.search_type_quick.search.search_type_quick_state_visible {
-      -webkit-animation-name: quickSearchFadeIn;
-      animation-name: quickSearchFadeIn;
       -webkit-animation-duration: 0.5s;
       animation-duration: 0.5s;
       -webkit-animation-fill-mode: both;
       animation-fill-mode: both;
+      -webkit-animation-name: quickSearchFadeIn;
+      animation-name: quickSearchFadeIn;
     }
 
 .search.search_type_quick.search.search_type_quick_state_visible .search-input__icon {
@@ -104,12 +104,12 @@
             }
 
 .search.search_type_quick.search.search_type_quick_state_visible .search-input__input {
+            padding: 0 16px 0 48px;
+            visibility: visible;
             -webkit-animation-duration: 0.5s;
             animation-duration: 0.5s;
             -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
-            padding: 0 16px 0 48px;
-            visibility: visible;
             -webkit-animation-name: quickSearchInputFadeIn;
             animation-name: quickSearchInputFadeIn;
           }
