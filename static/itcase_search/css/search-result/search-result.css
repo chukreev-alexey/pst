@@ -1,0 +1,43 @@
+.search-result {
+  width: 100%;
+  background: var(--color-surface);
+  margin: 0 0 80px 0;
+  position: relative;
+  &-list {
+    &__item {
+      padding: 16px 20px 16px 48px;
+      position: relative;
+      &:hover {
+        background: var(--color-surface-hover);
+      }
+      &-number {
+        color: var(--color-surface-text);
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        @mixin font normal, 14px, 18px, 14px, 18px, var(--font);
+      }
+      &-title {
+        color: var(--color-primary);
+        @mixin font 500, 16px, 24px, 24px, 32px, var(--font-title-secondary);
+        &:hover {
+          color: var(--color-primary-hover);
+        }
+      }
+      &-link {
+        &-text {
+          color: var(--color-surface-text);
+          @mixin font normal, 14px, 18px, 14px, 18px, var(--font);
+          &:hover {
+            color: var(--color-surface-text-hover);
+          }
+        }
+      }
+      &-text {
+        color: var(--color-surface-text);
+        margin: 8px 0 0 0;
+        @mixin font normal, 14px, 18px, 14px, 18px, var(--font);
+      }
+    }
+  }
+}

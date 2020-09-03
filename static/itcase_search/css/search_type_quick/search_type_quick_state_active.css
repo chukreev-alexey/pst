@@ -1,0 +1,21 @@
+.search {
+  &&_type_quick {
+    &&_state_active {
+      & .search {
+        &-result {
+          display: block;
+          animation-name: quickSearchResultFadeIn;
+        }
+      }
+    }
+  }
+}
+
+@keyframes quickSearchResultFadeIn {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}

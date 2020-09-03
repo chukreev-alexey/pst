@@ -174,7 +174,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             queryset=Category.objects.filter(active=True, level__lte=1))
 
         if self.object.other_template:
-            self.template_name = get_template_name('other_catalog_groups.html')
+            self.template_name = get_template_name('catalog_groups_type_selector.html')
 
         self.filter_query_dict[self.filter_key_brand] = request.GET.getlist(
             self.filter_key_brand)

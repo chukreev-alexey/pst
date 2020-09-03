@@ -2,25 +2,6 @@
   width: 100%;
   background: var(--color-primary);
   position: relative;
-  &__close {
-    position: absolute !important;
-    top: -60px;
-    right: 0;
-    transform: rotate(0deg);
-    transition: all 0.5s ease-in-out;
-    cursor: pointer;
-    &::before,
-    &::after {
-      background: #777 !important;
-    }
-    &:hover {
-      transform: rotate(-180deg);
-      &::before,
-      &::after {
-        background: #d0021b !important;
-      }
-    }
-  }
   &__input {
     width: 100%;
     color: var(--color-surface-text);
@@ -32,6 +13,44 @@
     @mixin font normal, 16px, 16px, 22px, 22px, var(--font-title-secondary);
     &:focus {
       outline: 0;
+    }
+  }
+  &__clear {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    display: none;
+    top: 50%;
+    right: 15px;
+    z-index: 2;
+    transform: translate(0, -50%);
+    transition: all 0.1s ease-in-out;
+    opacity: 0.5;
+    cursor: pointer;
+    &::before,
+    &::after {
+      width: 20px;
+      height: 2px;
+      background: var(--color-surface-item);
+      position: absolute;
+      content: '';
+      display: block;
+      left: calc(50% - 10px);
+      top: calc(50% - 1px);
+    }
+    &::before {
+      background: var(--color-surface-item);
+      transform: rotate(-45deg);
+    }
+    &::after {
+      background: var(--color-surface-item);
+      transform: rotate(45deg);
+    }
+    &:hover {
+      opacity: 1;
+    }
+    &_state_hidden {
+      display: none;
     }
   }
 }

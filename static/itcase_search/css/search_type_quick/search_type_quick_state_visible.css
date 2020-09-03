@@ -1,0 +1,99 @@
+.search {
+  &&_type_quick {
+    &&_state_visible {
+      animation-name: quickSearchFadeIn;
+      @media (--mobile) {
+        animation-name: quickSearchFadeInMobile;
+      }
+      & .search {
+        &-input {
+          &__icon {
+            background: url('./../img/icon/search_black.svg') no-repeat 50% 50%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+            &:hover {
+              transform: scale(1);
+            }
+          }
+          &__input {
+            padding: 0 16px 0 48px;
+            visibility: visible;
+            animation-name: quickSearchInputFadeIn;
+            @media (--mobile) {
+              animation: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes quickSearchFadeIn {
+  from {
+    width: 45px;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes quickSearchFadeInMobile {
+  from {
+    width: 45px;
+  }
+  to {
+    width: 92%;
+    right: 4%;
+  }
+}
+
+@keyframes quickSearchInputFadeIn {
+  from {
+    border: solid 1px var(--color-white);
+  }
+  to {
+    border: solid 1px var(--color-gray);
+  }
+}
+
+@keyframes quickSearchFadeOut {
+  from {
+    width: 90%;
+    transform: translate(0, 0);
+  }
+  to {
+    width: 45px;
+    right: 0;
+  }
+}
+
+@keyframes quickSearchFadeOutMobile {
+  from {
+    width: 90%;
+    transform: translate(0, 0);
+  }
+  to {
+    width: 45px;
+  }
+}
+
+@keyframes quickSearchInputFadeOut {
+  from {
+    border: solid 1px var(--color-gray);
+  }
+  to {
+    border: solid 1px var(--color-white);
+  }
+}
+
+@keyframes quickSearchResultFadeIn {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}

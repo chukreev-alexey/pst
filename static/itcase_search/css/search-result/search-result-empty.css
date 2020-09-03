@@ -1,0 +1,28 @@
+.search-result-empty {
+  width: 100%;
+  background: var(--color-surface);
+  padding: 32px;
+  margin: 0 0 80px 0;
+  position: relative;
+  box-sizing: border-box;
+  &__image {
+    display: none;
+  }
+  &__text {
+    &-title {
+      color: var(--color-surface-text);
+      @mixin font 500, 18px, 42px, 24px, 48px, var(--font-title-secondary);
+    }
+    &-desc {
+      color: var(--color-surface-text);
+      margin: 14px 0 0 0;
+      @mixin font normal, 14px, 18px, 18px, 24px, var(--font);
+      & a {
+        color: var(--color-primary);
+        &:hover {
+          color: var(--color-primary-hover);
+        }
+      }
+    }
+  }
+}

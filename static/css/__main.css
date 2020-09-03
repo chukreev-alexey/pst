@@ -2131,9 +2131,9 @@ sans-serif;
 .header__wrapper .header__search {
       width: 40px;
       height: 40px;
+      position: relative;
       display: none;
       order: -4;
-      position: relative;
     }
 
 @media (min-width: 15em)
