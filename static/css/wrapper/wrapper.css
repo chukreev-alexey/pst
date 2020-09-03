@@ -1,12 +1,17 @@
 .wrapper {
   width: 100%;
   position: relative;
-  flex: 1 0 auto;
   @media (--warning) {
     padding: 0 !important;
   }
   @media (--mobile) {
     flex: initial;
+  }
+  &__item {
+    font-size: 0;
+    flex: 1 0 auto;
+    position: relative;
+    overflow: hidden;
   }
   &__inner {
     max-width: var(--max);

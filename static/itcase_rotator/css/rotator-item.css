@@ -87,9 +87,9 @@
       background: var(--color-primary);
       color: var(--color-primary-text);
       @media (--mobile) {
-        position: absolute;
-        right: 0;
-        top: 0;
+        padding: 8px 16px;
+        background: var(--color-secondary);
+        color: var(--color-secondary-text);
       }
     }
     & p {

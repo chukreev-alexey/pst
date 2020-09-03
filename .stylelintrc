@@ -163,7 +163,7 @@
     ],
     "shorthand-property-no-redundant-values": null,
     "string-quotes": "single",
-    "property-blacklist": ["/^margin-/", "/^padding-/"],
+    "property-disallowed-list": ["/^margin-/", "/^padding-/"],
     "property-no-unknown": [
       true, {
         "ignoreProperties": ["aspect-ratio", "font-range", "line-height-range"]

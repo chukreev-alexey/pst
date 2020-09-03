@@ -543,7 +543,6 @@ sans-serif;
     flex-wrap: wrap;
     justify-content: space-between;
     box-sizing: border-box;
-    align-items: flex-start;
   }
 
 @media (min-width: 15em)
@@ -560,7 +559,7 @@ sans-serif;
       background: #f9f9fa;
       padding: 16px;
       margin: 0 0 40px 0;
-      flex: 0 0 32%;
+      width: 32%;
       box-sizing: border-box;
     }
 
@@ -3355,6 +3354,7 @@ sans-serif;
         white-space: nowrap;
         padding: 16px 8px;
         display: block;
+        transition: all 0.2s ease-in-out;
         font-size: calc(1rem + 0 * ((100vw - 20rem) / 140));
         font-weight: normal;
         font-family: 'Fact-Semi-Expanded'

@@ -2490,7 +2490,7 @@ sans-serif;
         white-space: nowrap;
         position: relative;
         display: block;
-        transition: all 0.1s linear;
+        transition: all 0.3s ease-in-out;
         font-size: calc(0.875rem + 0.125 * ((100vw - 20rem) / 140));
         font-weight: normal;
         font-family: 'Fact-Semi-Expanded'
@@ -2733,7 +2733,6 @@ sans-serif;
 .wrapper {
   width: 100%;
   position: relative;
-  flex: 1 0 auto;
 }
 
 @media (max-width: 15em) {
@@ -2749,6 +2748,13 @@ sans-serif;
 .wrapper {
     flex: initial
 }
+  }
+
+.wrapper__item {
+    font-size: 0;
+    flex: 1 0 auto;
+    position: relative;
+    overflow: hidden;
   }
 
 .wrapper__inner {

@@ -109,6 +109,11 @@ FILEBROWSER_VERSIONS = {
         'verbose_name': 'Catalog Detail Thumb',
         'width': 60, 'height': 60,
         'opts': 'upscale'},
+    # Search
+    'search_result_thumb': {
+        'verbose_name': 'Search Result Thumb',
+        'width': 120, 'height': 120,
+        'opts': 'upscale'},
     # Logos
     'logos_thumb': {
         'verbose_name': 'Logo Thumb',
