@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "91db4f062d31d3980cff";
+/******/ 	var hotCurrentHash = "31be4dec389bcd0da256";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1134,26 +1134,26 @@ var preventDefault = function preventDefault(rawEvent) {
 };
 
 var setOverflowHidden = function setOverflowHidden(options) {
-  // If previousBodyPaddingRight is already set, don't set it again.
-  if (previousBodyPaddingRight === undefined) {
-    var _reserveScrollBarGap = !!options && options.reserveScrollBarGap === true;
-    var scrollBarGap = window.innerWidth - document.documentElement.clientWidth;
+  // Setting overflow on body/documentElement synchronously in Desktop Safari slows down
+  // the responsiveness for some reason. Setting within a setTimeout fixes this.
+  setTimeout(function () {
+    // If previousBodyPaddingRight is already set, don't set it again.
+    if (previousBodyPaddingRight === undefined) {
+      var _reserveScrollBarGap = !!options && options.reserveScrollBarGap === true;
+      var scrollBarGap = window.innerWidth - document.documentElement.clientWidth;
 
-    if (_reserveScrollBarGap && scrollBarGap > 0) {
-      previousBodyPaddingRight = document.body.style.paddingRight;
-      document.body.style.paddingRight = scrollBarGap + 'px';
+      if (_reserveScrollBarGap && scrollBarGap > 0) {
+        previousBodyPaddingRight = document.body.style.paddingRight;
+        document.body.style.paddingRight = scrollBarGap + 'px';
+      }
     }
-  }
 
-  // If previousBodyOverflowSetting is already set, don't set it again.
-  if (previousBodyOverflowSetting === undefined) {
-    previousBodyOverflowSetting = document.body.style.overflow;
-    // Setting overflow on body/documentElement synchronously in Desktop Safari slows down
-    // the responsiveness for some reason. Setting within a setTimeout fixes this.
-    setTimeout(function () {
+    // If previousBodyOverflowSetting is already set, don't set it again.
+    if (previousBodyOverflowSetting === undefined) {
+      previousBodyOverflowSetting = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
-    });
-  }
+    }
+  });
 };
 
 var restoreOverflowSetting = function restoreOverflowSetting() {
@@ -17037,10 +17037,11 @@ $(document).on('change', 'input[id^="param-"]', event => {
 
 if (typeof SearchClass !== 'undefined') {
   global.ItcaseSearch = new SearchClass({
-    quickSearchOpenClass: 'search__wrapper',
+    quickSearchOpenClass: 'search-input',
     quickSearchPopupClass: 'search_type_quick',
     quickSearchVisibleClass: 'search_type_quick_state_visible',
-    quickSearchHideClass: 'search_type_quick_state_hidden'
+    quickSearchHideClass: 'search_type_quick_state_hidden',
+    clearButtonClass: 'search-input__clear'
   });
 }
 
