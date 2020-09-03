@@ -10,6 +10,18 @@
       &:hover {
         background: var(--color-surface-hover);
       }
+      &-wrapper {
+        display: flex;
+        ^&-image {
+          position: relative;
+        }
+        ^&-inner {
+          flex-grow: 1;
+        }
+        ^&-button {
+          position: relative;
+        }
+      }
       &-number {
         color: var(--color-surface-text);
         position: absolute;
@@ -22,15 +34,6 @@
         @mixin font 500, 16px, 24px, 24px, 32px, var(--font-title-secondary);
         &:hover {
           color: var(--color-primary-hover);
-        }
-      }
-      &-link {
-        &-text {
-          color: var(--color-surface-text);
-          @mixin font normal, 14px, 18px, 14px, 18px, var(--font);
-          &:hover {
-            color: var(--color-surface-text-hover);
-          }
         }
       }
       &-text {
