@@ -4,7 +4,7 @@
     <div class="search-result-list__item-wrapper">
         <div class="search-result-list__item-image">
             <a href="{{ item.get_absolute_url }}" class="search-result-list__item-image-link">
-                <img src="{% version item.image 'search_result_thumb' %}"
+                <img src="{% version item.get_first_image 'search_result_thumb' %}"
                      class="search-result-list__item-image-image" alt="" title="" />
             </a>
         </div>
@@ -29,7 +29,6 @@
                     <div class="search-result-list__item-state-text">Под заказ</div>
                 </div>
             {% endif %}
-
             <div class="search-result-list__item-price">
                 <div class="search-result-list__item-price-text">
                     {{ item.price|floatformat:'-2' }} Р

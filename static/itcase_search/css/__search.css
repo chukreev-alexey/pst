@@ -182,9 +182,9 @@
 
 .search.search_type_quick .search-input {
         height: 100%;
-        display: flex;
         position: relative;
         overflow: hidden;
+        display: flex;
       }
 
 .search.search_type_quick .search-input:hover {
@@ -507,8 +507,7 @@ sans-serif;
 .search-result-empty {
   width: 100%;
   background: #fff;
-  padding: 32px;
-  margin: 0 0 80px 0;
+  padding: 56px 32px;
   position: relative;
   box-sizing: border-box;
 }
