@@ -1,6 +1,8 @@
 .search {
   &&_type_quick {
     &&_state_visible {
+      animation-duration: 0.5s;
+      animation-fill-mode: both;
       animation-name: quickSearchFadeIn;
       & .search {
         &-input {
@@ -17,6 +19,8 @@
           &__input {
             padding: 0 16px 0 48px;
             visibility: visible;
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
             animation-name: quickSearchInputFadeIn;
             @media (--mobile) {
               animation: none;
