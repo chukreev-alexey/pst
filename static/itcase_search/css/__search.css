@@ -31,13 +31,21 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 .search.search_type_quick.search.search_type_quick_state_hidden {
-      -webkit-animation-name: quickSearchFadeOut;
-      animation-name: quickSearchFadeOut;
+        -webkit-animation-duration: 0.5s;
+        animation-duration: 0.5s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-animation-name: quickSearchFadeOut !important;
+      animation-name: quickSearchFadeOut !important;
     }
 
 .search.search_type_quick.search.search_type_quick_state_hidden .search-input__input {
-            -webkit-animation-name: quickSearchInputFadeOut;
-            animation-name: quickSearchInputFadeOut;
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            -webkit-animation-name: quickSearchInputFadeOut !important;
+            animation-name: quickSearchInputFadeOut !important;
           }
 
 @-webkit-keyframes quickSearchFadeOut {
@@ -77,6 +85,10 @@
 .search.search_type_quick.search.search_type_quick_state_visible {
       -webkit-animation-name: quickSearchFadeIn;
       animation-name: quickSearchFadeIn;
+      -webkit-animation-duration: 0.5s;
+      animation-duration: 0.5s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
     }
 
 .search.search_type_quick.search.search_type_quick_state_visible .search-input__icon {
@@ -92,6 +104,10 @@
             }
 
 .search.search_type_quick.search.search_type_quick_state_visible .search-input__input {
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
             padding: 0 16px 0 48px;
             visibility: visible;
             -webkit-animation-name: quickSearchInputFadeIn;
@@ -152,10 +168,6 @@
     top: 0;
     right: 0;
     z-index: 2;
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
   }
 
 @media (min-width: 15em)
@@ -182,9 +194,9 @@
 
 .search.search_type_quick .search-input {
         height: 100%;
-        display: flex;
         position: relative;
         overflow: hidden;
+        display: flex;
       }
 
 .search.search_type_quick .search-input:hover {
@@ -507,8 +519,7 @@ sans-serif;
 .search-result-empty {
   width: 100%;
   background: #fff;
-  padding: 32px;
-  margin: 0 0 80px 0;
+  padding: 56px 32px;
   position: relative;
   box-sizing: border-box;
 }

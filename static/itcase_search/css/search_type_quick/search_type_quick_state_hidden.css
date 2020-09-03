@@ -1,11 +1,15 @@
 .search {
   &&_type_quick {
     &&_state_hidden {
-      animation-name: quickSearchFadeOut;
+      animation-duration: 0.5s;
+      animation-fill-mode: both;
+      animation-name: quickSearchFadeOut !important;
       & .search {
         &-input {
           &__input {
-            animation-name: quickSearchInputFadeOut;
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+            animation-name: quickSearchInputFadeOut !important;
           }
         }
       }
