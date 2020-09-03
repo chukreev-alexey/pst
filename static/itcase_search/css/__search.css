@@ -35,86 +35,40 @@
       animation-name: quickSearchFadeOut;
     }
 
-@media (min-width: 15em)
-  and (max-width: 47.999em) {
-
-.search.search_type_quick.search.search_type_quick_state_hidden {
-        -webkit-animation-name: quickSearchFadeOutMobile;
-        animation-name: quickSearchFadeOutMobile
-    }
-      }
-
 .search.search_type_quick.search.search_type_quick_state_hidden .search-input__input {
             -webkit-animation-name: quickSearchInputFadeOut;
             animation-name: quickSearchInputFadeOut;
           }
 
-@media (min-width: 15em)
-  and (max-width: 47.999em) {
-
-.search.search_type_quick.search.search_type_quick_state_hidden .search-input__input {
-              -webkit-animation: none;
-              animation: none
-          }
-            }
-
 @-webkit-keyframes quickSearchFadeOut {
   from {
-    width: 90%;
-    transform: translate(0, 0);
+    width: 100%;
   }
   to {
-    width: 45px;
-    right: 0;
+    width: 0;
   }
 }
 
 @keyframes quickSearchFadeOut {
   from {
-    width: 90%;
-    transform: translate(0, 0);
+    width: 100%;
   }
   to {
-    width: 45px;
-    right: 0;
-  }
-}
-
-@-webkit-keyframes quickSearchFadeOutMobile {
-  from {
-    width: 90%;
-    transform: translate(0, 0);
-  }
-  to {
-    width: 45px;
-  }
-}
-
-@keyframes quickSearchFadeOutMobile {
-  from {
-    width: 90%;
-    transform: translate(0, 0);
-  }
-  to {
-    width: 45px;
+    width: 0;
   }
 }
 
 @-webkit-keyframes quickSearchInputFadeOut {
   from {
-    border: solid 1px var(--color-gray);
   }
   to {
-    border: solid 1px var(--color-white);
   }
 }
 
 @keyframes quickSearchInputFadeOut {
   from {
-    border: solid 1px var(--color-gray);
   }
   to {
-    border: solid 1px var(--color-white);
   }
 }
 
@@ -124,15 +78,6 @@
       -webkit-animation-name: quickSearchFadeIn;
       animation-name: quickSearchFadeIn;
     }
-
-@media (min-width: 15em)
-  and (max-width: 47.999em) {
-
-.search.search_type_quick.search.search_type_quick_state_visible {
-        -webkit-animation-name: quickSearchFadeInMobile;
-        animation-name: quickSearchFadeInMobile
-    }
-      }
 
 .search.search_type_quick.search.search_type_quick_state_visible .search-input__icon {
             background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTdweCIgaGVpZ2h0PSIxOXB4IiB2aWV3Qm94PSIwIDAgMTcgMTkiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8dGl0bGU+U2hhcGU8L3RpdGxlPgogICAgPGcgaWQ9IkRlc2t0b3AiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJNYWluUGFnZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEyOTIuMDAwMDAwLCAtMTMyLjAwMDAwMCkiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0ibm9uemVybyI+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMzA4LjU1MzE5LDE0OC4yODQwNTMgTDEzMDQuODEzMDksMTQ0LjM4NzUxMSBDMTMwNS44NjI1NSwxNDMuMDc3MDMzIDEzMDYuNDkzMzQsMTQxLjM5MjQwOSAxMzA2LjQ5MzM0LDEzOS41NTA3NiBDMTMwNi40OTUyLDEzNS4zNzcwMDIgMTMwMy4yNTE5MywxMzIgMTI5OS4yNDc2LDEzMiBDMTI5NS4yNDE0MiwxMzIgMTI5MiwxMzUuMzc3MDAyIDEyOTIsMTM5LjU1MDc2IEMxMjkyLDE0My43MjI1NzkgMTI5NS4yNDE0MiwxNDcuMTAxNTIgMTI5OS4yNDc2LDE0Ny4xMDE1MiBDMTMwMC4zODQ1MiwxNDcuMTAxNTIgMTMwMS40NjE4OSwxNDYuODI4MTgxIDEzMDIuNDIwMTcsMTQ2LjM0MzUzNiBDMTMwMi40NzU5OSwxNDYuNDM0NjUgMTMwMi41NDI5OCwxNDYuNTE5OTQ3IDEzMDIuNjE5MjcsMTQ2LjU5OTQyOSBMMTMwNi4zOTY1OCwxNTAuNTM0NzQxIEMxMzA2Ljk5MjAyLDE1MS4xNTUwODYgMTMwNy45NTk2MSwxNTEuMTU1MDg2IDEzMDguNTU1MDUsMTUwLjUzNDc0MSBDMTMwOS4xNDg2MywxNDkuOTEyNDU4IDEzMDkuMTQ4NjMsMTQ4LjkwNDM5OCAxMzA4LjU1MzE5LDE0OC4yODQwNTMgWiBNMTI5My41MjU4MSwxMzkuNTUwNzYgQzEyOTMuNTI1ODEsMTM2LjI1OTA1NSAxMjk2LjA4ODA2LDEzMy41ODk2MzQgMTI5OS4yNDc2LDEzMy41ODk2MzQgQzEzMDIuNDA3MTUsMTMzLjU4OTYzNCAxMzA0Ljk2OTM5LDEzNi4yNTkwNTUgMTMwNC45NjkzOSwxMzkuNTUwNzYgQzEzMDQuOTY5MzksMTQyLjg0MjQ2NSAxMzAyLjQwNTI5LDE0NS41MTE4ODcgMTI5OS4yNDc2LDE0NS41MTE4ODcgQzEyOTYuMDg4MDYsMTQ1LjUxMTg4NyAxMjkzLjUyNTgxLDE0Mi44NDI0NjUgMTI5My41MjU4MSwxMzkuNTUwNzYgWiIgaWQ9IlNoYXBlIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K) no-repeat 50% 50%;
@@ -164,7 +109,7 @@
 
 @-webkit-keyframes quickSearchFadeIn {
   from {
-    width: 45px;
+    width: 0;
   }
   to {
     width: 100%;
@@ -173,30 +118,10 @@
 
 @keyframes quickSearchFadeIn {
   from {
-    width: 45px;
+    width: 0;
   }
   to {
     width: 100%;
-  }
-}
-
-@-webkit-keyframes quickSearchFadeInMobile {
-  from {
-    width: 45px;
-  }
-  to {
-    width: 92%;
-    right: 4%;
-  }
-}
-
-@keyframes quickSearchFadeInMobile {
-  from {
-    width: 45px;
-  }
-  to {
-    width: 92%;
-    right: 4%;
   }
 }
 
@@ -215,88 +140,6 @@
   }
   to {
     border: solid 1px var(--color-gray);
-  }
-}
-
-@-webkit-keyframes quickSearchFadeOut {
-  from {
-    width: 90%;
-    transform: translate(0, 0);
-  }
-  to {
-    width: 45px;
-    right: 0;
-  }
-}
-
-@keyframes quickSearchFadeOut {
-  from {
-    width: 90%;
-    transform: translate(0, 0);
-  }
-  to {
-    width: 45px;
-    right: 0;
-  }
-}
-
-@-webkit-keyframes quickSearchFadeOutMobile {
-  from {
-    width: 90%;
-    transform: translate(0, 0);
-  }
-  to {
-    width: 45px;
-  }
-}
-
-@keyframes quickSearchFadeOutMobile {
-  from {
-    width: 90%;
-    transform: translate(0, 0);
-  }
-  to {
-    width: 45px;
-  }
-}
-
-@-webkit-keyframes quickSearchInputFadeOut {
-  from {
-    border: solid 1px var(--color-gray);
-  }
-  to {
-    border: solid 1px var(--color-white);
-  }
-}
-
-@keyframes quickSearchInputFadeOut {
-  from {
-    border: solid 1px var(--color-gray);
-  }
-  to {
-    border: solid 1px var(--color-white);
-  }
-}
-
-@-webkit-keyframes quickSearchResultFadeIn {
-  from {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    opacity: 1;
-  }
-  to {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    opacity: 1;
-  }
-}
-
-@keyframes quickSearchResultFadeIn {
-  from {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    opacity: 1;
-  }
-  to {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    opacity: 1;
   }
 }
 
@@ -337,16 +180,11 @@
         opacity: 100;
       }
 
-.search.search_type_quick .search__wrapper-inner {
-          max-width: 1000px;
-          margin: 0 auto;
-          position: relative;
-          z-index: 2;
-        }
-
 .search.search_type_quick .search-input {
         height: 100%;
         display: flex;
+        position: relative;
+        overflow: hidden;
       }
 
 .search.search_type_quick .search-input:hover {
@@ -657,6 +495,12 @@ sans-serif;
 .search-input__clear_state_hidden {
       display: none;
     }
+
+/* stylelint-disable custom-property-empty-line-before */
+
+.search-result.search-result_type_quick {
+    position: relative;
+  }
 
 /* stylelint-disable custom-property-empty-line-before */
 
