@@ -2,16 +2,10 @@
   &&_type_quick {
     &&_state_hidden {
       animation-name: quickSearchFadeOut;
-      @media (--mobile) {
-        animation-name: quickSearchFadeOutMobile;
-      }
       & .search {
         &-input {
           &__input {
             animation-name: quickSearchInputFadeOut;
-            @media (--mobile) {
-              animation: none;
-            }
           }
         }
       }
@@ -21,30 +15,16 @@
 
 @keyframes quickSearchFadeOut {
   from {
-    width: 90%;
-    transform: translate(0, 0);
+    width: 100%;
   }
   to {
-    width: 45px;
-    right: 0;
-  }
-}
-
-@keyframes quickSearchFadeOutMobile {
-  from {
-    width: 90%;
-    transform: translate(0, 0);
-  }
-  to {
-    width: 45px;
+    width: 0;
   }
 }
 
 @keyframes quickSearchInputFadeOut {
   from {
-    border: solid 1px var(--color-gray);
   }
   to {
-    border: solid 1px var(--color-white);
   }
 }

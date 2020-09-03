@@ -23,15 +23,11 @@
         right: 0;
         z-index: 1000;
         opacity: 100;
-        &-inner {
-          max-width: 1000px;
-          margin: 0 auto;
-          position: relative;
-          z-index: 2;
-        }
       }
       &-input {
         height: 100%;
+        position: relative;
+        overflow: hidden;
         display: flex;
         &:hover {
           cursor: pointer;

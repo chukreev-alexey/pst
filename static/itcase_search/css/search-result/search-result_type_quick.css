@@ -1,0 +1,5 @@
+.search-result {
+  &&_type_quick {
+    position: relative;
+  }
+}
