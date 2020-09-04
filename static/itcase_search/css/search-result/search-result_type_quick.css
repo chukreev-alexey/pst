@@ -1,5 +1,8 @@
 .search-result {
   &&_type_quick {
+    max-height: 500px;
     position: relative;
+    overflow: scroll;
+    background: var(--color-surface);
   }
 }

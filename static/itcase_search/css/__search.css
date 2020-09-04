@@ -423,7 +423,10 @@ sans-serif;
 /* stylelint-disable custom-property-empty-line-before */
 
 .search-result.search-result_type_quick {
+    max-height: 500px;
     position: relative;
+    overflow: scroll;
+    background: #fff;
   }
 
 /* stylelint-disable custom-property-empty-line-before */
@@ -534,7 +537,7 @@ sans-serif;
 
 .search-result-list {
     background: #fff;
-    padding: 32px 0 80px 0;
+    padding: 32px 0 0 0;
   }
 
 .search-result-list__item {
@@ -596,7 +599,7 @@ sans-serif;
         }
 
 .search-result-list__item-title {
-        color: #d82318;
+        color: #000;
         font-size: calc(1rem + 0.5 * ((100vw - 20rem) / 140));
         font-weight: 500;
         font-family: 'Fact-Semi-Expanded'
@@ -634,7 +637,7 @@ sans-serif;
 }
 
 .search-result-list__item-title:hover {
-          color: rgb(138, 21, 15);
+          color: #d82318;
         }
 
 .search-result-list__item-text {
@@ -683,18 +686,18 @@ sans-serif;
 .search-result-list__item-price-text {
           color: #d82318;
           padding: 6px 0;
-          font-size: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
+          font-size: calc(0.875rem + 0.875 * ((100vw - 20rem) / 140));
           font-weight: bold;
           font-family: 'Fact-Semi-Expanded'
 ,
 sans-serif;
-          line-height: calc(0.875rem + 0.25 * ((100vw - 20rem) / 140));
+          line-height: calc(0.875rem + 0.875 * ((100vw - 20rem) / 140));
         }
 
 @media screen and (min-width: 2560px) {
 
   .search-result-list__item-price-text {
-    line-height: 1.125rem;
+    line-height: 1.75rem;
   }
 }
 
@@ -708,7 +711,7 @@ sans-serif;
 @media screen and (min-width: 2560px) {
 
   .search-result-list__item-price-text {
-    font-size: 1.125rem;
+    font-size: 1.75rem;
   }
 }
 
@@ -763,6 +766,12 @@ sans-serif;
     font-size: 0.875rem;
   }
 }
+
+.search-result-list__button {
+      display: block;
+      max-width: 200px;
+      margin: 0 auto 20px auto;
+    }
 
 /* stylelint-disable custom-property-empty-line-before */
 

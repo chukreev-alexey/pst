@@ -60,6 +60,23 @@ div.rotator-container_state_animated {
 
 /* stylelint-disable custom-property-empty-line-before */
 
+.rotator-item.rotator-item_type_text {
+    height: auto;
+  }
+
+.rotator-item.rotator-item_type_text .rotator-item__text {
+        display: flex;
+        min-height: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+
+.rotator-item.rotator-item_type_text .rotator-item__text-inner {
+          text-align: center;
+        }
+
+/* stylelint-disable custom-property-empty-line-before */
+
 .rotator-item {
   display: flex;
 }

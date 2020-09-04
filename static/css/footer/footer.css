@@ -68,7 +68,7 @@
       display: flex;
       @media (--mobile) {
         margin: 0;
-        display: block;
+        display: none;
       }
       @media (--tablet) {
         margin: 0;
