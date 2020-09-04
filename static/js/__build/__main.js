@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "43bf69ba96e9fab1effd";
+/******/ 	var hotCurrentHash = "67b5e53b02078258aa49";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -17032,20 +17032,13 @@ $(document).on('change', 'input[id^="param-"]', event => {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* globals SearchClass */
 
 
 if (typeof SearchClass !== 'undefined') {
   const searchInputs = document.querySelectorAll('input[name="search_input_text"]');
   searchInputs.forEach(input => {
-    // global.ItcaseSearch = new SearchClass({
     new SearchClass({
-      element: input,
-      quickSearchOnOpenClass: 'search-input',
-      quickSearchPopupClass: 'search_type_quick',
-      quickSearchVisibleClass: 'search_type_quick_state_visible',
-      quickSearchHiddenClass: 'search_type_quick_state_hidden',
-      clearValueButtonClass: 'search-input__clear'
+      element: input
     });
   });
 }

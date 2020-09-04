@@ -23,10 +23,11 @@
         opacity: 100;
       }
       &-input {
+        background: var(--color-primary);
         height: 100%;
         position: relative;
         overflow: hidden;
-        display: flex;
+        @mixin font normal, 16px, 16px, 22px, 22px, var(--font-title-secondary);
         &:hover {
           cursor: pointer;
         }
@@ -39,6 +40,10 @@
           }
         }
         &__input {
+          width: 100%;
+          border: none;
+          border-radius: 4px;
+          @mixin font normal, 16px, 16px, 22px, 22px, var(--font-title-secondary);
           padding: 0 16px;
           margin: 6px 0;
           visibility: hidden;

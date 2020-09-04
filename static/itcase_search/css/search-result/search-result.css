@@ -1,24 +1,35 @@
 .search-result {
   width: 100%;
-  background: var(--color-surface);
-  margin: 0 0 80px 0;
   position: relative;
   &-list {
-    padding: 32px 0 0 0;
+    background: var(--color-surface);
+    padding: 32px 0 80px 0;
     &__item {
       padding: 16px 48px;
       position: relative;
+      @media (--mobile) {
+        padding: 0 0 24px 0;
+      }
       &:hover {
         background: var(--color-surface-hover);
       }
       &-wrapper {
         display: flex;
+        @media (--mobile) {
+          flex-flow: row wrap;
+        }
         ^&-image {
           position: relative;
+          @media (--mobile) {
+            margin: 0 0 16px 0;
+          }
         }
         ^&-inner {
           padding: 0 32px;
           flex-grow: 1;
+          @media (--mobile) {
+            padding: 0;
+          }
         }
         ^&-button {
           position: relative;
