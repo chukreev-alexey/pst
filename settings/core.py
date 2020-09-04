@@ -108,6 +108,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
+                'itcase_cart.context_processors.cart',
                 'itcase_common.context_processors.common',
                 'itcase_pages.context_processors.page',
 
