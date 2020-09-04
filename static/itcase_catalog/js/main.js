@@ -51,7 +51,7 @@ if (typeof UserCartClass !== 'undefined') {
     },
 
     // Button for add item to cart
-    addToCartButton: '.catalog-item__button, .search-result-list__item-button',
+    addToCartButton: '.catalog-item__button, .search-result-list__item-button-add',
     // baseAddToButtonClass: 'button_color_blue',
     // inOrderAddToButtonClass: 'button_border_orange',
     // inOrderAddToButtonText: 'В заказе',

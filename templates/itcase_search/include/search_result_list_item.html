@@ -34,7 +34,7 @@
             <div class="search-result-list__item-button">
                 {% with id=price.pk|unlocalize %}
                     <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
-                       class="button button_type_primary"
+                       class="button button_type_primary search-result-list__item-button-add"
                         data-add-url="{% url 'itcase_cart:cart_add' %}"
                         data-product="{{ id }}"
                         data-amount-{{ id }}="1">
