@@ -1,47 +1,49 @@
-{% load fb_versions l10n itcase_common %}
+{% load l10n fb_versions catalog_tags %}
 
 <div class="search-result-list__item">
     <div class="search-result-list__item-wrapper">
         <div class="search-result-list__item-image">
             <a href="{{ item.get_absolute_url }}" class="search-result-list__item-image-link">
-                <img src="{% version item.get_first_image 'search_result_thumb' %}"
+                <img src="{% version item.get_first_image|default:'' 'search_result_thumb' %}"
                      class="search-result-list__item-image-image" alt="" title="" />
             </a>
         </div>
-        <div class="search-result-list__item-inner">
-            <a href="{{ item.get_absolute_url }}" class="search-result-list__item-title">{{ item.highlighted.title }}</a>
-            <div class="search-result-list__item-text">{{ item.highlighted.announce|safe }}</div>
+        {% with price=item|get_product_actual_price:None %}
+            <div class="search-result-list__item-inner">
+                <a href="{{ item.get_absolute_url }}" class="search-result-list__item-title">{{ item.highlighted.announce|safe }}</a>
+                <div class="search-result-list__item-text"></div>
 
-            {% if item.price == 0 %}
-                <div class="search-result-list__item-state search-result-list__item-state_order">
-                    <div class="search-result-list__item-state-text">Под заказ</div>
-                </div>
-            {% else %}
-                <div class="search-result-list__item-price">
-                    <div class="search-result-list__item-price-text">
-                        2000 р {{ item.price|floatformat:'-2' }} Р
+                {% if price.price == 0 %}
+                    <div class="search-result-list__item-state search-result-list__item-state_order">
+                        <div class="search-result-list__item-state-text">Под заказ</div>
                     </div>
-                    {% if item.old_price %}
-                        <div class="search-result-list__item-price-old">
-                            {{ item.old_price|floatformat:'-2' }} Р
+                {% else %}
+                    <div class="search-result-list__item-price">
+                        <div class="search-result-list__item-price-text">
+                            {{ price.price|floatformat:'-2' }} Р
                         </div>
-                    {% endif %}
-                </div>
-            {% endif %}
+                        {% if price.old_price %}
+                            <div class="search-result-list__item-price-old">
+                                {{ price.old_price|floatformat:'-2' }} Р
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
 
-        </div>
-        <div class="search-result-list__item-button">
-            {% with id=item.pk|unlocalize %}
-                <a href="{% url 'itcase_cart:cart_add' %}?item={{ id }}&amount-{{ id }}=1"
-                   class="button button_type_primary"
-                    data-add-url="{% url 'itcase_cart:cart_add' %}"
-                    data-item="{{ id }}"
-                    data-amount-{{ id }}="1">
-                    <span class="button__text">
-                        {% if item in cart %} В заказе {% else %} Заказать {% endif %}
-                    </span>
-                </a>
-            {% endwith %}
-        </div>
+            </div>
+            <div class="search-result-list__item-button">
+                {% with id=price.pk|unlocalize %}
+                    <a href="{% url 'itcase_cart:cart_add' %}?product={{ id }}&amount-{{ id }}=1"
+                       class="button button_type_primary"
+                        data-add-url="{% url 'itcase_cart:cart_add' %}"
+                        data-product="{{ id }}"
+                        data-amount-{{ id }}="1">
+                        <span class="button__text">
+                            {% if price in cart %} В заказе {% else %} Заказать {% endif %}
+                        </span>
+                    </a>
+                {% endwith %}
+            </div>
+        {% endwith %}
     </div>
 </div>
