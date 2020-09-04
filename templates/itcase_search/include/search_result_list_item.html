@@ -9,36 +9,26 @@
             </a>
         </div>
         <div class="search-result-list__item-inner">
-            <div class="search-result-list__item-number">
-                {% if page_obj %}
-                    {{ forloop.counter0|add:page_obj.start_index }}
-                {% else %}
-                    {{ forloop.counter0 }}
-                {% endif %}
-            </div>
-
             <a href="{{ item.get_absolute_url }}" class="search-result-list__item-title">{{ item.highlighted.title }}</a>
             <div class="search-result-list__item-text">{{ item.highlighted.announce|safe }}</div>
 
-            {% if item.price != 0 %}
-                <div class="search-result-list__item-state search-result-list__item-state_exist">
-                    <div class="search-result-list__item-state-text">В наличии</div>
-                </div>
-            {% else %}
-                <div class="search-result-list__item-state">
+            {% if item.price == 0 %}
+                <div class="search-result-list__item-state search-result-list__item-state_order">
                     <div class="search-result-list__item-state-text">Под заказ</div>
                 </div>
-            {% endif %}
-            <div class="search-result-list__item-price">
-                <div class="search-result-list__item-price-text">
-                    {{ item.price|floatformat:'-2' }} Р
-                </div>
-                {% if item.old_price %}
-                    <div class="search-result-list__item-price-old">
-                        {{ item.old_price|floatformat:'-2' }} Р
+            {% else %}
+                <div class="search-result-list__item-price">
+                    <div class="search-result-list__item-price-text">
+                        2000 р {{ item.price|floatformat:'-2' }} Р
                     </div>
-                {% endif %}
-            </div>
+                    {% if item.old_price %}
+                        <div class="search-result-list__item-price-old">
+                            {{ item.old_price|floatformat:'-2' }} Р
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
         </div>
         <div class="search-result-list__item-button">
             {% with id=item.pk|unlocalize %}
