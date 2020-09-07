@@ -426,7 +426,6 @@ sans-serif;
   bottom: 0;
   width: 65px;
   height: 65px;
-  display: block;
   border-radius: 65px;
   margin-bottom: 20px;
   text-align: center;
@@ -441,7 +440,6 @@ sans-serif;
   and (max-width: 59.999em) {
 
 .catalog-filter-popup {
-    position: fixed;
     display: block
 }
   }

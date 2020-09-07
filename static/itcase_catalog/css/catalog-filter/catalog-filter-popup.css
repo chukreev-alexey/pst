@@ -9,16 +9,14 @@
   bottom: 0;
   width: 65px;
   height: 65px;
-  display: block;
   border-radius: 65px;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
   text-align: center;
   box-shadow: 0 19px 38px 0 rgba(34, 36, 43, 0.3);
   position: relative;
   transform: scale(1);
   overflow: hidden;
   @media (--mobile), (--tablet) {
-    position: fixed;
     display: block;
   }
   &_state_active {

@@ -90,6 +90,7 @@
       }
     }
     &-sum {
+      @mixin font normal, 15px, 18px, 15px, 18px, var(--font-title-secondary);
       @media (--mobile), (--tablet) {
         display: none;
       }
