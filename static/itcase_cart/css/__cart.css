@@ -536,43 +536,12 @@ sans-serif;
     align-self: flex-start;
   }
 
-@media print {
-
-.cart-list__item-count {
-      width: 200px;
-      margin: 0;
-      float: none;
-      display: table-cell
-  }
-    }
-
 @media (min-width: 15em)
   and (max-width: 47.999em) {
 
 .cart-list__item-count {
-      width: 100%;
       margin: 0 0 0 80px;
       order: 2
-  }
-    }
-
-@media (min-width: 23.435em)
-  and (max-width: 26.559em), (min-width: 26.56em)
-  and (max-width: 29.999em) {
-
-.cart-list__item-count {
-      margin: 0 150px 0 80px
-  }
-    }
-
-@media (min-width: 30em)
-  and (max-width: 39.999em), (min-width: 40em)
-  and (max-width: 47.999em) {
-
-.cart-list__item-count {
-      margin: 0 0 0 10px;
-      order: 0;
-      top: -5px
   }
     }
 
@@ -622,6 +591,15 @@ sans-serif;
       cursor: pointer;
     }
 
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.cart-list__item-count-button {
+        width: 32px;
+        height: 32px
+    }
+      }
+
 .cart-list__item-count-button_state_added {
         -webkit-animation-duration: 0.5s;
         animation-duration: 0.5s;
@@ -643,8 +621,9 @@ sans-serif;
             position: absolute;
             content: '';
             display: block;
-            left: 6px;
-            top: 11px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
           }
 
 .cart-list__item-count-button_action_minus:hover {
@@ -663,8 +642,9 @@ sans-serif;
             position: absolute;
             content: '';
             display: block;
-            left: 6px;
-            top: 11px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
           }
 
 .cart-list__item-count-button_action_plus::after {
@@ -674,9 +654,9 @@ sans-serif;
             position: absolute;
             content: '';
             display: block;
-            left: 6px;
-            top: 11px;
-            transform: rotate(90deg);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
           }
 
 .cart-list__item-count-button_action_plus:hover {

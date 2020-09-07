@@ -2141,7 +2141,7 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .header__wrapper .header__inner {
-        padding: 6px 0 4px 0
+        padding: 2px 0 4px 0
     }
       }
 
@@ -2440,24 +2440,27 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .logo {
-    width: 48px;
     margin: 0 auto;
-    overflow: hidden
-}
-  }
-
-@media (min-width: 48em)
-  and (max-width: 59.999em) {
-
-.logo {
-    width: 66px;
     overflow: hidden
 }
   }
 
 .logo__link {
     display: block;
+    position: relative;
   }
+
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.logo__link {
+      width: 100%;
+      height: 42px;
+      top: 3px;
+      background: url('./../img/logo.svg') no-repeat 50% 50%;
+      background-size: 42px auto
+  }
+    }
 
 .logo__link-image {
       position: relative;
@@ -2467,7 +2470,7 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .logo__link-image {
-        height: 32px
+        display: none
     }
       }
 

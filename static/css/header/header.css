@@ -33,7 +33,7 @@
       flex-flow: row wrap;
       box-sizing: border-box;
       @media (--mobile) {
-        padding: 6px 0 4px 0;
+        padding: 2px 0 4px 0;
       }
       @media (--tablet) {
         padding: 16px 24px;
@@ -68,14 +68,14 @@
       }
     }
     ^&__contact {
-      order: -4;
       width: 40px;
       height: 40px;
+      background: url('./../img/icon/call.svg') no-repeat 50% 50%;
+      margin: 0 0 0 12px;
       position: relative;
       display: none;
-      margin: 0 0 0 12px;
+      order: -4;
       top: -2px;
-      background: url('./../img/icon/call.svg') no-repeat 50% 50%;
       @media (--mobile) {
         display: block;
       }
@@ -115,8 +115,8 @@
         margin: 0;
         @mixin font normal, 13px, 16px, 13px, 16px, var(--font-title);
         @media (--mobile) {
-          padding: 0;
           color: var(--color-primary-text);
+          padding: 0;
         }
         & a {
           color: var(--color-neutral-text);
