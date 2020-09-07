@@ -10,9 +10,6 @@
     position: relative;
     box-sizing: border-box;
     z-index: 1000;
-    @media (--mobile) {
-      background: var(--color-primary);
-    }
     &_state_show,
     &_state_hide {
       position: fixed;
@@ -22,6 +19,7 @@
       right: 0;
       @media (--mobile) {
         box-shadow: none;
+        border-bottom: solid 1px var(--color-neutral-border);
       }
     }
     ^&__inner {
@@ -33,7 +31,7 @@
       flex-flow: row wrap;
       box-sizing: border-box;
       @media (--mobile) {
-        padding: 2px 0 4px 0;
+        padding: 2px 0 0 0;
       }
       @media (--tablet) {
         padding: 16px 24px;
@@ -62,7 +60,7 @@
       display: none;
       order: -5;
       @media (--mobile) {
-        background: url('./../img/icon/search.svg') no-repeat 50% 50%;
+        background: url('./../img/icon/search_black.svg') no-repeat 50% 50%;
         display: block;
         top: -1px;
       }
@@ -77,6 +75,11 @@
       order: -4;
       top: -2px;
       @media (--mobile) {
+        display: block;
+      }
+      &-button {
+        width: 100%;
+        height: 100%;
         display: block;
       }
     }
@@ -103,8 +106,14 @@
     ^&__phone {
       margin: 12px 0 0 0;
       display: inline-flex;
+      box-sizing: border-box;
       @media (--mobile) {
-        display: none;
+        width: 100%;
+        margin: 8px 0 0 0;
+        background: var(--color-neutral);
+        padding: 8px 24px;
+        display: flex;
+        justify-content: space-between;
       }
       @media (--tablet) {
         margin: 14px 0 0 0;
@@ -113,7 +122,7 @@
         color: var(--color-neutral-text);
         padding: 0 16px 0 0;
         margin: 0;
-        @mixin font normal, 13px, 16px, 13px, 16px, var(--font-title);
+        @mixin font normal, 15px, 16px, 15px, 16px, var(--font-title);
         @media (--mobile) {
           color: var(--color-primary-text);
           padding: 0;

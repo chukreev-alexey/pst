@@ -731,7 +731,7 @@ sans-serif;
 .site-menu__link-inner span {
         width: 100%;
         height: 2px;
-        background: #fff;
+        background: #000;
         position: absolute;
         display: block;
         left: 0;
