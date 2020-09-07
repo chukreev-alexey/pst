@@ -9,13 +9,9 @@
   left: 0;
   overflow-x: scroll;
   top: 100%;
-  z-index: 1000;
   z-index: 10;
   transform: translate(0, 10px);
   animation: all 0.4s cubic-bezier(0.21, 1.03, 0.7, 1) 0.3s both;
-  @media (--mobile) {
-    padding: 0;
-  }
   &::after {
     width: 100%;
     min-height: 144px;

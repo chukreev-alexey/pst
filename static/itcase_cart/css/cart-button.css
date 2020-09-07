@@ -81,5 +81,10 @@
         display: none;
       }
     }
+    &-sum {
+      @media (--mobile), (--tablet) {
+        display: none;
+      }
+    }
   }
 }

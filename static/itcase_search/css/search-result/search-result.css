@@ -8,7 +8,7 @@
       padding: 16px 48px;
       position: relative;
       @media (--mobile) {
-        padding: 0 0 24px 0;
+        padding: 0 0 48px 0;
       }
       &:hover {
         background: var(--color-surface-hover);
@@ -23,6 +23,9 @@
           @media (--mobile) {
             margin: 0 0 16px 0;
           }
+          &-link {
+            display: block;
+          }
         }
         ^&-inner {
           padding: 0 32px;
@@ -32,7 +35,14 @@
           }
         }
         ^&-button {
+          width: 100%;
           position: relative;
+          @media (--mobile) {
+            text-align: right;
+          }
+          &-add {
+           display: inline-block;
+          }
         }
       }
       &-title {
@@ -49,10 +59,34 @@
       }
       &-price {
         margin: 8px 0 0 0;
+        position: relative;
         &-text {
           color: var(--color-primary);
           padding: 6px 0;
-          @mixin font bold, 14px, 28px, 14px, 28px, var(--font-title-secondary);
+          display: inline-block;
+          @mixin font bold, 18px, 28px, 18px, 28px, var(--font-title-secondary);
+        }
+        &-old {
+          color: var(--color-surface-text);
+          margin: -5px 0 0 0;
+          position: relative;
+          display: inline-block;
+          vertical-align: top;
+          @mixin font normal, 16px, 18px, 16px, 18px, var(--font);
+          &::after {
+            width: calc(100% + 6px);
+            height: 1px;
+            background: var(--color-surface-text);
+            position: absolute;
+            content: '';
+            display: block;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            @media (--mobile) {
+              height: 2px;
+            }
+          }
         }
       }
       &-state {

@@ -4,6 +4,11 @@
   position: relative;
   box-sizing: border-box;
   z-index: 10;
+  & .catalog-menu-popup {
+    @media (--mobile) {
+      display: none;
+    }
+  }
   @media (--mobile) {
     background: none;
     margin: 0;

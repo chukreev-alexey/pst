@@ -1,0 +1,24 @@
+.catalog-menu-popup {
+  &&_type_mobile {
+    margin: 0;
+    z-index: inherit;
+    position: relative;
+    height: auto;
+    overflow: auto;
+    left: 0;
+    top: 0;
+    padding: 0;
+    visibility: visible;
+    animation: none;
+    box-shadow: none;
+    transform: none;
+    &::after {
+      display: none;
+    }
+    & .catalog-group {
+      &__inner-list {
+        padding: 0;
+      }
+    }
+  }
+}

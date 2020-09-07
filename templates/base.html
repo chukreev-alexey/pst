@@ -160,14 +160,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="header__catalog">Каталог</div>
-                    <div class="header__phone">
-                        {% if site_version == 'mobile' %}
-                            {{ request.infoblock.header_phone_mobile|default:""|safe }}
-                        {% else %}
-                            {{ request.infoblock.header_phone|default:""|safe }}
-                        {% endif %}
-                    </div>
+                    <div class="header__phone">{{ request.infoblock.header_phone|default:""|safe }}</div>
                 </div>
             </div>
             {% with hide_image=True close=True %}

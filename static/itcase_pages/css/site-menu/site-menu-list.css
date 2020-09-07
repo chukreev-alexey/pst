@@ -11,20 +11,50 @@
     padding: 0 0 40px 0;
     vertical-align: top;
     @media (--mobile) {
-      padding: 0 0 24px 0;
+      padding: 0;
     }
     &-group {
-      white-space: normal;
-      padding: 0 0 16px 0;
-      @media (--mobile) {
-        padding: 0 0 8px 0;
-      }
+      width: 100%;
+      background: var(--color-surface);
+      padding: 0;
+      margin: 0 0 8px 0;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 var(--color-surface-shadow);
       &-link {
+        width: 100%;
         color: var(--color-surface-text);
         text-decoration: none;
-        text-transform: uppercase;
         white-space: normal;
-        @mixin font bold, 16px, 36px, 16px, 36px, var(--font-title);
+        padding: 16px;
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        @mixin font 500, 16px, 24px, 22px, 28px, var(--font-title-secondary);
+        &::before {
+          width: 32px;
+          height: 32px;
+          background: var(--color-neutral);
+          border-radius: 50%;
+          position: absolute;
+          content: '';
+          display: block;
+          top: 12px;
+          right: 12px;
+        }
+        &::after {
+          padding: 4px;
+          border: solid var(--color-surface-item);
+          border-width: 0 2px 2px 0;
+          position: absolute;
+          content: '';
+          display: none;
+          top: 23px;
+          right: 25px;
+          transform: rotate(-45deg);
+          @media (--mobile) {
+            display: inline-block;
+          }
+        }
         &:hover {
           color: var(--color-surface-text-hover);
         }
@@ -34,16 +64,46 @@
       }
     }
     &-link {
-      padding: 10px 0;
-      @media (--mobile) {
-        padding: 6px 0;
-      }
+      width: 100%;
+      background: var(--color-surface);
+      padding: 0;
+      margin: 0 0 8px 0;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 var(--color-surface-shadow);
+      @mixin font 500, 16px, 24px, 22px, 28px, var(--font-title-secondary);
       &-text {
+        width: 100%;
         color: var(--color-surface-text);
         text-decoration: none;
-        @mixin font normal, 16px, 24px, 16px, 24px, var(--font-title);
-        @media (--mobile) {
-          white-space: normal;
+        white-space: normal;
+        padding: 16px;
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        &::before {
+          width: 32px;
+          height: 32px;
+          background: var(--color-neutral);
+          border-radius: 50%;
+          position: absolute;
+          content: '';
+          display: block;
+          top: 12px;
+          right: 12px;
+        }
+        &::after {
+          padding: 4px;
+          border: solid var(--color-surface-item);
+          border-width: 0 2px 2px 0;
+          position: absolute;
+          content: '';
+          display: none;
+          top: 23px;
+          right: 25px;
+          transform: rotate(-45deg);
+          @media (--mobile) {
+            display: inline-block;
+          }
         }
         &:hover {
           color: var(--color-surface-text-hover);
