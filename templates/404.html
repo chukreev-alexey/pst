@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ошибка 404 – Страница не найдена</title>
+    <meta name="description" content="Адрес страницы введен не правильно или страница больше не существует по этому адресу." />
+    <meta name="keywords" content="Ошибка 404" />
+    <meta name="robots" content="index,follow" />
+
+    <link href="{% static 'css/__main.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="error error_type_not-found">
+        <div class="error__wrapper">
+            <div class="error__inner">
+                <div class="error__title">Ошибка 404<br/>Страница не найдена</div>
+                <div class="error__text">Адрес страницы введен не правильно или страница больше не существует по этому адресу</div>
+                <div class="error__text">Попробуйте <a href="/" class="error__link">начать с главной страницы</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

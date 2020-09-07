@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ошибка 403 – Доступ запрещён</title>
+    <meta name="description" content="У вас нет прав для просмотра этой страницы." />
+    <meta name="keywords" content="Ошибка 403" />
+    <meta name="robots" content="index,follow" />
+
+    <link href="{% static 'css/__main.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="error error_type_permission">
+        <div class="error__wrapper">
+            <div class="error__inner">
+                <div class="error__title">Ошибка 403<br/>Доступ запрещён</div>
+                <div class="error__text">У вас нет прав для просмотра этой страницы</div>
+                <div class="error__text">Попробуйте <a href="/" class="error__link">начать с главной страницы</a> или авторизироваться</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

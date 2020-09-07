@@ -1,0 +1,16 @@
+.error {
+  &&_type_permission {
+    & .error {
+      &__inner {
+        ^&__title {
+        }
+        ^&__text {
+          ^&__link {
+            &:hover {
+            }
+          }
+        }
+      }
+    }
+  }
+}

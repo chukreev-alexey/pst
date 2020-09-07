@@ -1,0 +1,16 @@
+.error {
+  &&_type_not-found {
+    & .error {
+      &__inner {
+        ^&__title {
+        }
+        ^&__text {
+          ^&__link {
+            &:hover {
+            }
+          }
+        }
+      }
+    }
+  }
+}
