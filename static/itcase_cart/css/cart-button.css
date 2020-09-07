@@ -23,13 +23,15 @@
     text-decoration: none;
     position: relative;
     display: flex;
-    @mixin font normal, 14px, 18px, 14px, 18px, var(--font-title-secondary);
     @media (--mobile), (--tablet) {
-      color: var(--color-neutral);
       display: block;
     }
-    @media (--mobile) {
-      font-size: 0 !important;
+    &-text {
+      @mixin font normal, 15px, 18px, 15px, 18px, var(--font-title-secondary);
+      color: var(--color-neutral);
+      @media (--mobile), (--tablet) {
+        display: none;
+      }
     }
     &::after {
       width: 16px;
@@ -58,6 +60,7 @@
       }
     }
     &-count {
+      @mixin font normal, 15px, 18px, 15px, 18px, var(--font-title-secondary);
       min-width: 32px;
       min-height: 32px;
       color: var(--color-primary-text);
@@ -71,9 +74,11 @@
       top: -24px;
       right: -36px;
       @media (--mobile) {
+        background: var(--color-surface);
         top: -6px;
         right: -12px;
         transform: scale(0.6);
+        color: var(--color-surface-text);
       }
       @media (--tablet) {
         top: -8px;
