@@ -3,7 +3,7 @@
   width: 100%;
   display: none;
   z-index: 3;
-  display: inline-block;
+  display: none;
   position: fixed;
   left: 20px;
   bottom: 0;
