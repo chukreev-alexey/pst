@@ -430,8 +430,6 @@ sans-serif;
   margin: 0 0 20px 0;
   text-align: center;
   box-shadow: 0 19px 38px 0 rgba(34, 36, 43, 0.3);
-  position: relative;
-  transform: scale(1);
   overflow: hidden;
 }
 
