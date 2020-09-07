@@ -1,9 +1,9 @@
 .button {
   &&_type_small {
-    padding: 6px 20px 6px 20px;
+    padding: 6px 16px 7px 16px;
     & .button {
       &__text {
-        @mixin font normal, 16px, 16px, 16px, 16px, var(--font-title);
+        @mixin font normal, 14px, 16px, 14px, 16px, var(--font-title);
       }
     }
   }

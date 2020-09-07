@@ -57,7 +57,7 @@
     animation-name: siteMenuFadeIn;
     opacity: 1;
     @media (--mobile) {
-      margin: 90px 0 0 0;
+      margin: 50px 0 0 0;
     }
   }
   &_state_hidden {
