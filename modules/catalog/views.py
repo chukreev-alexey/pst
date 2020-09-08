@@ -572,7 +572,8 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         return reverse(self.paginator_url_name, args=[self.object.slug])
 
     def get_queryset(self):
-        if self.object.template_categories_list:
+        if (self.object.template_categories_list
+                and not self.object.template_groups_type_selector):
             return self.object.get_children_active()
 
         if not self.queryset:
