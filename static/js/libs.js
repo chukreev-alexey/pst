@@ -2,11 +2,13 @@
 
 'use strict'
 
-import $ from 'expose-loader?exposes[]=$&exposes[]=jQuery!./vendor/jquery'
-import Cookies from 'expose-loader?exposes=Cookies!./vendor/js.cookie'
-import Swiper from 'expose-loader?exposes=Swiper!./vendor/swiper'
+import $ from 'expose-loader?exposes[]=$&exposes[]=jQuery!jquery'
+import Cookies from 'expose-loader?exposes=Cookies!js-cookie'
+import Swiper from 'swiper/bundle'
 
-require('./vendor/ion.rangeSlider.min.js')
+global.Swiper = Swiper
+
+require('ion-rangeslider')
 
 // Before libs call before common
 $(document).on('validator_start_initialize', 'form', function () {
