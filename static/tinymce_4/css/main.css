@@ -1,0 +1,10 @@
+body {
+  font-size: 1em !important;
+  background: var(--color-surface);
+  margin: 20px;
+  box-sizing: border-box;
+}
+
+.mce-content-body {
+  width: auto !important;
+}
