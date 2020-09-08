@@ -173,8 +173,9 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         self.object = self.get_object(
             queryset=Category.objects.filter(active=True, level__lte=1))
 
-        if self.object.other_template:
-            self.template_name = get_template_name('catalog_groups_type_selector.html')
+        if self.object.template_groups_type_selector:
+            self.template_name = get_template_name(
+                'catalog_groups_type_selector.html')
 
         self.filter_query_dict[self.filter_key_brand] = request.GET.getlist(
             self.filter_key_brand)
@@ -207,7 +208,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         context['filter_data_price_query'] = None  # need for actual price
 
-        if self.hide_products:
+        if self.object.template_categories_list:
             context['categories'] = context['page_obj']
         else:
             context['filter_enabled'] = len(self.filter_data) > 0
@@ -370,9 +371,15 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         data = {}
         filtered_products = []
 
+        level = self.object.level + 1
+
         for product in self.queryset:
             for category in product.categories.all():
-                if not category.active or category.level < 2:
+                if not category.active:
+                    continue
+                if category.level < level:
+                    continue
+                if category.tree_id != self.object.tree_id:
                     continue
 
                 # данные категории
@@ -565,7 +572,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         return reverse(self.paginator_url_name, args=[self.object.slug])
 
     def get_queryset(self):
-        if self.hide_products:
+        if self.object.template_categories_list:
             return self.object.get_children_active()
 
         if not self.queryset:
@@ -576,7 +583,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
 
         self.queryset = self.get_sorted_queryset(self.queryset, self.request)
 
-        if self.object.other_template:
+        if self.object.template_groups_type_selector:
             return self.queryset
 
         queryset = self.queryset
@@ -654,13 +661,6 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             return queryset.order_by(*_sort)
 
         return queryset
-
-    @property
-    def hide_products(self):
-        if self.object:
-            return (self.object.level == 0
-                    and self.object.get_children_active().exists())
-        return False
 
     def render_to_response(self, context, **response_kwargs):
         if self.request.is_ajax():

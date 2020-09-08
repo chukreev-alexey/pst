@@ -50,7 +50,7 @@
     <div class="wrapper">
         <div class="wrapper__inner">
 
-            {% if view.hide_products %}
+            {% if category.template_categories_list %}
                 {% include './include/catalog_categories_list.html' %}
             {% elif products %}
                 {% include './include/catalog_group.html' %}

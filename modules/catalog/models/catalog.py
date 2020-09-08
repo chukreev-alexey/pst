@@ -121,7 +121,10 @@ class Category(MPTTModel, CategoryBase, SEOModel, ChangeCreateModel):
         verbose_name='Параметры для фильтра',
         blank=True)
 
-    other_template = models.BooleanField('Выбор товаров', default=False)
+    template_categories_list = models.BooleanField(
+        'Шаблон только с категориями', default=False)
+    template_groups_type_selector = models.BooleanField(
+        'Шаблон с категориями и товарами', default=False)
 
     rotator_units = models.ManyToManyField(
         get_settings('ITCASE_ROTATOR_ROTATOR_MODEL'),
