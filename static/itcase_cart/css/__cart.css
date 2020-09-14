@@ -31,7 +31,7 @@
 
 .cart-button__text {
     color: #000;
-    min-width: 160px;
+    min-width: 120px;
     text-decoration: none;
     position: relative;
     display: flex;

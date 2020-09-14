@@ -29,18 +29,25 @@
     animation-name: catalogMenuFadeOut;
   }
   & .catalog-group {
-    &__inner-list {
-      justify-content: flex-start;
-      &-link {
-        &-text {
-          margin: 0;
+    &__inner {
+      &-list {
+        justify-content: flex-start;
+        &-link {
+          &-text {
+            margin: 0;
+          }
         }
-      }
-      &-item {
-        margin: 0;
-        flex: 0 0 24%;
-        @media (--mobile) {
-          margin: 0 0 8px 0;
+        &-item {
+          margin: 0;
+          flex: 0 0 24%;
+          @media (--mobile) {
+            margin: 0 0 8px 0;
+          }
+        }
+        &-link {
+          &::before {
+            display: none;
+          }
         }
       }
     }

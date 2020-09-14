@@ -20,7 +20,7 @@
   }
   &__text {
     color: var(--color-neutral-text);
-    min-width: 160px;
+    min-width: 120px;
     text-decoration: none;
     position: relative;
     display: flex;

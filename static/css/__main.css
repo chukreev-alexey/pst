@@ -4484,6 +4484,59 @@ sans-serif;
 
 /* stylelint-disable custom-property-empty-line-before */
 
+.global-message {
+  background: #069;
+}
+
+.global-message__wrapper {
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 12px 32px;
+    text-align: center;
+  }
+
+.global-message__wrapper p {
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      font-size: calc(0.875rem + 0.875 * ((100vw - 20rem) / 140));
+      font-weight: normal;
+      font-family: 'Fact-Expanded'
+,
+sans-serif;
+      line-height: calc(1.125rem + 0.875 * ((100vw - 20rem) / 140));
+    }
+
+@media screen and (min-width: 2560px) {
+
+  .global-message__wrapper p {
+    line-height: 2rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .global-message__wrapper p {
+    line-height: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+
+  .global-message__wrapper p {
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .global-message__wrapper p {
+    font-size: 0.875rem;
+  }
+}
+
+/* stylelint-disable custom-property-empty-line-before */
+
 .header.header_state_active {
     z-index: 1000000;
   }
