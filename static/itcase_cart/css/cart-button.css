@@ -20,15 +20,17 @@
   }
   &__text {
     color: var(--color-neutral-text);
+    min-width: 160px;
     text-decoration: none;
     position: relative;
     display: flex;
+    justify-content: center;
     @media (--mobile), (--tablet) {
       display: block;
     }
     &-text {
       @mixin font normal, 15px, 18px, 15px, 18px, var(--font-title-secondary);
-      color: var(--color-neutral);
+      color: var(--color-neutral-text);
       @media (--mobile), (--tablet) {
         display: none;
       }
@@ -36,7 +38,7 @@
     &::after {
       width: 16px;
       height: 16px;
-      background: url('./../img/icon/add_to_cart.svg') no-repeat 50% 50%;
+      background: url('./../img/icon/add_to_cart_black.svg') no-repeat 50% 50%;
       background-size: 16px 16px;
       margin: 0 0 0 8px;
       content: '';

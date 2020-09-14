@@ -172,6 +172,21 @@
                                     <a href="{{ item.get_absolute_url }}" class="main-menu-list__item-link" {% if item.in_new_tab %} target="_blank" {% endif %}>{{ item.title }}</a>
                                 </div>
                             {% endfor %}
+                            <div class="main-menu-list__item">
+                                <a href="{% url 'form_detail' slug='request-cost' %}"
+                                   data-yandex-target="YANDEX_REQUEST_COST"
+                                   data-yandex-target-submit="YANDEX_REQUEST_COST_SUBMIT"
+                                   class="main-menu-list__item-link {% if site_version == 'desktop' %}forms_ajax{% endif %}"
+                                   data-popup-type-class="entry-popup"
+                                   data-show-form-header="false"
+                                   data-show-form-footer="false"
+                                   data-form-validatior-options='{"disableSubmitButton": false}'
+                                   data-require-group-fields="phone,email"
+                                   data-show-required-block="false"
+                                   data-form-additional-class="form_type_hide_messages">
+                                    <span class="button__text">Расчет материалов</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="header__phone">{{ request.infoblock.header_phone|default:""|safe }}</div>
@@ -179,7 +194,7 @@
                         <a href="{% url 'form_detail' slug='callback' %}"
                            data-yandex-target="YANDEX_CALLBACK"
                            data-yandex-target-submit="YANDEX_CALLBACK_SUBMIT"
-                           class="button button_type_primary button_type_small button_action_callback {{ additional_class }} {% if site_version == 'desktop' %}forms_ajax{% endif %}"
+                           class="{% if site_version == 'desktop' %}forms_ajax{% endif %}"
                            data-popup-type-class="entry-popup"
                            data-show-form-header="false"
                            data-show-form-footer="false"
@@ -187,7 +202,7 @@
                            data-require-group-fields="phone,email"
                            data-show-required-block="false"
                            data-form-additional-class="form_type_hide_messages">
-                            <span class="button__text">Обратный звонок</span>
+                            Обратный звонок
                         </a>
                     </div>
                 </div>
@@ -198,8 +213,9 @@
         </div>
     </div>
 
-
-    {% rotator page=request.page %}
+    {% with hide_pagination=True %}
+        {% rotator page=request.page %}
+    {% endwith %}
 
     {% block content %}
     {% endblock content %}

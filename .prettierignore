@@ -1,14 +1,8 @@
 /node_modules
-/gulp-tasks
 
 *.html
 *.css
 __*.js
-
-gulpfile.js
-gulpfile.paths.js
-
-webpack.config*
 
 **/__build/
 **/example/**

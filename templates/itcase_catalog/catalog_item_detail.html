@@ -54,7 +54,9 @@
                                 <div class="catalog-item-gallery__arrow catalog-item-gallery__arrow_type_prev"></div>
                                 <div class="catalog-item-gallery__arrow catalog-item-gallery__arrow_type_next"></div>
                             </div>
-                            <div class="catalog-item-gallery-pagination {% if product.get_all_images|length == 1 %} catalog-item-gallery-pagination_state_hidden {% endif %} swiper-pagination"></div>
+                            {% comment %}
+                                <div class="catalog-item-gallery-pagination {% if product.get_all_images|length == 1 %} catalog-item-gallery-pagination_state_hidden {% endif %} swiper-pagination"></div>
+                            {% endcomment %}
                         </div>
                     </div>
 
@@ -114,9 +116,9 @@
                                     data-amount-{{ product_id }}="1">
                                     <span class="button__text">
                                         {% if product in cart %}
-                                            В заказе
+                                            В корзине
                                         {% else %}
-                                            Заказать
+                                            В корзину
                                         {% endif %}
                                     </span>
                                 </a>

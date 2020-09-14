@@ -2429,42 +2429,6 @@ sans-serif;
       vertical-align: bottom;
     }
 
-.catalog-item__label {
-    display: flex;
-    flex-flow: row wrap;
-    z-index: 2;
-  }
-
-.catalog-item__label-item {
-      font: 0.875rem/0.875rem 'Fact' , sans-serif;
-      color: #fff;
-      padding: 6px 10px 4px 10px;
-      margin: 10px 10px 0 0;
-      position: relative;
-      align-self: flex-start;
-    }
-
-@media (min-width: 15em)
-  and (max-width: 47.999em) {
-
-.catalog-item__label-item {
-        font: 500 0.75rem/0.75rem 'Fact' , sans-serif
-    }
-      }
-
-.catalog-item__label-item_type_hit {
-        background: var(--color-red);
-      }
-
-.catalog-item__label-item_type_action {
-        background: var(--color-orange);
-      }
-
-.catalog-item__label-item_type_recommended {
-        color: var(--color-black);
-        background: var(--color-gray);
-      }
-
 .catalog-item__category {
     color: #000;
     text-transform: uppercase;
@@ -2728,7 +2692,7 @@ sans-serif;
 .catalog-item__button {
     width: 100%;
     text-align: right;
-    margin: -24px 0 0 0;
+    margin: -12px 0 0 0;
     position: relative;
     display: block;
     align-self: flex-end;
@@ -2745,7 +2709,7 @@ sans-serif;
   and (max-width: 47.999em) {
 
 .catalog-item__button {
-      margin: -24px 0 0 0
+      margin: 0
   }
     }
 
@@ -2776,8 +2740,7 @@ sans-serif;
       }
 
 .catalog-item__button:hover .catalog-item__button-text {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-        opacity: 1;
+        color: #d82318;
       }
 
 .catalog-item__button_state_added {
@@ -2835,15 +2798,13 @@ sans-serif;
         }
 
 .catalog-item__button-text {
-      color: #d82318;
+      color: #000;
       position: absolute;
       top: 50%;
       right: 64px;
       z-index: 2;
       transform: translate(0, -50%);
       transition: all 0.15s ease-out;
-      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-      opacity: 0;
       font-size: calc(1rem + 0.25 * ((100vw - 20rem) / 140));
       font-weight: normal;
       font-family: 'Fact-Semi-Expanded'
