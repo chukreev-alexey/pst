@@ -43,7 +43,8 @@
   and (max-width: 59.999em) {
 
 .cart-button__text {
-      display: block
+      display: block;
+      min-width: none
   }
     }
 
