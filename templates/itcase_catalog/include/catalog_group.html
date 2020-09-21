@@ -1,17 +1,18 @@
 
 <div class="catalog-group-page">
+    {% if filter_enabled %}
+        <div class="catalog-group__filter">
+            <div class="catalog-filter-popup">
+                <span class="catalog-filter-popup__button">Фильтр</span>
+            </div>
+        </div>
+    {% endif %}
     <div class="catalog-group__sort">
         {% include './catalog_sort.html' %}
     </div>
 
     <div class="catalog-group__inner">
         {% if filter_enabled %}
-            <div class="catalog-filter-popup">
-                <span class="catalog-filter-popup__button button button_type_primary">
-                    <span class="button_text">&nbsp;</span>
-                </span>
-            </div>
-
             <div class="catalog-group__inner-left">
                 <div class="catalog-group__inner-left-inner">
                     {% include './catalog_filter.html' %}

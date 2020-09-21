@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "59db8a41c1eb1d960aa7";
+/******/ 	var hotCurrentHash = "99548804cf863b2d5bd1";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -26923,15 +26923,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
     function Logger(name, defaultLevel, factory) {
       var self = this;
       var currentLevel;
+
       var storageKey = "loglevel";
-      if (name) {
+      if (typeof name === "string") {
         storageKey += ":" + name;
+      } else if (typeof name === "symbol") {
+        storageKey = undefined;
       }
 
       function persistLevelIfPossible(levelNum) {
           var levelName = (logMethods[levelNum] || 'silent').toUpperCase();
 
-          if (typeof window === undefinedType) return;
+          if (typeof window === undefinedType || !storageKey) return;
 
           // Use localStorage if available
           try {
@@ -26949,7 +26952,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
       function getPersistedLevel() {
           var storedLevel;
 
-          if (typeof window === undefinedType) return;
+          if (typeof window === undefinedType || !storageKey) return;
 
           try {
               storedLevel = window.localStorage[storageKey];
@@ -27042,7 +27045,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 
     var _loggersByName = {};
     defaultLogger.getLogger = function getLogger(name) {
-        if (typeof name !== "string" || name === "") {
+        if ((typeof name !== "symbol" && typeof name !== "string") || name === "") {
           throw new TypeError("You must supply a name when creating a logger.");
         }
 
@@ -27068,6 +27071,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
     defaultLogger.getLoggers = function getLoggers() {
         return _loggersByName;
     };
+
+    // ES6 default export, for compatibility
+    defaultLogger['default'] = defaultLogger;
 
     return defaultLogger;
 }));

@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "59db8a41c1eb1d960aa7";
+/******/ 	var hotCurrentHash = "99548804cf863b2d5bd1";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1148,34 +1148,26 @@ var setOverflowHidden = function setOverflowHidden(options) {
   // If previousBodyOverflowSetting is already set, don't set it again.
   if (previousBodyOverflowSetting === undefined) {
     previousBodyOverflowSetting = document.body.style.overflow;
-    // Setting overflow on body/documentElement synchronously in Desktop Safari slows down
-    // the responsiveness for some reason. Setting within a setTimeout fixes this.
-    setTimeout(function () {
-      document.body.style.overflow = 'hidden';
-    });
+    document.body.style.overflow = 'hidden';
   }
 };
 
 var restoreOverflowSetting = function restoreOverflowSetting() {
-  // Setting overflow on body/documentElement synchronously in Desktop Safari slows down
-  // the responsiveness for some reason. Setting within a setTimeout fixes this.
-  setTimeout(function () {
-    if (previousBodyPaddingRight !== undefined) {
-      document.body.style.paddingRight = previousBodyPaddingRight;
+  if (previousBodyPaddingRight !== undefined) {
+    document.body.style.paddingRight = previousBodyPaddingRight;
 
-      // Restore previousBodyPaddingRight to undefined so setOverflowHidden knows it
-      // can be set again.
-      previousBodyPaddingRight = undefined;
-    }
+    // Restore previousBodyPaddingRight to undefined so setOverflowHidden knows it
+    // can be set again.
+    previousBodyPaddingRight = undefined;
+  }
 
-    if (previousBodyOverflowSetting !== undefined) {
-      document.body.style.overflow = previousBodyOverflowSetting;
+  if (previousBodyOverflowSetting !== undefined) {
+    document.body.style.overflow = previousBodyOverflowSetting;
 
-      // Restore previousBodyOverflowSetting to undefined
-      // so setOverflowHidden knows it can be set again.
-      previousBodyOverflowSetting = undefined;
-    }
-  });
+    // Restore previousBodyOverflowSetting to undefined
+    // so setOverflowHidden knows it can be set again.
+    previousBodyOverflowSetting = undefined;
+  }
 };
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight#Problems_and_solutions
@@ -1205,51 +1197,47 @@ var handleScroll = function handleScroll(event, targetElement) {
 };
 
 var disableBodyScroll = function disableBodyScroll(targetElement, options) {
+  // targetElement must be provided
+  if (!targetElement) {
+    // eslint-disable-next-line no-console
+    console.error('disableBodyScroll unsuccessful - targetElement must be provided when calling disableBodyScroll on IOS devices.');
+    return;
+  }
+
+  // disableBodyScroll must not have been called on this targetElement before
+  if (locks.some(function (lock) {
+    return lock.targetElement === targetElement;
+  })) {
+    return;
+  }
+
+  var lock = {
+    targetElement: targetElement,
+    options: options || {}
+  };
+
+  locks = [].concat(_toConsumableArray(locks), [lock]);
+
   if (isIosDevice) {
-    // targetElement must be provided, and disableBodyScroll must not have been
-    // called on this targetElement before.
-    if (!targetElement) {
-      // eslint-disable-next-line no-console
-      console.error('disableBodyScroll unsuccessful - targetElement must be provided when calling disableBodyScroll on IOS devices.');
-      return;
-    }
-
-    if (targetElement && !locks.some(function (lock) {
-      return lock.targetElement === targetElement;
-    })) {
-      var lock = {
-        targetElement: targetElement,
-        options: options || {}
-      };
-
-      locks = [].concat(_toConsumableArray(locks), [lock]);
-
-      targetElement.ontouchstart = function (event) {
-        if (event.targetTouches.length === 1) {
-          // detect single touch.
-          initialClientY = event.targetTouches[0].clientY;
-        }
-      };
-      targetElement.ontouchmove = function (event) {
-        if (event.targetTouches.length === 1) {
-          // detect single touch.
-          handleScroll(event, targetElement);
-        }
-      };
-
-      if (!documentListenerAdded) {
-        document.addEventListener('touchmove', preventDefault, hasPassiveEvents ? { passive: false } : undefined);
-        documentListenerAdded = true;
+    targetElement.ontouchstart = function (event) {
+      if (event.targetTouches.length === 1) {
+        // detect single touch.
+        initialClientY = event.targetTouches[0].clientY;
       }
+    };
+    targetElement.ontouchmove = function (event) {
+      if (event.targetTouches.length === 1) {
+        // detect single touch.
+        handleScroll(event, targetElement);
+      }
+    };
+
+    if (!documentListenerAdded) {
+      document.addEventListener('touchmove', preventDefault, hasPassiveEvents ? { passive: false } : undefined);
+      documentListenerAdded = true;
     }
   } else {
     setOverflowHidden(options);
-    var _lock = {
-      targetElement: targetElement,
-      options: options || {}
-    };
-
-    locks = [].concat(_toConsumableArray(locks), [_lock]);
   }
 };
 
@@ -1266,43 +1254,36 @@ var clearAllBodyScrollLocks = function clearAllBodyScrollLocks() {
       documentListenerAdded = false;
     }
 
-    locks = [];
-
     // Reset initial clientY.
     initialClientY = -1;
   } else {
     restoreOverflowSetting();
-    locks = [];
   }
+
+  locks = [];
 };
 
 var enableBodyScroll = function enableBodyScroll(targetElement) {
-  if (isIosDevice) {
-    if (!targetElement) {
-      // eslint-disable-next-line no-console
-      console.error('enableBodyScroll unsuccessful - targetElement must be provided when calling enableBodyScroll on IOS devices.');
-      return;
-    }
+  if (!targetElement) {
+    // eslint-disable-next-line no-console
+    console.error('enableBodyScroll unsuccessful - targetElement must be provided when calling enableBodyScroll on IOS devices.');
+    return;
+  }
 
+  locks = locks.filter(function (lock) {
+    return lock.targetElement !== targetElement;
+  });
+
+  if (isIosDevice) {
     targetElement.ontouchstart = null;
     targetElement.ontouchmove = null;
 
-    locks = locks.filter(function (lock) {
-      return lock.targetElement !== targetElement;
-    });
-
     if (documentListenerAdded && locks.length === 0) {
       document.removeEventListener('touchmove', preventDefault, hasPassiveEvents ? { passive: false } : undefined);
-
       documentListenerAdded = false;
     }
-  } else {
-    locks = locks.filter(function (lock) {
-      return lock.targetElement !== targetElement;
-    });
-    if (!locks.length) {
-      restoreOverflowSetting();
-    }
+  } else if (!locks.length) {
+    restoreOverflowSetting();
   }
 };
 
@@ -7619,15 +7600,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
     function Logger(name, defaultLevel, factory) {
       var self = this;
       var currentLevel;
+
       var storageKey = "loglevel";
-      if (name) {
+      if (typeof name === "string") {
         storageKey += ":" + name;
+      } else if (typeof name === "symbol") {
+        storageKey = undefined;
       }
 
       function persistLevelIfPossible(levelNum) {
           var levelName = (logMethods[levelNum] || 'silent').toUpperCase();
 
-          if (typeof window === undefinedType) return;
+          if (typeof window === undefinedType || !storageKey) return;
 
           // Use localStorage if available
           try {
@@ -7645,7 +7629,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
       function getPersistedLevel() {
           var storedLevel;
 
-          if (typeof window === undefinedType) return;
+          if (typeof window === undefinedType || !storageKey) return;
 
           try {
               storedLevel = window.localStorage[storageKey];
@@ -7738,7 +7722,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 
     var _loggersByName = {};
     defaultLogger.getLogger = function getLogger(name) {
-        if (typeof name !== "string" || name === "") {
+        if ((typeof name !== "symbol" && typeof name !== "string") || name === "") {
           throw new TypeError("You must supply a name when creating a logger.");
         }
 
@@ -7764,6 +7748,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
     defaultLogger.getLoggers = function getLoggers() {
         return _loggersByName;
     };
+
+    // ES6 default export, for compatibility
+    defaultLogger['default'] = defaultLogger;
 
     return defaultLogger;
 }));

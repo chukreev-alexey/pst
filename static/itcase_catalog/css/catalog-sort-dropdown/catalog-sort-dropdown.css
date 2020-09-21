@@ -1,11 +1,9 @@
 .catalog-sort-dropdown {
-  min-width: 310px;
+  width: 310px;
   position: relative;
   box-sizing: border-box;
   z-index: 2;
   @media (--mobile) {
-    min-width: 0;
-    max-width: 280px;
     margin: 0 8px;
   }
   &::after {
@@ -23,7 +21,7 @@
   }
   &_state_open {
     &::after {
-      top: 24px;
+      top: 18px;
       transform: rotate(-135deg);
     }
     ^&__list {

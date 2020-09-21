@@ -58,8 +58,31 @@
       padding: 0 20px;
     }
   }
-  &__sort {
+  &__filter {
+    width: 35%;
     position: relative;
+    display: none;
+    @media (--mobile) {
+      display: block;
+    }
+    @media (--mobile-small) {
+      width: 28%;
+    }
+  }
+  &__sort {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    @media (--mobile) {
+      width: 60%;
+      max-width: none;
+      margin: 0 0 0 5%;
+      display: block;
+    }
+    @media (--mobile-small) {
+      width: 69%;
+      margin: 0 0 0 3%;
+    }
   }
   &__inner {
     width: 100%;

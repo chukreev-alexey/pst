@@ -292,6 +292,7 @@
     }
     &-text {
       color: var(--color-surface-text);
+      white-space: nowrap;
       position: absolute;
       top: 50%;
       right: 64px;

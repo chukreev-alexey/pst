@@ -1,28 +1,31 @@
-
 .catalog-filter-popup {
   width: 100%;
-  width: 65px;
-  height: 65px;
-  text-align: center;
-  margin: 0 0 20px 0;
-  border-radius: 65px;
-  position: fixed;
-  overflow: hidden;
+  margin: 0 0 0 8px;
   display: none;
-  box-shadow: 0 19px 38px 0 rgba(34, 36, 43, 0.3);
-  left: 20px;
-  bottom: 0;
-  z-index: 3;
   @media (--mobile), (--tablet) {
     display: block;
   }
   &_state_active {
   }
-  &__button.button {
-    height: 100%;
-    background: var(--color-primary) url('./../img/icon/filter.svg') 50% 55% no-repeat !important;
-    background-size: 45% 45% !important;
-    padding: 0;
-    border-radius: 0;
+  &__button {
+    color: var(--color-surface-text);
+    background: var(--color-surface-active);
+    padding: 12px 48px 12px 20px;
+    border: solid 1px var(--color-neutral-border);
+    position: relative;
+    display: block;
+    cursor: pointer;
+    @mixin font normal, 14px, 20px, 14px, 20px, var(--font);
+    &::after {
+      width: 12px;
+      height: 100%;
+      background: url('./../img/icon/filter.svg') no-repeat 50% 50%;
+      background-size: contain;
+      position: absolute;
+      content: '';
+      display: block;
+      top: 0;
+      right: 16px;
+    }
   }
 }

@@ -273,7 +273,6 @@ Build date: 2019-12-19 16:51:02
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   font-size: 0.75rem;
   font-family: Arial, sans-serif;
@@ -1999,12 +1998,10 @@ Build date: 2019-12-19 16:51:02
 }
 
 .swiper-container-horizontal.swiper-container-css-mode > .swiper-wrapper {
-  -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory;
 }
 
 .swiper-container-vertical.swiper-container-css-mode > .swiper-wrapper {
-  -ms-scroll-snap-type: y mandatory;
   scroll-snap-type: y mandatory;
 }
 
@@ -2465,7 +2462,6 @@ button.swiper-pagination-bullet {
   background: #000;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   opacity: 0.6;
-  -webkit-filter: blur(50px);
   filter: blur(50px);
   z-index: 0;
 }
