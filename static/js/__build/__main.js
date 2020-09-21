@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "99548804cf863b2d5bd1";
+/******/ 	var hotCurrentHash = "938f83599d558d8e3646";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -16763,6 +16763,9 @@ $(document).on('click', '*[data-product-tab-menu]', function changeActiceTab() {
   const contentActiveClass = `${contentBaseClass}_state_active`;
   document.querySelector(`.${contentActiveClass}`).classList.remove(contentActiveClass);
   tabContent.classList.add(contentActiveClass);
+  $([document.documentElement, document.body]).animate({
+    scrollTop: $('.catalog-item-detail__tabs-list-item_state_active').offset().top - $('.header__wrapper').outerHeight() - 12
+  }, 700);
 });
 
 /***/ }),

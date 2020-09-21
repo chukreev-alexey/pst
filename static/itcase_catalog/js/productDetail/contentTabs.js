@@ -13,4 +13,14 @@ $(document).on('click', '*[data-product-tab-menu]', function changeActiceTab() {
   const contentActiveClass = `${contentBaseClass}_state_active`
   document.querySelector(`.${contentActiveClass}`).classList.remove(contentActiveClass)
   tabContent.classList.add(contentActiveClass)
+
+  $([document.documentElement, document.body]).animate(
+    {
+      scrollTop:
+        $('.catalog-item-detail__tabs-list-item_state_active').offset().top -
+        $('.header__wrapper').outerHeight() -
+        12,
+    },
+    700
+  )
 })
