@@ -4,11 +4,11 @@
     {% for item in cart_items %}
         {% with complectation=item.product product=item.product.product price=item.price|floatformat:'-2' %}
             <div class="cart-list__item">
-                <div class="cart-list__item-image">
-                    {% if complectation.image.exists %}
-                        <img src="{% version complectation.image 'catalog_detail' %}" class="catalog-item__image-image" />
-                    {% endif %}
-                </div>
+                {% if product.get_first_image %}
+                    <div class="cart-list__item-image">
+                        <img src="{% version product.get_first_image 'catalog_detail' %}" class="catalog-item__image-image" />
+                    </div>
+                {% endif %}
 
                 <div class="cart-list__item-info">
                     <a href="{{ product.get_absolute_url }}" class="cart-list__item-info-title">
