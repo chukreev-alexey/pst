@@ -5,7 +5,7 @@
             for control of sort icon direction. eg: when "sort-price=0" then "value" be "1"
         {% endcomment %}
 
-        <div class="catalog-sort-dropdown__current catalog-sort-dropdown__item_sort_default">
+        <div class="catalog-sort-dropdown__current catalog-sort-dropdown__item_sort_default{% if sort.price == 0 or sort.name == 0 %} catalog-sort-dropdown__item_sort_asc{% elif sort.price == 1 or sort.name == 1 %} catalog-sort-dropdown__item_sort_desc{% endif %}">
             {% if 'price' in sort %}
                 По цене
             {% elif 'name' in sort  %}
