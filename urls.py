@@ -53,16 +53,15 @@ urlpatterns = [
         path('token/', rest_token_views.obtain_auth_token),
     ])),
 
-    path('', include('website.urls')),
-    path('', include('modules.catalog.urls')),
-
     path('cart/', include('itcase_cart.urls')),
-    path('', include('itcase_catalog.urls')),
     path('', include('itcase_feed.urls')),
     path('', include('itcase_gallery.urls')),
     path('', include('itcase_logos.urls')),
     path('search/', include('itcase_search.urls')),
     path('forms/', include('itcase_entry.urls')),
+
+    path('', include('website.urls')),
+    path('', include('modules.catalog.urls')),
 
     path('', include('itcase_pages.urls')),
 ]
