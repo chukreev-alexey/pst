@@ -95,15 +95,15 @@ dev-uploaddata:
 	ssh -A $(DEV_SERVER) 'rm ./$(LOCAL_PROJECT).sql'
 	rm ./$(LOCAL_PROJECT).sql
 
-prod-uploadimages:
+prod-uploadimages: confirm
 	rsync -ahvz --exclude '.DS_Store' $(MEDIA_PATH) $(PROD_SERVER):$(PROD_SERVER_MEDIA)
 
-prod-loadimages:
+prod-loadimages: confirm
 	rm -rf $(MEDIA_PATH)
 	mkdir -p $(MEDIA_PATH)
 	rsync -ahvz $(PROD_SERVER):$(PROD_SERVER_MEDIA) ./$(MEDIA_PATH)
 
-prod-getdata:
+prod-getdata: confirm
 	ssh -A $(PROD_SERVER) 'pg_dump -h localhost -U $(PROD_DB) -d $(PROD_DB) -f $(PROD_DUMP) -bcOv'
 	scp $(PROD_SERVER):$(PROD_DUMP) ${CURDIR}
 	ssh -A $(PROD_SERVER) 'rm $(PROD_DUMP)'
@@ -111,6 +111,18 @@ prod-getdata:
 	ssh $(LOCAL_SERVER) 'PGPASSWORD=$(LOCAL_DB_PASS) psql -h localhost -U $(LOCAL_DB) -d $(LOCAL_DB) -f ./$(PROD_PROJECT).sql'
 	ssh -A $(LOCAL_SERVER) 'rm ./$(PROD_PROJECT).sql'
 	rm ./$(PROD_PROJECT).sql
+
+prod-uploaddata: confirm
+	ssh -A $(LOCAL_SERVER) 'PGPASSWORD=$(LOCAL_DB_PASS) pg_dump -h localhost -U $(LOCAL_DB) -d $(LOCAL_DB) -f $(LOCAL_DUMP) -bcOv'
+	scp $(LOCAL_SERVER):$(LOCAL_DUMP) ${CURDIR}
+	ssh -A $(LOCAL_SERVER) 'rm $(LOCAL_DUMP)'
+	scp $(LOCAL_PROJECT).sql $(PROD_SERVER):~/
+	ssh $(PROD_SERVER) 'psql -h localhost -U $(PROD_DB) -d $(PROD_DB) -f ./$(LOCAL_PROJECT).sql'
+	ssh -A $(PROD_SERVER) 'rm ./$(LOCAL_PROJECT).sql'
+	rm ./$(LOCAL_PROJECT).sql
+
+confirm:
+	@echo "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
 
 connectproddb:
 	ssh -N -L 127.0.0.1:5432:localhost:5432 $(PROD_SERVER)

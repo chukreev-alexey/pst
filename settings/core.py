@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
 
+    'tinymce_4',  # must be under filebrowser and grappelli
     'captcha',
     'compressor',
     'django_mptt_admin',
@@ -51,7 +52,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'smart_selects',
     'sortedm2m',
-    'tinymce_4',
     'widget_tweaks',
 
     'itcase_cart',
