@@ -1,4 +1,4 @@
-/* globals UserCartClass, ItcaseFilterClass, UserCart, ItcaseFilter */
+/* globals UserCartClass, ItcaseFilterClass, UserCart, ItcaseFilter, PSTCatalogFilter */
 
 'use strict'
 
@@ -210,6 +210,20 @@ if (typeof ItcaseFilterClass !== 'undefined') {
     filterClearButtonClass: 'catalog-filter__clear',
     sortItemClass: ['catalog-sort__group-item', 'catalog-sort-dropdown__item'],
     contentRequestCB: initializeRangeSliders,
+    prepareHtmlBeforeReplace: (element) => {
+      const isFilter = element.classList.contains('catalog-filter')
+      if (isFilter && PSTCatalogFilter.isOpen) {
+        element.classList.add('catalog-filter_state_visible')
+      }
+
+      const isCatalog = element.classList.contains('catalog-group-page')
+      if (isCatalog && PSTCatalogFilter.isOpen) {
+        const filter = element.querySelector('.catalog-filter')
+        if (filter) {
+          filter.classList.add('catalog-filter_state_visible')
+        }
+      }
+    },
   })
 }
 

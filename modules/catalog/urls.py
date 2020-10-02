@@ -19,10 +19,10 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('catalog/', views.CatalogIndexView.as_view(), name='catalog-index'),
     path(
-        'category/',
+        'catalog/',
         include([
+            path('', views.CatalogIndexView.as_view(), name='catalog-index'),
             path(
                 '<slug>/',
                 include([
