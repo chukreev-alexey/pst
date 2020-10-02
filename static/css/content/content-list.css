@@ -6,15 +6,16 @@
   & li {
     color: var(--color-surface-text);
     padding: 0 0 15px 24px;
+    border: solid 2px red;
     position: relative;
     display: block;
     @mixin font normal, 18px, 18px, 28px, 28px, var(--font);
     &::before {
       position: absolute;
       content: counter(list1) '.';
-      counter-increment: list1;
       left: 0;
       top: 0;
+      counter-increment: list1;
     }
     & ol {
       padding: 0 0 0 15px;
