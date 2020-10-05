@@ -62,6 +62,12 @@ $(document).on('click', '.catalog-filter-popup__button', (event) => {
   }
 })
 
+$(document).on('click', '.catalog-filter__close', function(event) {
+  event.stopPropagation()
+  event.preventDefault()
+  PSTCatalogFilter.closeCatalogFilter()
+})
+
 $(document).on('click', (event) => {
   const $catalogFilter = $(event.target).closest('.catalog-filter, .catalog-filter-popup')
 
