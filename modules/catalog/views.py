@@ -246,15 +246,16 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         data = {}
         filtered_products = {}
 
-        _data = {}
-        products = []
-        _data, products = self.get_filter_data_brand(
-            queryset, self.filter_query_dict.get(self.filter_key_brand))
-        if _data:
-            data[self.filter_key_brand] = _data
-        if products:
-            filtered_products[self.filter_key_brand] = products
-            filtered_products['final'] = products
+        if self.object.filter_brand:
+            _data = {}
+            products = []
+            _data, products = self.get_filter_data_brand(
+                queryset, self.filter_query_dict.get(self.filter_key_brand))
+            if _data:
+                data[self.filter_key_brand] = _data
+            if products:
+                filtered_products[self.filter_key_brand] = products
+                filtered_products['final'] = products
 
         _data = {}
         products = []
