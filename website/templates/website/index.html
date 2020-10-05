@@ -9,7 +9,7 @@
             {% endwith %}
 
             {% with title='Все для кровли и фасада — быстро и по выгодным ценам' categories_list=categories_on_main_page limit=5 %}
-                {% include "itcase_catalog/include/get_categories_by.html" %}
+                {% include "itcase_catalog/include/get_categories_by_level.html" %}
             {% endwith %}
 
             {% include 'itcase_catalog/include/catalog_main_page_groups.html' %}

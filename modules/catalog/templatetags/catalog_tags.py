@@ -22,8 +22,6 @@ from ..models import Category
 
 register = template.Library()
 
-__all__ = ['catalog_menu']
-
 
 @register.inclusion_tag('itcase_catalog/include/catalog_group_hidden.html')
 def catalog_group_hidden(category=None, limit=5):
@@ -45,15 +43,12 @@ def catalog_group_hidden(category=None, limit=5):
 @register.inclusion_tag('itcase_catalog/include/catalog_menu.html',
                         takes_context=True)
 def catalog_menu(context,
+                 queryset=None,
                  additional_class=None,
-                 title_additional_class=None,
-                 queryset=None):
-    '''
-        catalog_menu поставляется из
-        catalog.context_processors.base_categories
-    '''
-    if queryset is not None:
-        context['catalog_menu'] = queryset
+                 title_additional_class=None):
+    queryset = queryset or Category.objects.filter(active=True, in_menu=True)
+    if queryset:
+        context['menu_queryset'] = queryset
 
     if additional_class is None:
         additional_class = context.get('additional_class')
@@ -67,21 +62,18 @@ def catalog_menu(context,
     return context
 
 
-@register.inclusion_tag('itcase_catalog/include/catalog_footer_menu.html',
+@register.inclusion_tag('itcase_catalog/include/catalog_menu_footer.html',
                         takes_context=True)
-def footer_categories_tag(context, queryset=None):
-    '''
-        footer_categories поставляется из
-        catalog.context_processors.base_categories
-    '''
-    if queryset is not None:
-        context['footer_categories'] = queryset
+def catalog_menu_footer(context, queryset=None):
+    queryset = queryset or Category.objects.filter(active=True, level=0)
+    if queryset:
+        context['menu_queryset'] = queryset
     return context
 
 
-@register.inclusion_tag('itcase_catalog/include/get_categories_by.html',
+@register.inclusion_tag('itcase_catalog/include/get_categories_by_level.html',
                         takes_context=True)
-def get_categories_by(context, level):
+def get_categories_by_level(context, level):
     context['categories_list'] = Category.objects.filter(active=True,
                                                          level=level)
     return context

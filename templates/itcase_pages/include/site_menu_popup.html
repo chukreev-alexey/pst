@@ -8,7 +8,7 @@
         <div class="site-menu-popup__wrapper-inner">
             <div class="site-menu-popup__column">
                 {% with hide_image=True class="catalog-menu-popup catalog-menu-popup_type_mobile" %}
-                    {% get_categories_by level=0 %}
+                    {% get_categories_by_level 0 %}
                 {% endwith %}
             </div>
             {% for main_menu in site_menu %}
