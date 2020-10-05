@@ -43,10 +43,32 @@
     }
     &::before {
       min-width: 24px;
-      min-height: 100%;
+      min-height: 24px;
       margin: 0 12px 0 0;
       content: '—';
       display: block;
+    }
+    &.catalog-sort-dropdown__item {
+      &_sort_asc {
+        &::before {
+          min-width: 24px;
+          min-height: 24px;
+          background: url('./../../img/icon/asc.svg') no-repeat 0 50%;
+          background-size: 50%;
+          content: ' ';
+          display: block;
+        }
+      }
+      &_sort_desc {
+        &::before {
+          min-width: 24px;
+          min-height: 24px;
+          background: url('./../../img/icon/desc.svg') no-repeat 0 50%;
+          background-size: 50%;
+          content: ' ';
+          display: block;
+        }
+      }
     }
   }
   &__list {
