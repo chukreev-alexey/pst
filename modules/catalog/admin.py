@@ -43,8 +43,9 @@ class CategoryAdmin(DjangoMpttAdmin, CategoryAdminBase):
 
     fieldsets = (
         (None, {
-            'fields': (('active', 'on_main_page', 'in_menu'), 'name', 'slug',
-                       'parent', 'image', 'filter_parametres', 'rotator_units')
+            'fields': (('active', 'on_main_page',
+                        'in_menu'), 'name', 'slug', 'parent', 'image',
+                       'filter_brand', 'filter_parametres', 'rotator_units')
         }),
         ('Шаблоны', {
             'fields': ('template_categories_list',

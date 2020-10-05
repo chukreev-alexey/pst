@@ -134,6 +134,8 @@ class Category(MPTTModel, CategoryBase, SEOModel, ChangeCreateModel):
 
     active = models.BooleanField('Показывать', default=True)
 
+    filter_brand = models.BooleanField('Фильтровать по бренду', default=True)
+
     class Meta(CategoryBase.Meta):
         pass
 
