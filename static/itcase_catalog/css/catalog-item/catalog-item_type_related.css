@@ -1,0 +1,22 @@
+.catalog-item {
+  &&_type_related {
+    & .catalog-item {
+      &__inner {
+        @media (--mobile) {
+          flex-flow: row wrap;
+        }
+        &-left {
+          @media (--mobile) {
+            width: 100%;
+          }
+        }
+        &-right {
+          @media (--mobile) {
+            align-self: auto;
+            margin: 16px 0 0 0;
+          }
+        }
+      }
+    }
+  }
+}

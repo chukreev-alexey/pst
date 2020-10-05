@@ -7,6 +7,8 @@
     &__item {
       padding: 16px 48px;
       position: relative;
+      display: flex;
+      flex-flow: row wrap;
       @media (--mobile) {
         padding: 0 0 48px 0;
       }
@@ -14,6 +16,7 @@
         background: var(--color-surface-hover);
       }
       &-wrapper {
+        width: 100%;
         display: flex;
         @media (--mobile) {
           flex-flow: row wrap;
@@ -28,16 +31,16 @@
           }
         }
         ^&-inner {
+          width: 100%;
           padding: 0 32px;
-          flex-grow: 1;
           @media (--mobile) {
             padding: 0;
           }
         }
         ^&-button {
-          width: 100%;
           position: relative;
           @media (--mobile) {
+            width: 100%;
             text-align: right;
           }
           &-add {

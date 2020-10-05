@@ -12,6 +12,11 @@
     @media (--mobile), (--tablet) {
       overflow: scroll;
       flex-wrap: nowrap;
+      &::before {
+        border: solid 15px transparent;
+        content: '';
+        display: inline-block;
+      }
       &::after {
         border: solid 15px transparent;
         content: '';
@@ -34,8 +39,7 @@
     margin: 0 32px 32px 0;
     @media (--mobile), (--tablet) {
       width: auto;
-      margin: 0 15px 20px 15px;
-      flex: 0 0 200px;
+      width: 240px;
     }
   }
 }

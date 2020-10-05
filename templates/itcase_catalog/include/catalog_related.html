@@ -6,7 +6,7 @@
             <div class="catalog-related__title">{{ category }}</div>
             <div class="catalog-related__wrapper">
                 {% for product in category.products.all %}
-                    {% with item_class='catalog-related__item' product=product %}
+                    {% with item_class='catalog-related__item catalog-item_type_related' product=product %}
                         {% include './catalog_item.html' %}
                     {% endwith %}
                 {% endfor %}
@@ -21,7 +21,7 @@
             <div class="catalog-related__title">{{ optional_products.name }}</div>
             <div class="catalog-related__wrapper">
                 {% for product in optional_products.products.all %}
-                    {% with item_class='catalog-related__item' product=product %}
+                    {% with item_class='catalog-related__item catalog-item_type_related' product=product %}
                         {% include './catalog_item.html' %}
                     {% endwith %}
                 {% endfor %}

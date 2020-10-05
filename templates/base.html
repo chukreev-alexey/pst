@@ -87,23 +87,7 @@
     {% include 'itcase_common/include/cookies_warning.html' %}
 
     {% block popup %}
-        <div class="popup">
-            <div class="popup-content">
-                <a href="#" class="popup-content__link">
-                    <span class="popup-content__link-text">&nbsp;</span>
-                </a>
-                <div class="popup-loading">
-                    <div class="popup-loading__inner">
-                        <div class="sk-three-bounce">
-                            <div class="sk-child sk-bounce1"></div>
-                            <div class="sk-child sk-bounce2"></div>
-                            <div class="sk-child sk-bounce3"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="popup-content__inner">&nbsp;</div>
-            </div>
-        </div>
+        {% include 'itcase_common/include/popup.html' %}
     {% endblock popup %}
 
     <div class="fader">&nbsp;</div>
