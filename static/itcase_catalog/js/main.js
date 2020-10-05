@@ -213,14 +213,14 @@ if (typeof ItcaseFilterClass !== 'undefined') {
     prepareHtmlBeforeReplace: (element) => {
       const isFilter = element.classList.contains('catalog-filter')
       if (isFilter && PSTCatalogFilter.isOpen) {
-        element.classList.add('catalog-filter-group_state_active')
+        element.classList.add('catalog-filter_state_active')
       }
 
       const isCatalog = element.classList.contains('catalog-group-page')
       if (isCatalog && PSTCatalogFilter.isOpen) {
         const filter = element.querySelector('.catalog-filter')
         if (filter) {
-          filter.classList.add('catalog-filter-group_state_active')
+          filter.classList.add('catalog-filter_state_active')
         }
       }
     },

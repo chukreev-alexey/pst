@@ -2,11 +2,11 @@
   width: 100%;
   background: var(--color-neutral);
   padding: 24px 8px;
-  box-sizing: border-box;
   position: relative;
+  box-sizing: border-box;
   @media (--mobile) {
     height: 100%;
-    padding: 96px 20px 120px 20px;
+    padding: 124px 20px 120px 20px;
     position: fixed;
     left: 0;
     top: 0;
@@ -19,6 +19,12 @@
   &_state_hidden.catalog-filter {
     animation: catalogFilterAnimationHide 0.5s cubic-bezier(0.19, 1, 0.22, 1) both;
   }
+  &_state_active {
+    @media (--mobile) {
+      transform: translateX(0);
+      animation: none;
+    }
+  }
   &__clear.button {
     padding: 15px 17px 13px 17px;
     margin: 15px 0 0 0;
@@ -30,12 +36,12 @@
     color: var(--color-surface-item);
     text-decoration: none;
     position: absolute;
-    right: 28px;
-    top: 100px;
     display: block;
+    top: 96px;
+    right: 28px;
+    z-index: 10;
     transition: transform 0.1s ease-in-out;
     cursor: pointer;
-    z-index: 10;
     &::before {
       width: 100%;
       height: 2px;

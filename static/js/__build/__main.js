@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "10e5c47c47fce22358d6";
+/******/ 	var hotCurrentHash = "cc8e7cf0039ea0197e58";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -16311,6 +16311,11 @@ $(document).on('click', '.catalog-filter-popup__button', event => {
     PSTCatalogFilter.openCatalogFilter();
   }
 });
+$(document).on('click', '.catalog-filter__close', function (event) {
+  event.stopPropagation();
+  event.preventDefault();
+  PSTCatalogFilter.closeCatalogFilter();
+});
 $(document).on('click', event => {
   const $catalogFilter = $(event.target).closest('.catalog-filter, .catalog-filter-popup');
 
@@ -16628,7 +16633,7 @@ if (typeof ItcaseFilterClass !== 'undefined') {
       const isFilter = element.classList.contains('catalog-filter');
 
       if (isFilter && PSTCatalogFilter.isOpen) {
-        element.classList.add('catalog-filter_state_visible');
+        element.classList.add('catalog-filter_state_active');
       }
 
       const isCatalog = element.classList.contains('catalog-group-page');
@@ -16637,7 +16642,7 @@ if (typeof ItcaseFilterClass !== 'undefined') {
         const filter = element.querySelector('.catalog-filter');
 
         if (filter) {
-          filter.classList.add('catalog-filter_state_visible');
+          filter.classList.add('catalog-filter_state_active');
         }
       }
     }

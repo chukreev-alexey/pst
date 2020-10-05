@@ -497,7 +497,7 @@
 
 .catalog-filter {
     height: 100%;
-    padding: 96px 20px 120px 20px;
+    padding: 124px 20px 120px 20px;
     position: fixed;
     left: 0;
     top: 0;
@@ -516,6 +516,16 @@
     animation: catalogFilterAnimationHide 0.5s cubic-bezier(0.19, 1, 0.22, 1) both;
   }
 
+@media (min-width: 15em)
+  and (max-width: 47.999em) {
+
+.catalog-filter_state_active {
+      transform: translateX(0);
+      -webkit-animation: none;
+      animation: none
+  }
+    }
+
 .catalog-filter__clear.button {
     padding: 15px 17px 13px 17px;
     margin: 15px 0 0 0;
@@ -529,7 +539,7 @@
     text-decoration: none;
     position: absolute;
     right: 28px;
-    top: 100px;
+    top: 96px;
     display: block;
     transition: transform 0.1s ease-in-out;
     cursor: pointer;
