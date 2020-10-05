@@ -488,8 +488,8 @@
   width: 100%;
   background: #f9f9fa;
   padding: 24px 8px;
-  box-sizing: border-box;
   position: relative;
+  box-sizing: border-box;
 }
 
 @media (min-width: 15em)
@@ -538,12 +538,12 @@
     color: #000;
     text-decoration: none;
     position: absolute;
-    right: 28px;
-    top: 96px;
     display: block;
+    top: 96px;
+    right: 28px;
+    z-index: 10;
     transition: transform 0.1s ease-in-out;
     cursor: pointer;
-    z-index: 10;
   }
 
 .catalog-filter__close::before {
@@ -3373,6 +3373,10 @@
           display: block;
         }
 
+.catalog-menu__wrapper .catalog-menu__item:hover .catalog-menu__item-submenu_type_column {
+          display: flex;
+        }
+
 .catalog-menu__wrapper .catalog-menu__item_state_current .catalog-menu__item-link {
           background: rgb(138, 21, 15);
         }
@@ -3400,7 +3404,20 @@
         box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
         left: 0;
         top: 100%;
+        background: #fff;
       }
+
+.catalog-menu__wrapper .catalog-menu__item-submenu_type_column {
+          min-width: 420px;
+        }
+
+.catalog-menu__wrapper .catalog-menu__item-submenu_type_column .catalog-menu__item-submenu-item-link {
+            min-width: 180px;
+          }
+
+.catalog-menu__wrapper .catalog-menu__item-submenu-column {
+          flex: 1 1 auto;
+        }
 
 .catalog-menu__wrapper .catalog-menu__item-submenu-item {
           display: block;
@@ -3411,7 +3428,6 @@
             color: #000;
             text-decoration: none;
             white-space: nowrap;
-            background: #fff;
             padding: 12px 24px 12px 16px;
             display: block;
             font-size: calc(16px + 0 * ((100vw - 320px) / 2240));

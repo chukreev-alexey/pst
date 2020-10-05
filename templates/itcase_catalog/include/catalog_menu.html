@@ -10,12 +10,24 @@
                 <a href="{{ category.get_absolute_url }}" class="catalog-menu__item-link">{{ category.name }}</a>
                 {% with subcategories=category.get_children_active %}
                     {% if subcategories.exists %}
-                        <div class="catalog-menu__item-submenu">
-                            {% for subcategory in subcategories %}
-                                <div class="catalog-menu__item-submenu-item {% if subcategory in catalog_breadcrumbs %} catalog-menu__item-submenu-item_state_current {% endif %}">
-                                    <a href="{{ subcategory.get_absolute_url }}" class="catalog-menu__item-submenu-item-link">{{ subcategory }}</a>
-                                </div>
-                            {% endfor %}
+                        <div class="catalog-menu__item-submenu  {% if subcategories|length > 10 %} catalog-menu__item-submenu_type_column {% endif %}">
+                            {% if subcategories|length > 8 %}
+                                {% for chunk in subcategories|chunks_list %}
+                                    <div class="catalog-menu__item-submenu-column">
+                                        {% for item in chunk %}
+                                            <div class="catalog-menu__item-submenu-item {% if item in catalog_breadcrumbs %} catalog-menu__item-submenu-item_state_current {% endif %}">
+                                                <a href="{{ item.get_absolute_url }}" class="catalog-menu__item-submenu-item-link">{{ item }}</a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% for item in subcategories %}
+                                    <div class="catalog-menu__item-submenu-item {% if item in catalog_breadcrumbs %} catalog-menu__item-submenu-item_state_current {% endif %}">
+                                        <a href="{{ item.get_absolute_url }}" class="catalog-menu__item-submenu-item-link">{{ item }}</a>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     {% endif %}
                 {% endwith %}
