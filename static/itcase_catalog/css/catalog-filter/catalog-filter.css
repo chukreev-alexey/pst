@@ -36,12 +36,15 @@
     color: var(--color-surface-item);
     text-decoration: none;
     position: absolute;
-    display: block;
+    display: none;
     top: 96px;
     right: 28px;
     z-index: 10;
     transition: transform 0.1s ease-in-out;
     cursor: pointer;
+    @media (--mobile) {
+      display: block;
+    }
     &::before {
       width: 100%;
       height: 2px;
