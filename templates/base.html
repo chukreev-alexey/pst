@@ -94,14 +94,6 @@
 
     {% include 'itcase_pages/include/site_menu_popup.html' %}
 
-    {% if request.infoblock.global_message %}
-        <div class="global-message">
-            <div class="global-message__wrapper">
-                {{ request.infoblock.global_message|default:""|safe }}
-            </div>
-        </div>
-    {% endif %}
-
     <div class="header" data-sticky-static="true">
         <div class="header__wrapper">
             <div class="header__inner">
@@ -204,6 +196,14 @@
             {% endwith %}
         </div>
     </div>
+
+    {% if request.infoblock.global_message %}
+        <div class="global-message">
+            <div class="global-message__wrapper">
+                {{ request.infoblock.global_message|default:""|safe }}
+            </div>
+        </div>
+    {% endif %}
 
     {% with hide_pagination=True %}
         {% rotator page=request.page %}

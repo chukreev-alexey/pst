@@ -21,7 +21,7 @@
     "ion-rangeslider": "^2.3.1",
     "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",
-    "pdfjs-dist": "^2.5.207",
+    "pdfjs-dist": "2.4.456",
     "spinkit": "^2.0.1",
     "suggestions-jquery": "^20.3.0",
     "swiper": "^6.3.2"

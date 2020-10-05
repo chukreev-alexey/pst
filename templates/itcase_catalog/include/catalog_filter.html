@@ -3,7 +3,7 @@
 {% localize off %}
     <form method="post" accept-charset="utf-8" class="catalog-filter" {% if site_version == 'mobile' %} id="catalogFilter" {% endif %}>
         {% csrf_token %}
-
+        <div class="catalog-filter__close">&nbsp;</div>
         {% if filter_data_misc %}
             <div class="catalog-filter-group catalog-filter-group_type_special catalog-filter-group_state_open" data-group-key="misc">
                 <div class="catalog-filter-group__list">
