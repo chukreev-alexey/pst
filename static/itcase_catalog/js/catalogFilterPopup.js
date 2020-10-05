@@ -8,6 +8,7 @@ function CatalogFilterFactory() {
 
   const filterPopupActiveClass = 'catalog-filter-popup_state_active'
 
+  const catalogFilterActive = 'catalog-filter_state_active'
   const catalogFilterVisible = 'catalog-filter_state_visible'
   const catalogFilterHidden = 'catalog-filter_state_hidden'
 
@@ -33,7 +34,7 @@ function CatalogFilterFactory() {
     $catalogFilter.addClass(catalogFilterHidden).on(animationEvents, () => {
       $catalogFilter
         .css({ transform: '' })
-        .removeClass([catalogFilterVisible, catalogFilterHidden].join(' '))
+        .removeClass([catalogFilterVisible, catalogFilterActive, catalogFilterHidden].join(' '))
         .off(animationEvents)
     })
 
@@ -62,7 +63,7 @@ $(document).on('click', '.catalog-filter-popup__button', (event) => {
   }
 })
 
-$(document).on('click', '.catalog-filter__close', function(event) {
+$(document).on('click', '.catalog-filter__close', function (event) {
   event.stopPropagation()
   event.preventDefault()
   PSTCatalogFilter.closeCatalogFilter()
