@@ -43,6 +43,9 @@
           @media (--mobile) {
             margin: 0 0 8px 0;
           }
+          @media (--tablet) {
+            flex: 0 0 33%;
+          }
         }
         &-link {
           &::before {

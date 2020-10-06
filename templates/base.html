@@ -92,7 +92,9 @@
 
     <div class="fader">&nbsp;</div>
 
-    {% include 'itcase_pages/include/site_menu_popup.html' %}
+    {% with show_close=True %}
+        {% include 'itcase_pages/include/site_menu_popup.html' %}
+    {% endwith %}
 
     <div class="header" data-sticky-static="true">
         <div class="header__wrapper">

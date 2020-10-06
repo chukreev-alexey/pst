@@ -19,7 +19,7 @@
       display: none;
     }
     @media (--tablet) {
-      flex-flow: row wrap;
+      overflow-y: scroll;
     }
     &::after {
       width: 48px;
@@ -29,16 +29,23 @@
     ^&__item {
       position: relative;
       flex: 1 1 auto;
-      @media (--tablet) {
-        flex: 0 0 auto;
+      &_type_search {
+        @media (--tablet) {
+          display: none;
+        }
       }
       &:hover {
-        z-index: 100;
         & .catalog-menu__item-submenu {
           display: block;
+          @media (--tablet) {
+            display: none;
+          }
         }
         & .catalog-menu__item-submenu_type_column {
           display: flex;
+          @media (--tablet) {
+            display: none;
+          }
         }
       }
       &_state_current {
@@ -105,6 +112,9 @@
         display: block;
         transition: all 0.2s ease-in-out;
         @mixin font normal, 16px, 16px, 22px, 22px, var(--font-title-secondary);
+        @media (--tablet) {
+          padding: 16px;
+        }
         &:hover {
           background: var(--color-primary-hover);
         }

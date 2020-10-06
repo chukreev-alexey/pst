@@ -50,7 +50,7 @@
         position: absolute;
         display: block;
         top: 16px;
-        right: 24px;
+        right: 8px;
       }
     }
     ^&__search {
@@ -206,7 +206,7 @@
         position: absolute;
         display: block;
         top: 16px;
-        right: 48px;
+        right: 96px;
       }
     }
   }
