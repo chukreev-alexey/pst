@@ -19,7 +19,7 @@
       display: none;
     }
     @media (--tablet) {
-      overflow-y: scroll;
+      flex-flow: row wrap;
     }
     &::after {
       width: 48px;
@@ -29,7 +29,11 @@
     ^&__item {
       position: relative;
       flex: 1 1 auto;
+      @media (--tablet) {
+        flex: 0 0 auto;
+      }
       &:hover {
+        z-index: 100;
         & .catalog-menu__item-submenu {
           display: block;
         }
