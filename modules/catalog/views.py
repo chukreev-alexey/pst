@@ -246,6 +246,9 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         data = {}
         filtered_products = {}
 
+        if queryset.count() <= 1:
+            return data, filtered_products
+
         if self.object.filter_brand:
             _data = {}
             products = []
@@ -711,12 +714,6 @@ class SubCategoryDetail(CategoryDetail):
 
     paginator_url_name = 'subcategory-detail'
 
-    def get_filter_data(self, queryset):
-        if not any(value for value in self.filter_query_dict.values()):
-            self.filter_query_dict[self.filter_key_category].append(
-                str(self.object.pk))
-        return super().get_filter_data(queryset)
-
     def get_filter_reset_url(self):
         return reverse(self.paginator_url_name,
                        args=[self.object.parent.slug, self.object.slug])
@@ -724,11 +721,6 @@ class SubCategoryDetail(CategoryDetail):
     def get_object(self, queryset):
         return super().get_object(
             Category.objects.filter(active=True, level__gte=1))
-
-    def get_queryset(self):
-        self.queryset = Product.objects.filter(
-            categories__in=self.object.parent.get_children_active())
-        return super().get_queryset()
 
 
 class ProductDetail(ProductDetailBase):
