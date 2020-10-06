@@ -24,11 +24,24 @@
   }
   &__image {
     min-height: 400px;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    &::before {
+      width: 1px;
+      height: 100%;
+      background: var(--color-surface);
+      position: absolute;
+      content: '';
+      display: block;
+      left: 0;
+      top: 0;
+      z-index: 2;
+    }
     &-image {
+      width: 100%;
       min-width: 400px;
       position: relative;
       @media (--mobile) {
