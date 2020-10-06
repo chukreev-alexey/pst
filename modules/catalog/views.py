@@ -586,14 +586,14 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
         self.queryset = self.get_sorted_queryset(self.queryset, self.request)
 
         if self.object.template_groups_type_selector:
-            return self.queryset
+            return self.queryset.distinct()
 
         queryset = self.queryset
 
         self.filter_data, filtered_products = self.get_filter_data(queryset)
 
         if 'final' not in filtered_products:
-            return queryset
+            return queryset.distinct()
 
         queryset = queryset.filter(pk__in=filtered_products['final'])
 
