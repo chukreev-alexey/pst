@@ -235,7 +235,10 @@
                 <div class="footer-menu">
                     {% for item in footer_menu %}
                         <div class="footer-menu__item">
-                            <a href="{{ item.get_absolute_url }}" class="footer-menu__item-link" {{ item.in_new_tab|yesno:"target=_blank," }}>{{ item.name }}</a>
+                            <a href="{{ item.get_absolute_url }}" class="footer-menu__item-link"
+                              {{ item.in_new_tab|yesno:'target=_blank,' }}>
+                                {{ item.name }}
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
