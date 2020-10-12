@@ -86,7 +86,11 @@ FILEBROWSER_VERSIONS = {
     # Rotator
     'rotator_image': {
         'verbose_name': 'Rotator Image',
-        'width': '', 'height': 265,
+        'width': 1300, 'height': '',
+        'opts': 'upscale'},
+    'rotator_image_mobile': {
+        'verbose_name': 'Rotator Image',
+        'width': 360, 'height': '',
         'opts': 'upscale'},
     # Catalog
     'catalog_category_thumb': {

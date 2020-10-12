@@ -86,7 +86,6 @@
       }
       &-image {
         width: 100%;
-        aspect-ratio: '21:7';
         position: relative;
         overflow: hidden;
         display: block;

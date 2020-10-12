@@ -98,7 +98,7 @@ dev-uploaddata:
 prod-uploadimages: confirm
 	rsync -ahvz --exclude '.DS_Store' $(MEDIA_PATH) $(PROD_SERVER):$(PROD_SERVER_MEDIA)
 
-prod-loadimages: confirm
+prod-loadimages:
 	rm -rf $(MEDIA_PATH)
 	mkdir -p $(MEDIA_PATH)
 	rsync -ahvz $(PROD_SERVER):$(PROD_SERVER_MEDIA) ./$(MEDIA_PATH)
@@ -112,7 +112,7 @@ prod-getdata: confirm
 	ssh -A $(LOCAL_SERVER) 'rm ./$(PROD_PROJECT).sql'
 	rm ./$(PROD_PROJECT).sql
 
-prod-uploaddata: confirm
+prod-uploaddata:
 	ssh -A $(LOCAL_SERVER) 'PGPASSWORD=$(LOCAL_DB_PASS) pg_dump -h localhost -U $(LOCAL_DB) -d $(LOCAL_DB) -f $(LOCAL_DUMP) -bcOv'
 	scp $(LOCAL_SERVER):$(LOCAL_DUMP) ${CURDIR}
 	ssh -A $(LOCAL_SERVER) 'rm $(LOCAL_DUMP)'

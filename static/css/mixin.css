@@ -7,6 +7,13 @@
   line-height-range: var(--min-max);
 }
 
+@define-mixin font-size $fontWeight, $fontSize, $lineHeight, $fontFamily {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  font-family: $fontFamily;
+  line-height: $lineHeight;
+}
+
 @define-mixin dark {
   @media (prefers-color-scheme: dark) {
     & {

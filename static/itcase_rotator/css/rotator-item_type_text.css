@@ -1,6 +1,10 @@
 .rotator-item {
   &&_type_text {
-    height: auto;
+    background: var(--color-neutral);
+    @media (--mobile) {
+      background: var(--color-primary);
+      margin: 0;
+    }
     & .rotator-item {
       &__text {
         display: flex;

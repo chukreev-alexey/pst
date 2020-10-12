@@ -1,0 +1,42 @@
+.rotator-item {
+  &&_type_image-text {
+    @media (--mobile) {
+      flex-flow: column wrap;
+    }
+    & .rotator-item {
+      &__image {
+        width: 100%;
+        max-width: 50%;
+        overflow: hidden;
+        position: relative !important;
+        @media (--mobile) {
+          height: 70%;
+          max-width: none;
+        }
+        &-item {
+          min-width: 100%;
+          min-height: 100%;
+          position: absolute;
+          left: 50% !important;
+          top: 50% !important;
+          transform: translate(-50%, -50%);
+        }
+      }
+      &__text {
+        width: 100%;
+        flex: 1;
+        margin: 0 0 0 72px;
+        box-sizing: border-box;
+        align-self: center;
+        position: relative;
+        z-index: 2;
+        @media (--mobile) {
+          text-align: center;
+          background: var(--color-primary);
+          margin: 0;
+          padding: 12px 16px;
+        }
+      }
+    }
+  }
+}

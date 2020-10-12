@@ -76,7 +76,7 @@
       }
       & .button__text {
         @media (--mobile) {
-          @mixin font normal, 24px, 24px, 24px, 24px, var(--font-title-secondary);
+          /* @mixin font normal, 24px, 24px, 24px, 24px, var(--font-title-secondary); */
         }
       }
     }
