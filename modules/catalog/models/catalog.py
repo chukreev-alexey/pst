@@ -254,7 +254,7 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
         if self.image and self.image.exists:
             return self.image.image
 
-        for image in self.get_images():
+        for image, _ in self.get_images():
             return image
         # if object product does not have images then get image from prices
         # use "_" because here is not need image description
