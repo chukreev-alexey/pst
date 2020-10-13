@@ -779,10 +779,12 @@ class ProductDetail(ProductDetailBase):
                 values_data['name'] = param.value
 
                 # цены со связанными товарами
+
                 prices = values_data.get('prices', {})
                 _price = prices.get(price.pk, {})
                 _price['scope'] = scope_pks
                 _price['price'] = floatformat(price.price, -2)
+                _price['old_price'] = floatformat(price.old_price, -2)
                 prices[price.pk] = _price
                 values_data['prices'] = prices
 
