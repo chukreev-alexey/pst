@@ -19,7 +19,6 @@ django-user-agents
 django-nested-admin
 django-smart-selects
 
-
 elasticsearch_dsl
 phonenumberslite
 pillow
