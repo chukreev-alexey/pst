@@ -136,6 +136,17 @@ class ParametresClass {
       measuring = (measuring) ? `/${measuring}` : ''
 
       priceElement.textContent = `${complectation.price} р${measuring}`
+      const oldPriceElement = document.querySelector('.catalog-item__price-old')
+
+      if (oldPriceElement) {
+        if (parseInt(complectation.old_price)) {
+          oldPriceElement.textContent = `${complectation.old_price} р${measuring}`
+          oldPriceElement.style.display = ''
+        } else {
+          oldPriceElement.textContent = ''
+          oldPriceElement.style.display = 'none'
+        }
+      }
 
       const addButton = document.querySelector('*[data-add-url]')
       const addUrl = addButton.dataset.addUrl
