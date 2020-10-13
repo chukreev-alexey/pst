@@ -730,7 +730,7 @@ class ProductDetail(ProductDetailBase):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
 
-        category = self.object.categories.first()
+        category = self.object.categories.order_by('level').last()
         if category is not None:
             context['catalog_breadcrumbs'] = category.get_ancestors(
                 include_self=True)
