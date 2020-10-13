@@ -74,10 +74,10 @@ class Price(models.Model):
         verbose_name_plural = 'Цены комплектаций'
 
     def __str__(self):
-        if self.price_parametres:
-            return f'{self.price}'
-        else:
-            return 'None'
+        parts = [str(self.price)]
+        for price_parametr in self.price_parametres.all():
+            parts.append(str(price_parametr.parametr_value))
+        return ' — '.join(parts)
 
 
 # TODO: maybe add amount for each parametr_value
