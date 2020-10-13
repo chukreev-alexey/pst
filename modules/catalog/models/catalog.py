@@ -230,6 +230,11 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
                                          blank=True,
                                          null=True)
 
+    active = models.BooleanField(
+        'Показывать',
+        default=True,
+        help_text='Если отключёно, элемент не будет отображаться на сайте')
+
     class Meta(ProductBase.Meta):
         ordering = ('sort', 'name', 'price')
 

@@ -165,11 +165,11 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'sort', 'measuring', ('in_hit',
-                                                             'border'),
-                       ('in_recommended', 'in_action'), 'brand', 'categories',
-                       'recommend_categories', 'parametres', 'product_actions',
-                       'short_description', 'content')
+            'fields': ('active', 'name', 'slug', 'sort', 'measuring',
+                       ('in_hit', 'border'), ('in_recommended', 'in_action'),
+                       'brand', 'categories', 'recommend_categories',
+                       'parametres', 'product_actions', 'short_description',
+                       'content')
         }),
         ('SEO-информация', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords',
@@ -184,10 +184,10 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
         PickingPriceInline
     ]
 
-    list_display = ('name', 'get_categories', 'sort')
-    list_editable = ['sort']
-    list_filter = ('border', 'brand', 'categories', 'in_action', 'in_hit',
-                   'in_recommended')
+    list_display = ('name', 'get_categories', 'active', 'sort')
+    list_editable = ('active', 'sort')
+    list_filter = ('active', 'border', 'brand', 'categories', 'in_action',
+                   'in_hit', 'in_recommended')
 
     prepopulated_fields = {'slug': ['name']}
 

@@ -581,7 +581,7 @@ class CategoryDetail(SlicePaginatorMixin, SortMixin, SingleObjectMixin,
             return self.object.get_children_active()
 
         if not self.queryset:
-            self.queryset = self.object.products.all()
+            self.queryset = self.object.products.filter(active=True)
 
         self.queryset = self.queryset.select_related('brand').prefetch_related(
             'categories', 'prices')
@@ -814,3 +814,7 @@ class ProductDetail(ProductDetailBase):
                 'parametr_value_id', flat=True)
             data['price'] = price
         return data
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(active=True)
