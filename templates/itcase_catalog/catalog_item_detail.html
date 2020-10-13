@@ -102,7 +102,11 @@
                                         <div class="catalog-item-detail__count-button catalog-item-detail__count-button_action_plus" data-input-name="amount">&nbsp;</div>
                                     </div>
                                     <div class="catalog-item-detail__price" data-measuring="{{ product.measuring|default:'' }}">
-                                        {{ params_initial.price.price|floatformat:-2 }} Р {% if product.measuring %}/{{ product.measuring }}{% endif %}
+                                        {% if params_initial.price.price %}
+                                            {{ params_initial.price.price|floatformat:-2 }} Р {% if product.measuring %}/{{ product.measuring }}{% endif %}
+                                        {% else %}
+                                            Предзаказ
+                                        {% endif %}
                                     </div>
                                     {% if params_initial.price.old_price %}
                                         <div class="catalog-item__price-old">
