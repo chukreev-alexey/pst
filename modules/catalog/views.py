@@ -750,6 +750,10 @@ class ProductDetail(ProductDetailBase):
 
         for price in self.object.prices.prefetch_related(
                 'price_parametres__parametr_value__parametr').all():
+
+            if not price.show:
+                continue
+
             params_qs = [param for param in obj_parametres]
             scope_pks = [param.pk for param in obj_parametres]
 
@@ -804,7 +808,7 @@ class ProductDetail(ProductDetailBase):
 
     def get_params_initial(self):
         data = {}
-        price = self.object.prices.order_by('price').first()
+        price = self.object.prices.filter(show=True).order_by('price').first()
         if price:
             data['scope'] = price.price_parametres.values_list(
                 'parametr_value_id', flat=True)
