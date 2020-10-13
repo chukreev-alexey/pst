@@ -26,5 +26,6 @@ psycopg2-binary
 pytils
 requests
 sentry-sdk
+openpyxl
 
 git+https://github.com/stephenmcd/django-forms-builder.git
