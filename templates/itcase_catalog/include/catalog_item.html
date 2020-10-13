@@ -26,7 +26,7 @@
                 <div class="catalog-item__price">
                     <div class="catalog-item__price-text">
                         {% if price.price %}
-                            {{ price.price|floatformat:'-2' }} Р
+                            {{ price.price|floatformat:'-2' }} Р {% if product.measuring %}/{{ product.measuring }}{% endif %}
                         {% else %}
                             Предзаказ
                         {% endif %}
