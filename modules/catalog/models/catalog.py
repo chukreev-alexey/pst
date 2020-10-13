@@ -236,14 +236,10 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
     def get_absolute_url(self):
         return reverse_lazy('product-detail', args=[self.slug])
 
-    # TODO: separate model ProductImage
-    # to model Image with fields image and description
-    # and link it with other models
     def get_all_images(self):
         images = []
-        for image in self.get_images():
-            # to avoid these awkward things
-            images.append((image, None))
+        for image, description in self.get_images():
+            images.append((image, description))
         for image, description in self.get_prices_images():
             images.append((image, description))
         return images
@@ -265,7 +261,7 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
         for image in self.images.all():
             if not image.image or not image.image.exists:
                 continue
-            yield image.image
+            yield (image.image, image.image_description)
 
     def get_optional_products(self):
         return self.optional_products.filter(show=True)

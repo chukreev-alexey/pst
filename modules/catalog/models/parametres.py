@@ -13,6 +13,9 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images',
                                 verbose_name=Product._meta.verbose_name,
                                 on_delete=models.CASCADE)
+    image_description = models.CharField('Описание изображения',
+                                         max_length=255,
+                                         blank=True, null=True)
 
     class Meta(object):
         ordering = ['sort']
