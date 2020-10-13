@@ -6,7 +6,7 @@
             <div class="cart-list__item">
                 {% if product.get_first_image %}
                     <div class="cart-list__item-image">
-                        <img src="{% version product.get_first_image 'catalog_detail' %}" class="catalog-item__image-image" />
+                        <img src="{% version product.get_first_image.image 'catalog_detail' %}" class="catalog-item__image-image" />
                     </div>
                 {% endif %}
 

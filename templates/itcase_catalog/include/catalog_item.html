@@ -6,8 +6,8 @@
             {% if product.get_first_image %}
                 <div class="catalog-item__image">
                     <a href="{{ product.get_absolute_url }}" class="catalog-item__image-link">
-                        <img src="{% version product.get_first_image 'catalog_list_thumb' %}"
-                            class="catalog-item__image-image" alt="" title="" />
+                        <img src="{% version product.get_first_image.image 'catalog_list_thumb' %}"
+                            class="catalog-item__image-image" alt="{{ product.get_first_image.image_description }}" title="" />
                     </a>
                 </div>
             {% else %}

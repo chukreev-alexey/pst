@@ -4,8 +4,8 @@
     <div class="search-result-list__item-wrapper">
         <div class="search-result-list__item-image">
             <a href="{{ item.get_absolute_url }}" class="search-result-list__item-image-link">
-                <img src="{% version item.get_first_image|default:'' 'search_result_thumb' %}"
-                     class="search-result-list__item-image-image" alt="" title="" />
+                <img src="{% version item.get_first_image.image|default:'' 'search_result_thumb' %}"
+                     class="search-result-list__item-image-image" alt="{{ item.get_first_image.image_description }}" title="" />
             </a>
         </div>
         {% with price=item|get_product_actual_price:None %}

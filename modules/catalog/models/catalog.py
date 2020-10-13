@@ -243,10 +243,10 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
 
     def get_all_images(self):
         images = []
-        for image, description in self.get_images():
-            images.append((image, description))
-        for image, description in self.get_prices_images():
-            images.append((image, description))
+        for image in self.get_images():
+            images.append((image.image, image.image_description))
+        for price in self.get_prices_images():
+            images.append((price.image, price.image_description))
         return images
 
     def get_first_image(self):
@@ -254,11 +254,11 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
         if self.image and self.image.exists:
             return self.image.image
 
-        for image, _ in self.get_images():
+        for image in self.get_images():
             return image
         # if object product does not have images then get image from prices
         # use "_" because here is not need image description
-        for image, _ in self.get_prices_images():
+        for image in self.get_prices_images():
             return image
 
     def get_images(self):
@@ -266,7 +266,7 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
         for image in self.images.all():
             if not image.image or not image.image.exists:
                 continue
-            yield (image.image, image.image_description)
+            yield image
 
     def get_optional_products(self):
         return self.optional_products.filter(show=True)
@@ -276,7 +276,7 @@ class Product(ProductBase, FieldExistsMixin, SEOModel, ChangeCreateModel):
             if not price.image.exists:
                 continue
             price.image.price_pk = price.pk
-            yield (price.image, price.image_description)
+            yield price
 
     def has_sections(self):
         return self.sections.exists()
