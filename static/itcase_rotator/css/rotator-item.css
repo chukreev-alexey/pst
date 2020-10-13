@@ -1,11 +1,9 @@
 .rotator-item {
   display: flex;
-  aspect-ratio: '21:5';
   height: auto !important;
+  aspect-ratio: '21:5';
   @media (--mobile) {
-    &::before {
-      padding: 60% 0 0 0;
-    }
+    aspect-ratio: '14:9';
   }
   &__link {
     width: 100%;
@@ -47,6 +45,7 @@
       }
     }
     & p {
+      width: 100%;
       @mixin font normal, 14px, 28px, 18px, 32px, var(--font);
       margin: 0;
       padding: 0;
