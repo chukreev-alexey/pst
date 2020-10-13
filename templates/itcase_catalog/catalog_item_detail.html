@@ -104,6 +104,11 @@
                                     <div class="catalog-item-detail__price" data-measuring="{{ product.measuring|default:'' }}">
                                         {{ params_initial.price.price|floatformat:-2 }} Р{% if product.measuring %}/{{ product.measuring }}{% endif %}
                                     </div>
+                                    {% if params_initial.price.old_price %}
+                                        <div class="catalog-item__price-old">
+                                            {{ params_initial.price.old_price|floatformat:'-2' }} Р
+                                        </div>
+                                    {% endif %}
                                 </div>
 
                                 <a href="{% url 'itcase_cart:cart_add' %}?product={{ product_id }}&amount-{{ product_id }}=1"
