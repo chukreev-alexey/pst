@@ -68,6 +68,7 @@ class Price(models.Model):
                                          max_length=255,
                                          blank=True, null=True)
     show = models.BooleanField('Показывать?', default=True)
+    sort = models.PositiveIntegerField('Порядок', blank=True, null=True)
 
     class Meta(object):
         verbose_name = 'Цена комплектации'
