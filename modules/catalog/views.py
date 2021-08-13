@@ -817,6 +817,6 @@ class ProductDetail(ProductDetailBase):
             data['price'] = price
         return data
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(active=True)
+    # def get_queryset(self):
+    #    queryset = super().get_queryset()
+    #    return queryset.filter(active=True)
