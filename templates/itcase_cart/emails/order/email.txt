@@ -20,6 +20,6 @@
 Позиции ({{ order.items.count }}):
 {% for item in order.items.all %}
 {% with total=item.total|floatformat:'-2' %}
-  * {{ item.product }}: {{ item.price|floatformat:'-2' }} * {{ item.amount }} = {{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}
+  * {{ item.product.product.name }} {{ item.product }}: {{ item.price|floatformat:'-2' }} * {{ item.amount }} = {{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}
 {% endwith %}
 {% endfor %}
