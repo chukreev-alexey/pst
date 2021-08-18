@@ -69,7 +69,7 @@
                 {% with total=item.total|floatformat:'-2' %}
                     <tr>
                         <td class="email-order__detail-title" valign="top">
-                            <a href="{{ request|get_host }}{{ item.product.product.get_absolute_url }}" class="email-order__detail-title-link">{{ item.product }} {{ item.product }}</a>:
+                            <a href="{{ request|get_host }}{{ item.product.product.get_absolute_url }}" class="email-order__detail-title-link">{{ item.product.product.name }} {{ item.product }}</a>:
                         </td>
                         <td class="email-order__detail-text" valign="top">
                             {{ item.price|floatformat:'-2' }} * {{ item.amount }} = {{ total }} рубл{{ total|pytils_choose_plural:'ь,я,ей' }}
